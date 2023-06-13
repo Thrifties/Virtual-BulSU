@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
+    <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+    <style>
+      .admin-panel-container {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">
+          <img src="logo.png" alt="Logo" width="30" height="30">
+        </a>
+      
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.html">Announcements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="VirtualBulsu_AdminPanel.html">Admins</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="user-icon">
+                  <i class='bx bx-user'></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+  <div class="container mt-5">
+    <div class="admin-panel-container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Admin Panel</h2>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">Admin 1</li>
+            <li class="list-group-item">Admin 2</li>
+            <li class="list-group-item">Admin 3</li>
+          </ul>
+        </div>
+  
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Admin Details</h5>
+              <p class="card-text"><strong>Name:</strong> John Doe</p>
+              <p class="card-text"><strong>Campus:</strong> Malolos - Main Campus</p>
+              <p class="card-text"><strong>Email:</strong> johndoe@example.com</p>
+              <p class="card-text"><strong>Contact Number:</strong> 123-456-7890</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Admin Modal -->
+  <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="adminModalLabel">Add Admin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-row">
+              <div class="col">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" required>
+              </div>
+              <div class="col">
+                <label for="middleName">Middle Name</label>
+                <input type="text" class="form-control" id="middleName">
+              </div>
+              <div class="col">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" required>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <label for="campus">Campus</label>
+              <select class="form-control" id="campus">
+                <option value="Malolos - Main Campus">Malolos - Main Campus</option>
+                <option value="Bustos Campus">Bustos Campus</option>
+                <option value="Sarmiento Campus">Sarmiento Campus</option>
+                <option value="San Rafael Campus">San Rafael Campus</option>
+                <option value="Hagonoy Campus">Hagonoy Campus</option>
+                <option value="Meneses Campus">Meneses Campus</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Contact Number</label>
+              <input type="text" class="form-control" id="phone" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Include the necessary Bootstrap JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>
