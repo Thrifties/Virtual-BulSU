@@ -36,3 +36,9 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            .navbar-custom .navbar-brand {
+                color: white;
+                text-decoration: none;
+                /* Remove underline */
+            }
