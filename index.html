@@ -20,8 +20,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        display: flex;
-        flex-direction: column;
       }
 
       .navbar-custom {
@@ -40,9 +38,9 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        height: fit-content;
         flex-grow: 1;
-        margin-top: 20px;
-        padding-bottom: 20px;
+        margin: 3em;
       }
 
       .container-heading {
@@ -52,6 +50,11 @@
         text-align: center;
         margin-bottom: 20px;
         width: 100%;
+      }
+
+      .campusSelect {
+        display: flex;
+        justify-content: center;
       }
 
       .image-placeholder {
@@ -66,10 +69,11 @@
         align-items: center;
         border-radius: 15px;
         overflow: hidden;
+        filter: brightness(50%);
       }
 
       .image-placeholder:hover {
-        filter: brightness(80%);
+        filter: brightness(100%);
       }
 
       .image-placeholder img {
@@ -124,7 +128,6 @@
   </head>
 
   <body>
-    <div>
       <!-- Navigation Bar -->
       <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand custom-brand" href="#">
@@ -135,29 +138,81 @@
 
       <div class="image-container">
         <div class="container-heading">Select Campus</div>
-        <div class="image-placeholder">
-          <img src="resources/tour_malolos.png" alt="Malolos Campus">
-          <div class="image-label">Malolos Campus</div>
-        </div>
-        <div class="image-placeholder">
-          <img src="resources/tour_sarmiento.png" alt="Hagonoy Campus">
-          <div class="image-label">Hagonoy Campus</div>
-        </div>
-        <div class="image-placeholder">
-          <img src="resources/tour_bustos.png" alt="Bustos Campus">
-          <div class="image-label">Bustos Campus</div>
-        </div>
-        <div class="image-placeholder">
-          <img src="resources/tour_sarmiento.png" alt="Sarmiento Campus">
-          <div class="image-label">Sarmiento Campus</div>
-        </div>
-        <div class="image-placeholder">
-          <img src="resources/tour_sanrafael.png" alt="San Rafael Campus">
-          <div class="image-label">San Rafael Campus</div>
+        <div id="image-carousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#image-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#image-carousel" data-slide-to="1"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-4">
+                  <a class="campusSelect" href="VirtualBulsu_Tour_Malolos.html">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_malolos.png" alt="Malolos Campus">
+                      <div class="image-label">Malolos Campus</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a class="campusSelect" href="VirtualBulsu_Tour_Malolos.html">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_meneses.png" alt="Malolos Campus">
+                      <div class="image-label">Meneses Campus</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a class="campusSelect" href="VirtualBulsu_Tour_Hagonoy.html">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_hagonoy.png" alt="Hagonoy Campus">
+                      <div class="image-label">Hagonoy Campus</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <a class="campusSelect" href="VirtualBulsu_Tour_Bustos.html">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_bustos.png" alt="Bustos Campus">
+                      <div class="image-label">Bustos Campus</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a class="campusSelect" href="VirtualBulsu_Tour_Sarmiento.html">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_sarmiento.png" alt="Sarmiento Campus">
+                      <div class="image-label">Sarmiento Campus</div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a class="campusSelect" href="Virtual">
+                    <div class="image-placeholder">
+                      <img src="resources/tour_sanrafael.png" alt="San Rafael Campus">
+                      <div class="image-label">San Rafael Campus</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#image-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#image-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
-    </div>
-    <footer class="footer">
+
+    <footer class="footer relative-bottom">
       &copy; 2023 Bulacan State University. All rights reserved.
     </footer>
 

@@ -14,10 +14,14 @@
             }
 
             body {
-                background: linear-gradient(rgba(51, 50, 50, 0.5), rgba(51, 50, 50, 0.5)), url('resources/BSU_Main.jpg');
+                background: linear-gradient(rgba(51, 50, 50, 0.5), rgba(51, 50, 50, 0.5)),
+                    url('resources/BSU_Main.jpg');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
+                background-attachment: fixed;
+                display: flex;
+                flex-direction: column;
             }
 
             #VTIntroduction {
@@ -35,62 +39,77 @@
                 /* Remove underline */
             }
 
-           .cta {
-            border: none;
-            background: none;
-            color: #d09b00; /* Set text color to #d09b00 */
-        }
+            .cta {
+                border: none;
+                background: none;
+                color: #d09b00;
+                /* Set text color to #d09b00 */
+            }
 
-        .cta span {
-            padding-bottom: 7px;
-            letter-spacing: 4px;
-            font-size: 14px;
-            padding-right: 15px;
-            text-transform: uppercase;
-            color: #d09b00; /* Set text color to #d09b00 */
-        }
+            .cta span {
+                padding-bottom: 7px;
+                letter-spacing: 4px;
+                font-size: 14px;
+                padding-right: 15px;
+                text-transform: uppercase;
+                color: #d09b00;
+                /* Set text color to #d09b00 */
+            }
 
-        .cta svg {
-            transform: translateX(-8px);
-            transition: all 0.3s ease;
-            fill: #d09b00; /* Set SVG color to #d09b00 */
-        }
+            .cta svg {
+                transform: translateX(-8px);
+                transition: all 0.3s ease;
+                fill: #d09b00;
+                /* Set SVG color to #d09b00 */
+            }
 
-        .cta:hover svg {
-            transform: translateX(0);
-        }
+            .cta:hover svg {
+                transform: translateX(0);
+            }
 
-        .cta:active svg {
-            transform: scale(0.9);
-        }
+            .cta:active svg {
+                transform: scale(0.9);
+            }
 
-        .hover-underline-animation {
-            position: relative;
-            color: #d09b00;
-            padding-bottom: 20px;
-        }
+            .hover-underline-animation {
+                position: relative;
+                color: #d09b00;
+                padding-bottom: 20px;
+            }
 
-        .hover-underline-animation:after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #d09b00;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
+            .hover-underline-animation:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #d09b00;
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
 
-        .cta:hover .hover-underline-animation:after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
+            .cta:hover .hover-underline-animation:after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+
+            .footer {
+                background-color: #763435;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 9999;
+            }
         </style>
     </head>
+
     <body>
-    <div>
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-custom">
             <a class="navbar-brand custom-brand" href="#">
@@ -103,17 +122,24 @@
         <div class="container d-block position-absolute mx-5" id="VTIntroduction">
             <h1>Welcome to Bulacan State University</h1>
             <p>Take a virtual tour and explore our campus!</p>
-            <a href="virtual-tour.html" id="btnPrimary">
-            <button class="cta">
-                <span class="hover-underline-animation">Start Virtual Tour</span>
-                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
-                        data-name="Path 10" id="Path_10"></path>
-                        
-                </svg>
-            </button>
+            <a href="VirtualBulsu_Campuses.html" id="btnPrimary">
+                <button class="cta">
+                    <span class="hover-underline-animation">Start Virtual Tour</span>
+                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                        id="arrow-horizontal">
+                        <path transform="translate(30)"
+                            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10"
+                            id="Path_10"></path>
+
+                    </svg>
+                </button>
             </a>
-    </div>
+        </div>
+
+        <footer class="footer">
+            &copy; 2023 Bulacan State University. All rights reserved.
+        </footer>
+
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
