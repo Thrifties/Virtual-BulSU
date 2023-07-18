@@ -56,7 +56,47 @@
       <div class="card-body">
         <h5 class="card-title">Announcement Title</h5>
         <p class="card-text">This is the content of the announcement.</p>
-        <p class="card-text"><small class="text-muted">Posted on June 12, 2023</small></p>
+        <p class="card-text" id="card-date"><small class="text-muted">Posted on June 12, 2023</small></p>
+          <!-- Add the Update and Delete buttons -->
+          <div class="form-group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">Update</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add the Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update Announcement</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="eventDate">Event Date (Optional)</label>
+            <input type="date" class="form-control" id="updateEventDate">
+          </div>
+          <div class="form-group">
+            <label for="updateHeadline">Headline</label>
+            <input type="text" class="form-control" id="updateHeadline" required>
+          </div>
+          <div class="form-group">
+            <label for="updateDescription">Description</label>
+            <textarea class="form-control" id="updateDescription" rows="4"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="updateAnnouncementBtn">Update</button>
       </div>
     </div>
   </div>
@@ -77,7 +117,7 @@
         <form>
           <div class="form-group">
             <label for="eventDate">Event Date (Optional)</label>
-            <input type="text" class="form-control" id="eventDate">
+            <input type="date" class="form-control" id="eventDate">
           </div>
           <div class="form-group">
             <label for="headline">Headline</label>
@@ -100,6 +140,25 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Update button click event handler
+    $('#updateAnnouncementBtn').click(function () {
+      // Get the updated headline and description from the modal fields
+      const updatedHeadline = $('#updateHeadline').val();
+      const updatedDescription = $('#updateDescription').val();
+      const updatedEventDate = $('#updateEventDate').val();
+
+      // Update the announcement card content
+      $('.card-title').text(updatedHeadline);
+      $('.card-text').text(updatedDescription);
+      $('#card-date').text(updatedEventDate);
+
+      // Close the modal
+      $('#updateModal').modal('hide');
+    });
+  });
+</script>
 
 </body>
 </html>
