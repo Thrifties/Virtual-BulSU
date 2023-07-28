@@ -1,0 +1,120 @@
+/* Added CSS for image placeholders */
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 3em;
+}
+
+.container-heading {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.campusSelect {
+    display: flex;
+    justify-content: center;
+}
+
+.image-placeholder {
+    position: relative;
+    width: 300px;
+    height: 600px;
+    background-color: #76343500;
+    margin: 10px;
+    transition: filter 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    filter: brightness(50%);
+}
+
+.image-placeholder:hover {
+    filter: brightness(100%);
+}
+
+.image-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 15px;
+    transition: filter 0.3s ease-in-out;
+}
+
+.image-container .image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #763435af;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.image-container .image-placeholder:hover .image-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footer {
+    background-color: #763435;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* Media queries for responsive image placeholders */
+@media (max-width: 768px) {
+    .image-placeholder {
+        width: 200px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .image-placeholder {
+        width: 150px;
+        height: 300px;
+    }
+}
+
+/* Added CSS for carousel control arrows */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 100%;
+    background: #76343500;
+    color: #fff;
+    font-size: 30px;
+    top: calc(50% - 25px);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel-control-prev:focus,
+.carousel-control-next:focus {
+    outline: none;
+}
+
+/* Adjust position of carousel control arrows */
+.carousel-control-prev {
+    left: -50px;
+}
+
+.carousel-control-next {
+    right: -50px;
+}

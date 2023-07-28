@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(rgba(51, 50, 50, 0.5), rgba(51, 50, 50, 0.5)), url('../resources/BSU_Main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#VTIntroduction {
+    color: white;
+    top: 40%;
+}
+
+.navbar-custom {
+    background-color: #763435;
+}
+
+.navbar-custom .navbar-brand {
+    padding-left: 1em;
+    color: white;
+    text-decoration: none;
+    /* Remove underline */
+}
