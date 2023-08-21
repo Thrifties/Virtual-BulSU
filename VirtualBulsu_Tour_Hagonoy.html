@@ -21,23 +21,58 @@
         <div>
             <!-- Navigation Bar -->
             <nav class="navbar navbar-expand-lg navbar-custom">
-                <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.html">
-                    <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30"
-                        class="d-inline-block align-text-top">
-                    Bulacan State University - Hagonoy Campus
-                </a>
+                <div class="container-fluid">
+                    <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.html">
+                        <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30"
+                            class="d-inline-block align-text-top">
+                        Bulacan State University - Hagonoy Campus
+                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item" id="nav-item">
+                                <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Campuses
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Malolos.html">Main Campus - Malolos Campus</a></li>
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Bustos.html">Bustos Campus</a></li>
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.html">Meneses Campus</a></li>
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.html">Sarmiento Campus</a></li>
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Hagonoy.html">Hagonoy Campus</a></li>
+                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.html">San Rafael Campus</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-            integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
-            crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    </body>
-
+            
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
+                id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Try scrolling the rest of the page to see this option in action.</p>
+                </div>
+            </div>
+            
+            
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+                crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    </body>      
 </html>

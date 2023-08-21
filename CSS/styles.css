@@ -20,8 +20,15 @@ body {
 }
 
 .navbar-custom .navbar-brand {
-    padding-left: 1em;
     color: white;
     text-decoration: none;
     /* Remove underline */
+}
+
+.nav-link, #announcementTab {
+    color: white;
+}
+
+.nav-link:hover, #announcementTab:hover {
+    color: #d9d9d9;
 }
