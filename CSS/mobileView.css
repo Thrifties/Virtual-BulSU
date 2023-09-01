@@ -1,0 +1,11 @@
+@media (max-width: 470px){
+    .container-fluid {
+        padding: 0 1em !important;
+    }
+}
+
+@media (max-width: 990px) {
+    .container-fluid {
+        padding: 0 1em !important;
+    }
+}
