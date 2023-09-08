@@ -1,5 +1,5 @@
 <?php
-	require "sessionUnset.php";
+	/* require "sessionUnset.php"; */
 	require "connect.php";
 
 if (isset($_POST['insbtn'])) {
@@ -17,10 +17,10 @@ if (isset($_POST['insbtn'])) {
 	$add = "INSERT INTO `groupings`(`group_id`, `activity_id`, `stud_ID`, `name`, `task`, `taskP`, `deadline`) VALUES ('$groupid','$activityid','$studid','$Name','$task','$taskP','$deadline')";
 
 	if(mysqli_query($con,$add)){
-            header("refresh: 0; url=SetupPage.php");
+            header("refresh: 0; url=VirtualBulsu_SuperAdmin.php");
         }
         else{
-            header("refresh: 0; url=AddMemberPage.php");
+            header("refresh: 0; url=VirtualBulsu_SuperAdmin.php");
         }
 	}
 

@@ -1,11 +1,6 @@
-<?php
-	session_start();
-	if(isset($_SESSION["user"]) && isset($_SESSION["pass"])){
-		header('Location: Dashboard.php');
-		exit();
-	}
+<?php 
+require "connect.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,14 +34,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title text-center">Login</h3>
-                            <form>
+                            <form method="post" action="login.php">
                                 <div class="form-group">
                                     <label for="username">Admin:</label>
-                                    <input type="text" class="form-control" id="username" required>
+                                    <input name="username" type="text" class="form-control" id="username" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" required>
+                                    <input name="password" type="password" class="form-control" id="password" required>
                                 </div>
                                 <a href="VirtualBulsu_AnnouncementPanel.html"><button type="submit" class="btn btn-primary btn-block">Login</button></a>
                             </form>
