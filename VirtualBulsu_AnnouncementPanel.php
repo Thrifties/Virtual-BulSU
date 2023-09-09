@@ -1,3 +1,7 @@
+<?php 
+require "connect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,12 +65,36 @@
         <div class="row">
           <div class="col-md-4">
             <div class="announcement-list">
-              <ul class="list-group">
-                <li class="list-group-item">Announcement 1</li>
-                <li class="list-group-item">Announcement 2</li>
-                <li class="list-group-item">Announcement 3</li>
-                <!-- Add more announcements here -->
-              </ul>
+              <table class="table table-hover">
+                <thead>
+                    <tr class="table">
+                        <th>Headline</th>
+                        <th>Event Date</th>
+                    </trc>
+                </thead>
+                <tbody>
+                    <?php
+
+                  // Query to fetch announcements from your database
+                  $query = "SELECT announcement_id, headline, event_date FROM announcements";
+                  $result = mysqli_query($con, $query);
+
+                  if (!$result) {
+                      die("Database query failed."); // Handle the error appropriately
+                  }
+
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<tr id=".$row['announcement_id'].">";
+                      echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
+                      echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
+                      echo "</tr>";
+                  }
+
+                  // Release the result set
+                  mysqli_free_result($result);
+                  ?>
+                </tbody>
+              </table>
             </div>
           </div>
           <div class="col-md-8">
@@ -140,29 +168,30 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
+                <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
                 <div class="form-group">
                   <label for="eventDate">Event Date (Optional)</label>
-                  <input type="date" class="form-control" id="eventDate">
+                  <input type="date" class="form-control" id="eventDate" name="eventDate">
                 </div>
                 <div class="form-group">
                   <label for="headline">Headline</label>
-                  <input type="text" class="form-control" id="headline" required>
+                  <input type="text" class="form-control" id="headline" name="headline" required>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea class="form-control" id="description" rows="4"></textarea>
+                  <textarea class="form-control" id="description" name="description" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="formFileMultiple" class="form-label">Multiple files input
                     example</label>
-                  <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary" form="announcementForm">Save</button>
             </div>
           </div>
         </div>
@@ -187,6 +216,55 @@
             // Close the modal
             $('#updateModal').modal('hide');
           });
+
+          $('#announcementModal').on('show.bs.modal', function () {
+            // Get the current date in the format YYYYMMDD
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // January is 0
+            var day = currentDate.getDate().toString().padStart(2, '0');
+
+            // Generate two random numbers between 0 and 99
+            var randomNumber1 = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            var randomNumber2 = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+
+            // Combine the date and random numbers to create the announcement ID
+            var announcementId = year + month + day + randomNumber1 + randomNumber2;
+
+            // Set the announcementId as the value of the hidden input field
+            $('#announcementId').val(announcementId);
+          });
+        });
+
+              // Function to update the announcement card when a row is clicked
+        function updateAnnouncementCard(announcementId) {
+          // Send an AJAX request to fetch the announcement details
+          $.ajax({
+              url: 'get_announcement.php', // Replace with the server-side script to fetch announcement details
+              method: 'GET',
+              data: { announcementId: announcementId },
+              dataType: 'json',
+              success: function (announcementData) {
+                  // Update the announcement card with the retrieved data
+                  $('.card-title').text(announcementData.headline);
+                  $('.card-text').text(announcementData.description);
+                  $('#card-date').text(announcementData.event_date);
+                  // You can also update the image if needed
+                  // $('.card-img-bottom').attr('src', data.image_url);
+              },
+              error: function () {
+                  // Handle errors here
+                  alert('Failed to fetch announcement details.');
+              }
+          });
+        }
+
+        // Attach a click event handler to each table row
+        $('.table-row').click(function () {
+            // Get the announcement ID from the row's ID attribute
+            var announcementId = this.id.split('_')[1];
+            // Call the function to update the announcement card
+            updateAnnouncementCard(announcementId);
         });
       </script>
   </body>
