@@ -70,7 +70,7 @@ require "connect.php";
         <thead>
           <tr>
             <th>Faculty ID</th>
-            <th>Name</th>
+            <th>Full Name</th>
             <th>Campus</th>
             <th>Action</th>
           </tr>
@@ -85,7 +85,7 @@ require "connect.php";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr id=".$row['faculty_id'].">";
                     echo "<td>" . $row["faculty_id"] . "</td>";
-                    echo "<td>" . $row["first_name"] . "</td>";
+                    echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
                     echo "<td>" . $row["campus"] . "</td>";
                     echo "<td>";
                     echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(".$row['faculty_id'].")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
@@ -139,7 +139,7 @@ require "connect.php";
                 <div class="form-group">
                   <label for="campus">Campus:</label>
                   <select class="form-control" id="viewCampus">
-                    <option value="Malolos - Main Campus">Malolos - Main Campus</option>
+                    <option value="Malolos Campus">Malolos Campus</option>
                     <option value="Bustos Campus">Bustos Campus</option>
                     <option value="Sarmiento Campus">Sarmiento Campus</option>
                     <option value="San Rafael Campus">San Rafael Campus</option>
@@ -184,7 +184,7 @@ require "connect.php";
             </div>
             <div class="form-group">
               <label for="addFacultyId">Password:</label>
-              <input type="text" class="form-control" name="addPassword" id="addPassword" value="" required>
+              <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
             </div>
             <div class="form-row">
               <div class="col">
@@ -203,7 +203,7 @@ require "connect.php";
             <div class="form-group mt-3">
               <label for="campus">Campus</label>
               <select class="form-control" name="addCampus" id="addCampus">
-                <option value="Malolos - Main Campus">Malolos - Main Campus</option>
+                <option value="Malolos Campus">Malolos Campus</option>
                 <option value="Bustos Campus">Bustos Campus</option>
                 <option value="Sarmiento Campus">Sarmiento Campus</option>
                 <option value="San Rafael Campus">San Rafael Campus</option>

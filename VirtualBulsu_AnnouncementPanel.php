@@ -119,7 +119,7 @@ require "connect.php";
         aria-labelledby="announcementModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header ">
               <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -146,17 +146,17 @@ require "connect.php";
                   <input class="form-control" type="file" id="viewFileInput" name="viewFileInput" multiple>
                   <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-between align-content-center">
+                  <p class="card-text"><small class="text-body-secondary">Author: </small></p>
                   <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
                   <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
                 </div>
               </form>
             </div>
-            
           </div>
         </div>
       </div>
-      <!-- Announcement Modal -->
+      <!-- Announcement Modal --> 
       <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog"
         aria-labelledby="announcementModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -170,6 +170,19 @@ require "connect.php";
             <div class="modal-body">
               <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
                 <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
+                <input type="text" class="form-control" id="author" name="author" value="" hidden>
+                <div class="form-group">
+                  <label for="campusAssignment">Campus Assignment</label>
+                  <select class="form-control" id="campusAssignment">
+                    <option value="All">All</option>
+                    <option value="Malolos Campus">Malolos Campus</option>
+                    <option value="Bustos Campus">Bustos Campus</option>
+                    <option value="Sarmiento Campus">Sarmiento Campus</option>
+                    <option value="San Rafael Campus">San Rafael Campus</option>
+                    <option value="Hagonoy Campus">Hagonoy Campus</option>
+                    <option value="Meneses Campus">Meneses Campus</option>
+                  </select>
+                </div>
                 <div class="form-group">
                   <label for="eventDate">Event Date (Optional)</label>
                   <input type="date" class="form-control" id="eventDate" name="eventDate">
@@ -309,8 +322,6 @@ require "connect.php";
                         } else {
                             alert(response.error);
                         }
-                    } else {
-                        alert("Error deleting announcement");
                     }
                 };
                 xhr.send("announcementId=" + announcementId);
