@@ -63,12 +63,13 @@ require "connect.php";
         <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- Table to display the list of admins -->
     <div class="table-responsive">
       <table class="table table-striped table-hover">
         <thead>
           <tr>
+            <th>Faculty ID</th>
             <th>Name</th>
             <th>Campus</th>
             <th>Action</th>
@@ -82,12 +83,14 @@ require "connect.php";
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr id=".$row['faculty_id']." onclick='selectedRow(".$row['faculty_id'].")'>";
+                    echo "<tr id=".$row['faculty_id'].">";
+                    echo "<td>" . $row["faculty_id"] . "</td>";
                     echo "<td>" . $row["first_name"] . "</td>";
                     echo "<td>" . $row["campus"] . "</td>";
                     echo "<td>";
-                    echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(".$row['faculty_id'].")'>Edit</button>";
+                    echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(".$row['faculty_id'].")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
                     echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(".$row['faculty_id'].")'>Delete</button>";
+                    echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(".$row['faculty_id'].")'>View</button>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -98,37 +101,44 @@ require "connect.php";
         </tbody>
       </table>
     </div>
-        </div>
-  
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Admin Details</h5>
+  </div>
+
+  <!-- View Admin Details Modal -->
+  <div class="modal fade" id="viewAdminDetails" tabindex="-1" role="dialog"
+        aria-labelledby="adminDetailsModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
               <form id="adminDetailsForm">
                 <div class="form-group">
                   <label for="facultyId">Faculty ID:</label>
-                  <input type="text" class="form-control" id="facultyId" readonly>
+                  <input type="text" class="form-control" id="facultyId">
                 </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col">
                       <label for="name">First Name:</label>
-                      <input type="text" class="form-control" id="firstName" readonly>
+                      <input type="text" class="form-control" id="viewFirstName">
                     </div>
                     <div class="col">
                       <label for="name">Middle Name:</label>
-                      <input type="text" class="form-control" id="middleName" readonly>
+                      <input type="text" class="form-control" id="viewMiddleName">
                     </div>
                     <div class="col">
                       <label for="name">Last Name:</label>
-                      <input type="text" class="form-control" id="lastName" readonly>
+                      <input type="text" class="form-control" id="viewLastName">
                     </div>
                   </div>
-                  
                 </div>
                 <div class="form-group">
                   <label for="campus">Campus:</label>
-                  <select class="form-control" id="campus" disabled>
+                  <select class="form-control" id="viewCampus">
                     <option value="Malolos - Main Campus">Malolos - Main Campus</option>
                     <option value="Bustos Campus">Bustos Campus</option>
                     <option value="Sarmiento Campus">Sarmiento Campus</option>
@@ -139,17 +149,21 @@ require "connect.php";
                 </div>
                 <div class="form-group">
                   <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email" readonly>
+                  <input type="email" class="form-control" id="viewEmail">
                 </div>
                 <div class="form-group">
                   <label for="phone">Contact Number:</label>
-                  <input type="text" class="form-control" id="phone" readonly>
+                  <input type="text" class="form-control" id="viewPhone">
                 </div>
-                <button type="button" class="btn btn-success" id="saveBtn" disabled>Save</button>
+                <div class="modal-footer">
+                  <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
+                  <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
+                </div>
               </form>
             </div>
           </div>
         </div>
+      </div>
   
   <!-- Admin Modal -->
   <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
@@ -223,13 +237,12 @@ require "connect.php";
 
       function selectedRow (facultyId){
         document.getElementById("facultyId").readOnly = true;
-        document.getElementById("firstName").readOnly = true;
-        document.getElementById("middleName").readOnly = true;
-        document.getElementById("lastName").readOnly = true;
-        document.getElementById("campus").disabled = true;
-        document.getElementById("email").readOnly = true;
-        document.getElementById("phone").readOnly = true;
-        document.querySelector("#editBtn").disabled = false;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
 
         var saveBtn = document.getElementById("saveBtn");
         document.getElementById("saveBtn").disabled = true;
@@ -244,12 +257,12 @@ require "connect.php";
 
             // Populate form fields with the fetched faculty data
             document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("firstName").value = facultyData.first_name;
-            document.getElementById("middleName").value = facultyData.middle_name;
-            document.getElementById("lastName").value = facultyData.last_name;
-            document.getElementById("campus").value = facultyData.campus;
-            document.getElementById("email").value = facultyData.email;
-            document.getElementById("phone").value = facultyData.contact_num;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
           }
         };
 
@@ -258,15 +271,19 @@ require "connect.php";
 
       }
 
+      function enableViewEdit(){
+        enableEdit(document.getElementById("facultyId").value);
+      }
+
        function enableEdit(facultyId) {
         // Enable form fields for editing
         document.getElementById("facultyId").readOnly = true;
-        document.getElementById("firstName").readOnly = false;
-        document.getElementById("middleName").readOnly = false;
-        document.getElementById("lastName").readOnly = false;
-        document.getElementById("campus").disabled = false;
-        document.getElementById("email").readOnly = false;
-        document.getElementById("phone").readOnly = false;
+        document.getElementById("viewFirstName").readOnly = false;
+        document.getElementById("viewMiddleName").readOnly = false;
+        document.getElementById("viewLastName").readOnly = false;
+        document.getElementById("viewCampus").disabled = false;
+        document.getElementById("viewEmail").readOnly = false;
+        document.getElementById("viewPhone").readOnly = false;
 
         /* var row = document.getElementById(facultyId);
         row.classList.add("table-active"); */
@@ -282,12 +299,12 @@ require "connect.php";
 
             // Populate form fields with the fetched faculty data
             document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("firstName").value = facultyData.first_name;
-            document.getElementById("middleName").value = facultyData.middle_name;
-            document.getElementById("lastName").value = facultyData.last_name;
-            document.getElementById("campus").value = facultyData.campus;
-            document.getElementById("email").value = facultyData.email;
-            document.getElementById("phone").value = facultyData.contact_num;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
           }
         };
 
@@ -303,12 +320,12 @@ require "connect.php";
       function saveChanges() {
         // Get updated admin data
         var facultyId = document.getElementById("facultyId").value;
-        var firstName = document.getElementById("firstName").value;
-        var middleName = document.getElementById("middleName").value;
-        var lastName = document.getElementById("lastName").value;
-        var campus = document.getElementById("campus").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
+        var firstName = document.getElementById("viewFirstName").value;
+        var middleName = document.getElementById("viewMiddleName").value;
+        var lastName = document.getElementById("viewLastName").value;
+        var campus = document.getElementById("viewCampus").value;
+        var email = document.getElementById("viewEmail").value;
+        var phone = document.getElementById("viewPhone").value;
 
         /* var row = document.getElementById(facultyId);
         row.classList.remove("table-active"); */
@@ -337,13 +354,12 @@ require "connect.php";
 
         // Disable form fields after saving
         document.getElementById("facultyId").readOnly = true;
-        document.getElementById("firstName").readOnly = true;
-        document.getElementById("middleName").readOnly = true;
-        document.getElementById("lastName").readOnly = true;
-        document.getElementById("campus").disabled = true;
-        document.getElementById("email").readOnly = true;
-        document.getElementById("phone").readOnly = true;
-        document.querySelector("#editBtn").disabled = false;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
 
         var saveBtn = document.getElementById("saveBtn");
         document.getElementById("saveBtn").disabled = true;
