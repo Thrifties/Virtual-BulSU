@@ -19,6 +19,12 @@ require "connect.php";
         padding: 20px;
         border-radius: 5px;
       }
+
+      #viewAnnouncementImage {
+        width: 100%;
+        height: auto;
+      }
+      
     </style>
   </head>
 
@@ -38,10 +44,10 @@ require "connect.php";
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item" id="custom-item">
-              <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.html">Announcements</a>
+              <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
             </li>
             <li class="nav-item" id="custom-item">
-              <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.html">Admins</a>
+              <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="VirtualBulsu_AdminSettings.html">
@@ -59,17 +65,18 @@ require "connect.php";
       <div class="announcement-panel">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h2>Announcement Panel</h2>
-          <button class="btn btn-primary" data-toggle="modal" data-target="#announcementModal">Add
+          <button class="btn btn-primary" id="addAnnouncement" data-toggle="modal" data-target="#announcementModal">Add
             Announcement</button>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-12">
             <div class="announcement-list">
-              <table class="table table-hover">
+              <table class="table table-striped table-hover">
                 <thead>
                     <tr class="table">
                         <th>Headline</th>
                         <th>Event Date</th>
+                        <th>Actions</th>
                     </trc>
                 </thead>
                 <tbody>
@@ -87,6 +94,13 @@ require "connect.php";
                       echo "<tr id=".$row['announcement_id'].">";
                       echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
                       echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
+                      echo "<td>";
+                      echo "<div class='btn-group' role='group' aria-label='Basic example'>";
+                      echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(".$row['announcement_id'].")'>Edit</button>";
+                      echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(".$row['announcement_id'].")'>View</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(".$row['announcement_id'].")' data-announcement-id='" . $row['announcement_id']. "'>Delete</button>";
+                      echo "</div>";
+                      echo "</td>";
                       echo "</tr>";
                   }
 
@@ -97,65 +111,51 @@ require "connect.php";
               </table>
             </div>
           </div>
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Announcement Title</h5>
-                <p class="card-text">This is the content of the announcement.</p>
-                <p class="card-text" id="card-date"><small class="text-muted">Posted on June 12,
-                    2023</small></p>
-                <img src="resources\sarmiento.jpg" class="card-img-bottom" alt="...">
-                <!-- Add the Update and Delete buttons -->
-                <div class="form-group my-3">
-                  <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#updateModal">Update</button>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-      <!-- Add the Update Modal -->
-      <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-        aria-hidden="true">
+
+      <!-- View Announcement Modal -->
+      <div class="modal fade" id="viewAnnouncementModal" tabindex="-1" role="dialog"
+        aria-labelledby="announcementModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="updateModalLabel">Update Announcement</h5>
+              <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method="post" id="viewAnnouncementForm" enctype="multipart/form-data">
+                <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
                 <div class="form-group">
-                  <label for="eventDate">Event Date (Optional)</label>
-                  <input type="date" class="form-control" id="updateEventDate">
+                  <label for="eventDate">Event Date</label>
+                  <input type="date" class="form-control" id="viewEventDate" name="viewEventDate">
                 </div>
                 <div class="form-group">
-                  <label for="updateHeadline">Headline</label>
-                  <input type="text" class="form-control" id="updateHeadline" required>
+                  <label for="headline">Headline</label>
+                  <input type="text" class="form-control" id="viewHeadline" name="viewHeadline" required>
                 </div>
                 <div class="form-group">
-                  <label for="updateDescription">Description</label>
-                  <textarea class="form-control" id="updateDescription" rows="4"></textarea>
+                  <label for="description">Description</label>
+                  <textarea class="form-control" id="viewDescription" name="viewDescription" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="formFileMultiple" class="form-label">Multiple files input
                     example</label>
-                  <input class="form-control" type="file" id="updateFile" multiple>
+                  <input class="form-control" type="file" id="viewFileInput" name="viewFileInput" multiple>
+                  <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
+                  <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="updateAnnouncementBtn">Update</button>
-            </div>
+            
           </div>
         </div>
       </div>
-
       <!-- Announcement Modal -->
       <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog"
         aria-labelledby="announcementModalLabel" aria-hidden="true">
@@ -200,73 +200,125 @@ require "connect.php";
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <script>
-        $(document).ready(function () {
-          // Update button click event handler
-          $('#updateAnnouncementBtn').click(function () {
-            // Get the updated headline and description from the modal fields
-            const updatedHeadline = $('#updateHeadline').val();
-            const updatedDescription = $('#updateDescription').val();
-            const updatedEventDate = $('#updateEventDate').val();
+        function viewAnnouncementModal(announcementId) {
+          document.getElementById("viewEventDate").readOnly = true;
+          document.getElementById("viewHeadline").readOnly = true;
+          document.getElementById("viewDescription").readOnly = true;
+          document.getElementById("viewFileInput").hidden = true;
 
-            // Update the announcement card content
-            $('.card-title').text(updatedHeadline);
-            $('.card-text').text(updatedDescription);
-            $('#card-date').text(updatedEventDate);
 
-            // Close the modal
-            $('#updateModal').modal('hide');
-          });
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "get_announcement.php", true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              var data = JSON.parse(this.responseText);
+              var ImageURL = data.file_input;
+              document.getElementById("announcementId").value = data.announcement_id;
+              document.getElementById("viewEventDate").value = data.event_date;
+              document.getElementById("viewHeadline").value = data.headline;
+              document.getElementById("viewDescription").value = data.description;
+              document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
+            }
+          };
 
-          $('#announcementModal').on('show.bs.modal', function () {
-            // Get the current date in the format YYYYMMDD
-            var currentDate = new Date();
-            var year = currentDate.getFullYear();
-            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // January is 0
-            var day = currentDate.getDate().toString().padStart(2, '0');
+          xhr.send("announcementId=" + announcementId);
 
-            // Generate two random numbers between 0 and 99
-            var randomNumber1 = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-            var randomNumber2 = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-
-            // Combine the date and random numbers to create the announcement ID
-            var announcementId = year + month + day + randomNumber1 + randomNumber2;
-
-            // Set the announcementId as the value of the hidden input field
-            $('#announcementId').val(announcementId);
-          });
-        });
-
-              // Function to update the announcement card when a row is clicked
-        function updateAnnouncementCard(announcementId) {
-          // Send an AJAX request to fetch the announcement details
-          $.ajax({
-              url: 'get_announcement.php', // Replace with the server-side script to fetch announcement details
-              method: 'GET',
-              data: { announcementId: announcementId },
-              dataType: 'json',
-              success: function (announcementData) {
-                  // Update the announcement card with the retrieved data
-                  $('.card-title').text(announcementData.headline);
-                  $('.card-text').text(announcementData.description);
-                  $('#card-date').text(announcementData.event_date);
-                  // You can also update the image if needed
-                  // $('.card-img-bottom').attr('src', data.image_url);
-              },
-              error: function () {
-                  // Handle errors here
-                  alert('Failed to fetch announcement details.');
-              }
-          });
+          document.getElementById("saveBtn").hidden = true;
+          document.getElementById("editViewBtn").hidden = false;
         }
 
-        // Attach a click event handler to each table row
-        $('.table-row').click(function () {
-            // Get the announcement ID from the row's ID attribute
-            var announcementId = this.id.split('_')[1];
-            // Call the function to update the announcement card
-            updateAnnouncementCard(announcementId);
-        });
+        function enableViewEdit() {
+          editAnnouncement(announcementId);
+        }
+
+        function editAnnouncement(announcementId){
+          document.getElementById("viewEventDate").readOnly = false;
+          document.getElementById("viewHeadline").readOnly = false;
+          document.getElementById("viewDescription").readOnly = false;
+          document.getElementById("viewFileInput").hidden = false;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "get_announcement.php", true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              var data = JSON.parse(this.responseText);
+              var ImageURL = data.file_input;
+              document.getElementById("announcementId").value = data.announcement_id;
+              document.getElementById("viewEventDate").value = data.event_date;
+              document.getElementById("viewHeadline").value = data.headline;
+              document.getElementById("viewDescription").value = data.description;
+              document.getElementById("viewFileInput").value = data.file_input;
+              document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
+            }
+          };
+          xhr.send("announcementId=" + announcementId);
+
+          document.getElementById("saveBtn").hidden = false;
+          document.getElementById("editViewBtn").hidden = true;
+        }
+
+        function saveChanges() {
+          var announcementId = document.getElementById("announcementId").value;
+          var eventDate = document.getElementById("viewEventDate").value;
+          var headline =  document.getElementById("viewHeadline").value;
+          var description = document.getElementById("viewDescription").value;
+          document.getElementById("viewFileInput").value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "update_announcement_details.php", true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              var data = JSON.parse(this.responseText);
+              if (response.success) {
+                alert(response.success);
+              } else {
+                alert(response.error);
+              } 
+            } else {
+                alert("Error updating announcement");
+              }
+          };
+
+          xhr.send("announcementId=" + announcementId + "&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
+
+          document.getElementById("viewEventDate").readOnly = true;
+          document.getElementById("viewHeadline").readOnly = true;
+          document.getElementById("viewDescription").readOnly = true;
+          document.getElementById("viewFileInput").disabled = true;
+
+          document.getElementById("saveBtn").hidden = true;
+          document.getElementById("editViewBtn").hidden = false;
+        }
+
+        function deleteAnnouncement(announcementId) {
+            if (confirm("Are you sure you want to delete this announcement?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "delete_announcement.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        var response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            // Remove the deleted row from the table
+                            var row = document.getElementById(announcementId);
+                            row.parentNode.removeChild(row);
+                            alert(response.success);
+                        } else {
+                            alert(response.error);
+                        }
+                    } else {
+                        alert("Error deleting announcement");
+                    }
+                };
+                xhr.send("announcementId=" + announcementId);
+            }
+        }
+
       </script>
+
   </body>
 
 </html>

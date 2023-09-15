@@ -40,13 +40,13 @@ require "connect.php";
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.html">Announcements</a>
+              <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_SuperAdmin.html">Admins</a>
+              <a class="nav-link" href="VirtualBulsu_SuperAdmin.php">Admins</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AdminSettings.html">
+              <a class="nav-link" href="VirtualBulsu_AdminSettings.php">
                 <span class="user-icon">
                   <!-- <i class='bx bx-user'></i> -->
                 </span>

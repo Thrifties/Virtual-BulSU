@@ -14,13 +14,19 @@
             .navbar-custom {
                 background-color: #95b302;
             }
+
+            iframe {
+                width: 100%;
+                height: 100vh;
+                border: none;
+            }
         </style>
     </head>
 
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
                 <div class="container-fluid">
                     <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.html">
                         <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30"
@@ -54,6 +60,9 @@
                     </div>
                 </div>
             </nav>
+
+            <iframe scrolling="no" id="virtualTour"
+                allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>
             
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
                 id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
@@ -133,5 +142,12 @@
                 integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
                 crossorigin="anonymous"></script>
             <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+            <script>
+                var navHeight = document.getElementById("navBar").clientHeight;
+                document.getElementById("virtualTour").style.height = "calc(100vh - " + navHeight + "px)"; // 100vh - navHeight
+
+
+
+            </script>
     </body>      
 </html>

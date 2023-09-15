@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Successful insertion
-        header("refresh: 3; url=VirtualBulsu_AnnouncementPanel.php"); // Redirect to the announcement panel
+        header("refresh: 1; url=VirtualBulsu_AnnouncementPanel.php"); // Redirect to the announcement panel
     } else {
         // Error occurred
         echo "Error: " . $stmt->error;
