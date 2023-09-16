@@ -1,6 +1,8 @@
 <?php 
 require "connect.php";
+require "includes/sessionStart.php"
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +45,7 @@ require "connect.php";
                                     <label for="password">Password:</label>
                                     <input name="password" type="password" class="form-control" id="password" required>
                                 </div>
-                                <a href="VirtualBulsu_AnnouncementPanel.html"><button type="submit" class="btn btn-primary btn-block">Login</button></a>
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </form>
                         </div>
                     </div>

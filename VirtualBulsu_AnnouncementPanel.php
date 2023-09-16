@@ -1,4 +1,5 @@
 <?php 
+require "includes/sessionEnd.php";
 require "connect.php";
 ?>
 

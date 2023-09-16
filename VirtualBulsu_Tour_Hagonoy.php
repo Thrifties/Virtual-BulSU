@@ -18,11 +18,14 @@ require "connect.php"
             .navbar-custom {
                 background-color: #95b302;
             }
-
             iframe {
                 width: 100%;
-                height: 100vh;
+                height: 99vh;
                 border: none;
+            }
+
+            #offcanvasNavbar, #announcementPanel {
+                background-color: #95b302;
             }
         </style>
     </head>
@@ -30,37 +33,42 @@ require "connect.php"
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
-                    <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.html">
-                        <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30"
-                            class="d-inline-block align-text-top">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                        <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         Bulacan State University - Hagonoy Campus
                     </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item" id="nav-item">
-                                <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
-                                    data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Campuses
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Malolos.php">Malolos Campus</a></li>
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Bustos.php">Bustos Campus</a></li>
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.php">Meneses Campus</a></li>
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.php">Sarmiento Campus</a></li>
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_Hagonoy.php">Hagonoy Campus</a></li>
-                                    <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.php">San Rafael Campus</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav">
+                                <li class="nav-item " id="nav-item">
+                                    <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
+                                        data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Campuses
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_Malolos.php">Malolos Campus</a></li>
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_Bustos.php">Bustos Campus</a></li>
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.php">Meneses Campus</a></li>
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.php">Sarmiento Campus</a></li>
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_Hagonoy.php">Hagonoy Campus</a></li>
+                                        <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.php">San Rafael Campus</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>

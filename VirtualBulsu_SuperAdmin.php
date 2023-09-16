@@ -1,5 +1,6 @@
 <?php
 require "connect.php";
+require "includes/sessionEnd.php"
 ?>
 
 <!DOCTYPE html>

@@ -21,18 +21,22 @@ require "connect.php"
             <!-- Navigation Bar -->
             <nav class="navbar navbar-expand-lg navbar-custom">
                 <div class="container-fluid">
-                <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.html">
-                    <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30"
-                        class="d-inline-block align-text-top">
-                    Bulacan State University - Sarmiento Campus
-                </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item" id="nav-item">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        Bulacan State University - Sarmiento Campus
+                    </a>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav">
+                                <li class="nav-item " id="nav-item">
                                     <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
                                         data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
                                 </li>
@@ -51,6 +55,7 @@ require "connect.php"
                                 </li>
                             </ul>
                         </div>
+                    </div>
                     </div>
                 </nav>
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"

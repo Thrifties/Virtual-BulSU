@@ -1,21 +1,21 @@
 <?php
-	//session_start();
+	session_start();
 	require "connect.php";
-	/* if(isset($_SESSION["user"]) && isset($_SESSION["pass"])){
+	if(isset($_SESSION["user"]) && isset($_SESSION["pass"])){
 		
-		header("Location: Dashboard.php");
+		header("Location: VirtualBulsu_AnnouncementPanel.php");
 		exit();
-	}	 */
+	}	
 	$user = $_POST["username"];
 	$pass = $_POST["password"];
 	$query = "SELECT * FROM campus_admin WHERE faculty_id='$user'and password='$pass'";
 	$result = mysqli_query($con,$query);
 	$count =  mysqli_num_rows($result);
 	if($count==1){
-		/* $_SESSION["user"] = $user;
-		$_SESSION["pass"] = $pass; */
+		$_SESSION["user"] = $user;
+		$_SESSION["pass"] = $pass;
     echo 'Login Success!';
-    header("refresh: 3; url=VirtualBulsu_SuperAdmin.php");
+    header("refresh: 3; url=VirtualBulsu_AnnouncementPanel.php");
 	}
 	else{
     echo 'Login Failed!';

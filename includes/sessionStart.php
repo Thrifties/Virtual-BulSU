@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(isset($_SESSION["faculty_id"]) && isset($_SESSION["password"])){
+	if(isset($_SESSION["user"]) && isset($_SESSION["pass"])){
 		header('Location: VirtualBulsu_AnnouncementPanel.php');
 		exit();
 	}
