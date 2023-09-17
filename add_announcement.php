@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $eventDate = $_POST["eventDate"];
     $headline = $_POST["headline"];
     $description = $_POST["description"];
+    $author = $_POST["author"];
 
     // Check if a file was uploaded
     if ($_FILES["fileInput"]["name"]) {
@@ -24,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert the announcement into the MySQL database
-    $sql = "INSERT INTO announcements (announcement_id, event_date, headline, description, file_input) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO announcements (announcement_id, author,event_date, headline, description, file_input) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("sssss", $announcementId, $eventDate, $headline, $description, $file_name);
+    $stmt->bind_param("ssssss", $announcementId, $author,$eventDate, $headline, $description, $file_name);
 
     if ($stmt->execute()) {
         // Successful insertion

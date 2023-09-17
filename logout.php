@@ -2,5 +2,5 @@
 	session_start();
 	session_unset();
 	session_destroy();
-	header('Location: HomePage.php');
+	header('Location: VirtualBulsu_Login.php');
 ?>

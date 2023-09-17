@@ -1,12 +1,20 @@
 <?php 
 require "includes/sessionEnd.php";
 require "connect.php";
+
+$user = $_SESSION["user"];
+
+$query = "SELECT * FROM campus_admin WHERE faculty_id='$user'";
+$result = mysqli_query($con, $query);
+$adminData = mysqli_fetch_assoc($result);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -24,6 +32,10 @@ require "connect.php";
       #viewAnnouncementImage {
         width: 100%;
         height: auto;
+      }
+      
+      td button {
+        margin: 0 3px;
       }
       
     </style>
@@ -50,12 +62,11 @@ require "connect.php";
             <li class="nav-item" id="custom-item">
               <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
             </li>
+            <li class="nav-item" id="custom-item">
+              <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AdminSettings.html">
-                <span class="user-icon">
-                  <i class='bx bx-user'></i>
-                </span>
-              </a>
+              <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
             </li>
           </ul>
         </div>
@@ -84,29 +95,28 @@ require "connect.php";
                     <?php
 
                   // Query to fetch announcements from your database
-                  $query = "SELECT announcement_id, headline, event_date FROM announcements";
-                  $result = mysqli_query($con, $query);
+                  $query2 = "SELECT announcement_id, headline, event_date FROM announcements";
+                  $result2 = mysqli_query($con, $query2);
 
-                  if (!$result) {
+                  if (!$result2) {
                       die("Database query failed."); // Handle the error appropriately
                   }
 
-                  while ($row = mysqli_fetch_assoc($result)) {
+                  while ($row = mysqli_fetch_assoc($result2)) {
                       echo "<tr id=".$row['announcement_id'].">";
                       echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
                       echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
                       echo "<td>";
-                      echo "<div class='btn-group' role='group' aria-label='Basic example'>";
                       echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(".$row['announcement_id'].")'>Edit</button>";
                       echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(".$row['announcement_id'].")'>View</button>";
                       echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(".$row['announcement_id'].")' data-announcement-id='" . $row['announcement_id']. "'>Delete</button>";
-                      echo "</div>";
                       echo "</td>";
                       echo "</tr>";
                   }
 
                   // Release the result set
-                  mysqli_free_result($result);
+                  mysqli_free_result($result2);
+
                   ?>
                 </tbody>
               </table>
@@ -148,7 +158,7 @@ require "connect.php";
                   <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
                 </div>
                 <div class="modal-footer d-flex justify-content-between align-content-center">
-                  <p class="card-text"><small class="text-body-secondary">Author: </small></p>
+                  <p class="card-text" id="viewAuthor"><small class="text-body-secondary">Author: </small></p>
                   <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
                   <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
                 </div>
@@ -171,7 +181,7 @@ require "connect.php";
             <div class="modal-body">
               <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
                 <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
-                <input type="text" class="form-control" id="author" name="author" value="" hidden>
+                <input type="text" class="form-control" id="author" name="author" value="<?php echo $adminData["faculty_id"]?>" hidden>
                 <div class="form-group">
                   <label for="campusAssignment">Campus Assignment</label>
                   <select class="form-control" id="campusAssignment">
@@ -199,8 +209,8 @@ require "connect.php";
                 <div class="form-group">
                   <label for="formFileMultiple" class="form-label">Multiple files input
                     example</label>
-                  <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
-                </div>
+                    <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
+                  </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -219,6 +229,7 @@ require "connect.php";
           document.getElementById("viewHeadline").readOnly = true;
           document.getElementById("viewDescription").readOnly = true;
           document.getElementById("viewFileInput").hidden = true;
+          document.getElementById("viewAuthor");
 
 
           var xhr = new XMLHttpRequest();
@@ -233,6 +244,7 @@ require "connect.php";
               document.getElementById("viewHeadline").value = data.headline;
               document.getElementById("viewDescription").value = data.description;
               document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
+              document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
             }
           };
 
@@ -327,6 +339,12 @@ require "connect.php";
                 };
                 xhr.send("announcementId=" + announcementId);
             }
+        }
+
+        function logout(){
+          var choice = confirm("Do you really want to log out?");
+          if(choice==true)
+          window.location = "logout.php";
         }
 
       </script>
