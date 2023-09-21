@@ -18,5 +18,5 @@
 <ul>
     <li>Level 2 admins for campus level</li>
     <li>Exlusive announcement page per campus</li>
-    hihi
+    Hello Jas
 </ul>
