@@ -14,7 +14,7 @@
     <li><s><s>Admin Settings</s></s></li>
 </ul>
 
-<h2>To Add Test:</h2>
+<h2>To Add:</h2>
 <ul>
     <li>Level 2 admins for campus level</li>
     <li>Exlusive announcement page per campus</li>
