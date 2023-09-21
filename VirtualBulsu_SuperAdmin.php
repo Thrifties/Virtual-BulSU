@@ -46,12 +46,11 @@ require "includes/sessionEnd.php"
             <li class="nav-item">
               <a class="nav-link" href="VirtualBulsu_SuperAdmin.php">Admins</a>
             </li>
+            <li class="nav-item" id="custom-item">
+              <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AdminSettings.php">
-                <span class="user-icon">
-                  <!-- <i class='bx bx-user'></i> -->
-                </span>
-              </a>
+              <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
             </li>
           </ul>
         </div>
@@ -395,6 +394,10 @@ require "includes/sessionEnd.php"
               // Send the request with faculty_id parameter
               xhr.send("faculty_id=" + facultyId);
           }
+      }
+
+      function logout(){
+        window.location.href = "logout.php";
       }
 
     </script>

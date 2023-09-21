@@ -11,11 +11,12 @@
 <ul>
     <li><s>Announcement Panel</s></li>
     <li><s>Admin Panel</s></li>
-    <li>Admin Settings</li>
+    <li><s>Admin Settings</s></li>
 </ul>
 
 <h2>To Add:</h2>
 <ul>
     <li>Level 2 admins for campus level</li>
     <li>Exlusive announcement page per campus</li>
+    hihi
 </ul>

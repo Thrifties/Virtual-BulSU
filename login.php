@@ -14,8 +14,11 @@
 	if($count==1){
 		$_SESSION["user"] = $user;
 		$_SESSION["pass"] = $pass;
-    echo 'Login Success!';
-    header("refresh: 3; url=VirtualBulsu_AnnouncementPanel.php");
+    echo '
+		
+		alert("Login Successful!");
+		';
+    header("refresh: 1; url=VirtualBulsu_AnnouncementPanel.php");
 	}
 	else{
     echo 'Login Failed!';
