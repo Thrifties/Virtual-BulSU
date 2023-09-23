@@ -22,12 +22,17 @@ require "includes/sessionStart.php"
 
     /*start of edit*/
     body {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.932)),
-            url("resources/BSU_Main.jpg");
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+
+            url('resources/cover.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
     }
 
     .box-flex-justify-content-center {
@@ -167,14 +172,13 @@ require "includes/sessionStart.php"
     <div class="box-flex-justify-content-center">
         <div class="container-justify-content-center">
             <div class="top-header-d-flex justify-content-center">
-                <span>Have an account?</span>
+                <!-- <span>Have an account? </span> -->
                 <!--<header>Login Form</header> -->
                 <img id="virtualbulsuLogo" src="resources\virtualbulsu_logo.png" alt="Logo" />
                 <form method="post" action="login.php">
                     <div class="form-group">
                         <div class="input-field">
                             <input type="number" class="input-flex-justify-content-center" placeholder="Faculty ID" input name="username" required />
-                            <!-- <input name="username" type="text" class="form-control" id="username" required> -->
                             <i class="bx bx-user"></i>
                         </div>
                         <div class="input-field">
@@ -193,7 +197,7 @@ require "includes/sessionStart.php"
                                 <label><a href="#"> Forgot Password?</a></label>
                             </div>
 
-
+                            <!--
                             <head>
                                 <meta charset="UTF-8">
                                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,8 +211,9 @@ require "includes/sessionStart.php"
                                 }
 
                                 body {
-                                    background: linear-gradient(rgba(51, 50, 50, 0.5), rgba(51, 50, 50, 0.5)),
-                                        url('resources/BSU_Main.jpg');
+                                    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+
+                                        url('resources/cover.png');
                                     background-size: cover;
                                     background-position: center;
                                     background-repeat: no-repeat;
@@ -216,10 +221,11 @@ require "includes/sessionStart.php"
                                     display: flex;
                                     flex-direction: column;
                                     justify-content: center;
+
                                 }
                             </style>
 
-                            <!--
+                            
 <body>
     <div class="container">
         <div class="row justify-content-center">
