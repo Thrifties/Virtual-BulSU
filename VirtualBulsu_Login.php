@@ -115,6 +115,7 @@ require "includes/sessionStart.php"
         outline: none;
         width: 70%;
         background: rgba(231, 199, 17, 0.7);
+        background-color: #fff;
         cursor: pointer;
         transition: 0.3s;
         margin-left: 50px;
@@ -122,6 +123,7 @@ require "includes/sessionStart.php"
 
     .submit:hover {
         box-shadow: 1px 30px 30px 1px rgba(0, 0, 0, 0.2);
+        background: rgba(231, 199, 17, 0.7);
     }
 
     .bottom {

@@ -19,4 +19,5 @@
     <li>Level 2 admins for campus level</li>
     <li>Exlusive announcement page per campus</li>
     Hello Jas
+    Shin, ung ui nung login iniba ko na. hehe
 </ul>
