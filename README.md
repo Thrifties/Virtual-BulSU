@@ -21,4 +21,5 @@
     Hello Jas
     Shin, ung ui nung login iniba ko na. hehe
     pati pala ung sa mga campuses shin, naiba ko na. 
+    tapos na rin ung sa homepage
 </ul>
