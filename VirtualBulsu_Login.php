@@ -124,6 +124,7 @@ require "includes/sessionStart.php"
     .submit:hover {
         box-shadow: 1px 30px 30px 1px rgba(0, 0, 0, 0.2);
         background: rgba(231, 199, 17, 0.7);
+        color: #fff;
     }
 
     .bottom {
