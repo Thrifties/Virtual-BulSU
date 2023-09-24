@@ -20,7 +20,7 @@
       }
 
       body {
-        /* background: linear-gradient(
+         background: linear-gradient(
             rgba(51, 50, 50, 0.5),
             rgba(51, 50, 50, 0.5)
           ),
@@ -30,7 +30,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         display: flex;
-        flex-direction: column; */
+        flex-direction: column;
 
         background-color: #eaeaea;
       }
@@ -196,7 +196,7 @@
           <div class="carousel-item active">
             <div class="row">
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_Malolos.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_Malolos.php">
                   <div class="image-placeholder">
                     <img src="resources/MAINCAMPUS.png" alt="Malolos Campus" />
                     <div class="image-label">START TOUR</div>
@@ -204,7 +204,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_Meneses.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_Meneses.php">
                   <div class="image-placeholder">
                     <img
                       src="resources/MENESESCAMPUS.png"
@@ -215,7 +215,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_Hagonoy.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_Hagonoy.php">
                   <div class="image-placeholder">
                     <img
                       src="resources/HAGONOYCAMPUS.png"
@@ -230,7 +230,7 @@
           <div class="carousel-item">
             <div class="row">
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_Bustos.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_Bustos.php">
                   <div class="image-placeholder">
                     <img src="resources/BUSTOSCAMPUS.png" alt="Bustos Campus" />
                     <div class="image-label">START TOUR</div>
@@ -238,7 +238,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_Sarmiento.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_Sarmiento.php">
                   <div class="image-placeholder">
                     <img
                       src="resources/SARMIENTOCAMPUS.png"
@@ -249,7 +249,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a class="campusSelect" href="VirtualBulsu_Tour_SanRafael.html">
+                <a class="campusSelect" href="VirtualBulsu_Tour_SanRafael.php">
                   <div class="image-placeholder">
                     <img
                       src="resources/SAN RAFAELCAMPUS.png"

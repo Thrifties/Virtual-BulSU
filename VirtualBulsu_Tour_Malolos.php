@@ -20,7 +20,7 @@ require "connect.php"
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">

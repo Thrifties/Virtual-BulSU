@@ -19,9 +19,9 @@ require "connect.php"
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -56,8 +56,8 @@ require "connect.php"
                             </ul>
                         </div>
                     </div>
-        </div>
-        </nav>
+                </div>
+            </nav>
         
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
             id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">

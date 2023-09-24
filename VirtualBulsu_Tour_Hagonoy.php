@@ -15,12 +15,15 @@ require "connect.php"
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mobileView.css">
         <style>
+            body {
+                overflow: hidden;
+            }
             .navbar-custom {
                 background-color: #95b302;
             }
             iframe {
                 width: 100%;
-                height: 99vh;
+                height: 98%;
                 border: none;
             }
 
@@ -72,8 +75,7 @@ require "connect.php"
                     </div>
                 </div>
             </nav>
-            <iframe scrolling="no" id="virtualTour"
-                allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>
+            <iframe scrolling="no" id="virtualTour" allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>
             
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
                 id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">

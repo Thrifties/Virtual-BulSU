@@ -16,10 +16,19 @@ require "connect.php"
         <link rel="stylesheet" href="CSS/mobileView.css">
     </head>
 
+    <style>
+        iframe {
+                width: 100%;
+                height: 98%;
+                border: none;
+            }
+    </style>
+
+
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -58,6 +67,8 @@ require "connect.php"
                     </div>
                 </div>
             </nav>
+
+            <iframe allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e8deea43813098500eb72,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" allowvr="yes" ></iframe>
             
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
                 id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">

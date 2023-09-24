@@ -107,7 +107,9 @@
         padding-bottom: 20px;
       }
 
-      .hover-underline-animation:after {
+      /* Tinanggal ko na lang yung underline na as start your tour na button */
+
+      /* .hover-underline-animation:after {
         content: "";
         position: absolute;
         width: 100%;
@@ -115,10 +117,11 @@
         height: 2px;
         bottom: 0;
         left: 0;
-        background-color: aliceblue;
+        background-color: #d09b00;
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
-      }
+      } */
+
       .cta:hover .hover-underline-animation:after {
         transform: scaleX(1);
         transform-origin: bottom left;
@@ -217,7 +220,7 @@ Navigation Bar
         Embark on a Digital Journey through the <br />
         Prestigious Campus
       </p>
-      <a href="VirtualBulsu_Tour_Campuses.html" id="btnPrimary">
+      <a href="VirtualBulsu_Tour_Campuses.php" id="btnPrimary">
         <button class="cta">
           <span class="hover-underline-animation">START YOUR TOUR</span>
           <svg
