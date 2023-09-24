@@ -28,14 +28,13 @@ require "connect.php"
 
         #offcanvasNavbar,
         #announcementPanel {
-            background-color: rgba(11, 156, 49, 0.4);
+            background-color: #fff;
             font-family: "Roboto";
             color: #95b302;
         }
 
         .offcanvas-header h5 {
             color: black;
-            background-color: aliceblue;
             width: 550px;
             height: 30px;
             margin: 0;
