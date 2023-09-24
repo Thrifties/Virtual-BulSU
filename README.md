@@ -19,4 +19,11 @@
     <li>Level 2 admins for campus level</li>
     <li>Exlusive announcement page per campus</li>
     Hello Jas
+<<<<<<< HEAD
 </ul>
+=======
+    Shin, ung ui nung login iniba ko na. hehe
+    pati pala ung sa mga campuses shin, naiba ko na. 
+    tapos na rin ung sa homepage
+</ul>
+>>>>>>> 634abc0ba4e27e04a7423ea83a59679a5be4e2a3
