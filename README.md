@@ -2,25 +2,31 @@
 
 <h2>Front-End:</h2>
 <ul>
-    <li>Announcement Panel</li>
-    <li>Admin Panel</li>
-    <li>Tour Sites</li>
+    <li></li>
+    <li></li>
+    <li></li>
 </ul>
 
 <h2>Backend:</h2>
 <ul>
-    <li><s>Announcement Panel</s></li>
-    <li><s>Admin Panel</s></li>
-    <li><s><s>Admin Settings</s></s></li>
+    <li></li>
+    <li></li>
+    <li></li>
 </ul>
 
 <h2>To Add:</h2>
 <ul>
-    <li>Level 2 admins for campus level</li>
-    <li>Exlusive announcement page per campus</li>
-    Hello Jas
+    <li><s>Exlusive announcement page per campus for user side</s></li>
+    <li>Idagdag yung iba pang announcement page ng other campuses</li>
 </ul>
-    Shin, ung ui nung login iniba ko na. hehe
-    pati pala ung sa mga campuses shin, naiba ko na. 
-    tapos na rin ung sa homepage
+
+<h2>Changes:</h2>
+<ul>
+    <li>Baguhin yung UI nung admin, gagawing sidebar</li>
+</ul>
+
+<h2>Notes:</h2>
+<ul>
+    <li>Create another database table for college admins</li>
+    <li>Aayusin pa yung structure ng code kasi magulo pa</li>
 </ul>

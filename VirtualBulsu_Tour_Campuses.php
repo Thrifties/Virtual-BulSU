@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bulacan State University</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto"
@@ -36,7 +34,13 @@
       }
 
       .navbar-custom {
+        /*background: rgba(255, 255, 255, 0.3);*/
+        z-index: 9999;
+        width: 100%;
+        background: none;
         background-color: #763435;
+        /*border: 1px solid#f7f7f7; */
+        font-family: "Roboto";
       }
 
       .navbar-custom .navbar-brand {
@@ -118,6 +122,21 @@
         transform: translateY(0);
       }
 
+      .navbar-custom .navbar-nav #campuses-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 215, 0, 1);
+            transition: background-color 0.3s ease;
+        }
+
+    .navbar-custom .navbar-nav #campuses-link {
+            color: #ffd700;
+        }
+
       .footer {
         background-color: #763435;
         color: white;
@@ -168,25 +187,72 @@
       .carousel-control-next {
         right: -50px;
       }
+
+      .navbar-custom .navbar-nav #campus-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 215, 0, 1);
+            transition: background-color 0.3s ease;
+        }
+
+    .navbar-custom .navbar-nav #campus-link {
+            color: #ffd700;
+        }
     </style>
   </head>
 
   <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-      <a
-        class="navbar-brand custom-brand"
-        href="VirtualBulsu_Tour_HomePage.html"
-      >
-        <img
-          src="resources\virtualbulsu_logo.png"
-          alt="Logo"
-          width="70"
-          height="auto"
-          class="d-inline-block align-text-top"
-        />
-        <!--Bulacan State University-->
-      </a>
+      <div class="container-fluid d-flex justify-content-start">
+        <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.php">
+          <img
+            src="resources\virtualbulsu_logo.png"
+            alt="Logo"
+            width="80"
+            height="auto"
+            class="d-inline-block align-top"
+          />
+          <!-- Virtual BulSU -->
+        </a>
+
+      <ul class="navbar-nav">
+        <li class="nav-tem">
+          <a class="nav-link" id="home-link" href="VirtualBulsu_Tour_HomePage.php">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="campus-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Campuses
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Bustos.php">Bustos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Hagonoy.php">Hagonoy Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Malolos.php">Malolos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.php">San Rafael Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.php">Sarmiento Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.php">Meneses Campus</a></li>
+
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="news-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            News
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Bustos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Hagonoy Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Malolos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">San Rafael Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Sarmiento Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Meneses Campus</a></li>
+          </ul>
+        </li>
+      </ul>
+      </div>
     </nav>
 
     <div class="image-container">
@@ -288,7 +354,5 @@
     </footer>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>

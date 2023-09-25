@@ -1,392 +1,461 @@
-<?php 
-require "includes/sessionEnd.php";
+<?php
 require "connect.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
-        <title>Announcement Panel</title>
-        <style>
-            body {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-        #sidebar {
-            width: 250px;
-            background-color: #343a40; /* Change the sidebar background color */
-            color: #fff; /* Change the text color */
-            transition: all 0.3s;
-        }
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-        #content {
-            flex: 1;
-            padding: 15px;
-            transition: all 0.3s;
-        }
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-        #navbar-toggler {
-            color: #fff; /* Change the navbar-toggler color */
-        }
+	<title>Admin Panel</title>
 
-        .navbar-brand.custom-brand {
-            color: #fff; /* Change the navbar brand color */
-        }
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-        .nav-link.data-custom {
-            color: #fff; /* Change the nav-link color */
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
+</head>
 
-        .navbar-toggler-icon {
-            background-color: #fff; /* Change the color of the navbar-toggler icon */
-        }
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+					<span class="align-middle">Virtual BulSU</span>
+        		</a>
 
-        /* Add more styling as needed */
+				<ul class="sidebar-nav">
 
-        @media (max-width: 768px) {
-            body {
-                flex-direction: row;
-            }
+					<li class="sidebar-item active">
+						<a class="sidebar-link" href="VirtualBulsu_AnnouncementPanel.php">
+						<i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Announcements</span>
+						</a>
+					</li>
 
-            #sidebar {
-                width: 0;
-                overflow-x: hidden;
-            }
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="VirtualBulsu_SuperAdmin.php">
+						<i class="align-middle" data-feather="user"></i> <span class="align-middle">Admin List</span></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 
-            #content {
-                flex: 1;
-                padding: 15px;
-            }
-        }
-        </style>
-    </head>
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
 
-    <body>
-        
-        <nav id="sidebar">
-            <!-- Sidebar content goes here -->
-            <ul class="navbar-nav">
-                <li class="nav-item" id="custom-item">
-                    <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
-                </li>
-                <li class="nav-item" id="custom-item">
-                    <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="VirtualBulsu_AdminSettings.html">
-                        <span class="user-icon">
-                            <i class='bx bx-user'></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div id="content">
-            <!-- Content goes here -->
-            <!-- Add a button to toggle the sidebar -->
-            <button class="navbar-toggler" id="navbar-toggler" onclick="toggleSidebar()">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="container mt-5">
-                <div class="container mt-5">
-                    <!-- Announcement Panel -->
-                    <div class="announcement-panel">
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+              </a>
+			<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">Charles Hall</span>
+            </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="log-out"></i> Sign out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+                    <div class="container mt-5">
+                        <div class="admin-panel-container">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2>Announcement Panel</h2>
-                            <button class="btn btn-primary" id="addAnnouncement" data-toggle="modal"
-                                data-target="#announcementModal">Add
-                                Announcement</button>
+                            <h2>Admin Panel</h2>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="announcement-list">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr class="table">
-                                                <th>Headline</th>
-                                                <th>Event Date</th>
-                                                <th>Actions</th>
-                                                </trc>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                
-                                  // Query to fetch announcements from your database
-                                  $query = "SELECT announcement_id, headline, event_date FROM announcements";
-                                  $result = mysqli_query($con, $query);
-                
-                                  if (!$result) {
-                                      die("Database query failed."); // Handle the error appropriately
-                                  }
-                
-                                  while ($row = mysqli_fetch_assoc($result)) {
-                                      echo "<tr id=".$row['announcement_id'].">";
-                                      echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
-                                      echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
-                                      echo "<td>";
-                                      echo "<div class='btn-group' role='group' aria-label='Basic example'>";
-                                      echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(".$row['announcement_id'].")'>Edit</button>";
-                                      echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(".$row['announcement_id'].")'>View</button>";
-                                      echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(".$row['announcement_id'].")' data-announcement-id='" . $row['announcement_id']. "'>Delete</button>";
-                                      echo "</div>";
-                                      echo "</td>";
-                                      echo "</tr>";
-                                  }
-                
-                                  // Release the result set
-                                  mysqli_free_result($result);
-                                  ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            <!-- Table to display the list of admins -->
+                        <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Faculty ID</th>
+                                <th>Full Name</th>
+                                <th>Campus</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                                $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
+
+                                $result = $con->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        if ($row['admin_level'] === 'admin') {
+                                        echo "<tr id=" . $row['faculty_id'] . ">";
+                                        echo "<td>" . $row["faculty_id"] . "</td>";
+                                        echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
+                                        echo "<td>" . $row["campus"] . "</td>";
+                                        echo "<td>";
+                                        echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
+                                        echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Delete</button>";
+                                        echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    }
+                                } else {
+                                    echo "No admin records found.";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
-                
-                    <!-- View Announcement Modal -->
-                    <div class="modal fade" id="viewAnnouncementModal" tabindex="-1" role="dialog"
-                        aria-labelledby="announcementModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header ">
-                                    <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" id="viewAnnouncementForm" enctype="multipart/form-data">
-                                        <input type="text" class="form-control" id="announcementId" name="announcementId" value=""
-                                            hidden>
-                                        <div class="form-group">
-                                            <label for="eventDate">Event Date</label>
-                                            <input type="date" class="form-control" id="viewEventDate" name="viewEventDate">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="headline">Headline</label>
-                                            <input type="text" class="form-control" id="viewHeadline" name="viewHeadline" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Description</label>
-                                            <textarea class="form-control" id="viewDescription" name="viewDescription"
-                                                rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formFileMultiple" class="form-label">Multiple files input
-                                                example</label>
-                                            <input class="form-control" type="file" id="viewFileInput" name="viewFileInput" multiple>
-                                            <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
-                                        </div>
-                                        <div class="modal-footer d-flex justify-content-between align-content-center">
-                                            <p class="card-text"><small class="text-body-secondary">Author: </small></p>
-                                            <button type="button" id="editViewBtn" class="btn btn-secondary"
-                                                onclick="enableViewEdit()">Edit</button>
-                                            <button type="submit" class="btn btn-success" id="saveBtn"
-                                                onclick="saveChanges()">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Announcement Modal -->
-                    <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                    <!-- View Admin Details Modal -->
+                    <div class="modal fade" id="viewAdminDetails" tabindex="-1" role="dialog"
+                            aria-labelledby="adminDetailsModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="announcementModalLabel">Add Announcement</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" id="announcementForm" action="add_announcement.php"
-                                        enctype="multipart/form-data">
-                                        <input type="text" class="form-control" id="announcementId" name="announcementId" value=""
-                                            hidden>
-                                        <input type="text" class="form-control" id="author" name="author" value="" hidden>
-                                        <div class="form-group">
-                                            <label for="campusAssignment">Campus Assignment</label>
-                                            <select class="form-control" id="campusAssignment">
-                                                <option value="All">All</option>
-                                                <option value="Malolos Campus">Malolos Campus</option>
-                                                <option value="Bustos Campus">Bustos Campus</option>
-                                                <option value="Sarmiento Campus">Sarmiento Campus</option>
-                                                <option value="San Rafael Campus">San Rafael Campus</option>
-                                                <option value="Hagonoy Campus">Hagonoy Campus</option>
-                                                <option value="Meneses Campus">Meneses Campus</option>
-                                            </select>
+                                <form id="adminDetailsForm">
+                                    <div class="form-group">
+                                    <label for="facultyId">Faculty ID:</label>
+                                    <input type="text" class="form-control" id="facultyId">
+                                    </div>
+                                    <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                        <label for="name">First Name:</label>
+                                        <input type="text" class="form-control" id="viewFirstName">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="eventDate">Event Date (Optional)</label>
-                                            <input type="date" class="form-control" id="eventDate" name="eventDate">
+                                        <div class="col">
+                                        <label for="name">Middle Name:</label>
+                                        <input type="text" class="form-control" id="viewMiddleName">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="headline">Headline</label>
-                                            <input type="text" class="form-control" id="headline" name="headline" required>
+                                        <div class="col">
+                                        <label for="name">Last Name:</label>
+                                        <input type="text" class="form-control" id="viewLastName">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="description">Description</label>
-                                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formFileMultiple" class="form-label">Multiple files input
-                                                example</label>
-                                            <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" form="announcementForm">Save</button>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="campus">Campus:</label>
+                                    <select class="form-control" id="viewCampus">
+                                        <option value="Malolos Campus">Malolos Campus</option>
+                                        <option value="Bustos Campus">Bustos Campus</option>
+                                        <option value="Sarmiento Campus">Sarmiento Campus</option>
+                                        <option value="San Rafael Campus">San Rafael Campus</option>
+                                        <option value="Hagonoy Campus">Hagonoy Campus</option>
+                                        <option value="Meneses Campus">Meneses Campus</option>
+                                    </select>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="viewEmail">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="phone">Contact Number:</label>
+                                    <input type="text" class="form-control" id="viewPhone">
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
+                                    <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
+                                    </div>
+                                </form>
                                 </div>
                             </div>
+                            </div>
+                        </div>
+                    
+                    <!-- Admin Modal -->
+                    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="adminModalLabel">Add Admin</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            <form method="post" action="add_admin_details.php">
+                                <div class="form-group">
+                                <label for="addFacultyId">Faculty ID:</label>
+                                <input type="text" class="form-control" name="addFacultyId" id="addFacultyId" value="" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="addFacultyId">Password:</label>
+                                <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
+                                </div>
+                                <div class="form-row">
+                                <div class="col">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" class="form-control" name="firstName" id="firstName" required>
+                                </div>
+                                <div class="col">
+                                    <label for="middleName">Middle Name</label>
+                                    <input type="text" class="form-control" name="middleName" id="middleName">
+                                </div>
+                                <div class="col">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" name="lastName" id="lastName" required>
+                                </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                <label for="campus">Campus</label>
+                                <select class="form-control" name="addCampus" id="addCampus">
+                                    <option value="Malolos Campus">Malolos Campus</option>
+                                    <option value="Bustos Campus">Bustos Campus</option>
+                                    <option value="Sarmiento Campus">Sarmiento Campus</option>
+                                    <option value="San Rafael Campus">San Rafael Campus</option>
+                                    <option value="Hagonoy Campus">Hagonoy Campus</option>
+                                    <option value="Meneses Campus">Meneses Campus</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="addEmail" id="addEmail" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="phone">Contact Number</label>
+                                <input type="text" class="form-control" name="addPhone" id="addPhone" required>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </form>
+                            </div>
+                            
+                        </div>
                         </div>
                     </div>
-            </div>
-        </div>
+				</div>
+			</main>
 
-        
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-            <script>
-                function viewAnnouncementModal(announcementId) {
-                    document.getElementById("viewEventDate").readOnly = true;
-                    document.getElementById("viewHeadline").readOnly = true;
-                    document.getElementById("viewDescription").readOnly = true;
-                    document.getElementById("viewFileInput").hidden = true;
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> &copy;
+							</p>
+						</div>
+						<div class="col-6 text-end">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 
+	<script src="js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "get_announcement.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onreadystatechange = function () {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            var data = JSON.parse(this.responseText);
-                            var ImageURL = data.file_input;
-                            document.getElementById("announcementId").value = data.announcement_id;
-                            document.getElementById("viewEventDate").value = data.event_date;
-                            document.getElementById("viewHeadline").value = data.headline;
-                            document.getElementById("viewDescription").value = data.description;
-                            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-                        }
-                    };
+    <script>
+      function selectedRow (facultyId){
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
 
-                    xhr.send("announcementId=" + announcementId);
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").value = facultyId;
 
-                    document.getElementById("saveBtn").hidden = true;
-                    document.getElementById("editViewBtn").hidden = false;
-                }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText); 
 
-                function enableViewEdit() {
-                    editAnnouncement(announcementId);
-                }
+            // Populate form fields with the fetched faculty data
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
 
-                function editAnnouncement(announcementId) {
-                    document.getElementById("viewEventDate").readOnly = false;
-                    document.getElementById("viewHeadline").readOnly = false;
-                    document.getElementById("viewDescription").readOnly = false;
-                    document.getElementById("viewFileInput").hidden = false;
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "get_announcement.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onreadystatechange = function () {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            var data = JSON.parse(this.responseText);
-                            var ImageURL = data.file_input;
-                            document.getElementById("announcementId").value = data.announcement_id;
-                            document.getElementById("viewEventDate").value = data.event_date;
-                            document.getElementById("viewHeadline").value = data.headline;
-                            document.getElementById("viewDescription").value = data.description;
-                            document.getElementById("viewFileInput").value = data.file_input;
-                            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-                        }
-                    };
-                    xhr.send("announcementId=" + announcementId);
+      }
 
-                    document.getElementById("saveBtn").hidden = false;
-                    document.getElementById("editViewBtn").hidden = true;
-                }
+      function enableViewEdit(){
+        enableEdit(document.getElementById("facultyId").value);
+      }
 
-                function saveChanges() {
-                    var announcementId = document.getElementById("announcementId").value;
-                    var eventDate = document.getElementById("viewEventDate").value;
-                    var headline = document.getElementById("viewHeadline").value;
-                    var description = document.getElementById("viewDescription").value;
-                    document.getElementById("viewFileInput").value;
+       function enableEdit(facultyId) {
+        // Enable form fields for editing
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = false;
+        document.getElementById("viewMiddleName").readOnly = false;
+        document.getElementById("viewLastName").readOnly = false;
+        document.getElementById("viewCampus").disabled = false;
+        document.getElementById("viewEmail").readOnly = false;
+        document.getElementById("viewPhone").readOnly = false;
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "update_announcement_details.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onreadystatechange = function () {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            var data = JSON.parse(this.responseText);
-                            if (response.success) {
-                                alert(response.success);
-                            } else {
-                                alert(response.error);
-                            }
-                        } else {
-                            alert("Error updating announcement");
-                        }
-                    };
+        /* var row = document.getElementById(facultyId);
+        row.classList.add("table-active"); */
 
-                    xhr.send("announcementId=" + announcementId + "&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
+        document.getElementById("facultyId").value = facultyId;
 
-                    document.getElementById("viewEventDate").readOnly = true;
-                    document.getElementById("viewHeadline").readOnly = true;
-                    document.getElementById("viewDescription").readOnly = true;
-                    document.getElementById("viewFileInput").disabled = true;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText);
 
-                    document.getElementById("saveBtn").hidden = true;
-                    document.getElementById("editViewBtn").hidden = false;
-                }
+            // Populate form fields with the fetched faculty data
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
 
-                function deleteAnnouncement(announcementId) {
-                    if (confirm("Are you sure you want to delete this announcement?")) {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "delete_announcement.php", true);
-                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        xhr.onreadystatechange = function () {
-                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                                var response = JSON.parse(this.responseText);
-                                if (response.success) {
-                                    // Remove the deleted row from the table
-                                    var row = document.getElementById(announcementId);
-                                    row.parentNode.removeChild(row);
-                                    alert(response.success);
-                                } else {
-                                    alert(response.error);
-                                }
-                            }
-                        };
-                        xhr.send("announcementId=" + announcementId);
-                    }
-                }
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
 
-                function toggleSidebar() {
-                        const sidebar = document.getElementById('sidebar');
-                        const content = document.getElementById('content');
-                        sidebar.style.width = sidebar.style.width === '0px' ? '250px' : '0';
-                        content.style.marginLeft = content.style.marginLeft === '250px' ? '0' : '250px';
-                    }
+        // Change the "Edit" button to a "Save" button
+        document.getElementById("saveBtn").disabled = false;
+        var saveBtn = document.getElementById("saveBtn");
+        saveBtn.onclick = saveChanges;
+      }
 
-            </script>
+      function saveChanges() {
+        // Get updated admin data
+        var facultyId = document.getElementById("facultyId").value;
+        var firstName = document.getElementById("viewFirstName").value;
+        var middleName = document.getElementById("viewMiddleName").value;
+        var lastName = document.getElementById("viewLastName").value;
+        var campus = document.getElementById("viewCampus").value;
+        var email = document.getElementById("viewEmail").value;
+        var phone = document.getElementById("viewPhone").value;
 
-    </body>
+        /* var row = document.getElementById(facultyId);
+        row.classList.remove("table-active"); */
+
+        // Send an AJAX request to update admin details
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              alert(response.success);
+            } else {
+              alert(response.error);
+            }
+          } else {
+            alert("Error updating admin details. Please try again later.");
+          }
+        }
+        };
+
+        // Send the updated admin data to the server
+        xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
+
+        // Disable form fields after saving
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").readOnly = true;
+      }
+
+      function deleteAdmin(facultyId) {
+          var confirmation = confirm("Are you sure you want to delete this admin?");
+          if (confirmation) {
+              // Create an XMLHttpRequest object
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "delete_admin.php", true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+              // Define a callback function to handle the response
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                      var response = JSON.parse(xhr.responseText);
+                      if (response.success) {
+                      alert(response.success);
+                      // Find and remove the deleted admin's row from the table
+                      var rowToRemove = document.getElementById("row_" + facultyId);
+                      if (rowToRemove) {
+                          rowToRemove.remove();
+                      }
+                    } else {
+                        alert(response.error);
+                      }
+                  }
+              };
+
+              // Send the request with faculty_id parameter
+              xhr.send("faculty_id=" + facultyId);
+          }
+      }
+
+      function logout(){
+        window.location.href = "logout.php";
+      }
+</script>
+
+</body>
 
 </html>

@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bulacan State University</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <style>
@@ -57,7 +54,6 @@
         border: none;
         background: none;
         color: #d09b00;
-        /* Set text color to #d09b00 */
       }
 
       .cta span {
@@ -76,13 +72,6 @@
         background-color: #d09b00;
         border-radius: 30px;
 
-        /*outline: none;
-        margin-top: 10px;
-        border-radius: 30px;
-        padding: 10 10 10 10px;
-        background: rgba(255, 255, 255, 0.1); */
-
-        /* Set text color to #d09b00 */
       }
 
       .cta svg {
@@ -90,7 +79,6 @@
         transition: all 0.3s ease;
         fill: #d09b00;
         margin-left: 20px;
-        /* Set SVG color to #d09b00 */
       }
 
       .cta:hover svg {
@@ -106,21 +94,6 @@
         color: aliceblue;
         padding-bottom: 20px;
       }
-
-      /* Tinanggal ko na lang yung underline na as start your tour na button */
-
-      /* .hover-underline-animation:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #d09b00;
-        transform-origin: bottom right;
-        transition: transform 0.25s ease-out;
-      } */
 
       .cta:hover .hover-underline-animation:after {
         transform: scaleX(1);
@@ -159,17 +132,22 @@
       .gold {
         color: #d09b00;
       } 
- /* .footer {
-    background-color: #763435;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-} */
+
+      .navbar-custom .navbar-nav #home-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 215, 0, 1);
+            transition: background-color 0.3s ease;
+        }
+
+    .navbar-custom .navbar-nav #home-link {
+            color: #ffd700;
+        }
+
 
 @media (max-width: 500px){
     h1{
@@ -183,30 +161,54 @@
 }
 </style>
 </head>
-<!--
-<body>
-Navigation Bar 
-<nav class="navbar navbar-expand-lg navbar-custom">
-<div class="container-fluid">
-    <a class="navbar-brand custom-brand" href="#">
-        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
-        Bulacan State University
-    </a>
-</div>
-</nav> -->
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-      <a class="navbar-brand custom-brand" href="#">
-        <img
-          src="resources\virtualbulsu_logo.png"
-          alt="Logo"
-          width="80"
-          height="auto"
-          class="d-inline-block align-top"
-        />
-        <!-- Virtual BulSU -->
-      </a>
+      <div class="container-fluid d-flex justify-content-start">
+        <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.php">
+          <img
+            src="resources\virtualbulsu_logo.png"
+            alt="Logo"
+            width="80"
+            height="auto"
+            class="d-inline-block align-top"
+          />
+          <!-- Virtual BulSU -->
+        </a>
+
+      <ul class="navbar-nav">
+        <li class="nav-tem">
+          <a class="nav-link" id="home-link" href="VirtualBulsu_Tour_HomePage.php">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="campus-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Campuses
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Bustos.php">Bustos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Hagonoy.php">Hagonoy Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Malolos.php">Malolos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.php">San Rafael Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.php">Sarmiento Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.php">Meneses Campus</a></li>
+
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="news-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            News
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Bustos.php">Bustos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Hagonoy.php">Hagonoy Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Malolos.php">Malolos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_SanRafael.php">San Rafael Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Sarmiento.php">Sarmiento Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Meneses.php">Meneses Campus</a></li>
+          </ul>
+        </li>
+      </ul>
+      </div>
     </nav>
     <!-- Virtual Tour Introduction -->
     <div class="container d-block position-absolute mx-5" id="VTIntroduction">
@@ -252,7 +254,7 @@ Navigation Bar
     </footer>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
