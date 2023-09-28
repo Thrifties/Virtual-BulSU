@@ -25,7 +25,6 @@ require "connect.php"
             height: 99vh;
             border: none;
         }
-
         #offcanvasNavbar,
         #announcementPanel {
             background-color: #fff;

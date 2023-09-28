@@ -16,16 +16,25 @@ require "connect.php"
         <link rel="stylesheet" href="CSS/mobileView.css">
     </head>
 
+    <style>
+        iframe {
+                width: 100%;
+                height: 98%;
+                border: none;
+            }
+    </style>
+
+
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
                         <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         Bulacan State University - Bustos Campus
                     </a>
@@ -58,6 +67,8 @@ require "connect.php"
                     </div>
                 </div>
             </nav>
+
+            <iframe allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e8deea43813098500eb72,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" allowvr="yes" ></iframe>
             
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
                 id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">

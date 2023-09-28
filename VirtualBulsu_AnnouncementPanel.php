@@ -7,6 +7,7 @@ $user = $_SESSION["user"];
 $query = "SELECT * FROM campus_admin WHERE faculty_id='$user'";
 $result = mysqli_query($con, $query);
 $adminData = mysqli_fetch_assoc($result);
+$author = $adminData["first_name"]. ' ' . $adminData["last_name"];
 ?>
 
 
@@ -181,11 +182,10 @@ $adminData = mysqli_fetch_assoc($result);
             <div class="modal-body">
               <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
                 <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
-                <input type="text" class="form-control" id="author" name="author" value="<?php echo $adminData["faculty_id"]?>" hidden>
+                <input type="text" class="form-control" id="author" name="author" value="<?php echo $author?>" hidden>
                 <div class="form-group">
                   <label for="campusAssignment">Campus Assignment</label>
-                  <select class="form-control" id="campusAssignment">
-                    <option value="All">All</option>
+                  <select class="form-control" name="campusAssignment" id="campusAssignment">
                     <option value="Malolos Campus">Malolos Campus</option>
                     <option value="Bustos Campus">Bustos Campus</option>
                     <option value="Sarmiento Campus">Sarmiento Campus</option>

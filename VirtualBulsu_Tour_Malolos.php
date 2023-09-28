@@ -20,13 +20,13 @@ require "connect.php"
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
                         <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         Bulacan State University - Malolos Campus
                     </a>

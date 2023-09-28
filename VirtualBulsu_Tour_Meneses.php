@@ -30,13 +30,13 @@ require "connect.php"
     <body>
         <div>
             <!-- Navigation Bar -->
-            <nav class="navbar navbar-expand-lg navbar-custom">
+            <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
                         <img src="resources\BSU_Meneses.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         Bulacan State University - Meneses Campus
                     </a>
@@ -67,8 +67,10 @@ require "connect.php"
                             </ul>
                         </div>
                     </div>
-            </div>
+                </div>
             </nav>
+
+            <iframe width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/6502dafcc602223ba112d1b2,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" allowvr="yes" ></iframe>
 
             
             
@@ -105,16 +107,6 @@ require "connect.php"
                     ?>
                 </div>
             </div>
-
-            <div id="tour"></div>
-
-            <script src="//lcp360.cachefly.net/panoskin.min.js"></script>
-            <script>
-                PANOSKIN.createViewer({
-                    id: 'tour',
-                    tour: '64f59b4388c06b27136e9606'
-                });
-            </script>
             
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

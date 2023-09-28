@@ -77,22 +77,24 @@ require "includes/sessionEnd.php"
         </thead>
         <tbody>
           <?php 
-            $sql = "SELECT * FROM campus_admin";
+            $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
 
             $result = $con->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr id=".$row['faculty_id'].">";
-                    echo "<td>" . $row["faculty_id"] . "</td>";
-                    echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
-                    echo "<td>" . $row["campus"] . "</td>";
-                    echo "<td>";
-                    echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(".$row['faculty_id'].")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                    echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(".$row['faculty_id'].")'>Delete</button>";
-                    echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(".$row['faculty_id'].")'>View</button>";
-                    echo "</td>";
-                    echo "</tr>";
+                     if ($row['admin_level'] === 'admin') {
+                      echo "<tr id=" . $row['faculty_id'] . ">";
+                      echo "<td>" . $row["faculty_id"] . "</td>";
+                      echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
+                      echo "<td>" . $row["campus"] . "</td>";
+                      echo "<td>";
+                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Delete</button>";
+                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                      echo "</td>";
+                      echo "</tr>";
+                  }
                 }
             } else {
                 echo "No admin records found.";
