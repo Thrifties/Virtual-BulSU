@@ -352,7 +352,7 @@
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
     </footer>
-
+    
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   </body>
 </html>
