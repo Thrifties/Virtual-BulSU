@@ -1,6 +1,9 @@
 <?php 
 require "connect.php";
 
+$query = "SELECT * FROM announcements WHERE campus_assignment = 'Meneses Campus' ORDER BY created_at DESC" ;
+$result = mysqli_query($con, $query);
+
 
 ?>
 
@@ -11,7 +14,6 @@ require "connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bulacan State University</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <style>
@@ -21,16 +23,37 @@ require "connect.php";
       }
 
       body {
-        background-color: white;
+        background: /*linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.932)),*/
+          url("resources/cover.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         display: flex;
         flex-direction: column;
+        /*backdrop-filter: blur(2px); */
+      }
+
+      #VTIntroduction {
+        color: white;
+        top: 30%;
+      }
+
+      #line-clamp {
+        display: -webkit-box;
+        -webkit-line-clamp: 6; /* Adjust the number of lines as needed */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .navbar-custom {
+        /*background: rgba(255, 255, 255, 0.3);*/
         z-index: 9999;
         width: 100%;
         background: none;
         background-color: #763435;
+        /*border: 1px solid#f7f7f7; */
         font-family: "Roboto";
       }
       .navbar-custom .navbar-brand {
@@ -45,9 +68,23 @@ require "connect.php";
                 width: 100%;
             }
 
+    .navbar-custom .navbar-nav #news-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 215, 0, 1);
+            transition: background-color 0.3s ease;
+        }
+
+    .navbar-custom .navbar-nav #news-link {
+            color: #ffd700;
+        }
+
       .footer {
         /*background: none;*/
-        margin-top: 5rem; 
         background-color: #763435;
         color: white;
         padding: 5px;
@@ -69,9 +106,6 @@ require "connect.php";
         width: 100% !important;
     }
 
-    #date-posted, #author {
-        color:#763435 !important;
-    }
 }
 </style>
 </head>
@@ -94,7 +128,6 @@ require "connect.php";
         <li class="nav-tem">
           <a class="nav-link" id="home-link" href="VirtualBulsu_Tour_HomePage.php">Home</a>
         </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="campus-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Campuses
@@ -106,9 +139,9 @@ require "connect.php";
             <li><a class="dropdown-item" href="VirtualBulsu_Tour_SanRafael.php">San Rafael Campus</a></li>
             <li><a class="dropdown-item" href="VirtualBulsu_Tour_Sarmiento.php">Sarmiento Campus</a></li>
             <li><a class="dropdown-item" href="VirtualBulsu_Tour_Meneses.php">Meneses Campus</a></li>
+
           </ul>
         </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="news-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             News
@@ -125,26 +158,44 @@ require "connect.php";
       </ul>
       </div>
     </nav>
-    <img src="resources/BSU_Main.jpg" id="news-image" class="img-fluid shadow-sm" alt="...">
-    <div class="container-lg mt-3">
 
-        <small class="text-body-secondary" id="date-posted">Date today: October 15, 2023</small>
-        <h1 class="mb-3"><strong>Robot Dogs Take Over the Red Planet: Mars Mission Success!</strong></h1>
+    <div class="container-lg my-3 ">
+      <h1 class="text-center text-white" id="heading">Malolos Campus News</h1>
+        <div class="container mt-3">
+            <div class="row row-cols-3 row-cols-md-3 g-4">
+            <?php
+              if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $headline = $row['headline'];
+                    $image = $row['file_input'];
+                    $description = $row['description'];
+                    $datePosted = $row['created_at'];
 
-        <small class="text-body-secondary" id="author">Author:  John R. Marsfield</small>
-        <p class="fs-5"> In a historic leap for mankind, the Mars Exploration Team has achieved a groundbreaking milestone by deploying a fleet of robotic dogs on the surface of the Red Planet. These highly advanced quadrupeds, designed by TerraTech Industries, have successfully landed on Mars and begun their mission to explore and collect valuable data about the Martian environment.
-
-        Equipped with cutting-edge sensors, cameras, and AI systems, these robot dogs will traverse the Martian terrain, examining the geology, climate, and atmosphere of the planet. They will also search for signs of past or present microbial life and study the feasibility of human colonization.
-
-        The project, dubbed "Paws on Mars," marks a significant step toward realizing the dream of human exploration and potential settlement on Mars. The robot dogs are capable of navigating rugged terrain, extreme temperatures, and low-pressure environments, making them ideal for this ambitious mission.
-
-        Scientists and engineers at NASA and TerraTech Industries have been working tirelessly for years to develop and prepare these robotic explorers for their journey. The successful landing and deployment of the robot dogs have sparked excitement and hope within the global space community.
-
-        As the robot dogs roam the Martian surface, they will send back real-time data and stunning images, allowing scientists and space enthusiasts to witness the mysteries of Mars up close. The information gathered by these mechanical pioneers will be invaluable for future manned missions to the Red Planet.
-
-        Stay tuned for more updates on this extraordinary mission as "Paws on Mars" paves the way for humanity's next giant leap into the cosmos.</p>
-
+                    // Output the announcement HTML structure here
+                    echo '<div class="col-4">';
+                    echo '<div class="card h-100">';
+                    echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
+                    echo '<div class="card-body">';
+                    echo "<h5 class='card-title'>$headline</h5>";
+                    echo "<p class='card-text' id='line-clamp'>$description</p>";
+                    echo '</div>';
+                    echo '<div class="card-footer">';
+                    echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+              } else {
+                  echo "<p>No announcements available.</p>";
+              }
+            ?>
+            
+        </div>
+        </div>
+        
     </div>
+
+    
 
 
     <footer class="footer">
@@ -155,6 +206,9 @@ require "connect.php";
         document.getElementById("");
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    
   </body>
 </html>
