@@ -236,12 +236,12 @@
             News
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Bustos Campus</a></li>
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Hagonoy Campus</a></li>
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Malolos Campus</a></li>
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">San Rafael Campus</a></li>
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Sarmiento Campus</a></li>
-            <li><a class="dropdown-item" href="VirtualBulsu_Tour_Announcement.php">Meneses Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Bustos.php">Bustos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Hagonoy.php">Hagonoy Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Malolos.php">Malolos Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_SanRafael.php">San Rafael Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Sarmiento.php">Sarmiento Campus</a></li>
+            <li><a class="dropdown-item" href="VirtualBulsu_Announcement_Meneses.php">Meneses Campus</a></li>
           </ul>
         </li>
       </ul>
@@ -328,4 +328,10 @@
 
 </body>
 
+    <footer class="footer">
+      <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
+    </footer>
+    
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  </body>
 </html>
