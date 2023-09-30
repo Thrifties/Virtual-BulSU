@@ -1,10 +1,10 @@
-
-      function selectedRow (facultyId){
+function selectedRow (facultyId){
         document.getElementById("facultyId").readOnly = true;
         document.getElementById("viewFirstName").readOnly = true;
         document.getElementById("viewMiddleName").readOnly = true;
         document.getElementById("viewLastName").readOnly = true;
         document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
         document.getElementById("viewEmail").readOnly = true;
         document.getElementById("viewPhone").readOnly = true;
 
@@ -17,7 +17,7 @@
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            var facultyData = JSON.parse(xhr.responseText); 
+            var facultyData = JSON.parse(xhr.responseText);
 
             // Populate form fields with the fetched faculty data
             document.getElementById("facultyId").value = facultyData.faculty_id;
@@ -25,6 +25,7 @@
             document.getElementById("viewMiddleName").value = facultyData.middle_name;
             document.getElementById("viewLastName").value = facultyData.last_name;
             document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewCollege").value = facultyData.college;
             document.getElementById("viewEmail").value = facultyData.email;
             document.getElementById("viewPhone").value = facultyData.contact_num;
           }

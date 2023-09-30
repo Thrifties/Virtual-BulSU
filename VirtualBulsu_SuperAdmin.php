@@ -1,6 +1,19 @@
 <?php
 require "connect.php";
-require "includes/sessionEnd.php"
+require "includes/sessionEnd.php";
+
+$currentAdminId = $_SESSION["user"];
+
+$sql1 = "SELECT * FROM campus_admin WHERE faculty_id = '$currentAdminId'";
+$result1 = $con->query($sql1);
+
+if ($result1) {
+  while ($row = $result1->fetch_assoc()) {
+    $currentAdminLevel = $row['admin_level'];
+    $currentAdminCampus = $row['campus'];
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +26,7 @@ require "includes/sessionEnd.php"
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+    <script defer src="js/superadmin.js"></script>
     <style>
       .admin-panel-container {
         border: 1px solid #ddd;
@@ -71,15 +85,26 @@ require "includes/sessionEnd.php"
           <tr>
             <th>Faculty ID</th>
             <th>Full Name</th>
-            <th>Campus</th>
+            <?php 
+            
+            if ($currentAdminLevel === 'super_admin') {
+              echo "<th>Campus</th>";
+            } elseif ($currentAdminLevel === 'admin') {
+              echo "<th>College</th>";
+            }
+            
+            ?>
+
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <?php 
-            $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
 
-            $result = $con->query($sql);
+            if ($currentAdminLevel === 'super_admin') {
+              $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
+
+              $result = $con->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -96,9 +121,28 @@ require "includes/sessionEnd.php"
                       echo "</tr>";
                   }
                 }
-            } else {
-                echo "No admin records found.";
+            } 
+            } elseif ($currentAdminLevel === 'admin') {
+              $sql = "SELECT * FROM college_admin WHERE campus = '$currentAdminCampus'";
+
+              $result = $con->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                      echo "<tr id=" . $row['faculty_id'] . ">";
+                      echo "<td>" . $row["faculty_id"] . "</td>";
+                      echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
+                      echo "<td>" . $row["college"] . "</td>";
+                      echo "<td>";
+                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
+                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                      echo "</td>";
+                      echo "</tr>";
+                }
             }
+            }
+
           ?>
         </tbody>
       </table>
@@ -138,17 +182,44 @@ require "includes/sessionEnd.php"
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="campus">Campus:</label>
-                  <select class="form-control" id="viewCampus">
-                    <option value="Malolos Campus">Malolos Campus</option>
-                    <option value="Bustos Campus">Bustos Campus</option>
-                    <option value="Sarmiento Campus">Sarmiento Campus</option>
-                    <option value="San Rafael Campus">San Rafael Campus</option>
-                    <option value="Hagonoy Campus">Hagonoy Campus</option>
-                    <option value="Meneses Campus">Meneses Campus</option>
-                  </select>
-                </div>
+                <?php 
+                  if ($currentAdminLevel === 'super_admin') {
+                    echo "<div class='form-group'>";
+                    echo "<label for='campus'>Campus:</label>";
+                    echo "<select class='form-control' id='viewCampus'>";
+                    echo "<option value='Malolos Campus'>Malolos Campus</option>";
+                    echo "<option value='Bustos Campus'>Bustos Campus</option>";
+                    echo "<option value='Sarmiento Campus'>Sarmiento Campus</option>";
+                    echo "<option value='San Rafael Campus'>San Rafael Campus</option>";
+                    echo "<option value='Hagonoy Campus'>Hagonoy Campus</option>";
+                    echo "<option value='Meneses Campus'>Meneses Campus</option>";
+                    echo "</select>";
+                    echo "</div>";
+                  } elseif ($currentAdminLevel === 'admin') {
+                    echo "<div class='form-group'>";
+                    echo "<label for='campus'>Campus:</label>";
+                    echo "<select class='form-control' id='viewCampus'>";
+                    echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
+                    echo "</select>";
+                    echo "</div>";
+
+                    echo "<div class='form-group'>";
+                    echo "<label for='college' id='viewCollege'>College:</label>";
+                    echo "<select class='form-control' id='viewCollege'>";
+                    echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
+                    echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
+                    echo "<option value='College of Business Administration'>College of Business Administration</option>";
+                    echo "<option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>";
+                    echo "<option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>";
+                    echo "<option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>";
+                    echo "<option value='College of Industrial Technology'>College of Industrial Technology</option>";
+                    echo "<option value='College of Law'>College of Law</option>";
+                    echo "<option value='College of Nursing'>College of Nursing</option>";
+                    echo "<option value='College of Engineering'>College of Engineering</option>";
+                    echo "<option value='College of Education'>College of Education</option>";
+                    echo "<option value='College of Science'>College of Science</option>";
+                  }
+                ?>
                 <div class="form-group">
                   <label for="email">Email:</label>
                   <input type="email" class="form-control" id="viewEmail">
@@ -202,17 +273,52 @@ require "includes/sessionEnd.php"
                 <input type="text" class="form-control" name="lastName" id="lastName" required>
               </div>
             </div>
-            <div class="form-group mt-3">
-              <label for="campus">Campus</label>
-              <select class="form-control" name="addCampus" id="addCampus">
-                <option value="Malolos Campus">Malolos Campus</option>
-                <option value="Bustos Campus">Bustos Campus</option>
-                <option value="Sarmiento Campus">Sarmiento Campus</option>
-                <option value="San Rafael Campus">San Rafael Campus</option>
-                <option value="Hagonoy Campus">Hagonoy Campus</option>
-                <option value="Meneses Campus">Meneses Campus</option>
-                </select>
-            </div>
+
+            <?php 
+              if ($currentAdminLevel === 'super_admin') {
+                echo "<div class='form-group mt-3'>";
+                echo "<label for='campus'>Campus</label>";
+                echo "<select class='form-control' name='addCampus' id='addCampus'>";
+                echo "<option value='Malolos Campus'>Malolos Campus</option>";
+                echo "<option value='Bustos Campus'>Bustos Campus</option>";
+                echo "<option value='Sarmiento Campus'>Sarmiento Campus</option>";
+                echo "<option value='San Rafael Campus'>San Rafael Campus</option>";
+                echo "<option value='Hagonoy Campus'>Hagonoy Campus</option>";
+                echo "<option value='Meneses Campus'>Meneses Campus</option>";
+                echo "</select>";
+                echo "</div>";
+              } elseif ($currentAdminLevel === 'admin') {
+                echo "<div class='form-group mt-3'>";
+                echo "<label for='campus'>Campus</label>";
+                echo "<select class='form-control' name='addCampus' id='addCampus'>";
+                echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
+                echo "</select>";
+                echo "</div>";
+
+                echo "<div class='form-group mt-3'>";
+                echo "<label for='college'>College</label>";
+                echo "<select class='form-control' name='addCollege' id='addCollege'>";
+                echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
+                echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
+                echo "<option value='College of Business Administration'>College of Business Administration</option>";
+                echo "<option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>";
+                echo "<option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>";
+                echo "<option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>";
+                echo "<option value='College of Industrial Technology'>College of Industrial Technology</option>";
+                echo "<option value='College of Law'>College of Law</option>";
+                echo "<option value='College of Nursing'>College of Nursing</option>";
+                echo "<option value='College of Engineering'>College of Engineering</option>";
+                echo "<option value='College of Education'>College of Education</option>";
+                echo "<option value='College of Science'>College of Science</option>";
+                echo "<option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>";
+                echo "<option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>";
+                echo "<option value='Graduate School'>Graduate School</option>";
+                echo "</select>";
+                echo "</div>";
+
+              }
+            ?>
+
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="addEmail" id="addEmail" required>
@@ -235,173 +341,6 @@ require "includes/sessionEnd.php"
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-
-      function selectedRow (facultyId){
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = true;
-        document.getElementById("viewMiddleName").readOnly = true;
-        document.getElementById("viewLastName").readOnly = true;
-        document.getElementById("viewCampus").disabled = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewPhone").readOnly = true;
-
-        var saveBtn = document.getElementById("saveBtn");
-        document.getElementById("saveBtn").disabled = true;
-        document.getElementById("facultyId").value = facultyId;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var facultyData = JSON.parse(xhr.responseText);
-
-            // Populate form fields with the fetched faculty data
-            document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("viewFirstName").value = facultyData.first_name;
-            document.getElementById("viewMiddleName").value = facultyData.middle_name;
-            document.getElementById("viewLastName").value = facultyData.last_name;
-            document.getElementById("viewCampus").value = facultyData.campus;
-            document.getElementById("viewEmail").value = facultyData.email;
-            document.getElementById("viewPhone").value = facultyData.contact_num;
-          }
-        };
-
-        // Send the id to the server
-        xhr.send("facultyId="+ facultyId);
-
-      }
-
-      function enableViewEdit(){
-        enableEdit(document.getElementById("facultyId").value);
-      }
-
-       function enableEdit(facultyId) {
-        // Enable form fields for editing
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = false;
-        document.getElementById("viewMiddleName").readOnly = false;
-        document.getElementById("viewLastName").readOnly = false;
-        document.getElementById("viewCampus").disabled = false;
-        document.getElementById("viewEmail").readOnly = false;
-        document.getElementById("viewPhone").readOnly = false;
-
-        /* var row = document.getElementById(facultyId);
-        row.classList.add("table-active"); */
-
-        document.getElementById("facultyId").value = facultyId;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var facultyData = JSON.parse(xhr.responseText);
-
-            // Populate form fields with the fetched faculty data
-            document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("viewFirstName").value = facultyData.first_name;
-            document.getElementById("viewMiddleName").value = facultyData.middle_name;
-            document.getElementById("viewLastName").value = facultyData.last_name;
-            document.getElementById("viewCampus").value = facultyData.campus;
-            document.getElementById("viewEmail").value = facultyData.email;
-            document.getElementById("viewPhone").value = facultyData.contact_num;
-          }
-        };
-
-        // Send the id to the server
-        xhr.send("facultyId="+ facultyId);
-
-        // Change the "Edit" button to a "Save" button
-        document.getElementById("saveBtn").disabled = false;
-        var saveBtn = document.getElementById("saveBtn");
-        saveBtn.onclick = saveChanges;
-      }
-
-      function saveChanges() {
-        // Get updated admin data
-        var facultyId = document.getElementById("facultyId").value;
-        var firstName = document.getElementById("viewFirstName").value;
-        var middleName = document.getElementById("viewMiddleName").value;
-        var lastName = document.getElementById("viewLastName").value;
-        var campus = document.getElementById("viewCampus").value;
-        var email = document.getElementById("viewEmail").value;
-        var phone = document.getElementById("viewPhone").value;
-
-        /* var row = document.getElementById(facultyId);
-        row.classList.remove("table-active"); */
-
-        // Send an AJAX request to update admin details
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
-          } else {
-            alert("Error updating admin details. Please try again later.");
-          }
-        }
-        };
-
-        // Send the updated admin data to the server
-        xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
-
-        // Disable form fields after saving
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = true;
-        document.getElementById("viewMiddleName").readOnly = true;
-        document.getElementById("viewLastName").readOnly = true;
-        document.getElementById("viewCampus").disabled = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewPhone").readOnly = true;
-
-        var saveBtn = document.getElementById("saveBtn");
-        document.getElementById("saveBtn").disabled = true;
-        document.getElementById("facultyId").readOnly = true;
-      }
-
-      function deleteAdmin(facultyId) {
-          var confirmation = confirm("Are you sure you want to delete this admin?");
-          if (confirmation) {
-              // Create an XMLHttpRequest object
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "delete_admin.php", true);
-              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-              // Define a callback function to handle the response
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState === 4 && xhr.status === 200) {
-                      var response = JSON.parse(xhr.responseText);
-                      if (response.success) {
-                      alert(response.success);
-                      // Find and remove the deleted admin's row from the table
-                      var rowToRemove = document.getElementById("row_" + facultyId);
-                      if (rowToRemove) {
-                          rowToRemove.remove();
-                      }
-                    } else {
-                        alert(response.error);
-                      }
-                  }
-              };
-
-              // Send the request with faculty_id parameter
-              xhr.send("faculty_id=" + facultyId);
-          }
-      }
-
-      function logout(){
-        window.location.href = "logout.php";
-      }
-
-    </script>
+    
   </body>
 </html>
