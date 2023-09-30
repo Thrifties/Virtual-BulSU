@@ -147,6 +147,19 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     h2 {
       margin-bottom: 5px;
     }
+
+    #editBtn {
+      background-color: #D1512D;
+      border: #D1512D;
+    }
+
+    #announcement_id {
+      background-color: #763435;
+    }
+
+    .table th {
+      background-color: #F2ECBE;
+    }
   </style>
 </head>
 
@@ -251,12 +264,12 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
 
                   while ($row = mysqli_fetch_assoc($result2)) {
                     echo "<tr id=" . $row['announcement_id'] . ">";
-                    echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
-                    echo "<td>";
+                    echo "<td style='background-color:#C08261'>" . htmlspecialchars($row['headline']) . "</td>";
+                    echo "<td style='background-color:#C08261'>" . htmlspecialchars($row['event_date']) . "</td>";
+                    echo "<td style='background-color:#C08261'>";
                     echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(" . $row['announcement_id'] . ")'>Edit</button>";
                     echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(" . $row['announcement_id'] . ")'>View</button>";
-                    echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Delete</button>";
+                    echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Archive</button>";
                     echo "</td>";
                     echo "</tr>";
                   }
