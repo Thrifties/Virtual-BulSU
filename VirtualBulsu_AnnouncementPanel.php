@@ -22,6 +22,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   <title>Announcement Panel</title>
   <style>
     .announcement-panel {
@@ -31,6 +32,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
       color: #ffff;
       background-color: #763435;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      font-family: "Roboto";
     }
 
     #viewAnnouncementImage {
@@ -44,7 +46,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
 
     body {
       background:
-        url("resources/try.png");
+        url("resources/try1.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -58,12 +60,14 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
       background-color: aliceblue;
       border: white;
       margin-bottom: 10px;
+      font-family: "Roboto";
     }
 
     #addAnnouncement:hover {
       background-color: #d09b00;
       border: white;
       color: #ffff;
+      font-family: "Roboto";
     }
 
     .side-nav {
@@ -85,6 +89,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
       list-style: none;
       padding: 0 15px;
       margin-right: 10px;
+      font-family: "Roboto";
     }
 
     ul #custom-item {
@@ -96,7 +101,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     }
 
     ul li img {
-      width: 30px;
+      width: 40px;
       height: auto;
       margin-right: 10px;
       justify-content: center;
@@ -108,7 +113,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     }
 
     .side-nav:hover {
-      width: 200px;
+      width: 210px;
     }
 
     .side-nav:hover ul #custom-item a {
@@ -193,19 +198,19 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
   <div class="header">
     <div class="side-nav">
       <ul>
-        <li class="nav-item" id="custom-item"><img src="resources/announcement.png">
+        <li class="nav-item" id="custom-item"><img src="resources/megaphone.png">
           <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
         </li>
-        <li class="nav-item" id="custom-item"><img src="resources/user.png">
+        <li class="nav-item" id="custom-item"><img src="resources/user1.png">
           <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
         </li>
-        <li class="nav-item" id="custom-item"><img src="resources/setting.png">
+        <li class="nav-item" id="custom-item"><img src="resources/settings.png">
           <a class="nav-link data-custom" href="VirtualBulsu_AdminSettings.php">User Settings</a>
         </li>
       </ul>
 
       <ul>
-        <li class="nav-item" id="custom-item"><img src="resources/logout.png">
+        <li class="nav-item" id="custom-item"><img src="resources/logout1.png">
           <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
         </li>
       </ul>
