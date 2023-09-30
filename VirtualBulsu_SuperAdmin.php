@@ -27,6 +27,7 @@ require "includes/sessionEnd.php"
 </head>
 
 <body>
+
   <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand custom-brand" href="#">
       <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
@@ -53,6 +54,30 @@ require "includes/sessionEnd.php"
         </li>
       </ul>
     </div>
+
+    <!--
+    <div class="header">
+      <div class="side-nav">
+        <li><img src="resources/announcement.png">
+          <p>Announcement</p>
+        </li>
+        <li><img src="resources/user.png">
+          <p>Admins</p>
+        </li>
+        <li><img src="resources/logout.png">
+          <p>Log Out</p>
+        </li>
+        <li><img src="resources/setting.png">
+          <p>User Settings</p>
+        </li>
+        -->
+    </div>
+    </div>
+
+
+
+
+
   </nav>
 
   <div class="container mt-5">
