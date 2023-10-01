@@ -8,6 +8,7 @@ $query = "SELECT * FROM campus_admin WHERE faculty_id='$user'";
 $result = mysqli_query($con, $query);
 $adminData = mysqli_fetch_assoc($result);
 $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
+$currentAdminLevel = $adminData["admin_level"];
 ?>
 
 
@@ -84,9 +85,11 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
           <li class="nav-item" id="custom-item">
             <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
           </li>
-          <li class="nav-item" id="custom-item">
-            <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
-          </li>
+          <?php if ($currentAdminLevel == "super_admin" OR "admin") : ?>
+            <li class="nav-item" id="custom-item">
+              <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
+            </li>
+          <?php endif; ?>
           <li class="nav-item" id="custom-item">
             <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
           </li>
@@ -134,7 +137,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
                   echo "<td>";
                   echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(" . $row['announcement_id'] . ")'>Edit</button>";
                   echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(" . $row['announcement_id'] . ")'>View</button>";
-                  echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Delete</button>";
+                  echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Archive</button>";
                   echo "</td>";
                   echo "</tr>";
                 }
@@ -163,6 +166,10 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
           <div class="modal-body">
             <form method="post" id="viewAnnouncementForm" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
+              <div class="form-group">
+                <label for="viewCollegeAssignment">College Assignment</label>
+                
+              </div>
               <div class="form-group">
                 <label for="eventDate">Event Date</label>
                 <input type="date" class="form-control" id="viewEventDate" name="viewEventDate">
@@ -216,6 +223,28 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
                   <option value="Meneses Campus">Meneses Campus</option>
                 </select>
               </div>
+              <div class='form-group'>
+                <label for='college'>College</label>
+                <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                  <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
+                  <option value='College of Arts and Letters'>College of Arts and Letters</option>
+                  <option value='College of Business Administration'>College of Business Administration</option>
+                  <option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>
+                  <option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>
+                  <option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>
+                  <option value='College of Industrial Technology'>College of Industrial Technology</option>
+                  <option value='College of Law'>College of Law</option>
+                  <option value='College of Nursing'>College of Nursing</option>
+                  <option value='College of Engineering'>College of Engineering</option>
+                  <option value='College of Education'>College of Education</option>
+                  <option value='College of Science'>College of Science</option>
+                  <option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>
+                  <option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>
+                  <option value='Graduate School'>Graduate School</option>
+                </select>
+              </div>
+                
+              
               <div class="form-group">
                 <label for="eventDate">Event Date (Optional)</label>
                 <input type="date" class="form-control" id="eventDate" name="eventDate">
@@ -245,131 +274,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      function viewAnnouncementModal(announcementId) {
-        document.getElementById("viewEventDate").readOnly = true;
-        document.getElementById("viewHeadline").readOnly = true;
-        document.getElementById("viewDescription").readOnly = true;
-        document.getElementById("viewFileInput").hidden = true;
-        document.getElementById("viewAuthor");
-
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_announcement.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            var ImageURL = data.file_input;
-            document.getElementById("announcementId").value = data.announcement_id;
-            document.getElementById("viewEventDate").value = data.event_date;
-            document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-            document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
-          }
-        };
-
-        xhr.send("announcementId=" + announcementId);
-
-        document.getElementById("saveBtn").hidden = true;
-        document.getElementById("editViewBtn").hidden = false;
-      }
-
-      function enableViewEdit() {
-        editAnnouncement(announcementId);
-      }
-
-      function editAnnouncement(announcementId) {
-        document.getElementById("viewEventDate").readOnly = false;
-        document.getElementById("viewHeadline").readOnly = false;
-        document.getElementById("viewDescription").readOnly = false;
-        document.getElementById("viewFileInput").hidden = false;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_announcement.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            var ImageURL = data.file_input;
-            document.getElementById("announcementId").value = data.announcement_id;
-            document.getElementById("viewEventDate").value = data.event_date;
-            document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewFileInput").value = data.file_input;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-          }
-        };
-        xhr.send("announcementId=" + announcementId);
-
-        document.getElementById("saveBtn").hidden = false;
-        document.getElementById("editViewBtn").hidden = true;
-      }
-
-      function saveChanges() {
-        var announcementId = document.getElementById("announcementId").value;
-        var eventDate = document.getElementById("viewEventDate").value;
-        var headline = document.getElementById("viewHeadline").value;
-        var description = document.getElementById("viewDescription").value;
-        document.getElementById("viewFileInput").value;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_announcement_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
-          } else {
-            alert("Error updating announcement");
-          }
-        };
-
-        xhr.send("announcementId=" + announcementId + "&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
-
-        document.getElementById("viewEventDate").readOnly = true;
-        document.getElementById("viewHeadline").readOnly = true;
-        document.getElementById("viewDescription").readOnly = true;
-        document.getElementById("viewFileInput").disabled = true;
-
-        document.getElementById("saveBtn").hidden = true;
-        document.getElementById("editViewBtn").hidden = false;
-      }
-
-      function deleteAnnouncement(announcementId) {
-        if (confirm("Are you sure you want to delete this announcement?")) {
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "delete_announcement.php", true);
-          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-          xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              var response = JSON.parse(this.responseText);
-              if (response.success) {
-                // Remove the deleted row from the table
-                var row = document.getElementById(announcementId);
-                row.parentNode.removeChild(row);
-                alert(response.success);
-              } else {
-                alert(response.error);
-              }
-            }
-          };
-          xhr.send("announcementId=" + announcementId);
-        }
-      }
-
-      function logout() {
-        var choice = confirm("Do you really want to log out?");
-        if (choice == true)
-          window.location = "logout.php";
-      }
-    </script>
-
+    <script defer src = "js/admin_announcements.js"></script>
 </body>
 
 </html>

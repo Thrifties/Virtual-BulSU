@@ -1,25 +1,42 @@
-<?php
+
+
+ <?php
 require "connect.php"; // Include your database connection code
 
 // Check if faculty_id is provided via POST
 if (isset($_POST['faculty_id'])) {
     $facultyId = $_POST['faculty_id'];
 
-    // SQL query to delete the admin record
-    $sql = "DELETE FROM campus_admin WHERE faculty_id = ?";
+    // Get the admin record before deleting it
+    $sqlSelect = "SELECT * FROM campus_admin WHERE faculty_id = ?";
+    $stmtSelect = $con->prepare($sqlSelect);
+    $stmtSelect->bind_param("i", $facultyId);
+    $stmtSelect->execute();
+    $result = $stmtSelect->get_result();
+    $adminData = $result->fetch_assoc();
 
-    // Use prepared statements to prevent SQL injection
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("i", $facultyId);
+    // Archive the admin data
+    $sqlArchive = "INSERT INTO archive_admin (faculty_id, first_name, last_name, campus, email, contact_num)
+                   VALUES (?, ?, ?, ?, ?, ?)";
+    $stmtArchive = $con->prepare($sqlArchive);
+    $stmtArchive->bind_param("isssss", $adminData['faculty_id'], $adminData['first_name'], $adminData['last_name'], $adminData['campus'], $adminData['email'], $adminData['contact_num']);
+    $stmtArchive->execute();
 
-    if ($stmt->execute()) {
-        $response = ["success" => "Admin deleted successfully"];
+    // Delete the admin record from the original table
+    $sqlDelete = "DELETE FROM campus_admin WHERE faculty_id = ?";
+    $stmtDelete = $con->prepare($sqlDelete);
+    $stmtDelete->bind_param("i", $facultyId);
+
+    if ($stmtDelete->execute()) {
+        $response = ["success" => "Admin archived successfully"];
     } else {
-        $response = ["error" => "Error deleting admin: " . $stmt->error];
+        $response = ["error" => "Error archiving admin: " . $stmtDelete->error];
     }
 
-    // Close the prepared statement
-    $stmt->close();
+    // Close the prepared statements
+    $stmtSelect->close();
+    $stmtArchive->close();
+    $stmtDelete->close();
 } else {
     $response = ["error" => "Invalid request"];
 }

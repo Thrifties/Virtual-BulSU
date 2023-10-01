@@ -26,7 +26,7 @@ if ($result1) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
-    <script defer src="js/superadmin.js"></script>
+    
     <style>
       .admin-panel-container {
         border: 1px solid #ddd;
@@ -115,8 +115,9 @@ if ($result1) {
                       echo "<td>" . $row["campus"] . "</td>";
                       echo "<td>";
                       echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Delete</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
                       echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                      
                       echo "</td>";
                       echo "</tr>";
                   }
@@ -134,9 +135,9 @@ if ($result1) {
                       echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
                       echo "<td>" . $row["college"] . "</td>";
                       echo "<td>";
-                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
+                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEditAdmin(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
                       echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
-                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRowAdmin(" . $row['faculty_id'] . ")'>View</button>";
                       echo "</td>";
                       echo "</tr>";
                 }
@@ -164,7 +165,7 @@ if ($result1) {
               <form id="adminDetailsForm">
                 <div class="form-group">
                   <label for="facultyId">Faculty ID:</label>
-                  <input type="text" class="form-control" id="facultyId">
+                  <input type="text" class="form-control" id="facultyId" readOnly>
                 </div>
                 <div class="form-group">
                   <div class="row">
@@ -202,9 +203,8 @@ if ($result1) {
                     echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
                     echo "</select>";
                     echo "</div>";
-
                     echo "<div class='form-group'>";
-                    echo "<label for='college' id='viewCollege'>College:</label>";
+                    echo "<label for='college'>College:</label>";
                     echo "<select class='form-control' id='viewCollege'>";
                     echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
                     echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
@@ -218,6 +218,11 @@ if ($result1) {
                     echo "<option value='College of Engineering'>College of Engineering</option>";
                     echo "<option value='College of Education'>College of Education</option>";
                     echo "<option value='College of Science'>College of Science</option>";
+                    echo "<option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>";
+                    echo "<option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>";
+                    echo "<option value='Graduate School'>Graduate School</option>";
+                    echo "</select>";
+                    echo "</div>";
                   }
                 ?>
                 <div class="form-group">
@@ -230,7 +235,14 @@ if ($result1) {
                 </div>
                 <div class="modal-footer">
                   <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
-                  <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
+                  <?php 
+                    if ($currentAdminLevel === 'super_admin') {
+                      echo '<button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>';
+                    } elseif ($currentAdminLevel === 'admin') {
+                      echo '<button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChangesAdmin()">Save</button>';
+                    }
+                  ?>
+                  
                 </div>
               </form>
             </div>
@@ -294,7 +306,6 @@ if ($result1) {
                 echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
                 echo "</select>";
                 echo "</div>";
-
                 echo "<div class='form-group mt-3'>";
                 echo "<label for='college'>College</label>";
                 echo "<select class='form-control' name='addCollege' id='addCollege'>";
@@ -341,6 +352,291 @@ if ($result1) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+    <script>
+      function selectedRowAdmin (facultyId){
+        
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewCollege").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText);
+
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewCollege").value = facultyData.college;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
+
+        document.getElementById("facultyId").value = facultyId;
+
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
+
+      }
+
+      function selectedRow (facultyId){
+        
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText);
+
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
+
+        document.getElementById("facultyId").value = facultyId;
+
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
+
+      }
+
+      function enableViewEdit(){
+        enableEdit(document.getElementById("facultyId").value);
+      }
+
+       function enableEditAdmin(facultyId) {
+        // Enable form fields for editing
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = false;
+        document.getElementById("viewMiddleName").readOnly = false;
+        document.getElementById("viewLastName").readOnly = false;
+        document.getElementById("viewCampus").disabled = false;
+        document.getElementById("viewCollege").disabled = false;
+        document.getElementById("viewEmail").readOnly = false;
+        document.getElementById("viewPhone").readOnly = false;
+
+        document.getElementById("facultyId").value = facultyId;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText);
+
+            // Populate form fields with the fetched faculty data
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewCollege").value = facultyData.college;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
+
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
+
+        // Change the "Edit" button to a "Save" button
+        document.getElementById("saveBtn").disabled = false;
+        var saveBtn = document.getElementById("saveBtn");
+        saveBtn.onclick = saveChangesAdmin;
+      }
+
+      function enableEdit(facultyId) {
+        // Enable form fields for editing
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = false;
+        document.getElementById("viewMiddleName").readOnly = false;
+        document.getElementById("viewLastName").readOnly = false;
+        document.getElementById("viewCampus").disabled = false;
+        document.getElementById("viewEmail").readOnly = false;
+        document.getElementById("viewPhone").readOnly = false;
+
+        document.getElementById("facultyId").value = facultyId;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_admin_details.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var facultyData = JSON.parse(xhr.responseText);
+
+            // Populate form fields with the fetched faculty data
+            document.getElementById("facultyId").value = facultyData.faculty_id;
+            document.getElementById("viewFirstName").value = facultyData.first_name;
+            document.getElementById("viewMiddleName").value = facultyData.middle_name;
+            document.getElementById("viewLastName").value = facultyData.last_name;
+            document.getElementById("viewCampus").value = facultyData.campus;
+            document.getElementById("viewEmail").value = facultyData.email;
+            document.getElementById("viewPhone").value = facultyData.contact_num;
+          }
+        };
+
+        // Send the id to the server
+        xhr.send("facultyId="+ facultyId);
+
+        // Change the "Edit" button to a "Save" button
+        document.getElementById("saveBtn").disabled = false;
+        var saveBtn = document.getElementById("saveBtn");
+        saveBtn.onclick = saveChanges;
+      }
+
+      function saveChanges() {
+        
+        var facultyId = document.getElementById("facultyId").value;
+        var firstName = document.getElementById("viewFirstName").value;
+        var middleName = document.getElementById("viewMiddleName").value;
+        var lastName = document.getElementById("viewLastName").value;
+        var campus = document.getElementById("viewCampus").value;
+        var email = document.getElementById("viewEmail").value;
+        var phone = document.getElementById("viewPhone").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              alert(response.success);
+            } else {
+              alert(response.error);
+            }
+          } else {
+            alert("Error updating admin details. Please try again later.");
+          }
+        }
+        };
+
+        // Send the updated admin data to the server
+        xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
+
+        // Disable form fields after saving
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").readOnly = true;
+      }
+
+      function saveChangesAdmin() {
+
+        var facultyId = document.getElementById("facultyId").value;
+        var firstName = document.getElementById("viewFirstName").value;
+        var middleName = document.getElementById("viewMiddleName").value;
+        var lastName = document.getElementById("viewLastName").value;
+        var campus = document.getElementById("viewCampus").value;
+        var college = document.getElementById("viewCollege").value;
+        var email = document.getElementById("viewEmail").value;
+        var phone = document.getElementById("viewPhone").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin_college.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              alert(response.success);
+            } else {
+              alert(response.error);
+            }
+          } else {
+            alert("Error updating admin details. Please try again later.");
+          }
+        }
+        };
+
+        // Send the updated admin data to the server
+        xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&college=" + college + "&email=" + email + "&phone=" + phone);
+
+        // Disable form fields after saving
+        document.getElementById("facultyId").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = true;
+        document.getElementById("viewMiddleName").readOnly = true;
+        document.getElementById("viewLastName").readOnly = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewCollege").disabled = true;
+        document.getElementById("viewEmail").readOnly = true;
+        document.getElementById("viewPhone").readOnly = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").readOnly = true;
+      }
+
+      function deleteAdmin(facultyId) {
+          var confirmation = confirm("Are you sure you want to delete this admin?");
+          if (confirmation) {
+              // Create an XMLHttpRequest object
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "delete_admin.php", true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+              // Define a callback function to handle the response
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                      var response = JSON.parse(xhr.responseText);
+                      if (response.success) {
+                      alert(response.success);
+                      // Find and remove the deleted admin's row from the table
+                      var rowToRemove = document.getElementById("row_" + facultyId);
+                      if (rowToRemove) {
+                          rowToRemove.remove();
+                      }
+                    } else {
+                        alert(response.error);
+                      }
+                  }
+              };
+
+              // Send the request with faculty_id parameter
+              xhr.send("faculty_id=" + facultyId);
+          }
+      }
+
+      function logout(){
+        window.location.href = "logout.php";
+      }
+
+    </script>
   </body>
 </html>

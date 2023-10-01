@@ -1,16 +1,14 @@
 function selectedRow (facultyId){
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = true;
-        document.getElementById("viewMiddleName").readOnly = true;
-        document.getElementById("viewLastName").readOnly = true;
-        document.getElementById("viewCampus").disabled = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewPhone").readOnly = true;
+        document.getElementById("viewFirstName").readOnly = false;
+        document.getElementById("viewMiddleName").readOnly = false;
+        document.getElementById("viewLastName").readOnly = false;
+        document.getElementById("viewCampus").disabled = false;
+        document.getElementById("viewCollege").readOnly = false;
+        document.getElementById("viewEmail").readOnly = false;
+        document.getElementById("viewPhone").readOnly = false;
 
         var saveBtn = document.getElementById("saveBtn");
         document.getElementById("saveBtn").disabled = true;
-        document.getElementById("facultyId").value = facultyId;
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "get_admin_details.php", true);
@@ -19,17 +17,17 @@ function selectedRow (facultyId){
           if (xhr.readyState === 4 && xhr.status === 200) {
             var facultyData = JSON.parse(xhr.responseText);
 
-            // Populate form fields with the fetched faculty data
             document.getElementById("facultyId").value = facultyData.faculty_id;
             document.getElementById("viewFirstName").value = facultyData.first_name;
             document.getElementById("viewMiddleName").value = facultyData.middle_name;
             document.getElementById("viewLastName").value = facultyData.last_name;
             document.getElementById("viewCampus").value = facultyData.campus;
-            document.getElementById("viewCollege").value = facultyData.college;
             document.getElementById("viewEmail").value = facultyData.email;
             document.getElementById("viewPhone").value = facultyData.contact_num;
           }
         };
+
+        document.getElementById("facultyId").value = facultyId;
 
         // Send the id to the server
         xhr.send("facultyId="+ facultyId);
@@ -49,9 +47,6 @@ function selectedRow (facultyId){
         document.getElementById("viewCampus").disabled = false;
         document.getElementById("viewEmail").readOnly = false;
         document.getElementById("viewPhone").readOnly = false;
-
-        /* var row = document.getElementById(facultyId);
-        row.classList.add("table-active"); */
 
         document.getElementById("facultyId").value = facultyId;
 
