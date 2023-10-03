@@ -71,7 +71,7 @@ require "includes/sessionStart.php"
         padding: 10px 0 10px 0;
     }
 
-    .input-flex-justify-content-center {
+    #password, #username {
         height: 45px;
         width: 70%;
         border: none;
@@ -175,17 +175,16 @@ require "includes/sessionStart.php"
     <div class="box-flex-justify-content-center">
         <div class="container-justify-content-center">
             <div class="top-header-d-flex justify-content-center">
-                <!-- <span>Have an account? </span> -->
-                <!--<header>Login Form</header> -->
+
                 <img id="virtualbulsuLogo" src="resources\virtualbulsu_logo.png" alt="Logo" />
                 <form method="post" action="login.php">
                     <div class="form-group">
                         <div class="input-field">
-                            <input type="number" class="input-flex-justify-content-center" placeholder="Faculty ID" input name="username" required />
+                            <input type="text" class="form-control" id="username" placeholder="Faculty ID" input name="username" required />
                             <i class="bx bx-user"></i>
                         </div>
                         <div class="input-field">
-                            <input type="password" class="input-flex-justify-content-center" placeholder="Password" input name="password" required />
+                            <input type="password" class="form-control" id="password" placeholder="Password" input name="password" required />
                             <i class="bx bx-lock"></i>
                         </div>
                         <div class="input-field">
@@ -199,71 +198,9 @@ require "includes/sessionStart.php"
                             <div class="right">
                                 <label><a href="#"> Forgot Password?</a></label>
                             </div>
-
-                            <!--
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <title>Login Interface</title>
-                                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-                            </head>
-                            <style>
-                                html,
-                                body {
-                                    height: 100%;
-                                }
-
-                                body {
-                                    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-
-                                        url('resources/cover.png');
-                                    background-size: cover;
-                                    background-position: center;
-                                    background-repeat: no-repeat;
-                                    background-attachment: fixed;
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: center;
-
-                                }
-                            </style>
-
-                            
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title text-center">Login</h3>
-                        <form method="post" action="login.php">
-                            <div class="form-group">
-                                <label for="username">Admin:</label>
-                                <input name="username" type="text" class="form-control" id="username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input name="password" type="password" class="form-control" id="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            >>>>>>> cccaa5ffbe21c7005caa4528017ee2457e459ad7:VirtualBulsu_Login.php
-        </div>
-        <div class="right">
-            <label><a href="#"> Forgot Password?</a></label>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-     Include the necessary Bootstrap JavaScript libraries -->
-                            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

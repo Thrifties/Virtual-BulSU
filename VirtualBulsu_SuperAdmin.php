@@ -291,6 +291,7 @@ if ($result1) {
                 echo "<div class='form-group mt-3'>";
                 echo "<label for='campus'>Campus</label>";
                 echo "<select class='form-control' name='addCampus' id='addCampus'>";
+                echo "<option value='' selected disabled> -- Select Campus -- </option>";
                 echo "<option value='Malolos Campus'>Malolos Campus</option>";
                 echo "<option value='Bustos Campus'>Bustos Campus</option>";
                 echo "<option value='Sarmiento Campus'>Sarmiento Campus</option>";

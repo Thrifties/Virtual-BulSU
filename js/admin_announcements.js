@@ -1,4 +1,5 @@
 function viewAnnouncementModal(announcementId) {
+        document.getElementById("viewCollegeAssignment").disabled = true;
         document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;
         document.getElementById("viewDescription").readOnly = true;
@@ -14,6 +15,7 @@ function viewAnnouncementModal(announcementId) {
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
             document.getElementById("announcementId").value = data.announcement_id;
+            document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
             document.getElementById("viewDescription").value = data.description;
@@ -31,8 +33,8 @@ function viewAnnouncementModal(announcementId) {
       function enableViewEdit() {
         editAnnouncement(announcementId);
       }
-
       function editAnnouncement(announcementId) {
+        document.getElementById("viewCollegeAssignment").disabled = false;
         document.getElementById("viewEventDate").readOnly = false;
         document.getElementById("viewHeadline").readOnly = false;
         document.getElementById("viewDescription").readOnly = false;
@@ -46,6 +48,7 @@ function viewAnnouncementModal(announcementId) {
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
             document.getElementById("announcementId").value = data.announcement_id;
+            document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
             document.getElementById("viewDescription").value = data.description;
@@ -61,6 +64,7 @@ function viewAnnouncementModal(announcementId) {
 
       function saveChanges() {
         var announcementId = document.getElementById("announcementId").value;
+        var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
         var eventDate = document.getElementById("viewEventDate").value;
         var headline = document.getElementById("viewHeadline").value;
         var description = document.getElementById("viewDescription").value;
@@ -82,8 +86,9 @@ function viewAnnouncementModal(announcementId) {
           }
         };
 
-        xhr.send("announcementId=" + announcementId + "&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
+        xhr.send("announcementId=" + announcementId + "collegeAssignment="+ collegeAssignment +"&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
 
+        document.getElementById("viewCollegeAssignment").disabled = true;
         document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;
         document.getElementById("viewDescription").readOnly = true;
