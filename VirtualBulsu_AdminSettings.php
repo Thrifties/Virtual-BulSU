@@ -36,7 +36,6 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +96,7 @@ if ($result->num_rows > 0) {
         <div class="container mt-5">
             <div class="admin-panel-container">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2>ADMIN PANEL</h2>
+                    <h2>Admin Panel</h2>
                     <button class="btn btn-primary" id="editBtn" onclick="enableEdit()">Edit</button>
                 </div>
                 
@@ -183,7 +182,8 @@ if ($result->num_rows > 0) {
                     } else {
                         alert("Error updating admin details. Please try again later.");
                     }
-
+                }
+            };
 
             xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&email=" + email + "&phone=" + phone);
 
@@ -200,38 +200,20 @@ if ($result->num_rows > 0) {
             editBtn.onclick = enableEdit;
         }
 
+        function logout() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "logout.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = "VirtualBulsu_Login.php";
+            }
+            };
 
-                        // Disable form fields after saving
-                        document.getElementById("facultyId").readOnly = true;
-                        document.getElementById("firstName").readOnly = true;
-                        document.getElementById("middleName").readOnly = true;
-                        document.getElementById("lastName").readOnly = true;
-                        document.getElementById("campus").disabled = true;
-                        document.getElementById("email").readOnly = true;
-                        document.getElementById("phone").readOnly = true;
+            // Send the id to the server
+            xhr.send();
+        }
 
-                        // Change the "Save" button to an "Edit" button
-                        var editBtn = document.getElementById("editBtn");
-                        editBtn.innerHTML = "Edit";
-                        editBtn.className = "btn btn-primary";
-                        editBtn.onclick = enableEdit;
-
-                    }
-
-                    function logout() {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "logout.php", true);
-                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                window.location.href = "VirtualBulsu_Login.php";
-                            }
-                        };
-
-                        // Send the id to the server
-                        xhr.send();
-                    }
-                </script>
-</body>
-
+        </script>
+    </body>
 </html>
