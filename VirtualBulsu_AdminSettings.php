@@ -20,7 +20,6 @@ mysqli_close($con);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <style>
         .admin-panel-container {
             border: 1px solid #763435;
@@ -135,6 +134,12 @@ mysqli_close($con);
             max-height: auto;
         }
 
+        h1 {
+            font-size: 30px;
+            padding-left: 20px;
+            color: #ffff;
+        }
+
         h2 {
             margin-bottom: 5px;
             color: #ffff;
@@ -155,6 +160,15 @@ mysqli_close($con);
 </head>
 
 <body>
+    <div class="container">
+        <div class="image">
+            <img src="resources\BSU_Logo.png">
+        </div>
+        <div class="text">
+            <h1>Bulacan State University</h1>
+        </div>
+    </div>
+
     </div>
     </nav>
 
