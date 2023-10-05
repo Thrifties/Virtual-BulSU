@@ -155,6 +155,18 @@ require "includes/sessionEnd.php"
     .row th {
       color: #ffff;
     }
+
+    #adminDetailsForm {
+      color: black;
+    }
+
+    .form-group {
+      color: black;
+    }
+
+    .col {
+      color: black;
+    }
   </style>
 </head>
 
