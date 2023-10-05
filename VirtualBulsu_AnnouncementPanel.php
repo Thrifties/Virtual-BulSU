@@ -46,7 +46,7 @@ $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
 
     body {
       background:
-        url("resources/try1.png");
+        url("resources/cover.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
