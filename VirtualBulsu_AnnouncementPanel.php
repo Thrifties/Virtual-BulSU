@@ -18,6 +18,7 @@ if ($result->num_rows > 0) {
     $adminData = mysqli_fetch_assoc($result);
     $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     $currentAdminLevel = $adminData["admin_level"];
+    $currentAdminCampus = $adminData["campus"];
 } else {
     // If user is not found in campus_admin, check college_admin
     $stmt = $con->prepare($collegeAdminQuery);
@@ -29,9 +30,9 @@ if ($result->num_rows > 0) {
         $adminData = mysqli_fetch_assoc($result);
         $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
         $currentAdminLevel = $adminData["admin_level"];
+        $currentAdminCampus = $adminData["campus"];
+        $currentCollege = $adminData["college"];
     } else {
-        // User not found in either table
-        echo "Invalid username or password";
     }
 }
 
@@ -114,11 +115,17 @@ $stmt->close();
           <li class="nav-item" id="custom-item">
             <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
           </li>
-          <?php if (($currentAdminLevel == "super_admin") || ($currentAdminLevel == "admin")) : ?>
-            <li class="nav-item" id="custom-item">
-              <a class="nav-link data-custom" href="VirtualBulsu_SuperAdmin.php">Admins</a>
-            </li>
-          <?php endif; ?>
+          <?php
+          if ($currentAdminLevel == "super_admin") {
+            echo "<li class='nav-item' id='custom-item'>";
+            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
+            echo "</li>";
+          } else if ($currentAdminLevel == "admin") {
+            echo "<li class='nav-item' id='custom-item'>";
+            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
+            echo "</li>";
+          }
+          ?>
           <li class="nav-item" id="custom-item">
             <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
           </li>
@@ -144,15 +151,22 @@ $stmt->close();
               <thead>
                 <tr class="table">
                   <th>Headline</th>
-                  <th>Event Date</th>
+                  <th>Author</th>
+                  <th>Faculty ID</th>
                   <th>Actions</th>
                   </trc>
               </thead>
               <tbody>
                 <?php
 
-                // Query to fetch announcements from your database
-                $query2 = "SELECT announcement_id, headline, event_date FROM announcements";
+                if ($currentAdminLevel == "super_admin") {
+                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements";
+                } else if ($currentAdminLevel == "admin") {
+                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
+                } else if ($currentAdminLevel == "college_admin") {
+                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
+                }
+
                 $result2 = mysqli_query($con, $query2);
 
                 if (!$result2) {
@@ -162,7 +176,8 @@ $stmt->close();
                 while ($row = mysqli_fetch_assoc($result2)) {
                   echo "<tr id=" . $row['announcement_id'] . ">";
                   echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
-                  echo "<td>" . htmlspecialchars($row['event_date']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['author']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['faculty_id']) . "</td>";
                   echo "<td>";
                   echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(" . $row['announcement_id'] . ")'>Edit</button>";
                   echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(" . $row['announcement_id'] . ")'>View</button>";
@@ -195,10 +210,22 @@ $stmt->close();
           <div class="modal-body">
             <form method="post" id="viewAnnouncementForm" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
-              <div class='form-group'>
-                <?php if($currentAdminLevel == "super_admin"): ?>
-                  <label for='college'>College</label>
-                  <select class='form-control' name='viewCollegeAssignment' id='viewCollegeAssignment' value='' disabled>
+              <?php if($currentAdminLevel == "super_admin"): 
+              echo "
+                <div class='form-group'>
+                  <label for='campusAssignment'>Campus Assignment</label>
+                  <select class='form-control' name='viewCampusAssignment' id='viewCampusAssignment'>
+                    <option value='Malolos Campus'>Malolos Campus</option>
+                    <option value='Bustos Campus'>Bustos Campus</option>
+                    <option value='Sarmiento Campus'>Sarmiento Campus</option>
+                    <option value='San Rafael Campus'>San Rafael Campus</option>
+                    <option value='Hagonoy Campus'>Hagonoy Campus</option>
+                    <option value='Meneses Campus'>Meneses Campus</option>
+                  </select>
+                </div>
+                <div class='form-group'>
+                  <label for='college'>College Assignment</label>
+                  <select class='form-control' name='viewCollegeAssignment' id='viewCollegeAssignment'>
                     <option value='' disabled selected>-- Select College --</option>
                     <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
                     <option value='College of Arts and Letters'>College of Arts and Letters</option>
@@ -217,7 +244,37 @@ $stmt->close();
                     <option value='Graduate School'>Graduate School</option>
                   </select>
                 </div>
-              <?php endif; ?>
+              "; endif; ?>
+              <?php if($currentAdminLevel == "admin"): 
+              echo "
+                <input type='text' class='form-control' id='viewCampusAssignment' name='viewCampusAssignment' value='$currentAdminCampus' hidden>
+                <div class='form-group'>
+                  <label for='college'>College Assignment</label>
+                  <select class='form-control' name='viewCollegeAssignment' id='viewCollegeAssignment'>
+                    <option value='' disabled selected>-- Select College --</option>
+                    <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
+                    <option value='College of Arts and Letters'>College of Arts and Letters</option>
+                    <option value='College of Business Administration'>College of Business Administration</option>
+                    <option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>
+                    <option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>
+                    <option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>
+                    <option value='College of Industrial Technology'>College of Industrial Technology</option>
+                    <option value='College of Law'>College of Law</option>
+                    <option value='College of Nursing'>College of Nursing</option>
+                    <option value='College of Engineering'>College of Engineering</option>
+                    <option value='College of Education'>College of Education</option>
+                    <option value='College of Science'>College of Science</option>
+                    <option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>
+                    <option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>
+                    <option value='Graduate School'>Graduate School</option>
+                  </select>
+                </div>
+              "; endif; ?>
+              <?php if($currentAdminLevel == "college_admin"): 
+              echo "
+                <input type='text' class='form-control' id='viewCampusAssignment' name='viewCampusAssignment' value='".$adminData["campus"]."' hidden>
+                <input type='text' class='form-control' id='viewCollegeAssignment' name='viewCollegeAssignment' value='$currentCollege' hidden>
+              "; endif; ?>
               <div class="form-group">
                 <label for="eventDate">Event Date</label>
                 <input type="date" class="form-control" id="viewEventDate" name="viewEventDate">
@@ -246,6 +303,7 @@ $stmt->close();
         </div>
       </div>
     </div>
+
     <!-- Announcement Modal -->
     <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -260,42 +318,20 @@ $stmt->close();
             <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
               <input type="text" class="form-control" id="author" name="author" value="<?php echo $author ?>" hidden>
-              <?php if($currentAdminLevel == "super_admin"): ?>
-              <div class="form-group">
-                <label for="campusAssignment">Campus Assignment</label>
-                <select class="form-control" name="campusAssignment" id="campusAssignment">
-                  <option value="Malolos Campus">Malolos Campus</option>
-                  <option value="Bustos Campus">Bustos Campus</option>
-                  <option value="Sarmiento Campus">Sarmiento Campus</option>
-                  <option value="San Rafael Campus">San Rafael Campus</option>
-                  <option value="Hagonoy Campus">Hagonoy Campus</option>
-                  <option value="Meneses Campus">Meneses Campus</option>
-                </select>
-              </div>
-              <div class='form-group'>
-                <label for='college'>College Assignment</label>
-                <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
-                  <option value='' disabled selected>-- Select College --</option>
-                  <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
-                  <option value='College of Arts and Letters'>College of Arts and Letters</option>
-                  <option value='College of Business Administration'>College of Business Administration</option>
-                  <option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>
-                  <option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>
-                  <option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>
-                  <option value='College of Industrial Technology'>College of Industrial Technology</option>
-                  <option value='College of Law'>College of Law</option>
-                  <option value='College of Nursing'>College of Nursing</option>
-                  <option value='College of Engineering'>College of Engineering</option>
-                  <option value='College of Education'>College of Education</option>
-                  <option value='College of Science'>College of Science</option>
-                  <option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>
-                  <option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>
-                  <option value='Graduate School'>Graduate School</option>
-                </select>
-              </div>
-              <?php endif; ?>
-              <?php if($currentAdminLevel == "admin"): ?>
-                <input type="text" class="form-control" id="campusAssignment" name="campusAssignment" value="<?php echo $adminData["campus"] ?>" hidden>
+              <input type="text" class="form-control" id="faculty_id" name="facultyId" value="<?php echo $user_id ?>" hidden>
+              <?php if($currentAdminLevel == "super_admin"): 
+              echo "
+                <div class='form-group'>
+                  <label for='campusAssignment'>Campus Assignment</label>
+                  <select class='form-control' name='campusAssignment' id='campusAssignment'>
+                    <option value='Malolos Campus'>Malolos Campus</option>
+                    <option value='Bustos Campus'>Bustos Campus</option>
+                    <option value='Sarmiento Campus'>Sarmiento Campus</option>
+                    <option value='San Rafael Campus'>San Rafael Campus</option>
+                    <option value='Hagonoy Campus'>Hagonoy Campus</option>
+                    <option value='Meneses Campus'>Meneses Campus</option>
+                  </select>
+                </div>
                 <div class='form-group'>
                   <label for='college'>College Assignment</label>
                   <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
@@ -317,14 +353,38 @@ $stmt->close();
                     <option value='Graduate School'>Graduate School</option>
                   </select>
                 </div>
-              <?php endif; ?>
-              <?php if($currentAdminLevel == "college_admin"): ?>
-                <input type="text" class="form-control" id="campusAssignment" name="campusAssignment" value="<?php echo $adminData["campus"] ?>" hidden>
-                <input type="text" class="form-control" id="collegeAssignment" name="collegeAssignment" value="<?php echo $adminData["college"] ?>" hidden>
-              <?php endif; ?>
-              
-                
-              
+              "; endif; ?>
+              <?php if($currentAdminLevel == "admin"): 
+              echo "
+                <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
+                <div class='form-group'>
+                  <label for='college'>College Assignment</label>
+                  <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                    <option value='' disabled selected>-- Select College --</option>
+                    <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
+                    <option value='College of Arts and Letters'>College of Arts and Letters</option>
+                    <option value='College of Business Administration'>College of Business Administration</option>
+                    <option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>
+                    <option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>
+                    <option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>
+                    <option value='College of Industrial Technology'>College of Industrial Technology</option>
+                    <option value='College of Law'>College of Law</option>
+                    <option value='College of Nursing'>College of Nursing</option>
+                    <option value='College of Engineering'>College of Engineering</option>
+                    <option value='College of Education'>College of Education</option>
+                    <option value='College of Science'>College of Science</option>
+                    <option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>
+                    <option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>
+                    <option value='Graduate School'>Graduate School</option>
+                  </select>
+                </div>
+              "; endif; ?>
+              <?php if($currentAdminLevel == "college_admin"): 
+              echo "
+                <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
+                <input type='text' class='form-control' id='collegeAssignment' name='collegeAssignment' value='$currentCollege' hidden>
+              "; endif; ?>
+
               <div class="form-group">
                 <label for="eventDate">Event Date (Optional)</label>
                 <input type="date" class="form-control" id="eventDate" name="eventDate">
@@ -356,13 +416,13 @@ $stmt->close();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
       function viewAnnouncementModal(announcementId) {
+        document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;
         document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;
         document.getElementById("viewDescription").readOnly = true;
         document.getElementById("viewFileInput").hidden = true;
         document.getElementById("viewAuthor");
-
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "get_announcement.php", true);
@@ -372,6 +432,7 @@ $stmt->close();
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
             document.getElementById("announcementId").value = data.announcement_id;
+            document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
@@ -391,6 +452,7 @@ $stmt->close();
         editAnnouncement(announcementId);
       }
       function editAnnouncement(announcementId) {
+        document.getElementById("viewCampusAssignment").disabled = false;
         document.getElementById("viewCollegeAssignment").disabled = false;
         document.getElementById("viewEventDate").readOnly = false;
         document.getElementById("viewHeadline").readOnly = false;
@@ -405,6 +467,7 @@ $stmt->close();
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
             document.getElementById("announcementId").value = data.announcement_id;
+            document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
@@ -420,12 +483,15 @@ $stmt->close();
       }
 
       function saveChanges() {
+
         var announcementId = document.getElementById("announcementId").value;
+        var campusAssignment = document.getElementById("viewCampusAssignment").value;
         var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
         var eventDate = document.getElementById("viewEventDate").value;
         var headline = document.getElementById("viewHeadline").value;
         var description = document.getElementById("viewDescription").value;
         document.getElementById("viewFileInput").value;
+
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "update_announcement_details.php", true);
@@ -443,8 +509,9 @@ $stmt->close();
           }
         };
 
-        xhr.send("announcementId=" + announcementId + "&collegeAssignment=" + collegeAssignment +"&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
+        xhr.send("announcementId=" + announcementId + "&campusAssignment=" + campusAssignment + "&collegeAssignment=" + collegeAssignment +"&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
 
+        document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;
         document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;

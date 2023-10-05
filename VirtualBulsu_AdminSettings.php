@@ -2,12 +2,36 @@
 require "connect.php";
 require "includes/sessionEnd.php";
 
-$user = $_SESSION["user"];
 
-$query = "SELECT * FROM campus_admin WHERE faculty_id='$user'";
-$result = mysqli_query($con, $query);
-$adminData = mysqli_fetch_assoc($result);
-mysqli_close($con);
+
+// Assuming you have a user_id in your session
+$user_id = $_SESSION["user"];
+
+$campusAdminQuery = "SELECT * FROM campus_admin WHERE faculty_id = ?";
+$collegeAdminQuery = "SELECT * FROM college_admin WHERE faculty_id = ?";
+
+// Prepare and execute the query for campus_admin
+$stmt = $con->prepare($campusAdminQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $adminData = mysqli_fetch_assoc($result);
+    $currentAdminLevel = $adminData["admin_level"];
+} else {
+    // If user is not found in campus_admin, check college_admin
+    $stmt = $con->prepare($collegeAdminQuery);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+            $adminData = mysqli_fetch_assoc($result);
+            $currentAdminLevel = $adminData["admin_level"];
+        } else {
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +71,17 @@ mysqli_close($con);
                         <li class="nav-item">
                             <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="VirtualBulsu_SuperAdmin.php">Admins</a>
-                        </li>
+                        <?php
+          if ($currentAdminLevel == "super_admin") {
+            echo "<li class='nav-item' id='custom-item'>";
+            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
+            echo "</li>";
+          } else if ($currentAdminLevel == "admin") {
+            echo "<li class='nav-item' id='custom-item'>";
+            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
+            echo "</li>";
+          }
+          ?>
                         <li class="nav-item" id="custom-item">
                             <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
                         </li>
@@ -91,17 +123,6 @@ mysqli_close($con);
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="campus">Campus:</label>
-                                        <select class="form-control" id="campus" disabled>
-                                            <option value="Malolos Campus" <?php if ($adminData["campus"] == "Malolos Campus") echo "selected"; ?>>Malolos Campus</option>
-                                            <option value="Bustos Campus" <?php if ($adminData["campus"] == "Bustos Campus") echo "selected"; ?>>Bustos Campus</option>
-                                            <option value="Sarmiento Campus" <?php if ($adminData["campus"] == "Sarmiento Campus") echo "selected"; ?>>Sarmiento Campus</option>
-                                            <option value="San Rafael Campus" <?php if ($adminData["campus"] == "San Rafael Campus") echo "selected"; ?>>San Rafael Campus</option>
-                                            <option value="Hagonoy Campus" <?php if ($adminData["campus"] == "Hagonoy Campus") echo "selected"; ?>>Hagonoy Campus</option>
-                                            <option value="Meneses Campus" <?php if ($adminData["campus"] == "Meneses Campus") echo "selected"; ?>>Meneses Campus</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="email">Email:</label>
                                         <input type="email" class="form-control" id="email" value="<?php echo $adminData["email"]; ?>"
                                             readonly>
@@ -125,7 +146,6 @@ mysqli_close($con);
             document.getElementById("firstName").readOnly = false;
             document.getElementById("middleName").readOnly = false;
             document.getElementById("lastName").readOnly = false;
-            document.getElementById("campus").disabled = false;
             document.getElementById("email").readOnly = false;
             document.getElementById("phone").readOnly = false;
 
@@ -143,13 +163,12 @@ mysqli_close($con);
             var firstName = document.getElementById("firstName").value;
             var middleName = document.getElementById("middleName").value;
             var lastName = document.getElementById("lastName").value;
-            var campus = document.getElementById("campus").value;
             var email = document.getElementById("email").value;
             var phone = document.getElementById("phone").value;
 
             // Send an AJAX request to update admin details
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "update_admin_details.php", true);
+            xhr.open("POST", "update_user_details.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
@@ -166,24 +185,19 @@ mysqli_close($con);
                 }
             };
 
-            // Send the updated admin data to the server
-            xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
+            xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&email=" + email + "&phone=" + phone);
 
-            // Disable form fields after saving
             document.getElementById("facultyId").readOnly = true;
             document.getElementById("firstName").readOnly = true;
             document.getElementById("middleName").readOnly = true;
             document.getElementById("lastName").readOnly = true;
-            document.getElementById("campus").disabled = true;
             document.getElementById("email").readOnly = true;
             document.getElementById("phone").readOnly = true;
 
-            // Change the "Save" button to an "Edit" button
             var editBtn = document.getElementById("editBtn");
             editBtn.innerHTML = "Edit";
             editBtn.className = "btn btn-primary";
             editBtn.onclick = enableEdit;
-
         }
 
         function logout() {
