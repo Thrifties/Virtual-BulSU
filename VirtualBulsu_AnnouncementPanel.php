@@ -324,6 +324,7 @@ $stmt->close();
                 <div class='form-group'>
                   <label for='campusAssignment'>Campus Assignment</label>
                   <select class='form-control' name='campusAssignment' id='campusAssignment'>
+                    <option value='' disabled selected>-- Select Campus --</option>
                     <option value='Malolos Campus'>Malolos Campus</option>
                     <option value='Bustos Campus'>Bustos Campus</option>
                     <option value='Sarmiento Campus'>Sarmiento Campus</option>

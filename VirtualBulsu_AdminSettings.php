@@ -99,7 +99,6 @@ if ($result->num_rows > 0) {
                     <h2>Admin Panel</h2>
                     <button class="btn btn-primary" id="editBtn" onclick="enableEdit()">Edit</button>
                 </div>
-                
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Admin Details</h5>
