@@ -167,6 +167,10 @@ require "includes/sessionEnd.php"
     .col {
       color: black;
     }
+
+    .modal-title {
+      color: black;
+    }
   </style>
 </head>
 
