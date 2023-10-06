@@ -49,26 +49,50 @@ require "connect.php"
         }
 
         #announcementTab {
+            box-shadow: inset 0 0 0 0 #95b302;
+            color: #95b302;
+            padding: 0 .25rem;
+            margin: 0 -.25rem;
+            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
             color: white;
+            font-family: 'Roboto';
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+            text-decoration: none;
+            margin-bottom: 8px;
         }
 
         #announcementTab:hover {
-            color: #d09b00;
+            color: black;
+            box-shadow: inset 150px 0 0 0 #95b302;
+            ;
         }
 
         #campuses {
+            box-shadow: inset 0 0 0 0 #95b302;
+            color: #95b302;
+            padding: 0 .25rem;
+            margin: 0 -.25rem;
+            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
             color: white;
+            font-family: 'Roboto';
+            font-weight: 500;
+            line-height: 1.5;
+            text-decoration: none;
+            font-size: 18px;
         }
 
         #campuses:hover {
-            color: #d09b00;
+            color: black;
+            box-shadow: inset 150px 0 0 0 #95b302;
+            ;
         }
 
         #offcanvasNavbarLabel {
             color: white;
             font-size: larger;
             margin-left: 5px;
-            padding-top: 3px;
         }
 
         .dropdown-menu {
@@ -84,8 +108,8 @@ require "connect.php"
             font-family: 'Roboto';
         }
 
-        .button {
-            background-color: aliceblue;
+        .btn-close {
+            color: white;
         }
     </style>
 </head>
@@ -135,7 +159,7 @@ require "connect.php"
 
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
             <div class="offcanvas-header">
-                <h4 class="offcanvas-title" id="offcanvasScrollingLabel">Campus News</h4>
+                <h4 class="offcanvas-title" id="offcanvasScrollingLabel">CAMPUS NEWS</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
