@@ -14,6 +14,7 @@ require "connect.php"
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/mobileView.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <style>
         .navbar-custom {
             background-color: #95b302;
@@ -28,9 +29,16 @@ require "connect.php"
 
         #offcanvasNavbar,
         #announcementPanel {
-            background-color: #fff;
-            font-family: "Roboto";
-            color: #95b302;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 30px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            transition: width 0.5s;
         }
 
         .offcanvas-header h5 {
@@ -41,11 +49,43 @@ require "connect.php"
         }
 
         #announcementTab {
-            color: black;
+            color: white;
+        }
+
+        #announcementTab:hover {
+            color: #d09b00;
         }
 
         #campuses {
-            color: black;
+            color: white;
+        }
+
+        #campuses:hover {
+            color: #d09b00;
+        }
+
+        #offcanvasNavbarLabel {
+            color: white;
+            font-size: larger;
+            margin-left: 5px;
+            padding-top: 3px;
+        }
+
+        .dropdown-menu {
+            background-color: #95b302;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        #offcanvasScrollingLabel {
+            color: white;
+            font-family: 'Roboto';
+        }
+
+        .button {
+            background-color: aliceblue;
         }
     </style>
 </head>
@@ -64,6 +104,7 @@ require "connect.php"
                 </a>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
+                        <box-icon name='menu' color='#ffffff' size=25px></box-icon>
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
