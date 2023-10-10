@@ -1,33 +1,59 @@
+
+
 <?php
-// Include your database connection file (connect.php)
 require "connect.php";
 
 // Check if announcementId is set in the POST request
 if (isset($_POST['announcementId'])) {
     $announcementId = $_POST['announcementId'];
 
-    // Prepare and execute the DELETE query
-    $deleteQuery = "DELETE FROM announcements WHERE announcement_id = ?";
-    $stmt = mysqli_prepare($con, $deleteQuery);
+    // Get the announcement data before deletion
+    $selectQuery = "SELECT * FROM announcements WHERE announcement_id = ?";
+    $stmt = mysqli_prepare($con, $selectQuery);
 
     if ($stmt === false) {
-        // Handle the error appropriately (e.g., log it or show an error message)
-        $response = array("error" => "Delete query preparation failed.");
+        $response = array("error" => "Select query preparation failed.");
     } else {
         mysqli_stmt_bind_param($stmt, "i", $announcementId);
+        mysqli_stmt_execute($stmt);
 
-        if (mysqli_stmt_execute($stmt)) {
-            // Deletion successful
-            $response = array("success" => "Announcement deleted successfully.");
+        $result = mysqli_stmt_get_result($stmt);
+        $announcementData = mysqli_fetch_assoc($result);
+
+        // Archive the announcement
+        $archiveQuery = "INSERT INTO archive_announcement (announcement_id, author, headline, event_date, description, file_input, campus_assignment, college_assignment, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($con, $archiveQuery);
+
+        if ($stmt === false) {
+            $response = array("error" => "Archive query preparation failed.");
         } else {
-            // Handle the deletion failure (e.g., log it or show an error message)
-            $response = array("error" => "Announcement deletion failed.");
+            mysqli_stmt_bind_param($stmt, "issssssss", $announcementData['announcement_id'], $announcementData['author'], $announcementData['headline'], $announcementData['event_date'], $announcementData['description'], $announcementData['file_input'], $announcementData['campus_assignment'], $announcementData['college_assignment'], $announcementData['created_at']);
+            
+            if (mysqli_stmt_execute($stmt)) {
+                // Deletion successful
+                $response = array("success" => "Announcement archived successfully.");
+
+                // Now, delete the original record
+                $deleteQuery = "DELETE FROM announcements WHERE announcement_id = ?";
+                $stmt = mysqli_prepare($con, $deleteQuery);
+
+                if ($stmt === false) {
+                    $response = array("error" => "Delete query preparation failed.");
+                } else {
+                    mysqli_stmt_bind_param($stmt, "i", $announcementId);
+
+                    if (!mysqli_stmt_execute($stmt)) {
+                        $response = array("error" => "Announcement deletion failed.");
+                    }
+                }
+            } else {
+                $response = array("error" => "Announcement archive failed.");
+            }
         }
 
         mysqli_stmt_close($stmt);
     }
 } else {
-    // If announcementId is not set in the POST request, return an error
     $response = array("error" => "Invalid request.");
 }
 

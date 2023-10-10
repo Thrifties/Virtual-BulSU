@@ -1,32 +1,15 @@
-<h1>Next Step:</h1>
+<h1>Reminder!</h1>
+<p>Bale tapos ko na yung admins (sana), and need na lang eh puro output output ng mga announcements sa mga pages na kelangan pag outputan tsaka onting ayos din sa announcements panel pa</p>
 
-<h2>Front-End:</h2>
+<h2>To do:</h2>
 <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
-
-<h2>Backend:</h2>
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
-
-<h2>To Add:</h2>
-<ul>
-    <li><s>Exlusive announcement page per campus for user side</s></li>
-    <li>Idagdag yung iba pang announcement page ng other campuses</li>
-</ul>
-
-<h2>Changes:</h2>
-<ul>
-    <li>Baguhin yung UI nung admin, gagawing sidebar</li>
-</ul>
-
-<h2>Notes:</h2>
-<ul>
-    <li>Create another database table for college admins</li>
-    <li>Aayusin pa yung structure ng code kasi magulo pa</li>
+    <li>Announcements panel:</li>
+        <ul>
+            <li>Di pa lumalabas yung details kapag nag edit</li>
+            <li>Di rin lulamabas pa yung viewing ng announcements sa view button</li>
+        </ul>
+    <li>Admin setting:</li>
+    <ul>
+        <li>Di pa naaayos yung college_admin details sa user settings</li>
+    </ul>
 </ul>

@@ -26,7 +26,6 @@ require "connect.php"
             height: 99vh;
             border: none;
         }
-
         #offcanvasNavbar,
         #announcementPanel {
             position: fixed;
@@ -47,6 +46,8 @@ require "connect.php"
             height: 30px;
             margin: 0;
         }
+
+/////////
 
         #announcementTab {
             box-shadow: inset 0 0 0 0 #95b302;
@@ -111,6 +112,7 @@ require "connect.php"
         .btn-close {
             color: white;
         }
+///////////////////////
     </style>
 </head>
 
@@ -138,7 +140,7 @@ require "connect.php"
                                 <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas" data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="campuses" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Campuses
                                 </a>
                                 <ul class="dropdown-menu">
