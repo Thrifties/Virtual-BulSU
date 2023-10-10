@@ -19,6 +19,7 @@ if ($result1) {
 <!DOCTYPE html>
 <html lang="en">
 
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,6 +149,184 @@ if ($result1) {
         </tbody>
       </table>
 
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
+  <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+  <style>
+    td button {
+      margin: 0 3px;
+    }
+
+    .admin-panel-container {
+      border: 1px solid #763435;
+      padding: 20px;
+      border-radius: 5px;
+      color: #ffff;
+      background-color: #763435;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      font-family: "Roboto";
+      width: 100%;
+    }
+
+    #viewAnnouncementImage {
+      width: 100%;
+      height: auto;
+    }
+
+    td button {
+      margin: 0 3px;
+    }
+
+    body {
+      background:
+        url("resources/cover.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn-primary {
+      color: #d09b00;
+      background-color: aliceblue;
+      border: white;
+      font-family: "Roboto";
+    }
+
+    .btn-primary:hover {
+      background-color: #d09b00;
+      border: white;
+      color: #ffff;
+      font-family: "Roboto";
+    }
+
+    .side-nav {
+      width: 100px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 30px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      transition: width 0.5s;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0 15px;
+      margin-right: 10px;
+      font-family: "Roboto";
+    }
+
+    ul #custom-item {
+      margin: 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: pointer;
+    }
+
+    ul li img {
+      width: 40px;
+      height: auto;
+      margin-right: 10px;
+      justify-content: center;
+    }
+
+    ul #custom-item a {
+      white-space: nowrap;
+      display: none;
+    }
+
+    .side-nav:hover {
+      width: 220px;
+    }
+
+    .side-nav:hover ul #custom-item a {
+      display: block;
+      color: #ffff;
+    }
+
+    .side-nav:hover ul #custom-item img {
+      margin-right: 10px;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 25px;
+      padding-left: 150px;
+
+    }
+
+    img {
+      max-width: 50px;
+      max-height: auto;
+    }
+
+    h1 {
+      font-size: 30px;
+      padding-left: 20px;
+      color: #ffff;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      color: #ffff;
+    }
+
+    .card {
+      background-color: #763435;
+    }
+
+    .card-title {
+      color: #ffff;
+    }
+
+    .row th {
+      color: #ffff;
+    }
+
+    #adminDetailsForm {
+      color: black;
+    }
+
+    .form-group {
+      color: black;
+    }
+
+    .col {
+      color: black;
+    }
+
+    .modal-title {
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="image">
+      <img src="resources\BSU_Logo.png">
+    </div>
+    <div class="text">
+      <h1>Bulacan State University</h1>
+////////////////////////////
     </div>
   </div>
 
