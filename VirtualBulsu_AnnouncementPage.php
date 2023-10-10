@@ -1,8 +1,28 @@
-<?php 
+
+<?php
 require "connect.php";
 
+$announcementId = $_GET['id'];
+$query = "SELECT * FROM announcements WHERE announcement_id = ?";
+$stmt = $con->prepare($query);
+$stmt->bind_param("i", $announcementId);  // Assuming announcement_id is an integer, adjust if it's not
+$stmt->execute();
+$result = $stmt->get_result();
 
+if ($row = mysqli_fetch_assoc($result)) {
+    $author = $row['author'];
+    $headline = $row['headline'];
+    $image = $row['file_input'];
+    $description = $row['description'];
+    $datePosted = $row['created_at'];
+} else {
+    echo "Announcement not found";
+}
+
+$stmt->close();
+mysqli_close($con);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,24 +145,14 @@ require "connect.php";
       </ul>
       </div>
     </nav>
-    <img src="resources/BSU_Main.jpg" id="news-image" class="img-fluid shadow-sm" alt="...">
+    <img src="uploads/<?php $image ?>" id="news-image" class="img-fluid shadow-sm" alt="...">
     <div class="container-lg mt-3">
 
-        <small class="text-body-secondary" id="date-posted">Date today: October 15, 2023</small>
-        <h1 class="mb-3"><strong>Robot Dogs Take Over the Red Planet: Mars Mission Success!</strong></h1>
+        <small class="text-body-secondary" id="date-posted">Date posted: <?php $datePosted ?> </small>
+        <h1 class="mb-3"><strong><?php $headline ?></strong></h1>
 
-        <small class="text-body-secondary" id="author">Author:  John R. Marsfield</small>
-        <p class="fs-5"> In a historic leap for mankind, the Mars Exploration Team has achieved a groundbreaking milestone by deploying a fleet of robotic dogs on the surface of the Red Planet. These highly advanced quadrupeds, designed by TerraTech Industries, have successfully landed on Mars and begun their mission to explore and collect valuable data about the Martian environment.
-
-        Equipped with cutting-edge sensors, cameras, and AI systems, these robot dogs will traverse the Martian terrain, examining the geology, climate, and atmosphere of the planet. They will also search for signs of past or present microbial life and study the feasibility of human colonization.
-
-        The project, dubbed "Paws on Mars," marks a significant step toward realizing the dream of human exploration and potential settlement on Mars. The robot dogs are capable of navigating rugged terrain, extreme temperatures, and low-pressure environments, making them ideal for this ambitious mission.
-
-        Scientists and engineers at NASA and TerraTech Industries have been working tirelessly for years to develop and prepare these robotic explorers for their journey. The successful landing and deployment of the robot dogs have sparked excitement and hope within the global space community.
-
-        As the robot dogs roam the Martian surface, they will send back real-time data and stunning images, allowing scientists and space enthusiasts to witness the mysteries of Mars up close. The information gathered by these mechanical pioneers will be invaluable for future manned missions to the Red Planet.
-
-        Stay tuned for more updates on this extraordinary mission as "Paws on Mars" paves the way for humanity's next giant leap into the cosmos.</p>
+        <small class="text-body-secondary" id="author">Author:  <?php $author ?></small>
+        <p class="fs-5"><?php $description ?></p>
 
     </div>
 
