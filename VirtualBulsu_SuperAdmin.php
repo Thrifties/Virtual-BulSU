@@ -20,6 +20,7 @@ if ($result1) {
 <html lang="en">
 
 //////////////////
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,7 +149,9 @@ if ($result1) {
           ?>
         </tbody>
       </table>
-///////////////
+
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -325,7 +328,6 @@ if ($result1) {
     </div>
     <div class="text">
       <h1>Bulacan State University</h1>
-///////////////////
     </div>
   </div>
 
