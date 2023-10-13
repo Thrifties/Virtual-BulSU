@@ -315,7 +315,7 @@ $stmt->close();
             </button>
           </div>
           <div class="modal-body">
-            <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
               <input type="text" class="form-control" id="author" name="author" value="<?php echo $author ?>" hidden>
               <input type="text" class="form-control" id="faculty_id" name="facultyId" value="<?php echo $user_id ?>" hidden>
@@ -323,7 +323,7 @@ $stmt->close();
               echo "
                 <div class='form-group'>
                   <label for='campusAssignment'>Campus Assignment</label>
-                  <select class='form-control' name='campusAssignment' id='campusAssignment'>
+                  <select class='form-control' name='campusAssignment' id='campusAssignment' required>
                     <option value='' disabled selected>-- Select Campus --</option>
                     <option value='Malolos Campus'>Malolos Campus</option>
                     <option value='Bustos Campus'>Bustos Campus</option>
@@ -335,7 +335,7 @@ $stmt->close();
                 </div>
                 <div class='form-group'>
                   <label for='college'>College Assignment</label>
-                  <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                  <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
                     <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
                     <option value='College of Arts and Letters'>College of Arts and Letters</option>
@@ -360,7 +360,7 @@ $stmt->close();
                 <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
                 <div class='form-group'>
                   <label for='college'>College Assignment</label>
-                  <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                  <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
                     <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
                     <option value='College of Arts and Letters'>College of Arts and Letters</option>
@@ -393,21 +393,27 @@ $stmt->close();
               <div class="form-group">
                 <label for="headline">Headline</label>
                 <input type="text" class="form-control" id="headline" name="headline" required>
+                <div id="headlineFeedback" class="invalid-feedback">
+                </div>
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                <div id="descriptionFeedback" class="invalid-feedback">
+                </div>
               </div>
               <div class="form-group">
                 <label for="formFileMultiple" class="form-label">Multiple files input
                   example</label>
-                <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
+                <input class="form-control" type="file" id="fileInput" name="fileInput" multiple required>
+                <div id="fileInputFeedback" class="invalid-feedback">
+                </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" form="announcementForm">Save</button>
+            <button type="submit" id="addBtn" class="btn btn-primary" form="announcementForm" disabled>Save</button>
           </div>
         </div>
       </div>
@@ -416,6 +422,73 @@ $stmt->close();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+    
+    document.getElementById("headline").addEventListener("input", validateForm);
+    document.getElementById("description").addEventListener("input", validateForm);
+    document.getElementById("fileInput").addEventListener("input", validateForm);
+    document.getElementById("campusAssignment").addEventListener("input", validateForm);
+    document.getElementById("collegeAssignment").addEventListener("input", validateForm);
+
+    document.getElementById("viewHeadline").addEventListener("input", validateUpdateForm);
+    document.getElementById("viewDescription").addEventListener("input", validateUpdateForm);
+    document.getElementById("viewFileInput").addEventListener("input", validateUpdateForm);
+    document.getElementById("viewCampusAssignment").addEventListener("input", validateUpdateForm);
+    document.getElementById("viewCollegeAssignment").addEventListener("input", validateUpdateForm);
+
+    function validateUpdateForm() {
+      var headline = document.getElementById("viewHeadline").value;
+      var description = document.getElementById("viewDescription").value;
+      var fileInput = document.getElementById("viewFileInput").value;
+      var campusAssignment = document.getElementById("viewCampusAssignment").value;
+      var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
+
+      var isFormValid = headline != "" && description != "" && fileInput != "" && campusAssignment != "" && collegeAssignment != "";
+
+      document.getElementById("saveBtn").disabled = !isFormValid;
+    }
+
+    function validateForm() {
+      var headline = document.getElementById("headline").value;
+      var description = document.getElementById("description").value;
+      var fileInput = document.getElementById("fileInput").value;
+      var campusAssignment = document.getElementById("campusAssignment").value;
+      var collegeAssignment = document.getElementById("collegeAssignment").value;
+
+      var isFormValid = headline != "" && description != "" && fileInput != "" && campusAssignment != "" && collegeAssignment != "";
+
+      document.getElementById("addBtn").disabled = !isFormValid;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        addValidationListener("headline");
+        addValidationListener("description");
+        addValidationListener("fileInput");
+
+      });
+
+      function addValidationListener(elementId){
+        document.getElementById(elementId).addEventListener("keyup", function(){
+          validateInput(elementId);
+        })
+      }
+
+      function validateInput(elementId) {
+        var inputValue = document.getElementById
+        var feedbackMessage = document.getElementById(elementId + "Feedback");
+
+        if (inputValue.length > 0) {
+            feedbackMessage.innerText = "";
+            document.getElementById(elementId).classList.remove("is-invalid");
+            document.getElementById(elementId).classList.add("is-valid");
+        } else {
+            feedbackMessage.innerText = "This field is required.";
+            document.getElementById(elementId).classList.remove("is-valid");
+            document.getElementById(elementId).classList.add("is-invalid");
+        }
+
+      }
+
       function viewAnnouncementModal(announcementId) {
         document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;

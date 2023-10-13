@@ -13,7 +13,6 @@ if ($result1) {
     $currentAdminCampus = $row['campus'];
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +32,6 @@ if ($result1) {
         padding: 20px;
         border-radius: 5px;
       }
-
       td button {
         margin: 0 3px;
       }
@@ -162,7 +160,7 @@ if ($result1) {
               </button>
             </div>
             <div class="modal-body">
-              <form id="adminDetailsForm">
+              <form id="adminDetailsForm" class="needs-validation">
                 <div class="form-group">
                   <label for="facultyId">Faculty ID:</label>
                   <input type="text" class="form-control" id="facultyId" readOnly>
@@ -262,19 +260,25 @@ if ($result1) {
           </button>
         </div>
         <div class="modal-body">
-          <form method="post" action="add_admin_details.php">
+          <form class="needs-validation" method="post" action="add_admin_details.php">
             <div class="form-group">
               <label for="addFacultyId">Faculty ID:</label>
-              <input type="text" class="form-control" name="addFacultyId" id="addFacultyId" value="" required>
+              <input type="text" class="form-control" name="addFacultyId" id="addFacultyId" onkeyup="checkFacultyId()" value="" pattern="\d+" required>
+              <div id="feedbackMessage" class="invalid-feedback">
+              </div>
             </div>
             <div class="form-group">
               <label for="addFacultyId">Password:</label>
               <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
+              <div id="passwordFeedback" class="invalid-feedback">
+              </div>
             </div>
             <div class="form-row">
               <div class="col">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" name="firstName" id="firstName" required>
+                <div id="firstNameFeedback" class="invalid-feedback">
+              </div>
               </div>
               <div class="col">
                 <label for="middleName">Middle Name</label>
@@ -283,14 +287,16 @@ if ($result1) {
               <div class="col">
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" name="lastName" id="lastName" required>
+                <div id="lastNameFeedback" class="invalid-feedback">
+                </div>
               </div>
             </div>
 
             <?php 
               if ($currentAdminLevel === 'super_admin') {
-                echo "<div class='form-group mt-3'>";
+                echo "<div class='form-group mt-3' has-validation>";
                 echo "<label for='campus'>Campus</label>";
-                echo "<select class='form-control' name='addCampus' id='addCampus'>";
+                echo "<select class='form-control' name='addCampus' id='addCampus' required>";
                 echo "<option value='' selected disabled> -- Select Campus -- </option>";
                 echo "<option value='Malolos Campus'>Malolos Campus</option>";
                 echo "<option value='Bustos Campus'>Bustos Campus</option>";
@@ -299,17 +305,18 @@ if ($result1) {
                 echo "<option value='Hagonoy Campus'>Hagonoy Campus</option>";
                 echo "<option value='Meneses Campus'>Meneses Campus</option>";
                 echo "</select>";
+                echo '<div id="addCampusFeedback" class="invalid-feedback"></div>';
                 echo "</div>";
               } elseif ($currentAdminLevel === 'admin') {
                 echo "<div class='form-group mt-3'>";
                 echo "<label for='campus'>Campus</label>";
-                echo "<select class='form-control' name='addCampus' id='addCampus'>";
+                echo "<select class='form-control' name='addCampus' id='addCampus' required>";
                 echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
                 echo "</select>";
                 echo "</div>";
                 echo "<div class='form-group mt-3'>";
                 echo "<label for='college'>College</label>";
-                echo "<select class='form-control' name='addCollege' id='addCollege'>";
+                echo "<select class='form-control' name='addCollege' id='addCollege' requied>";
                 echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
                 echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
                 echo "<option value='College of Business Administration'>College of Business Administration</option>";
@@ -326,6 +333,7 @@ if ($result1) {
                 echo "<option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>";
                 echo "<option value='Graduate School'>Graduate School</option>";
                 echo "</select>";
+                echo '<div id="addCollegeFeedback" class="invalid-feedback"></div>';
                 echo "</div>";
 
               }
@@ -334,18 +342,21 @@ if ($result1) {
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="addEmail" id="addEmail" required>
+              <div id="addEmailFeedback" class="invalid-feedback">
+              </div>
             </div>
             <div class="form-group">
               <label for="phone">Contact Number</label>
               <input type="text" class="form-control" name="addPhone" id="addPhone" required>
+              <div id="addPhoneFeedback" class="invalid-feedback">
+              </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary" id="addBtn" disabled>Add</button>
             </div>
           </form>
         </div>
-        
       </div>
     </div>
   </div>
@@ -354,6 +365,144 @@ if ($result1) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+
+      document.getElementById("addFacultyId").addEventListener("input", validateForm);
+      document.getElementById("addPassword").addEventListener("input", validateForm);
+      document.getElementById("firstName").addEventListener("input", validateForm);
+      document.getElementById("lastName").addEventListener("input", validateForm);
+      document.getElementById("addEmail").addEventListener("input", validateForm);
+      document.getElementById("addPhone").addEventListener("input", validateForm);
+
+      document.getElementById("viewFirstName").addEventListener("input", validateUpdateForm);
+      document.getElementById("viewLastName").addEventListener("input", validateUpdateForm);
+      document.getElementById("viewEmail").addEventListener("input", validateUpdateForm);
+      document.getElementById("viewPhone").addEventListener("input", validateUpdateForm);
+
+      function validateUpdateForm() {
+          var firstName = document.getElementById("viewFirstName").value;
+          var lastName = document.getElementById("viewLastName").value;
+          var email = document.getElementById("viewEmail").value;
+          var phone = document.getElementById("viewPhone").value;
+
+          var isFormValid = firstName !== "" && lastName !== "" && email !== "" && phone !== "";
+
+          document.getElementById("saveBtn").disabled = !isFormValid;
+      }
+
+      function validateForm() {
+          var facultyId = document.getElementById("addFacultyId").value;
+          var password = document.getElementById("addPassword").value;
+          var firstName = document.getElementById("firstName").value;
+          var lastName = document.getElementById("lastName").value;
+          var email = document.getElementById("addEmail").value;
+          var phone = document.getElementById("addPhone").value;
+
+
+          var isFormValid = facultyId !== "" && password !== "" && firstName !== "" && lastName !== "" && email !== "" && phone !== "";
+          document.getElementById("addBtn").disabled = !isFormValid;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+        document.getElementById("addPassword").addEventListener("input", function () {
+            validatePassword();
+        });
+
+        addValidationListener("firstName");
+        addValidationListener("lastName");
+        addValidationListener("addEmail");
+        addValidationListener("addPhone");
+        addValidationListener("viewFirstName");
+        addValidationListener("viewLastName");
+        addValidationListener("viewEmail");
+        addValidationListener("viewPhone");
+        addValidationListener("addCampus");
+
+      });
+
+      function addValidationListener(elementId) {
+        document.getElementById(elementId).addEventListener("input", function () {
+            validateInput(elementId);
+        });
+      }
+
+      function validateInput(elementId) {
+        var inputValue = document.getElementById(elementId).value;
+        var feedbackMessage = document.getElementById(elementId + "Feedback");
+
+        if (inputValue.length > 0) {
+            feedbackMessage.innerText = "";
+            document.getElementById(elementId).classList.remove("is-invalid");
+            document.getElementById(elementId).classList.add("is-valid");
+        } else {
+            feedbackMessage.innerText = "This field is required.";
+            document.getElementById(elementId).classList.remove("is-valid");
+            document.getElementById(elementId).classList.add("is-invalid");
+        }
+      }
+
+
+    function validatePassword() {
+        var password = document.getElementById("addPassword").value;
+        var feedbackMessage = document.getElementById("passwordFeedback");
+
+        if (password.length >= 8 && password.length <= 25) {
+            feedbackMessage.innerText = "Looks good!";
+            document.getElementById("addPassword").classList.remove("is-invalid");
+            document.getElementById("addPassword").classList.add("is-valid");
+        } else {
+            feedbackMessage.innerText = "Password should be between 8 and 25 characters.";
+            document.getElementById("addPassword").classList.remove("is-valid");
+            document.getElementById("addPassword").classList.add("is-invalid");
+        }
+    }
+
+    function checkFacultyId() {
+    var facultyIdInput = document.getElementById("addFacultyId");
+    var facultyId = facultyIdInput.value;
+
+    // Check if facultyId contains only numbers
+    var numericRegex = /^\d+$/;
+    if (numericRegex.test(facultyId)) {
+        // Check if the facultyId has 10 digits
+        if (facultyId.length === 10) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'checkFacultyId.php?faculty_id=' + facultyId, true);
+
+            xhr.send();
+
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    var feedbackMessage = document.getElementById("feedbackMessage");
+                    if (xhr.responseText === "Faculty ID is already taken.") {
+                        facultyIdInput.classList.remove("is-valid");
+                        facultyIdInput.classList.add("is-invalid");
+                        feedbackMessage.innerText = xhr.responseText;
+                    } else {
+                        facultyIdInput.classList.remove("is-invalid");
+                        facultyIdInput.classList.add("is-valid");
+                        feedbackMessage.innerText = "";
+                    }
+                } else {
+                    console.error('Request failed. Returned status of ' + xhr.status);
+                }
+            };
+        } else {
+            // If the faculty ID doesn't have 10 digits, mark it as invalid
+            facultyIdInput.classList.remove("is-valid");
+            facultyIdInput.classList.add("is-invalid");
+            document.getElementById("feedbackMessage").innerText = "Faculty ID must have 10 digits.";
+        }
+    } else {
+        // If the faculty ID contains non-numeric characters, mark it as invalid
+        facultyIdInput.classList.remove("is-valid");
+        facultyIdInput.classList.add("is-invalid");
+        document.getElementById("feedbackMessage").innerText = "Faculty ID must contain only numbers.";
+    }
+}
+
+
       function selectedRowAdmin (facultyId){
         
         document.getElementById("viewFirstName").readOnly = true;
@@ -389,9 +538,7 @@ if ($result1) {
 
         // Send the id to the server
         xhr.send("facultyId="+ facultyId);
-
       }
-
       function selectedRow (facultyId){
         
         document.getElementById("viewFirstName").readOnly = true;

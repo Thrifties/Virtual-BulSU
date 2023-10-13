@@ -171,7 +171,6 @@ $result = mysqli_query($con, $query);
                     $description = $row['description'];
                     $datePosted = $row['created_at'];
 
-                    // Output the announcement HTML structure here
                     echo '<div class="col-4">';
                     echo '<div class="card h-100">';
                     echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
@@ -192,11 +191,7 @@ $result = mysqli_query($con, $query);
             
         </div>
         </div>
-        
     </div>
-
-    
-
 
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.

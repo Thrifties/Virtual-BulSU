@@ -158,7 +158,7 @@ $result = mysqli_query($con, $query);
       </ul>
       </div>
     </nav>
-
+  
     <div class="container-lg my-3 ">
       <h1 class="text-center text-white" id="heading">Sarmiento Campus News</h1>
         <div class="container mt-3">

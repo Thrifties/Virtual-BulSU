@@ -58,6 +58,8 @@ require "connect.php"
                     </div>
                 </div>
             </nav>
+
+            <iframe id="evrFrame" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;"  allowvr="yes" allow="xr-spatial-tracking;vr;gyroscope;accelerometer;fullscreen;" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/65103e271f8f1a3b9a2e9862,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" ></iframe>
         
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
             id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">

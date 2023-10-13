@@ -106,11 +106,14 @@ if ($result->num_rows > 0) {
                                     <div class="form-group">
                                         <label for="facultyId">Faculty ID:</label>
                                         <input type="text" class="form-control" id="facultyId" value="<?php echo $adminData["faculty_id"]; ?>" readonly>
+                                        
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="name">First Name:</label>
                                             <input type="text" class="form-control" id="firstName" value="<?php echo $adminData["first_name"]; ?>" readonly>
+                                            <div id="firstNameFeedback" class="invalid-feedback">
+                                            </div>
                                         </div>
                                         <div class="form-group col">
                                             <label for="name">Middle Name:</label>
@@ -119,17 +122,23 @@ if ($result->num_rows > 0) {
                                         <div class="form-group col">
                                             <label for="name">Last Name:</label>
                                             <input type="text" class="form-control" id="lastName" value="<?php echo $adminData["last_name"]; ?>" readonly>
+                                            <div id="lastNameFeedback" class="invalid-feedback">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email:</label>
                                         <input type="email" class="form-control" id="email" value="<?php echo $adminData["email"]; ?>"
                                             readonly>
+                                        <div id="emailFeedback" class="invalid-feedback">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Contact Number:</label>
                                         <input type="text" class="form-control" id="phone" value="<?php echo $adminData["contact_num"]; ?>"
                                             readonly>
+                                        <div id="phoneFeedback" class="invalid-feedback">
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -138,6 +147,69 @@ if ($result->num_rows > 0) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script>
+
+        function validateForm() {
+            var firstName = document.getElementById("firstName");
+            var lastName = document.getElementById("lastName");
+            var email = document.getElementById("email");
+            var phone = document.getElementById("phone");
+
+            var isFormValid = firstName !== "" && lastName !== "" && email !== "" && phone !== "";
+            document.getElementById("editBtn").disabled = !isFormValid;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            addValidationListener("firstName");
+            addValidationListener("lastName");
+            addValidationListener("email");
+            addValidationListener("phone");
+        });
+
+        function addValidationListener(elementId) {
+            document.getElementById(elementId).addEventListener("keyup", function () {
+                validate(elementId);
+            });
+        }
+
+    function validate(elementId) {
+    var element = document.getElementById(elementId);
+    var feedbackElement = document.getElementById(elementId + "Feedback");
+
+    if (element.value === "") {
+        element.classList.add("is-invalid");
+        feedbackElement.innerHTML = "This field is required.";
+        return false;
+    } else {
+        var pattern;
+        switch (elementId) {
+            case "firstName":
+                pattern = /^[a-zA-Z]+$/;
+                break;
+            case "lastName":
+                pattern = /^[a-zA-Z]+$/;
+                break;
+            case "email":
+                pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                break;
+            case "phone":
+                pattern = /^\d{11}$/
+                break;
+            default:
+                pattern = /.*/;
+        }
+
+        if (!pattern.test(element.value)) {
+            element.classList.add("is-invalid");
+            feedbackElement.innerHTML = "Invalid format.";
+            return false;
+        } else {
+            element.classList.remove("is-invalid");
+            feedbackElement.innerHTML = "";
+            return true;
+        }
+    }
+}
+
         function enableEdit() {
 
             // Enable form fields for editing

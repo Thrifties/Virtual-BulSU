@@ -195,9 +195,6 @@ $result = mysqli_query($con, $query);
         
     </div>
 
-    
-
-
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
     </footer>
