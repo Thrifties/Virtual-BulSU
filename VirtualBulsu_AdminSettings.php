@@ -102,7 +102,7 @@ if ($result->num_rows > 0) {
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Admin Details</h5>
-                                <form id="adminDetailsForm">
+                                <form id="adminDetailsForm" class="needs-validation">
                                     <div class="form-group">
                                         <label for="facultyId">Faculty ID:</label>
                                         <input type="text" class="form-control" id="facultyId" value="<?php echo $adminData["faculty_id"]; ?>" readonly>
@@ -111,7 +111,7 @@ if ($result->num_rows > 0) {
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="name">First Name:</label>
-                                            <input type="text" class="form-control" id="firstName" value="<?php echo $adminData["first_name"]; ?>" readonly>
+                                            <input type="text" class="form-control" id="firstName" value="<?php echo $adminData["first_name"]; ?>" readonly required>
                                             <div id="firstNameFeedback" class="invalid-feedback">
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@ if ($result->num_rows > 0) {
                                         </div>
                                         <div class="form-group col">
                                             <label for="name">Last Name:</label>
-                                            <input type="text" class="form-control" id="lastName" value="<?php echo $adminData["last_name"]; ?>" readonly>
+                                            <input type="text" class="form-control" id="lastName" value="<?php echo $adminData["last_name"]; ?>" readonly required>
                                             <div id="lastNameFeedback" class="invalid-feedback">
                                             </div>
                                         </div>
@@ -129,14 +129,14 @@ if ($result->num_rows > 0) {
                                     <div class="form-group">
                                         <label for="email">Email:</label>
                                         <input type="email" class="form-control" id="email" value="<?php echo $adminData["email"]; ?>"
-                                            readonly>
+                                            readonly required>
                                         <div id="emailFeedback" class="invalid-feedback">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Contact Number:</label>
                                         <input type="text" class="form-control" id="phone" value="<?php echo $adminData["contact_num"]; ?>"
-                                            readonly>
+                                            readonly required>
                                         <div id="phoneFeedback" class="invalid-feedback">
                                         </div>
                                     </div>
@@ -147,16 +147,6 @@ if ($result->num_rows > 0) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script>
-
-        function validateForm() {
-            var firstName = document.getElementById("firstName");
-            var lastName = document.getElementById("lastName");
-            var email = document.getElementById("email");
-            var phone = document.getElementById("phone");
-
-            var isFormValid = firstName !== "" && lastName !== "" && email !== "" && phone !== "";
-            document.getElementById("editBtn").disabled = !isFormValid;
-        }
 
         document.addEventListener("DOMContentLoaded", function () {
             addValidationListener("firstName");
@@ -175,9 +165,10 @@ if ($result->num_rows > 0) {
     var element = document.getElementById(elementId);
     var feedbackElement = document.getElementById(elementId + "Feedback");
 
-    if (element.value === "") {
+    if (element.value === "" && elementId !== "middleName") {
         element.classList.add("is-invalid");
         feedbackElement.innerHTML = "This field is required.";
+        document.getElementById("editBtn").disabled = true;
         return false;
     } else {
         var pattern;
@@ -192,7 +183,7 @@ if ($result->num_rows > 0) {
                 pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 break;
             case "phone":
-                pattern = /^\d{11}$/
+                pattern = /^\d{11}$/;
                 break;
             default:
                 pattern = /.*/;
@@ -201,14 +192,30 @@ if ($result->num_rows > 0) {
         if (!pattern.test(element.value)) {
             element.classList.add("is-invalid");
             feedbackElement.innerHTML = "Invalid format.";
+            document.getElementById("editBtn").disabled = true;
             return false;
         } else {
             element.classList.remove("is-invalid");
             feedbackElement.innerHTML = "";
+            // Enable or disable the button based on whether all required fields are filled
+            var isFormValid = validateForm();
+            document.getElementById("editBtn").disabled = !isFormValid;
             return true;
         }
     }
 }
+
+function validateForm() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+
+    // Check if all required fields are filled
+    var isFormValid = firstName !== "" && lastName !== "" && email !== "" && phone !== "";
+    return isFormValid;
+}
+
 
         function enableEdit() {
 

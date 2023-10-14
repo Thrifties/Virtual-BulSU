@@ -87,29 +87,30 @@ require "connect.php"
             </div>
             <div class="offcanvas-body">
                 <?php
-                // Query to fetch announcements from your database
-                $query = "SELECT * FROM announcements";
-                $result = mysqli_query($con, $query);
-
-                if (!$result) {
-                    die("Database query failed."); // Handle the error appropriately
-                }
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '
-                                <div class="card mb-3" id=' . $row['announcement_id'] . '>
-                                    <img src="uploads/' . $row['file_input'] . '" class="card-img-top" alt="Unable to load image">
+                        // Query to fetch announcements from your database
+                        $query = "SELECT * FROM announcements WHERE campus = 'Meneses Campus' ORDER BY event_date DESC";
+                        $result = mysqli_query($con, $query);
+        
+                        if (!$result) {
+                            die("Database query failed."); // Handle the error appropriately
+                        }
+        
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '
+                                <a href="VirtualBulsu_AnnouncementPage.php?id='.$row['announcement_id'].'" class="text-decoration-none text-body">
+                                <div class="card mb-3" id='.$row['announcement_id'].'>
+                                    <img src="uploads/'.$row['file_input'].'" class="card-img-top" alt="Unable to load image">
                                     <div class="card-body">
                                         <h5 class="card-title">' . htmlspecialchars($row['headline']) . '</h5>
-                                        <p class="card-text">' . htmlspecialchars($row['description']) . '</p>
-                                        <p class="card-text"><small class="text-body-secondary">' . $row['event_date'] . '</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">'.$row['event_date'].'</small></p>
                                     </div>
                                 </div>
+                                </a>
                             ';
-                }
-                // Release the result set
-                mysqli_free_result($result);
-                ?>
+                        }
+                        // Release the result set
+                        mysqli_free_result($result);
+                    ?>
             </div>
         </div>
 

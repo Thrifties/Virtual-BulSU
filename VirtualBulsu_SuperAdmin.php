@@ -72,7 +72,11 @@ if ($result1) {
     <div class="admin-panel-container">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Admin Panel</h2>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
+        <div>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
+          <a href="generate_report_admin.php" class="btn btn-success">Download CSV</a>
+        </div>
+        
       </div>
       <div class="row">
         <div class="col-md-12">

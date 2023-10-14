@@ -173,15 +173,16 @@ $result = mysqli_query($con, $query);
 
                     echo '<div class="col-4">';
                     echo '<div class="card h-100">';
+                    echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
                     echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
                     echo '<div class="card-body">';
-                    echo "<h5 class='card-title'>$headline</h5>";
-                    echo "<p class='card-text' id='line-clamp'>$description</p>";
+                    echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
                     echo '</div>';
                     echo '<div class="card-footer">';
                     echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
                     echo '</div>';
                     echo '</div>';
+                    echo '</a>';
                     echo '</div>';
                 }
               } else {

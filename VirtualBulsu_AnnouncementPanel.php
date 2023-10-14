@@ -403,8 +403,7 @@ $stmt->close();
                 </div>
               </div>
               <div class="form-group">
-                <label for="formFileMultiple" class="form-label">Multiple files input
-                  example</label>
+                <label for="formFileMultiple" class="form-label">Multiple files input</label>
                 <input class="form-control" type="file" id="fileInput" name="fileInput" multiple required>
                 <div id="fileInputFeedback" class="invalid-feedback">
                 </div>

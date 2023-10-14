@@ -4,7 +4,6 @@ require "connect.php";
 $query = "SELECT * FROM announcements WHERE campus_assignment = 'Malolos Campus' ORDER BY created_at DESC" ;
 $result = mysqli_query($con, $query);
 
-
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +93,15 @@ $result = mysqli_query($con, $query);
         z-index: 9999;
       }
 
+      #announcementCard {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+      }
+
+      #announcementCard:hover {
+        color: inherit; /* Inherit text color on hover */
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -174,30 +182,25 @@ $result = mysqli_query($con, $query);
                     // Output the announcement HTML structure here
                     echo '<div class="col-4">';
                     echo '<div class="card h-100">';
-                    echo '<a href="VirtualBulsu_AnnouncementPage.php?id="'.$announcementId.'">';
+                    echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
                     echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
                     echo '<div class="card-body">';
-                    echo "<h5 class='card-title text-center'>$headline</h5>";
+                    echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
                     echo '</div>';
-                    echo '</a>';
                     echo '<div class="card-footer">';
                     echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
                     echo '</div>';
                     echo '</div>';
+                    echo '</a>';
                     echo '</div>';
                 }
               } else {
                   echo "<p>No announcements available.</p>";
               }
             ?>
-            
         </div>
-        </div>
-        
+      </div>
     </div>
-
-    
-
 
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
