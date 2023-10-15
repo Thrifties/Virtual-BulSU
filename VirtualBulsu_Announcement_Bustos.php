@@ -93,6 +93,15 @@ $result = mysqli_query($con, $query);
         z-index: 9999;
       }
 
+      #announcementCard {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+      }
+
+      #announcementCard:hover {
+        color: inherit; /* Inherit text color on hover */
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -164,6 +173,7 @@ $result = mysqli_query($con, $query);
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $announcementId = $row['announcement_id'];
                     $headline = $row['headline'];
                     $image = $row['file_input'];
                     $description = $row['description'];
@@ -206,7 +216,6 @@ $result = mysqli_query($con, $query);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     
   </body>

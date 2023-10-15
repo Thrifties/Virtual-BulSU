@@ -15,6 +15,7 @@ $result = mysqli_query($con, $query);
     <title>Bulacan State University</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css" />
+    <link rel="stylesheet" href="announcement_list.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <style>
       html,
@@ -95,6 +96,15 @@ $result = mysqli_query($con, $query);
         z-index: 9999;
       }
 
+      #announcementCard {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+      }
+
+      #announcementCard:hover {
+        color: inherit; /* Inherit text color on hover */
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -166,6 +176,7 @@ $result = mysqli_query($con, $query);
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $announcementId = $row['announcement_id'];
                     $headline = $row['headline'];
                     $image = $row['file_input'];
                     $description = $row['description'];

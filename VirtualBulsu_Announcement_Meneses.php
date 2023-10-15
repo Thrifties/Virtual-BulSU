@@ -95,6 +95,15 @@ $result = mysqli_query($con, $query);
         z-index: 9999;
       }
 
+      #announcementCard {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+      }
+
+      #announcementCard:hover {
+        color: inherit; /* Inherit text color on hover */
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -160,17 +169,19 @@ $result = mysqli_query($con, $query);
     </nav>
 
     <div class="container-lg my-3 ">
-      <h1 class="text-center text-white" id="heading">Malolos Campus News</h1>
+      <h1 class="text-center text-white" id="heading">Meneses Campus News</h1>
         <div class="container mt-3">
             <div class="row row-cols-3 row-cols-md-3 g-4">
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $announcementId = $row['announcement_id'];
                     $headline = $row['headline'];
                     $image = $row['file_input'];
                     $description = $row['description'];
                     $datePosted = $row['created_at'];
 
+                    // Output the announcement HTML structure here
                     echo '<div class="col-4">';
                     echo '<div class="card h-100">';
                     echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
