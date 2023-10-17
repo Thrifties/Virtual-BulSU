@@ -9,8 +9,8 @@ require "connect.php"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulacan State University</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/mobileView.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
@@ -19,17 +19,22 @@ require "connect.php"
             background-color: #95b302;
             font-family: "Roboto";
         }
-
         iframe {
             width: 100%;
             height: 99vh;
             border: none;
         }
-        #offcanvasNavbar,
-        #announcementPanel {
-            background-color: #fff;
-            font-family: "Roboto";
-            color: #95b302;
+        #offcanvasNavbar, #announcementPanel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 30px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            transition: width 0.5s;
         }
 
         .offcanvas-header h5 {
@@ -38,6 +43,69 @@ require "connect.php"
             height: 30px;
             margin: 0;
         }
+
+        #announcementTab {
+            box-shadow: inset 0 0 0 0 #95b302;
+            color: #95b302;
+            padding: 0 .25rem;
+            margin: 0 -.25rem;
+            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+            color: white;
+            font-family: 'Roboto';
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+
+        #announcementTab:hover {
+            color: black;
+            box-shadow: inset 150px 0 0 0 #95b302;
+        }
+
+        #campuses {
+            box-shadow: inset 0 0 0 0 #95b302;
+            color: #95b302;
+            padding: 0 .25rem;
+            margin: 0 -.25rem;
+            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+            color: white;
+            font-family: 'Roboto';
+            font-weight: 500;
+            line-height: 1.5;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        #campuses:hover {
+            color: black;
+            box-shadow: inset 150px 0 0 0 #95b302;
+        }
+
+        #offcanvasNavbarLabel {
+            color: white;
+            font-size: larger;
+            margin-left: 5px;
+        }
+
+        .dropdown-menu {
+            background-color: #95b302;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        #offcanvasScrollingLabel {
+            color: white;
+            font-family: 'Roboto';
+        }
+
+        .btn-close {
+            color: white;
+        }
+
     </style>
 </head>
 
@@ -49,7 +117,7 @@ require "connect.php"
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.html">
+                <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
                     <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                     BULACAN STATE UNIVERSITY - Hagonoy Campus
                 </a>
@@ -116,10 +184,6 @@ require "connect.php"
                     ?>
             </div>
         </div>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         <script>
             var navHeight = document.getElementById("navBar").clientHeight;

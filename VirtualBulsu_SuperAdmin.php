@@ -39,34 +39,8 @@ if ($result1) {
   </head>
 
   <body>
-      <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand custom-brand" href="#">
-          <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
-          Bulacan State University
-        </a>
-      
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_SuperAdmin.php">Admins</a>
-            </li>
-            <li class="nav-item" id="custom-item">
-              <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+
+  <?php include "includes/navbar.php"; ?>
 
   <div class="container mt-5">
     <div class="admin-panel-container">
@@ -117,8 +91,8 @@ if ($result1) {
                       echo "<td>" . $row["campus"] . "</td>";
                       echo "<td>";
                       echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
                       echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
                       
                       echo "</td>";
                       echo "</tr>";
@@ -138,8 +112,8 @@ if ($result1) {
                       echo "<td>" . $row["college"] . "</td>";
                       echo "<td>";
                       echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEditAdmin(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
                       echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRowAdmin(" . $row['faculty_id'] . ")'>View</button>";
+                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
                       echo "</td>";
                       echo "</tr>";
                 }

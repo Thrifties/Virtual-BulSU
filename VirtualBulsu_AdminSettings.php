@@ -40,112 +40,57 @@ if ($result->num_rows > 0) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User Admin Settings</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
-        <style>
-            .admin-panel-container {
-                border: 1px solid #ddd;
-                padding: 20px;
-                border-radius: 5px;
-            }
-        </style>
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-custom">
-            <div class="container-fluid">
-                <a class="navbar-brand custom-brand" href="#">
-                    <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    Bulacan State University
-                </a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
-                        </li>
-                        <?php
-          if ($currentAdminLevel == "super_admin") {
-            echo "<li class='nav-item' id='custom-item'>";
-            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
-            echo "</li>";
-          } else if ($currentAdminLevel == "admin") {
-            echo "<li class='nav-item' id='custom-item'>";
-            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
-            echo "</li>";
-          }
-          ?>
-                        <li class="nav-item" id="custom-item">
-                            <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include "includes/navbar.php"; ?>
 
-        <div class="container mt-5">
-            <div class="admin-panel-container">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2>Admin Panel</h2>
-                    <button class="btn btn-primary" id="editBtn" onclick="enableEdit()">Edit</button>
-                </div>
+            <div class="container p-3 ">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Admin Details</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h2 class="card-title">Admin Details</h2>
+                                <button class="btn btn-primary" id="editBtn" onclick="enableEdit()">Edit</button>
+                                </div>
                                 <form id="adminDetailsForm" class="needs-validation">
-                                    <div class="form-group">
+                                    <div class="form-group mb-3"> <!-- Added mb-3 for spacing -->
                                         <label for="facultyId">Faculty ID:</label>
                                         <input type="text" class="form-control" id="facultyId" value="<?php echo $adminData["faculty_id"]; ?>" readonly>
-                                        
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col">
+                                        <div class="form-group col mb-3"> <!-- Added mb-3 for spacing -->
                                             <label for="name">First Name:</label>
                                             <input type="text" class="form-control" id="firstName" value="<?php echo $adminData["first_name"]; ?>" readonly required>
-                                            <div id="firstNameFeedback" class="invalid-feedback">
-                                            </div>
+                                            <div id="firstNameFeedback" class="invalid-feedback"></div>
                                         </div>
-                                        <div class="form-group col">
+                                        <div class="form-group col mb-3"> <!-- Added mb-3 for spacing -->
                                             <label for="name">Middle Name:</label>
                                             <input type="text" class="form-control" id="middleName" value="<?php echo $adminData["middle_name"]; ?>" readonly>
                                         </div>
-                                        <div class="form-group col">
+                                        <div class="form-group col mb-3"> <!-- Added mb-3 for spacing -->
                                             <label for="name">Last Name:</label>
                                             <input type="text" class="form-control" id="lastName" value="<?php echo $adminData["last_name"]; ?>" readonly required>
-                                            <div id="lastNameFeedback" class="invalid-feedback">
-                                            </div>
+                                            <div id="lastNameFeedback" class="invalid-feedback"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-3"> <!-- Added mb-3 for spacing -->
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" value="<?php echo $adminData["email"]; ?>"
-                                            readonly required>
-                                        <div id="emailFeedback" class="invalid-feedback">
-                                        </div>
+                                        <input type="email" class="form-control" id="email" value="<?php echo $adminData["email"]; ?>" readonly required>
+                                        <div id="emailFeedback" class="invalid-feedback"></div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-3"> <!-- Added mb-3 for spacing -->
                                         <label for="phone">Contact Number:</label>
-                                        <input type="text" class="form-control" id="phone" value="<?php echo $adminData["contact_num"]; ?>"
-                                            readonly required>
-                                        <div id="phoneFeedback" class="invalid-feedback">
-                                        </div>
+                                        <input type="text" class="form-control" id="phone" value="<?php echo $adminData["contact_num"]; ?>" readonly required>
+                                        <div id="phoneFeedback" class="invalid-feedback"></div>
                                     </div>
                                 </form>
                             </div>
-                        </div>
                     <!-- Include the necessary Bootstrap JavaScript libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/user_settings_panel.js"></script>
     </body>
 </html>

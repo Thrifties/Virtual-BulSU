@@ -1,461 +1,103 @@
-<?php
-require "connect.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulacan State University</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="css/carousel.css">
+    </head>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-
-	<title>Admin Panel</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
-</head>
-
-<body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="#">
-					<span class="align-middle">Virtual BulSU</span>
-        		</a>
-
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="VirtualBulsu_AnnouncementPanel.php">
-						<i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Announcements</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="VirtualBulsu_SuperAdmin.php">
-						<i class="align-middle" data-feather="user"></i> <span class="align-middle">Admin List</span></a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-              </a>
-			<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                 <span class="text-dark">Charles Hall</span>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <a class="navbar-brand custom-brand" href="VirtualBulsu_Tour_HomePage.php">
+                <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                Bulacan State University
             </a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="log-out"></i> Sign out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+        </nav>
 
-			<main class="content">
-				<div class="container-fluid p-0">
-                    <div class="container mt-5">
-                        <div class="admin-panel-container">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2>Admin Panel</h2>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                            <!-- Table to display the list of admins -->
-                        <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>Faculty ID</th>
-                                <th>Full Name</th>
-                                <th>Campus</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                                $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
+        <div class="container">
+        <div class="swiper tranding-slider">
+          <div class="swiper-wrapper">
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+            <!-- Slide-start -->
+            <div class="swiper-slide tranding-slide">
+              <div class="tranding-slide-img">
+                <img src="resources/HAGONOYCAMPUS.png" alt="Tranding">
+              </div>
+            </div>
+            <!-- Slide-end -->
+          </div>
 
-                                $result = $con->query($sql);
+          <div class="tranding-slider-control">
+            <div class="swiper-button-prev slider-arrow">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </div>
+            <div class="swiper-button-next slider-arrow">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        if ($row['admin_level'] === 'admin') {
-                                        echo "<tr id=" . $row['faculty_id'] . ">";
-                                        echo "<td>" . $row["faculty_id"] . "</td>";
-                                        echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
-                                        echo "<td>" . $row["campus"] . "</td>";
-                                        echo "<td>";
-                                        echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                                        echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Delete</button>";
-                                        echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    }
-                                } else {
-                                    echo "No admin records found.";
-                                }
-                            ?>
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
+        </div>
+      </div>
 
-                    <!-- View Admin Details Modal -->
-                    <div class="modal fade" id="viewAdminDetails" tabindex="-1" role="dialog"
-                            aria-labelledby="adminDetailsModal" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                <form id="adminDetailsForm">
-                                    <div class="form-group">
-                                    <label for="facultyId">Faculty ID:</label>
-                                    <input type="text" class="form-control" id="facultyId">
-                                    </div>
-                                    <div class="form-group">
-                                    <div class="row">
-                                        <div class="col">
-                                        <label for="name">First Name:</label>
-                                        <input type="text" class="form-control" id="viewFirstName">
-                                        </div>
-                                        <div class="col">
-                                        <label for="name">Middle Name:</label>
-                                        <input type="text" class="form-control" id="viewMiddleName">
-                                        </div>
-                                        <div class="col">
-                                        <label for="name">Last Name:</label>
-                                        <input type="text" class="form-control" id="viewLastName">
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="campus">Campus:</label>
-                                    <select class="form-control" id="viewCampus">
-                                        <option value="Malolos Campus">Malolos Campus</option>
-                                        <option value="Bustos Campus">Bustos Campus</option>
-                                        <option value="Sarmiento Campus">Sarmiento Campus</option>
-                                        <option value="San Rafael Campus">San Rafael Campus</option>
-                                        <option value="Hagonoy Campus">Hagonoy Campus</option>
-                                        <option value="Meneses Campus">Meneses Campus</option>
-                                    </select>
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="viewEmail">
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="phone">Contact Number:</label>
-                                    <input type="text" class="form-control" id="viewPhone">
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" id="editViewBtn" class="btn btn-secondary" onclick="enableViewEdit()">Edit</button>
-                                    <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
-                                    </div>
-                                </form>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    
-                    <!-- Admin Modal -->
-                    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="adminModalLabel">Add Admin</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                            <form method="post" action="add_admin_details.php">
-                                <div class="form-group">
-                                <label for="addFacultyId">Faculty ID:</label>
-                                <input type="text" class="form-control" name="addFacultyId" id="addFacultyId" value="" required>
-                                </div>
-                                <div class="form-group">
-                                <label for="addFacultyId">Password:</label>
-                                <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
-                                </div>
-                                <div class="form-row">
-                                <div class="col">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" name="firstName" id="firstName" required>
-                                </div>
-                                <div class="col">
-                                    <label for="middleName">Middle Name</label>
-                                    <input type="text" class="form-control" name="middleName" id="middleName">
-                                </div>
-                                <div class="col">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" name="lastName" id="lastName" required>
-                                </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                <label for="campus">Campus</label>
-                                <select class="form-control" name="addCampus" id="addCampus">
-                                    <option value="Malolos Campus">Malolos Campus</option>
-                                    <option value="Bustos Campus">Bustos Campus</option>
-                                    <option value="Sarmiento Campus">Sarmiento Campus</option>
-                                    <option value="San Rafael Campus">San Rafael Campus</option>
-                                    <option value="Hagonoy Campus">Hagonoy Campus</option>
-                                    <option value="Meneses Campus">Meneses Campus</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="addEmail" id="addEmail" required>
-                                </div>
-                                <div class="form-group">
-                                <label for="phone">Contact Number</label>
-                                <input type="text" class="form-control" name="addPhone" id="addPhone" required>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                </div>
-                            </form>
-                            </div>
-                            
-                        </div>
-                        </div>
-                    </div>
-				</div>
-			</main>
+        <footer class="footer">
+            &copy; 2023 Bulacan State University. All rights reserved.
+        </footer>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-end">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-
-	<script src="js/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-      function selectedRow (facultyId){
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = true;
-        document.getElementById("viewMiddleName").readOnly = true;
-        document.getElementById("viewLastName").readOnly = true;
-        document.getElementById("viewCampus").disabled = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewPhone").readOnly = true;
-
-        var saveBtn = document.getElementById("saveBtn");
-        document.getElementById("saveBtn").disabled = true;
-        document.getElementById("facultyId").value = facultyId;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var facultyData = JSON.parse(xhr.responseText); 
-
-            // Populate form fields with the fetched faculty data
-            document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("viewFirstName").value = facultyData.first_name;
-            document.getElementById("viewMiddleName").value = facultyData.middle_name;
-            document.getElementById("viewLastName").value = facultyData.last_name;
-            document.getElementById("viewCampus").value = facultyData.campus;
-            document.getElementById("viewEmail").value = facultyData.email;
-            document.getElementById("viewPhone").value = facultyData.contact_num;
-          }
-        };
-
-        // Send the id to the server
-        xhr.send("facultyId="+ facultyId);
-
-      }
-
-      function enableViewEdit(){
-        enableEdit(document.getElementById("facultyId").value);
-      }
-
-       function enableEdit(facultyId) {
-        // Enable form fields for editing
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = false;
-        document.getElementById("viewMiddleName").readOnly = false;
-        document.getElementById("viewLastName").readOnly = false;
-        document.getElementById("viewCampus").disabled = false;
-        document.getElementById("viewEmail").readOnly = false;
-        document.getElementById("viewPhone").readOnly = false;
-
-        /* var row = document.getElementById(facultyId);
-        row.classList.add("table-active"); */
-
-        document.getElementById("facultyId").value = facultyId;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var facultyData = JSON.parse(xhr.responseText);
-
-            // Populate form fields with the fetched faculty data
-            document.getElementById("facultyId").value = facultyData.faculty_id;
-            document.getElementById("viewFirstName").value = facultyData.first_name;
-            document.getElementById("viewMiddleName").value = facultyData.middle_name;
-            document.getElementById("viewLastName").value = facultyData.last_name;
-            document.getElementById("viewCampus").value = facultyData.campus;
-            document.getElementById("viewEmail").value = facultyData.email;
-            document.getElementById("viewPhone").value = facultyData.contact_num;
-          }
-        };
-
-        // Send the id to the server
-        xhr.send("facultyId="+ facultyId);
-
-        // Change the "Edit" button to a "Save" button
-        document.getElementById("saveBtn").disabled = false;
-        var saveBtn = document.getElementById("saveBtn");
-        saveBtn.onclick = saveChanges;
-      }
-
-      function saveChanges() {
-        // Get updated admin data
-        var facultyId = document.getElementById("facultyId").value;
-        var firstName = document.getElementById("viewFirstName").value;
-        var middleName = document.getElementById("viewMiddleName").value;
-        var lastName = document.getElementById("viewLastName").value;
-        var campus = document.getElementById("viewCampus").value;
-        var email = document.getElementById("viewEmail").value;
-        var phone = document.getElementById("viewPhone").value;
-
-        /* var row = document.getElementById(facultyId);
-        row.classList.remove("table-active"); */
-
-        // Send an AJAX request to update admin details
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_admin_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
-          } else {
-            alert("Error updating admin details. Please try again later.");
-          }
-        }
-        };
-
-        // Send the updated admin data to the server
-        xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
-
-        // Disable form fields after saving
-        document.getElementById("facultyId").readOnly = true;
-        document.getElementById("viewFirstName").readOnly = true;
-        document.getElementById("viewMiddleName").readOnly = true;
-        document.getElementById("viewLastName").readOnly = true;
-        document.getElementById("viewCampus").disabled = true;
-        document.getElementById("viewEmail").readOnly = true;
-        document.getElementById("viewPhone").readOnly = true;
-
-        var saveBtn = document.getElementById("saveBtn");
-        document.getElementById("saveBtn").disabled = true;
-        document.getElementById("facultyId").readOnly = true;
-      }
-
-      function deleteAdmin(facultyId) {
-          var confirmation = confirm("Are you sure you want to delete this admin?");
-          if (confirmation) {
-              // Create an XMLHttpRequest object
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "delete_admin.php", true);
-              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-              // Define a callback function to handle the response
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState === 4 && xhr.status === 200) {
-                      var response = JSON.parse(xhr.responseText);
-                      if (response.success) {
-                      alert(response.success);
-                      // Find and remove the deleted admin's row from the table
-                      var rowToRemove = document.getElementById("row_" + facultyId);
-                      if (rowToRemove) {
-                          rowToRemove.remove();
-                      }
-                    } else {
-                        alert(response.error);
-                      }
-                  }
-              };
-
-              // Send the request with faculty_id parameter
-              xhr.send("faculty_id=" + facultyId);
-          }
-      }
-
-      function logout(){
-        window.location.href = "logout.php";
-      }
-</script>
-
-</body>
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+        <script src="js/carousel.js"></script>
+        
+    </body>
 
 </html>

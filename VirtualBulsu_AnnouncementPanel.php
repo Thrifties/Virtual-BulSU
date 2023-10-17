@@ -39,9 +39,6 @@ if ($result->num_rows > 0) {
 $stmt->close();
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,8 +46,7 @@ $stmt->close();
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Announcement Panel</title>
@@ -99,43 +95,9 @@ $stmt->close();
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid">
-      <a class="navbar-brand custom-brand" href="#">
-        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-        Bulacan State University
-      </a>
+  
+  <?php include "includes/navbar.php" ?>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" id="custom-item">
-            <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
-          </li>
-          <?php
-          if ($currentAdminLevel == "super_admin") {
-            echo "<li class='nav-item' id='custom-item'>";
-            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
-            echo "</li>";
-          } else if ($currentAdminLevel == "admin") {
-            echo "<li class='nav-item' id='custom-item'>";
-            echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
-            echo "</li>";
-          }
-          ?>
-          <li class="nav-item" id="custom-item">
-            <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
   <div class="container mt-5">
     <!-- Announcement Panel -->
     <div class="announcement-panel">

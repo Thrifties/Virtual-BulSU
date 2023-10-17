@@ -9,17 +9,126 @@ require "connect.php"
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bulacan State University</title>
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mobileView.css">
     </head>
 
     <style>
-        iframe {
-                width: 100%;
-                height: 98%;
-                border: none;
-            }
+         iframe {
+        width: 100%;
+        height: 98%;
+        border: none;
+    }
+
+    .navbar-custom {
+        background-color: #4B5320;
+        font-family: 'Roboto';
+    }
+
+    #tour {
+        width: 100%;
+        height: 800px;
+        min-height: 562px;
+        margin: 0 auto;
+    }
+
+    #announcementTab {
+        color: black;
+    }
+
+    #campuses {
+        color: black;
+    }
+
+    #offcanvasNavbar,
+    #announcementPanel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 30px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        transition: width 0.5s;
+    }
+
+    .offcanvas-header h5 {
+        color: black;
+        width: 550px;
+        height: 30px;
+        margin: 0;
+    }
+
+    #announcementTab {
+        box-shadow: inset 0 0 0 0 #4B5320;
+        color: #4B5320;
+        padding: 0 .25rem;
+        margin: 0 -.25rem;
+        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+        color: white;
+        font-family: 'Roboto';
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.5;
+        text-decoration: none;
+        margin-bottom: 8px;
+    }
+
+    #announcementTab:hover {
+        color: #d09b00;
+        box-shadow: inset 150px 0 0 0 #4B5320;
+        ;
+    }
+
+    #campuses {
+        box-shadow: inset 0 0 0 0 #4B5320;
+        color: #4B5320;
+        padding: 0 .25rem;
+        margin: 0 -.25rem;
+        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+        color: white;
+        font-family: 'Roboto';
+        font-weight: 500;
+        line-height: 1.5;
+        text-decoration: none;
+        font-size: 18px;
+
+    }
+
+    #campuses:hover {
+        color: #d09b00;
+        box-shadow: inset 150px 0 0 0 #4B5320;
+        ;
+    }
+
+    #offcanvasNavbarLabel {
+        color: white;
+        font-size: larger;
+        margin-left: 5px;
+        padding-top: 3px;
+        font-family: 'Roboto';
+    }
+
+    .dropdown-menu {
+        background-color: #4B5320;
+    }
+
+    .dropdown-item {
+        color: white;
+    }
+
+    #offcanvasScrollingLabel {
+        color: white;
+        font-family: 'Roboto';
+    }
+
+    .btn-close {
+        color: white;
+    }
     </style>
 
 
@@ -102,7 +211,6 @@ require "connect.php"
                     ?>
                 </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
             </body>
             
