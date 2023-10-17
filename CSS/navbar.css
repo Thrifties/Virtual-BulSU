@@ -1,5 +1,6 @@
 .navbar-custom {
                 background-color: #763435;
+                box-shadow: 2px 2px 5px #0f0f0f67;
             }
 
             .navbar-custom .navbar-nav .nav-link {

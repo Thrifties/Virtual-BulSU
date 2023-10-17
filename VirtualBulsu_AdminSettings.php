@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User Admin Settings</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+        <link rel="stylesheet" href="CSS/navbar.css">
     </head>
 
     <body>

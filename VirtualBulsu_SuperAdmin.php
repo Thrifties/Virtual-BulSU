@@ -25,7 +25,7 @@ if ($result1) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
-    <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
     
     <style>
       .admin-panel-container {

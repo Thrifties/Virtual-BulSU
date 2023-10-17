@@ -47,7 +47,7 @@ $stmt->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
+  <link rel="stylesheet" href="CSS/navbar.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Announcement Panel</title>
   <style>
@@ -98,7 +98,7 @@ $stmt->close();
   
   <?php include "includes/navbar.php" ?>
 
-  <div class="container mt-5">
+  <div class="container-fluid mt-5">
     <!-- Announcement Panel -->
     <div class="announcement-panel">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -113,6 +113,8 @@ $stmt->close();
               <thead>
                 <tr class="table">
                   <th>Headline</th>
+                  <th>Campus</th>
+                  <th>College</th>
                   <th>Author</th>
                   <th>Faculty ID</th>
                   <th>Actions</th>
@@ -122,11 +124,11 @@ $stmt->close();
                 <?php
 
                 if ($currentAdminLevel == "super_admin") {
-                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements";
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements";
                 } else if ($currentAdminLevel == "admin") {
-                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
                 } else if ($currentAdminLevel == "college_admin") {
-                  $query2 = "SELECT announcement_id, headline, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
                 }
 
                 $result2 = mysqli_query($con, $query2);
@@ -138,6 +140,8 @@ $stmt->close();
                 while ($row = mysqli_fetch_assoc($result2)) {
                   echo "<tr id=" . $row['announcement_id'] . ">";
                   echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['campus_assignment']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['college_assignment']) . "</td>";
                   echo "<td>" . htmlspecialchars($row['author']) . "</td>";
                   echo "<td>" . htmlspecialchars($row['faculty_id']) . "</td>";
                   echo "<td>";
