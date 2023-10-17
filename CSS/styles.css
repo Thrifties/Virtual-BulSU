@@ -1,39 +1,77 @@
-html, body {
-    height: 100%;
-}
+/* styles.css */
 
+/* Common Styles */
 body {
-    background: linear-gradient(rgba(51, 50, 50, 0.5), rgba(51, 50, 50, 0.5)), url('../resources/BSU_Main.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    font-family: 'Roboto';
 }
 
-#VTIntroduction {
-    color: white;
-    top: 40%;
-}
-
+/* Navigation Bar */
 .navbar-custom {
-    background-color: #763435;
+    background-color: #4B5320;
 }
 
-iframe {
-    height: auto;
-    width: auto;
+.offcanvas-header h5 {
+    color: black;
+    width: 550px;
+    height: 30px;
+    margin: 0;
 }
 
-.navbar-custom .navbar-brand {
+#announcementTab, #campuses {
+    box-shadow: inset 0 0 0 0 #4B5320;
+    color: #4B5320;
+    padding: 0 .25rem;
+    margin: 0 -.25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
     color: white;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
     text-decoration: none;
-    /* Remove underline */
+    margin-bottom: 8px;
 }
 
-.nav-link, #announcementTab {
+#announcementTab:hover, #campuses:hover {
+    color: #d09b00;
+    box-shadow: inset 150px 0 0 0 #4B5320;
+}
+
+.dropdown-menu {
+    background-color: #4B5320;
+}
+
+.dropdown-item {
     color: white;
 }
 
-.nav-link:hover, #announcementTab:hover {
-    color: #d9d9d9;
+.btn-close {
+    color: white;
+}
+
+/* Iframe Styles */
+iframe {
+    width: 100%;
+    height: 98%;
+    border: none;
+}
+
+/* Offcanvas Panel Styles */
+#offcanvasNavbar, #announcementPanel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 30px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: width 0.5s;
+}
+
+#offcanvasNavbarLabel {
+    color: white;
+    font-size: larger;
+    margin-left: 5px;
+    padding-top: 3px;
 }

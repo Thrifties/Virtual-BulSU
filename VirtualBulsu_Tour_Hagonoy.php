@@ -21,7 +21,7 @@ require "connect.php"
         }
         iframe {
             width: 100%;
-            height: 99vh;
+            height: calc(100vh - 51px); /* Adjusted for the navbar height */
             border: none;
         }
         #offcanvasNavbar, #announcementPanel {
@@ -114,13 +114,14 @@ require "connect.php"
         <!-- Navigation Bar -->
         <nav id="navBar" class="navbar navbar-lg navbar-custom">
             <div class="container-fluid">
+                <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
+                    <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                    <span class="navbar-title text-wrap">Bulacan State University - Hagonoy Campus</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
-                    <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    BULACAN STATE UNIVERSITY - Hagonoy Campus
-                </a>
+                
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
@@ -147,6 +148,10 @@ require "connect.php"
                         </ul>
                     </div>
                 </div>
+                <a class="navbar-brand custom-brand mx-auto d-none d-lg-block" href="VirtualBulsu_Tour_HomePage.php">
+                    <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                    <span class="navbar-title text-wrap">Bulacan State University - Hagonoy Campus</span>
+                </a>
             </div>
         </nav>
         <iframe scrolling="no" id="virtualTour" allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>

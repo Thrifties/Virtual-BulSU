@@ -16,11 +16,11 @@ require "connect.php"
     </head>
 
     <style>
-         iframe {
-        width: 100%;
-        height: 98%;
-        border: none;
-    }
+     iframe {
+            width: 100%;
+            height: calc(100vh - 51px); /* Adjusted for the navbar height */
+            border: none;
+        }
 
     .navbar-custom {
         background-color: #4B5320;
@@ -79,9 +79,8 @@ require "connect.php"
     }
 
     #announcementTab:hover {
-        color: #d09b00;
+        color: black;
         box-shadow: inset 150px 0 0 0 #4B5320;
-        ;
     }
 
     #campuses {
@@ -137,14 +136,15 @@ require "connect.php"
             <!-- Navigation Bar -->
             <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
+                    <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
+                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <span class="navbar-title text-wrap">Bulacan State University - Bustos Campus</span>
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
-                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                        Bulacan State University - Bustos Campus
-                    </a>
+                    
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
@@ -157,7 +157,7 @@ require "connect.php"
                                         data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" id="campuses" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Campuses
                                     </a>
                                     <ul class="dropdown-menu">
@@ -172,6 +172,11 @@ require "connect.php"
                             </ul>
                         </div>
                     </div>
+
+                    <a class="navbar-brand custom-brand mx-auto d-none d-lg-block" href="VirtualBulsu_Tour_HomePage.php">
+                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <span class="navbar-title text-wrap">Bulacan State University - Bustos Campus</span>
+                    </a>
                 </div>
             </nav>
 

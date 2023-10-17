@@ -119,6 +119,12 @@ require "connect.php"
     .btn-close {
         color: white;
     }
+
+    iframe {
+            width: 100%;
+            height: calc(100vh - 51px); /* Adjusted for the navbar height */
+            border: none;
+        }
         </style>
     </head>
 
@@ -127,14 +133,15 @@ require "connect.php"
             <!-- Navigation Bar -->
             <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
+                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <span class="navbar-title text-wrap">Bulacan State University - Malolos Campus</span>
+                    </a>
+                    <button class="navbar-toggler order-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
-                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                        Bulacan State University - Malolos Campus
-                    </a>
+                    
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
@@ -147,7 +154,7 @@ require "connect.php"
                                         data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" id="campuses" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Campuses
                                     </a>
                                     <ul class="dropdown-menu">
@@ -162,10 +169,14 @@ require "connect.php"
                             </ul>
                         </div>
                     </div>
+                    <a class="navbar-brand custom-brand mx-auto d-none d-lg-block" href="VirtualBulsu_Tour_HomePage.php">
+                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <span class="navbar-title text-wrap">Bulacan State University - Malolos Campus</span>
+                    </a>
                 </div>
             </nav>
 
-            <iframe id="evrFrame" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;"  allowvr="yes" allow="xr-spatial-tracking;vr;gyroscope;accelerometer;fullscreen;" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e85d4ac66aa5ca84ef742,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" ></iframe>
+            <iframe allowvr="yes" allow="xr-spatial-tracking;vr;gyroscope;accelerometer;fullscreen;" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e85d4ac66aa5ca84ef742,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" ></iframe>
             
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">

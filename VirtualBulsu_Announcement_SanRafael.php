@@ -84,13 +84,12 @@ $result = mysqli_query($con, $query);
         }
 
       .footer {
-        /*background: none;*/
         background-color: #763435;
         color: white;
         padding: 5px;
         text-align: center;
+        position: fixed;
         bottom: 0;
-        left: 0;
         width: 100%;
         z-index: 9999;
       }
@@ -124,7 +123,7 @@ $result = mysqli_query($con, $query);
     <div class="container-lg my-3 ">
       <h1 class="text-center text-white" id="heading">San Rafael Campus News</h1>
         <div class="container mt-3">
-            <div class="row row-cols-3 row-cols-md-3 g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -135,7 +134,7 @@ $result = mysqli_query($con, $query);
                     $datePosted = $row['created_at'];
 
                     // Output the announcement HTML structure here
-                    echo '<div class="col-4">';
+                    echo '<div class="col-md-6 col-lg-4">';
                     echo '<div class="card h-100">';
                     echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
                     echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';

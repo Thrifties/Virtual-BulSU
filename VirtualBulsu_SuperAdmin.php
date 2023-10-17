@@ -23,6 +23,7 @@ if ($result1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
     <link rel="stylesheet" href="includes\VirtualBulsu_Navbar.css">
     
@@ -39,6 +40,7 @@ if ($result1) {
   </head>
 
   <body>
+    
 
   <?php include "includes/navbar.php"; ?>
 
@@ -56,7 +58,7 @@ if ($result1) {
         <div class="col-md-12">
           <!-- Table to display the list of admins -->
     <div class="table-responsive">
-      <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover" id="adminTable">
         <thead>
           <tr>
             <th>Faculty ID</th>
@@ -337,7 +339,7 @@ if ($result1) {
       </div>
     </div>
   </div>
-
+    <script src="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
