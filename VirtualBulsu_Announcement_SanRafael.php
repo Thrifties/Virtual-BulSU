@@ -95,6 +95,15 @@ $result = mysqli_query($con, $query);
         z-index: 9999;
       }
 
+      #announcementCard {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+      }
+
+      #announcementCard:hover {
+        color: inherit; /* Inherit text color on hover */
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -166,6 +175,7 @@ $result = mysqli_query($con, $query);
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $announcementId = $row['announcement_id'];
                     $headline = $row['headline'];
                     $image = $row['file_input'];
                     $description = $row['description'];
@@ -174,15 +184,16 @@ $result = mysqli_query($con, $query);
                     // Output the announcement HTML structure here
                     echo '<div class="col-4">';
                     echo '<div class="card h-100">';
+                    echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
                     echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
                     echo '<div class="card-body">';
-                    echo "<h5 class='card-title'>$headline</h5>";
-                    echo "<p class='card-text' id='line-clamp'>$description</p>";
+                    echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
                     echo '</div>';
                     echo '<div class="card-footer">';
                     echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
                     echo '</div>';
                     echo '</div>';
+                    echo '</a>';
                     echo '</div>';
                 }
               } else {
@@ -194,9 +205,6 @@ $result = mysqli_query($con, $query);
         </div>
         
     </div>
-
-    
-
 
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.

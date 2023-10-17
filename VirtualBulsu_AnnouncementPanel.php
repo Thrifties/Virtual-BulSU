@@ -315,7 +315,7 @@ $stmt->close();
             </button>
           </div>
           <div class="modal-body">
-            <form method="post" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
               <input type="text" class="form-control" id="author" name="author" value="<?php echo $author ?>" hidden>
               <input type="text" class="form-control" id="faculty_id" name="facultyId" value="<?php echo $user_id ?>" hidden>
@@ -323,7 +323,7 @@ $stmt->close();
               echo "
                 <div class='form-group'>
                   <label for='campusAssignment'>Campus Assignment</label>
-                  <select class='form-control' name='campusAssignment' id='campusAssignment'>
+                  <select class='form-control' name='campusAssignment' id='campusAssignment' required>
                     <option value='' disabled selected>-- Select Campus --</option>
                     <option value='Malolos Campus'>Malolos Campus</option>
                     <option value='Bustos Campus'>Bustos Campus</option>
@@ -335,7 +335,7 @@ $stmt->close();
                 </div>
                 <div class='form-group'>
                   <label for='college'>College Assignment</label>
-                  <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                  <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
                     <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
                     <option value='College of Arts and Letters'>College of Arts and Letters</option>
@@ -360,7 +360,7 @@ $stmt->close();
                 <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
                 <div class='form-group'>
                   <label for='college'>College Assignment</label>
-                  <select class='form-control' name='collegeAssignment' id='collegeAssignment'>
+                  <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
                     <option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>
                     <option value='College of Arts and Letters'>College of Arts and Letters</option>
@@ -393,21 +393,26 @@ $stmt->close();
               <div class="form-group">
                 <label for="headline">Headline</label>
                 <input type="text" class="form-control" id="headline" name="headline" required>
+                <div id="headlineFeedback" class="invalid-feedback">
+                </div>
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                <div id="descriptionFeedback" class="invalid-feedback">
+                </div>
               </div>
               <div class="form-group">
-                <label for="formFileMultiple" class="form-label">Multiple files input
-                  example</label>
-                <input class="form-control" type="file" id="fileInput" name="fileInput" multiple>
+                <label for="formFileMultiple" class="form-label">Multiple files input</label>
+                <input class="form-control" type="file" id="fileInput" name="fileInput" multiple required>
+                <div id="fileInputFeedback" class="invalid-feedback">
+                </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" form="announcementForm">Save</button>
+            <button type="submit" id="addBtn" class="btn btn-primary" form="announcementForm" disabled>Save</button>
           </div>
         </div>
       </div>
@@ -415,142 +420,7 @@ $stmt->close();
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      function viewAnnouncementModal(announcementId) {
-        document.getElementById("viewCampusAssignment").disabled = true;
-        document.getElementById("viewCollegeAssignment").disabled = true;
-        document.getElementById("viewEventDate").readOnly = true;
-        document.getElementById("viewHeadline").readOnly = true;
-        document.getElementById("viewDescription").readOnly = true;
-        document.getElementById("viewFileInput").hidden = true;
-        document.getElementById("viewAuthor");
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_announcement.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            var ImageURL = data.file_input;
-            document.getElementById("announcementId").value = data.announcement_id;
-            document.getElementById("viewCampusAssignment").value = data.campus_assignment;
-            document.getElementById("viewCollegeAssignment").value = data.college_assignment;
-            document.getElementById("viewEventDate").value = data.event_date;
-            document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-            document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
-          }
-        };
-
-        xhr.send("announcementId=" + announcementId);
-
-        document.getElementById("saveBtn").hidden = true;
-        document.getElementById("editViewBtn").hidden = false;
-      }
-
-      function enableViewEdit() {
-        editAnnouncement(announcementId);
-      }
-      function editAnnouncement(announcementId) {
-        document.getElementById("viewCampusAssignment").disabled = false;
-        document.getElementById("viewCollegeAssignment").disabled = false;
-        document.getElementById("viewEventDate").readOnly = false;
-        document.getElementById("viewHeadline").readOnly = false;
-        document.getElementById("viewDescription").readOnly = false;
-        document.getElementById("viewFileInput").hidden = false;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "get_announcement.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            var ImageURL = data.file_input;
-            document.getElementById("announcementId").value = data.announcement_id;
-            document.getElementById("viewCampusAssignment").value = data.campus_assignment;
-            document.getElementById("viewCollegeAssignment").value = data.college_assignment;
-            document.getElementById("viewEventDate").value = data.event_date;
-            document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewFileInput").value = data.file_input;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
-          }
-        };
-        xhr.send("announcementId=" + announcementId);
-
-        document.getElementById("saveBtn").hidden = false;
-        document.getElementById("editViewBtn").hidden = true;
-      }
-
-      function saveChanges() {
-
-        var announcementId = document.getElementById("announcementId").value;
-        var campusAssignment = document.getElementById("viewCampusAssignment").value;
-        var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
-        var eventDate = document.getElementById("viewEventDate").value;
-        var headline = document.getElementById("viewHeadline").value;
-        var description = document.getElementById("viewDescription").value;
-        document.getElementById("viewFileInput").value;
-
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_announcement_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
-          } else {
-            alert("Error updating announcement");
-          }
-        };
-
-        xhr.send("announcementId=" + announcementId + "&campusAssignment=" + campusAssignment + "&collegeAssignment=" + collegeAssignment +"&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
-
-        document.getElementById("viewCampusAssignment").disabled = true;
-        document.getElementById("viewCollegeAssignment").disabled = true;
-        document.getElementById("viewEventDate").readOnly = true;
-        document.getElementById("viewHeadline").readOnly = true;
-        document.getElementById("viewDescription").readOnly = true;
-        document.getElementById("viewFileInput").disabled = true;
-
-        document.getElementById("saveBtn").hidden = true;
-        document.getElementById("editViewBtn").hidden = false;
-      }
-
-      function deleteAnnouncement(announcementId) {
-        if (confirm("Are you sure you want to delete this announcement?")) {
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "delete_announcement.php", true);
-          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-          xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              var response = JSON.parse(this.responseText);
-              if (response.success) {
-                // Remove the deleted row from the table
-                var row = document.getElementById(announcementId);
-                row.parentNode.removeChild(row);
-                alert(response.success);
-              } else {
-                alert(response.error);
-              }
-            }
-          };
-          xhr.send("announcementId=" + announcementId);
-        }
-      }
-
-      function logout() {
-        var choice = confirm("Do you really want to log out?");
-        if (choice == true)
-          window.location = "logout.php";
-      }
-    </script>
+    <script src="js/announcement_panel.js"></script>
 </body>
 
 </html>

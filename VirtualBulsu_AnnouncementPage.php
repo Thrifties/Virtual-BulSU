@@ -1,28 +1,34 @@
-
 <?php
 require "connect.php";
 
-$announcementId = $_GET['id'];
-$query = "SELECT * FROM announcements WHERE announcement_id = ?";
-$stmt = $con->prepare($query);
-$stmt->bind_param("i", $announcementId);  // Assuming announcement_id is an integer, adjust if it's not
-$stmt->execute();
-$result = $stmt->get_result();
+// Check if the announcement ID is provided in the URL
+if (isset($_GET['id'])) {
+    $announcementId = $_GET['id'];
+    $query = "SELECT * FROM announcements WHERE announcement_id = $announcementId";
+    $result = mysqli_query($con, $query);
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $author = $row['author'];
-    $headline = $row['headline'];
-    $image = $row['file_input'];
-    $description = $row['description'];
-    $datePosted = $row['created_at'];
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        // Now, you can use $row to display the announcement details
+        $headline = $row['headline'];
+        $author = $row['author'];
+        $image = $row['file_input'];
+        $description = $row['description'];
+        $datePosted = $row['created_at'];
+    } else {
+        // Handle the case where the announcement with the provided ID is not found
+        $headline = "Announcement Not Found";
+        $description = "The announcement you're looking for does not exist.";
+        $datePosted = date("Y-m-d H:i:s"); // Current date and time
+    }
 } else {
-    echo "Announcement not found";
+    // Handle the case where no announcement ID is provided
+    $headline = "Invalid Request";
+    $description = "Please provide a valid announcement ID.";
+    $datePosted = date("Y-m-d H:i:s"); // Current date and time
 }
-
-$stmt->close();
-mysqli_close($con);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,14 +151,14 @@ mysqli_close($con);
       </ul>
       </div>
     </nav>
-    <img src="uploads/<?php $image ?>" id="news-image" class="img-fluid shadow-sm" alt="...">
+    <img src="uploads/<?php echo $image; ?>" id="news-image" class="img-fluid shadow-sm" alt="...">
     <div class="container-lg mt-3">
 
-        <small class="text-body-secondary" id="date-posted">Date posted: <?php $datePosted ?> </small>
-        <h1 class="mb-3"><strong><?php $headline ?></strong></h1>
+        <small class="text-body-secondary" id="date-posted">Date posted: <?php echo $datePosted; ?> </small>
+        <h1 class="mb-3"><strong><?php echo $headline ?></strong></h1>
 
-        <small class="text-body-secondary" id="author">Author:  <?php $author ?></small>
-        <p class="fs-5"><?php $description ?></p>
+        <small class="text-body-secondary" id="author">Author:  <?php echo $author; ?></small>
+        <p class="fs-5"><?php echo $description; ?></p>
 
     </div>
 

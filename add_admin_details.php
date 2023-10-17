@@ -14,7 +14,6 @@
             $currentAdminCampus = $row['campus'];
         }
     }
-
     
 
     if ($currentAdminLevel == "super_admin") {

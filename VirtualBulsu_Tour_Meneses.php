@@ -13,12 +13,9 @@ require "connect.php"
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/mobileView.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <style>
         .navbar-custom {
             background-color: #dd4091;
-            font-family: 'Roboto';
         }
 
         #tour {
@@ -35,93 +32,6 @@ require "connect.php"
         #campuses {
             color: black;
         }
-
-        #offcanvasNavbar,
-        #announcementPanel {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 30px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            transition: width 0.5s;
-        }
-
-        .offcanvas-header h5 {
-            color: black;
-            width: 550px;
-            height: 30px;
-            margin: 0;
-        }
-
-        #announcementTab {
-            box-shadow: inset 0 0 0 0 #dd4091;
-            color: #dd4091;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            margin-bottom: 8px;
-        }
-
-        #announcementTab:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #dd4091;
-            ;
-        }
-
-        #campuses {
-            box-shadow: inset 0 0 0 0 #dd4091;
-            color: #dd4091;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        #campuses:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #dd4091;
-            ;
-        }
-
-        #offcanvasNavbarLabel {
-            color: white;
-            font-size: larger;
-            margin-left: 5px;
-            padding-top: 3px;
-            font-family: 'Roboto';
-        }
-
-        .dropdown-menu {
-            background-color: #dd4091;
-        }
-
-        .dropdown-item {
-            color: white;
-        }
-
-        #offcanvasScrollingLabel {
-            color: white;
-            font-family: 'Roboto';
-        }
-
-        .btn-close {
-            color: white;
-        }
     </style>
 </head>
 
@@ -135,12 +45,11 @@ require "connect.php"
                 </button>
                 <a class="navbar-brand custom-brand mx-auto" href="VirtualBulsu_Tour_HomePage.php">
                     <img src="resources\BSU_Meneses.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    BULACAN STATE UNIVERSITY - Meneses Campus
+                    Bulacan State University - Meneses Campus
                 </a>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <box-icon name='menu' color='#ffffff' size=25px></box-icon>
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -173,35 +82,35 @@ require "connect.php"
 
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
             <div class="offcanvas-header">
-                <box-icon name='news' color='#ffffff'></box-icon>
-                <h4 class="offcanvas-title" id="offcanvasScrollingLabel">CAMPUS NEWS</h4>
+                <h4 class="offcanvas-title" id="offcanvasScrollingLabel">Campus News</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <?php
-                // Query to fetch announcements from your database
-                $query = "SELECT * FROM announcements";
-                $result = mysqli_query($con, $query);
-
-                if (!$result) {
-                    die("Database query failed."); // Handle the error appropriately
-                }
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '
-                                <div class="card mb-3" id=' . $row['announcement_id'] . '>
-                                    <img src="uploads/' . $row['file_input'] . '" class="card-img-top" alt="Unable to load image">
+                        // Query to fetch announcements from your database
+                        $query = "SELECT * FROM announcements WHERE campus = 'Meneses Campus' ORDER BY event_date DESC";
+                        $result = mysqli_query($con, $query);
+        
+                        if (!$result) {
+                            die("Database query failed."); // Handle the error appropriately
+                        }
+        
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '
+                                <a href="VirtualBulsu_AnnouncementPage.php?id='.$row['announcement_id'].'" class="text-decoration-none text-body">
+                                <div class="card mb-3" id='.$row['announcement_id'].'>
+                                    <img src="uploads/'.$row['file_input'].'" class="card-img-top" alt="Unable to load image">
                                     <div class="card-body">
                                         <h5 class="card-title">' . htmlspecialchars($row['headline']) . '</h5>
-                                        <p class="card-text">' . htmlspecialchars($row['description']) . '</p>
-                                        <p class="card-text"><small class="text-body-secondary">' . $row['event_date'] . '</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">'.$row['event_date'].'</small></p>
                                     </div>
                                 </div>
+                                </a>
                             ';
-                }
-                // Release the result set
-                mysqli_free_result($result);
-                ?>
+                        }
+                        // Release the result set
+                        mysqli_free_result($result);
+                    ?>
             </div>
         </div>
 
