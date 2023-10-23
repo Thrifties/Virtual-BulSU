@@ -42,12 +42,17 @@ if ($result->num_rows > 0) {
         <title>User Admin Settings</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/navbar.css">
+        <style>
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+        </style>
     </head>
 
     <body>
         <?php include "includes/navbar.php"; ?>
 
-            <div class="container p-3 ">
+            <div class="container p-3 mt-5 ">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">

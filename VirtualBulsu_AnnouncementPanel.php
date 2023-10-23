@@ -52,11 +52,9 @@ $stmt->close();
   <title>Announcement Panel</title>
   <style>
     .announcement-panel {
-      border: 1px solid #763435;
+      border: 1px solid #ddd;
       padding: 20px;
       border-radius: 5px;
-      color: #ffff;
-      background-color: #763435;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
@@ -67,29 +65,6 @@ $stmt->close();
 
     td button {
       margin: 0 3px;
-    }
-
-    body {
-      background:
-        url("resources/try.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #addAnnouncement {
-      color: #d09b00;
-      background-color: aliceblue;
-      border: white;
-    }
-
-    #addAnnouncement:hover {
-      background-color: #d09b00;
-      border: white;
-      color: #ffff;
     }
   </style>
 </head>
