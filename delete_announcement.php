@@ -21,19 +21,18 @@ if (isset($_POST['announcementId'])) {
         $announcementData = mysqli_fetch_assoc($result);
 
         // Archive the announcement
-        $archiveQuery = "INSERT INTO archive_announcement (announcement_id, author, headline, event_date, description, file_input, campus_assignment, college_assignment, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $archiveQuery = "INSERT INTO archive_announcement (announcement_id, author, headline, description, file_input, campus_assignment, college_assignment, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $archiveQuery);
 
         if ($stmt === false) {
             $response = array("error" => "Archive query preparation failed.");
         } else {
-            mysqli_stmt_bind_param($stmt, "issssssss", $announcementData['announcement_id'], $announcementData['author'], $announcementData['headline'], $announcementData['event_date'], $announcementData['description'], $announcementData['file_input'], $announcementData['campus_assignment'], $announcementData['college_assignment'], $announcementData['created_at']);
+            mysqli_stmt_bind_param($stmt, "isssssss", $announcementData['announcement_id'], $announcementData['author'], $announcementData['headline'], $announcementData['description'], $announcementData['file_input'], $announcementData['campus_assignment'], $announcementData['college_assignment'], $announcementData['created_at']);
             
             if (mysqli_stmt_execute($stmt)) {
-                // Deletion successful
+
                 $response = array("success" => "Announcement archived successfully.");
 
-                // Now, delete the original record
                 $deleteQuery = "DELETE FROM announcements WHERE announcement_id = ?";
                 $stmt = mysqli_prepare($con, $deleteQuery);
 

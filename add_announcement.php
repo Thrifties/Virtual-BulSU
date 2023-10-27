@@ -5,7 +5,6 @@ require "connect.php"; // Include your database connection script
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $announcementId = $_POST["announcementId"];
     $facultyId = $_POST["facultyId"];
-    $eventDate = $_POST["eventDate"];
     $headline = $_POST["headline"];
     $description = $_POST["description"];
     $author = $_POST["author"];
@@ -28,9 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert the announcement into the MySQL database
-    $sql = "INSERT INTO announcements (announcement_id, author, faculty_id, event_date, headline, description, file_input, campus_assignment, college_assignment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO announcements (announcement_id, author, faculty_id, headline, description, file_input, campus_assignment, college_assignment) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("sssssssss", $announcementId, $author, $facultyId, $eventDate, $headline, $description, $file_name, $campusAssignment, $collegeAssignment);
+    $stmt->bind_param("ssssssss", $announcementId, $author, $facultyId, $headline, $description, $file_name, $campusAssignment, $collegeAssignment);
 
     if ($stmt->execute()) {
         // Successful insertion

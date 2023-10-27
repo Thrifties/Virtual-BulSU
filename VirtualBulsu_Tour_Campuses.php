@@ -21,49 +21,43 @@
         <h1>Select Campus</h1>
         <div class="swiper tranding-slider slider-faded" id="slider">
           <div class="swiper-wrapper">
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img">
                 <a href="VirtualBulsu_Tour_Malolos.php"><img src="resources/MAINCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img">
                 <a href="VirtualBulsu_Tour_Hagonoy.php"><img src="resources/HAGONOYCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img">
                 <a href="VirtualBulsu_Tour_Sarmiento.php"><img src="resources/SARMIENTOCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img"> 
                 <a href="VirtualBulsu_Tour_SanRafael.php"><img src="resources/SAN RAFAELCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img">
                 <a href="VirtualBulsu_Tour_Bustos.php"><img src="resources/BUSTOSCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
             <div class="swiper-slide tranding-slide">
               <div class="tranding-slide-img">
                 <a href="VirtualBulsu_Tour_Meneses.php"><img src="resources/MENESESCAMPUS.png" alt="Tranding"></a>
               </div>
             </div>
-            <!-- Slide-end -->
-            <!-- Slide-start -->
+
           </div>
             <div class="tranding-slider-control">
                 <div class="swiper-button-prev slider-arrow">

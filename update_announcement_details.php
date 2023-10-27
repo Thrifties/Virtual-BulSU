@@ -4,17 +4,30 @@ require "connect.php";
 $announcementId = $_POST['announcementId'];
 $campusAssignment = $_POST['campusAssignment'];
 $collegeAssignment = $_POST['collegeAssignment'];
-$eventDate = $_POST['eventDate'];
 $headline = $_POST['headline'];
 $description = $_POST['description'];
 
+// Check if a file is uploaded
+if (isset($_FILES['fileInput'])) {
+    $fileInput = $_FILES['fileInput']['name'];
+    $fileInputTmp = $_FILES['fileInput']['tmp_name'];
 
-
-$sql = "UPDATE announcements SET campus_assignment = '$campusAssignment', college_assignment = '$collegeAssignment', headline = '$headline', event_date = '$eventDate', description = '$description'  WHERE announcement_id = $announcementId";
-
-if ($con->query($sql) === TRUE) {
-    echo json_encode(['success' => 'Admin details updated']);
+    // Move the uploaded file to the uploads folder
+    move_uploaded_file($fileInputTmp, "uploads/" . $fileInput);
 } else {
-    echo json_encode(['error' => 'Error updating admin details: ' . $con->error]);
+    $fileInput = null;
 }
+
+// Update the announcement details in the database
+$sql = "UPDATE announcements SET campus_assignment = ?, college_assignment = ?, headline = ?, description = ?, file_input = ? WHERE announcement_id = ?";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("sssssi", $campusAssignment, $collegeAssignment, $headline, $description, $fileInput, $announcementId);
+
+if ($stmt->execute()) {
+    echo json_encode(['success' => 'Announcement updated']);
+} else {
+    echo json_encode(['error' => 'Error updating announcement details: ' . $stmt->error]);
+}
+
+$stmt->close();
 ?>

@@ -190,14 +190,7 @@ require "includes/sessionStart.php"
                         <div class="input-field">
                             <input type="submit" class="submit" value="Login" />
                         </div>
-                        <div class="bottom">
-                            <div class="left">
-                                <input type="checkbox" id=" check" />
-                                <label for="check"> &nbsp Remember Me </label>
-                            </div>
-                            <div class="right">
-                                <label><a href="#"> Forgot Password?</a></label>
-                            </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -149,7 +149,7 @@ $stmt->close();
             </button>
           </div>
           <div class="modal-body">
-            <form method="post" id="viewAnnouncementForm" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" id="viewAnnouncementForm" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
               <?php if($currentAdminLevel == "super_admin"): 
               echo "
@@ -217,10 +217,6 @@ $stmt->close();
                 <input type='text' class='form-control' id='viewCollegeAssignment' name='viewCollegeAssignment' value='$currentCollege' hidden>
               "; endif; ?>
               <div class="form-group">
-                <label for="eventDate">Event Date</label>
-                <input type="date" class="form-control" id="viewEventDate" name="viewEventDate">
-              </div>
-              <div class="form-group">
                 <label for="headline">Headline</label>
                 <input type="text" class="form-control" id="viewHeadline" name="viewHeadline" required>
               </div>
@@ -229,9 +225,8 @@ $stmt->close();
                 <textarea class="form-control" id="viewDescription" name="viewDescription" rows="4"></textarea>
               </div>
               <div class="form-group">
-                <label for="formFileMultiple" class="form-label">Multiple files input
-                  example</label>
-                <input class="form-control" type="file" id="viewFileInput" name="viewFileInput" multiple>
+                <label for="formFileMultiple" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="viewFileInput" name="viewFileInput">
                 <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
               </div>
               <div class="modal-footer d-flex justify-content-between align-content-center">
@@ -326,11 +321,6 @@ $stmt->close();
                 <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
                 <input type='text' class='form-control' id='collegeAssignment' name='collegeAssignment' value='$currentCollege' hidden>
               "; endif; ?>
-
-              <div class="form-group">
-                <label for="eventDate">Event Date (Optional)</label>
-                <input type="date" class="form-control" id="eventDate" name="eventDate">
-              </div>
               <div class="form-group">
                 <label for="headline">Headline</label>
                 <input type="text" class="form-control" id="headline" name="headline" required>

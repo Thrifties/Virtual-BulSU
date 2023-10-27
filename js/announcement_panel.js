@@ -3,7 +3,6 @@ document.getElementById("headline").addEventListener("input", validateForm);
     document.getElementById("fileInput").addEventListener("input", validateForm);
     document.getElementById("campusAssignment").addEventListener("input", validateForm);
     document.getElementById("collegeAssignment").addEventListener("input", validateForm);
-
     document.getElementById("viewHeadline").addEventListener("input", validateUpdateForm);
     document.getElementById("viewDescription").addEventListener("input", validateUpdateForm);
     document.getElementById("viewFileInput").addEventListener("input", validateUpdateForm);
@@ -67,7 +66,6 @@ document.getElementById("headline").addEventListener("input", validateForm);
       function viewAnnouncementModal(announcementId) {
         document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;
-        document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;
         document.getElementById("viewDescription").readOnly = true;
         document.getElementById("viewFileInput").hidden = true;
@@ -83,10 +81,9 @@ document.getElementById("headline").addEventListener("input", validateForm);
             document.getElementById("announcementId").value = data.announcement_id;
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
-            document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
             document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
+            document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
             document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
           }
         };
@@ -100,10 +97,11 @@ document.getElementById("headline").addEventListener("input", validateForm);
       function enableViewEdit() {
         editAnnouncement(announcementId);
       }
+
       function editAnnouncement(announcementId) {
+        document.getElementById("announcementId").value = announcementId;
         document.getElementById("viewCampusAssignment").disabled = false;
         document.getElementById("viewCollegeAssignment").disabled = false;
-        document.getElementById("viewEventDate").readOnly = false;
         document.getElementById("viewHeadline").readOnly = false;
         document.getElementById("viewDescription").readOnly = false;
         document.getElementById("viewFileInput").hidden = false;
@@ -114,15 +112,12 @@ document.getElementById("headline").addEventListener("input", validateForm);
         xhr.onreadystatechange = function() {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             var data = JSON.parse(this.responseText);
-            var ImageURL = data.file_input;
             document.getElementById("announcementId").value = data.announcement_id;
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
-            document.getElementById("viewEventDate").value = data.event_date;
             document.getElementById("viewHeadline").value = data.headline;
             document.getElementById("viewDescription").value = data.description;
-            document.getElementById("viewFileInput").value = data.file_input;
-            document.getElementById("viewAnnouncementImage").src = "uploads/" + ImageURL;
+            document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
           }
         };
         xhr.send("announcementId=" + announcementId);
@@ -132,22 +127,31 @@ document.getElementById("headline").addEventListener("input", validateForm);
       }
 
       function saveChanges() {
-
         var announcementId = document.getElementById("announcementId").value;
         var campusAssignment = document.getElementById("viewCampusAssignment").value;
         var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
-        var eventDate = document.getElementById("viewEventDate").value;
         var headline = document.getElementById("viewHeadline").value;
         var description = document.getElementById("viewDescription").value;
-        document.getElementById("viewFileInput").value;
 
+        var file = document.getElementById("viewFileInput").files[0];
+
+        var formData = new FormData();
+
+        formData.append("announcementId", announcementId);
+        formData.append("campusAssignment", campusAssignment);
+        formData.append("collegeAssignment", collegeAssignment);
+        formData.append("headline", headline);
+        formData.append("description", description);
+
+        if (file) {
+          formData.append("fileInput", file); // Add the file to the FormData
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "update_announcement_details.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var data = JSON.parse(this.responseText);
+            var response = JSON.parse(this.responseText);
             if (response.success) {
               alert(response.success);
             } else {
@@ -158,11 +162,10 @@ document.getElementById("headline").addEventListener("input", validateForm);
           }
         };
 
-        xhr.send("announcementId=" + announcementId + "&campusAssignment=" + campusAssignment + "&collegeAssignment=" + collegeAssignment +"&eventDate=" + eventDate + "&headline=" + headline + "&description=" + description);
+        xhr.send(formData);
 
         document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;
-        document.getElementById("viewEventDate").readOnly = true;
         document.getElementById("viewHeadline").readOnly = true;
         document.getElementById("viewDescription").readOnly = true;
         document.getElementById("viewFileInput").disabled = true;
@@ -170,6 +173,7 @@ document.getElementById("headline").addEventListener("input", validateForm);
         document.getElementById("saveBtn").hidden = true;
         document.getElementById("editViewBtn").hidden = false;
       }
+
 
       function deleteAnnouncement(announcementId) {
         if (confirm("Are you sure you want to delete this announcement?")) {
