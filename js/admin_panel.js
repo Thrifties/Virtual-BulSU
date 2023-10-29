@@ -137,7 +137,9 @@ if (numericRegex.test(facultyId)) {
 }
 
 
-function selectedRowAdmin (facultyId){
+function selectedRowAdmin (facultyId){ 
+
+  console.log("View button clicked for faculty ID:", facultyId);
   
   document.getElementById("viewFirstName").readOnly = true;
   document.getElementById("viewMiddleName").readOnly = true;
@@ -168,7 +170,7 @@ function selectedRowAdmin (facultyId){
     }
   };
 
-  document.getElementById("facultyId").value = facultyId;
+  document.getElementById("facultyId").value = data;
 
   // Send the id to the server
   xhr.send("facultyId="+ facultyId);
@@ -214,6 +216,7 @@ function enableViewEdit(){
 }
 
   function enableEditAdmin(facultyId) {
+  console.log("Edit button clicked for faculty ID:", facultyId);
   // Enable form fields for editing
   document.getElementById("facultyId").readOnly = true;
   document.getElementById("viewFirstName").readOnly = false;
@@ -336,6 +339,7 @@ function saveChanges() {
   var saveBtn = document.getElementById("saveBtn");
   document.getElementById("saveBtn").disabled = true;
   document.getElementById("facultyId").readOnly = true;
+
 }
 
 function saveChangesAdmin() {
@@ -381,6 +385,7 @@ function saveChangesAdmin() {
   document.getElementById("viewPhone").readOnly = true;
 
   var saveBtn = document.getElementById("saveBtn");
+
   document.getElementById("saveBtn").disabled = true;
   document.getElementById("facultyId").readOnly = true;
 }

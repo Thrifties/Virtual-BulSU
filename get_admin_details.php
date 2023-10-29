@@ -24,7 +24,7 @@ if ($currentAdminLevel == "super_admin") {
 
     if ($result->num_rows > 0) {
         $facultyData = $result->fetch_assoc();
-        echo json_encode($facultyData); // Send admin data as JSON response
+        echo json_encode($facultyData);
     } else {
         echo json_encode(['error' => 'Admin not found']);
     }
@@ -38,7 +38,7 @@ if ($currentAdminLevel == "super_admin") {
 
     if ($result->num_rows > 0) {
         $facultyData = $result->fetch_assoc();
-        echo json_encode($facultyData); // Send admin data as JSON response
+        echo json_encode($facultyData);
     } else {
         echo json_encode(['error' => 'Admin not found']);
     }

@@ -22,10 +22,8 @@ if ($result1) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <?php include "includes/cdn.php"; ?>
     
     <style>
       .admin-panel-container {
@@ -50,8 +48,8 @@ if ($result1) {
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Admin Panel</h2>
         <div>
-          <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
-          <a href="generate_report_admin.php" class="btn btn-success">Download CSV</a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
+          <a href="generate_report_admin.php" class="btn btn-success">Download List</a>
         </div>
         
       </div>
@@ -59,73 +57,30 @@ if ($result1) {
         <div class="col-md-12">
           <!-- Table to display the list of admins -->
     <div class="table-responsive">
-      <table class="table table-striped table-hover" id="adminTable">
+      <table id="<?php if($currentAdminLevel == 'admin'){
+        echo 'adminTable';
+      } elseif ($currentAdminLevel == 'super_admin') {
+        echo 'adminTableSuper';
+      } ?>" class="display" style="width:100%">
         <thead>
-          <tr>
-            <th>Faculty ID</th>
-            <th>Full Name</th>
-            <?php 
-            
-            if ($currentAdminLevel === 'super_admin') {
-              echo "<th>Campus</th>";
-            } elseif ($currentAdminLevel === 'admin') {
-              echo "<th>College</th>";
-            }
-            
-            ?>
-
-            <th>Action</th>
-          </tr>
+            <tr>
+                <th>Faculty ID</th>
+                <th>Name</th>
+                 <?php 
+                  if ($currentAdminLevel === 'super_admin') {
+                    echo "<th>Campus</th>";
+                  } elseif ($currentAdminLevel === 'admin') {
+                    echo "<th>College</th>";
+                  }
+                  ?>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
-          <?php 
-
-            if ($currentAdminLevel === 'super_admin') {
-              $sql = "SELECT * FROM campus_admin WHERE admin_level = 'admin'";
-
-              $result = $con->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                     if ($row['admin_level'] === 'admin') {
-                      echo "<tr id=" . $row['faculty_id'] . ">";
-                      echo "<td>" . $row["faculty_id"] . "</td>";
-                      echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
-                      echo "<td>" . $row["campus"] . "</td>";
-                      echo "<td>";
-                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEdit(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRow(" . $row['faculty_id'] . ")'>View</button>";
-                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
-                      
-                      echo "</td>";
-                      echo "</tr>";
-                  }
-                }
-            } 
-            } elseif ($currentAdminLevel === 'admin') {
-              $sql = "SELECT * FROM college_admin WHERE campus = '$currentAdminCampus'";
-
-              $result = $con->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                      echo "<tr id=" . $row['faculty_id'] . ">";
-                      echo "<td>" . $row["faculty_id"] . "</td>";
-                      echo "<td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
-                      echo "<td>" . $row["college"] . "</td>";
-                      echo "<td>";
-                      echo "<button type='button' class='btn btn-primary' id='editBtn' onclick='enableEditAdmin(" . $row['faculty_id'] . ")' data-toggle='modal' data-target='#viewAdminDetails'>Edit</button>";
-                      echo "<button type='button' class='btn btn-secondary' id='viewAdmin' data-toggle='modal' data-target='#viewAdminDetails' onclick='selectedRowAdmin(" . $row['faculty_id'] . ")'>View</button>";
-                      echo "<button type='button' class='btn btn-danger' onclick='deleteAdmin(" . $row['faculty_id'] . ")'>Archive</button>";
-                      echo "</td>";
-                      echo "</tr>";
-                }
-            }
-            }
-
-          ?>
+            
         </tbody>
       </table>
+
     </div>
   </div>
 
@@ -227,9 +182,13 @@ if ($result1) {
           </div>
         </div>
       </div>
+
+      <div class="alert alert-success" id="saveSuccessAlert" style="display: none;">
+        Changes have been saved successfully.
+      </div>
   
   <!-- Admin Modal -->
-  <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel"
+  <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -340,10 +299,90 @@ if ($result1) {
       </div>
     </div>
   </div>
-    <script src="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/admin_panel.js"></script>
+  <script src="js/admin_panel.js"></script>
+  <?php 
+  
+  include "includes/js_cdn.php"; 
+  
+  ?>
+  <script>
+
+  $(document).ready(function () {
+  $("#adminTable").DataTable({
+    responsive: true,
+    autoWidth: false,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "college" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewAdminDetails" onclick="enableEditAdmin(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>'
+          );
+        },
+      },
+    ],
+  });
+});
+
+  $(document).ready(function () {
+  $("#adminTableSuper").DataTable({
+    responsive: true,
+    autoWidth: false,
+    searching: true,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "campus" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewAdminDetails" onclick="selectedRow(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewAdminDetails" onclick="enableEdit(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>'
+          );
+        },
+      },
+    ],
+  });
+});
+  </script>
   </body>
 </html>
