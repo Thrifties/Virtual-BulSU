@@ -1,11 +1,13 @@
-document.getElementById("headline").addEventListener("input", validateForm);
+    
+    let id;
+    
+    document.getElementById("headline").addEventListener("input", validateForm);
     document.getElementById("description").addEventListener("input", validateForm);
     document.getElementById("fileInput").addEventListener("input", validateForm);
     document.getElementById("campusAssignment").addEventListener("input", validateForm);
     document.getElementById("collegeAssignment").addEventListener("input", validateForm);
     document.getElementById("viewHeadline").addEventListener("input", validateUpdateForm);
     document.getElementById("viewDescription").addEventListener("input", validateUpdateForm);
-    document.getElementById("viewFileInput").addEventListener("input", validateUpdateForm);
     document.getElementById("viewCampusAssignment").addEventListener("input", validateUpdateForm);
     document.getElementById("viewCollegeAssignment").addEventListener("input", validateUpdateForm);
 
@@ -16,7 +18,7 @@ document.getElementById("headline").addEventListener("input", validateForm);
       var campusAssignment = document.getElementById("viewCampusAssignment").value;
       var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
 
-      var isFormValid = headline != "" && description != "" && fileInput != "" && campusAssignment != "" && collegeAssignment != "";
+      var isFormValid = headline != "" && description != "" && campusAssignment != "" && collegeAssignment != "";
 
       document.getElementById("saveBtn").disabled = !isFormValid;
     }
@@ -66,10 +68,9 @@ document.getElementById("headline").addEventListener("input", validateForm);
       function viewAnnouncementModal(announcementId) {
         document.getElementById("viewCampusAssignment").disabled = true;
         document.getElementById("viewCollegeAssignment").disabled = true;
-        document.getElementById("viewHeadline").readOnly = true;
-        document.getElementById("viewDescription").readOnly = true;
+        document.getElementById("viewHeadline").disabled = true;
+        document.getElementById("viewDescription").disabled = true;
         document.getElementById("viewFileInput").hidden = true;
-        document.getElementById("viewAuthor");
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "get_announcement.php", true);
@@ -92,18 +93,22 @@ document.getElementById("headline").addEventListener("input", validateForm);
 
         document.getElementById("saveBtn").hidden = true;
         document.getElementById("editViewBtn").hidden = false;
+
+        id = announcementId;
+
       }
 
       function enableViewEdit() {
-        editAnnouncement(announcementId);
+        console.log(id);
+        editAnnouncement(id);
       }
 
       function editAnnouncement(announcementId) {
         document.getElementById("announcementId").value = announcementId;
         document.getElementById("viewCampusAssignment").disabled = false;
         document.getElementById("viewCollegeAssignment").disabled = false;
-        document.getElementById("viewHeadline").readOnly = false;
-        document.getElementById("viewDescription").readOnly = false;
+        document.getElementById("viewHeadline").disabled = false;
+        document.getElementById("viewDescription").disabled = false;
         document.getElementById("viewFileInput").hidden = false;
 
         var xhr = new XMLHttpRequest();
@@ -143,8 +148,8 @@ document.getElementById("headline").addEventListener("input", validateForm);
         formData.append("headline", headline);
         formData.append("description", description);
 
-        if (file) {
-          formData.append("fileInput", file); // Add the file to the FormData
+        if (file != null) {
+          formData.append("fileInput", file);
         }
 
         var xhr = new XMLHttpRequest();
@@ -157,8 +162,6 @@ document.getElementById("headline").addEventListener("input", validateForm);
             } else {
               alert(response.error);
             }
-          } else {
-            alert("Error updating announcement");
           }
         };
 
@@ -176,6 +179,7 @@ document.getElementById("headline").addEventListener("input", validateForm);
 
 
       function deleteAnnouncement(announcementId) {
+        console.log(announcementId);
         if (confirm("Are you sure you want to delete this announcement?")) {
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "delete_announcement.php", true);
@@ -201,4 +205,8 @@ document.getElementById("headline").addEventListener("input", validateForm);
         var choice = confirm("Do you really want to log out?");
         if (choice == true)
           window.location = "logout.php";
+      }
+
+      function test(announcement_id) {
+        console.log("test output: ", announcement_id);
       }

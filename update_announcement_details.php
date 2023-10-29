@@ -7,6 +7,9 @@ $collegeAssignment = $_POST['collegeAssignment'];
 $headline = $_POST['headline'];
 $description = $_POST['description'];
 
+// Initialize $fileInput as null
+$fileInput = null;
+
 // Check if a file is uploaded
 if (isset($_FILES['fileInput'])) {
     $fileInput = $_FILES['fileInput']['name'];
@@ -14,14 +17,24 @@ if (isset($_FILES['fileInput'])) {
 
     // Move the uploaded file to the uploads folder
     move_uploaded_file($fileInputTmp, "uploads/" . $fileInput);
-} else {
-    $fileInput = null;
 }
 
 // Update the announcement details in the database
-$sql = "UPDATE announcements SET campus_assignment = ?, college_assignment = ?, headline = ?, description = ?, file_input = ? WHERE announcement_id = ?";
+$sql = "UPDATE announcements SET campus_assignment = ?, college_assignment = ?, headline = ?, description = ?";
+// Include 'file_input' and 'updated_at' in the SQL query if a file was uploaded
+if ($fileInput !== null) {
+    $sql .= ", file_input = ?, updated_at = NOW()";
+} else {
+    $sql .= ", updated_at = NOW()";
+}
+$sql .= " WHERE announcement_id = ?";
+
 $stmt = $con->prepare($sql);
-$stmt->bind_param("sssssi", $campusAssignment, $collegeAssignment, $headline, $description, $fileInput, $announcementId);
+if ($fileInput !== null) {
+    $stmt->bind_param("sssssi", $campusAssignment, $collegeAssignment, $headline, $description, $fileInput, $announcementId);
+} else {
+    $stmt->bind_param("ssssi", $campusAssignment, $collegeAssignment, $headline, $description, $announcementId);
+}
 
 if ($stmt->execute()) {
     echo json_encode(['success' => 'Announcement updated']);

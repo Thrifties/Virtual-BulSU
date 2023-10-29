@@ -46,7 +46,7 @@ $stmt->close();
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <?php include "includes/cdn.php" ?>
   <link rel="stylesheet" href="CSS/navbar.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Announcement Panel</title>
@@ -78,13 +78,13 @@ $stmt->close();
     <div class="announcement-panel">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Announcement Panel</h2>
-        <button class="btn btn-primary" id="addAnnouncement" data-toggle="modal" data-target="#announcementModal">Add
+        <button class="btn btn-primary" id="addAnnouncement" data-bs-toggle="modal" data-bs-target="#announcementModal">Add
           Announcement</button>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="announcement-list">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="announcementTbl">
               <thead>
                 <tr class="table">
                   <th>Headline</th>
@@ -96,41 +96,7 @@ $stmt->close();
                   </trc>
               </thead>
               <tbody>
-                <?php
-
-                if ($currentAdminLevel == "super_admin") {
-                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements";
-                } else if ($currentAdminLevel == "admin") {
-                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
-                } else if ($currentAdminLevel == "college_admin") {
-                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
-                }
-
-                $result2 = mysqli_query($con, $query2);
-
-                if (!$result2) {
-                  die("Database query failed."); // Handle the error appropriately
-                }
-
-                while ($row = mysqli_fetch_assoc($result2)) {
-                  echo "<tr id=" . $row['announcement_id'] . ">";
-                  echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
-                  echo "<td>" . htmlspecialchars($row['campus_assignment']) . "</td>";
-                  echo "<td>" . htmlspecialchars($row['college_assignment']) . "</td>";
-                  echo "<td>" . htmlspecialchars($row['author']) . "</td>";
-                  echo "<td>" . htmlspecialchars($row['faculty_id']) . "</td>";
-                  echo "<td>";
-                  echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(" . $row['announcement_id'] . ")'>Edit</button>";
-                  echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(" . $row['announcement_id'] . ")'>View</button>";
-                  echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Archive</button>";
-                  echo "</td>";
-                  echo "</tr>";
-                }
-
-                // Release the result set
-                mysqli_free_result($result2);
-
-                ?>
+                
               </tbody>
             </table>
           </div>
@@ -144,8 +110,7 @@ $stmt->close();
         <div class="modal-content">
           <div class="modal-header ">
             <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             </button>
           </div>
           <div class="modal-body">
@@ -227,7 +192,7 @@ $stmt->close();
               <div class="form-group">
                 <label for="formFileMultiple" class="form-label">Upload Image</label>
                 <input class="form-control" type="file" id="viewFileInput" name="viewFileInput">
-                <img id="viewAnnouncementImage" src="" alt="Announcement Image" />
+                <img id="viewAnnouncementImage" class="rounded" src="" alt="Announcement Image" />
               </div>
               <div class="modal-footer d-flex justify-content-between align-content-center">
                 <p class="card-text" id="viewAuthor"><small class="text-body-secondary">Author: </small></p>
@@ -245,20 +210,19 @@ $stmt->close();
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="announcementModalLabel">Add Announcement</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <h5 class="modal-title h5" id="announcementModalLabel">Add Announcement</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             </button>
           </div>
           <div class="modal-body">
             <form method="post" class="needs-validation" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
-              <input type="text" class="form-control" id="author" name="author" value="<?php echo $author ?>" hidden>
+              <input type="text" class="form-control " id="author" name="author" value="<?php echo $author ?>" hidden>
               <input type="text" class="form-control" id="faculty_id" name="facultyId" value="<?php echo $user_id ?>" hidden>
               <?php if($currentAdminLevel == "super_admin"): 
               echo "
-                <div class='form-group'>
-                  <label for='campusAssignment'>Campus Assignment</label>
+                <div class='form-group mt-2'>
+                  <labelfor='campusAssignment'>Campus Assignment</labelfor=>
                   <select class='form-control' name='campusAssignment' id='campusAssignment' required>
                     <option value='' disabled selected>-- Select Campus --</option>
                     <option value='Malolos Campus'>Malolos Campus</option>
@@ -269,7 +233,7 @@ $stmt->close();
                     <option value='Meneses Campus'>Meneses Campus</option>
                   </select>
                 </div>
-                <div class='form-group'>
+                <div class='form-group mt-2'>
                   <label for='college'>College Assignment</label>
                   <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
@@ -294,7 +258,7 @@ $stmt->close();
               <?php if($currentAdminLevel == "admin"): 
               echo "
                 <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
-                <div class='form-group'>
+                <div class='form-group mt-2'>
                   <label for='college'>College Assignment</label>
                   <select class='form-control' name='collegeAssignment' id='collegeAssignment' required>
                     <option value='' disabled selected>-- Select College --</option>
@@ -321,19 +285,19 @@ $stmt->close();
                 <input type='text' class='form-control' id='campusAssignment' name='campusAssignment' value='$currentAdminCampus' hidden>
                 <input type='text' class='form-control' id='collegeAssignment' name='collegeAssignment' value='$currentCollege' hidden>
               "; endif; ?>
-              <div class="form-group">
+              <div class="form-group mt-2">
                 <label for="headline">Headline</label>
                 <input type="text" class="form-control" id="headline" name="headline" required>
                 <div id="headlineFeedback" class="invalid-feedback">
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group mt-2">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                 <div id="descriptionFeedback" class="invalid-feedback">
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group mt-2">
                 <label for="formFileMultiple" class="form-label">Multiple files input</label>
                 <input class="form-control" type="file" id="fileInput" name="fileInput" multiple required>
                 <div id="fileInputFeedback" class="invalid-feedback">
@@ -348,10 +312,50 @@ $stmt->close();
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php include "includes/js_cdn.php" ?>
     <script src="js/announcement_panel.js"></script>
+    <script>
+      $(document).ready(function () {
+      $('#announcementTbl').DataTable({
+        responsive: true,
+        autoWidth: false,
+        search: true,
+        processing: true,
+        ajax: {
+          url: 'get_announcement_list.php',
+          dataSrc: '',
+          error: function (xhr, error, code) {
+            console.log(xhr);
+            console.log(error);
+            console.log(code);
+          },
+        },
+        columns: [
+          { data: 'headline' },
+          { data: 'campus_assignment' },
+          { data: 'college_assignment' },
+          { data: 'author' },
+          { data: 'faculty_id' },
+          { data: "announcement_id",
+            render: function (data) {
+              return (
+                '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="viewAnnouncementModal(' +
+                data +
+                ')">View</button>' +
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="editAnnouncement(' +
+                data +
+                ')">Edit</button>' +
+                '<button type="button" class="btn btn-danger" onclick="deleteAnnouncement(' +
+                data +
+                ')">Delete</button>'
+              );
+            },
+          },
+        ],
+      });
+    });
+
+    </script>
 </body>
 
 </html>

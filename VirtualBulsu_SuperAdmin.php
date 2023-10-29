@@ -48,7 +48,7 @@ if ($result1) {
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Admin Panel</h2>
         <div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminModal">Add Admin</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminModal">Add Admin</button>
           <a href="generate_report_admin.php" class="btn btn-success">Download List</a>
         </div>
         
@@ -91,17 +91,16 @@ if ($result1) {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="announcementModalLabel">Announcement Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
               </button>
             </div>
             <div class="modal-body">
               <form id="adminDetailsForm" class="needs-validation">
                 <div class="form-group">
                   <label for="facultyId">Faculty ID:</label>
-                  <input type="text" class="form-control" id="facultyId" readOnly>
+                  <input type="text" class="form-control" id="facultyId" disabled>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                   <div class="row">
                     <div class="col">
                       <label for="name">First Name:</label>
@@ -119,7 +118,7 @@ if ($result1) {
                 </div>
                 <?php 
                   if ($currentAdminLevel === 'super_admin') {
-                    echo "<div class='form-group'>";
+                    echo "<div class='form-group mt-2'>";
                     echo "<label for='campus'>Campus:</label>";
                     echo "<select class='form-control' id='viewCampus'>";
                     echo "<option value='Malolos Campus'>Malolos Campus</option>";
@@ -131,13 +130,13 @@ if ($result1) {
                     echo "</select>";
                     echo "</div>";
                   } elseif ($currentAdminLevel === 'admin') {
-                    echo "<div class='form-group'>";
+                    echo "<div class='form-group mt-2'>";
                     echo "<label for='campus'>Campus:</label>";
                     echo "<select class='form-control' id='viewCampus'>";
                     echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
                     echo "</select>";
                     echo "</div>";
-                    echo "<div class='form-group'>";
+                    echo "<div class='form-group mt-2'>";
                     echo "<label for='college'>College:</label>";
                     echo "<select class='form-control' id='viewCollege'>";
                     echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
@@ -159,11 +158,11 @@ if ($result1) {
                     echo "</div>";
                   }
                 ?>
-                <div class="form-group">
+                <div class="form-group mt-2">
                   <label for="email">Email:</label>
                   <input type="email" class="form-control" id="viewEmail">
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                   <label for="phone">Contact Number:</label>
                   <input type="text" class="form-control" id="viewPhone">
                 </div>
@@ -194,25 +193,24 @@ if ($result1) {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="adminModalLabel">Add Admin</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body">
           <form class="needs-validation" method="post" action="add_admin_details.php">
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label for="addFacultyId">Faculty ID:</label>
               <input type="text" class="form-control" name="addFacultyId" id="addFacultyId" onkeyup="checkFacultyId()" value="" pattern="\d+" required>
               <div id="feedbackMessage" class="invalid-feedback">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label for="addFacultyId">Password:</label>
               <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
               <div id="passwordFeedback" class="invalid-feedback">
               </div>
             </div>
-            <div class="form-row">
+            <div class="form-row mt-2">
               <div class="col">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" name="firstName" id="firstName" required>
@@ -233,7 +231,7 @@ if ($result1) {
 
             <?php 
               if ($currentAdminLevel === 'super_admin') {
-                echo "<div class='form-group mt-3' has-validation>";
+                echo "<div class='form-group mt-2' has-validation>";
                 echo "<label for='campus'>Campus</label>";
                 echo "<select class='form-control' name='addCampus' id='addCampus' required>";
                 echo "<option value='' selected disabled> -- Select Campus -- </option>";
@@ -247,13 +245,13 @@ if ($result1) {
                 echo '<div id="addCampusFeedback" class="invalid-feedback"></div>';
                 echo "</div>";
               } elseif ($currentAdminLevel === 'admin') {
-                echo "<div class='form-group mt-3'>";
+                echo "<div class='form-group mt-2'>";
                 echo "<label for='campus'>Campus</label>";
                 echo "<select class='form-control' name='addCampus' id='addCampus' required>";
                 echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
                 echo "</select>";
                 echo "</div>";
-                echo "<div class='form-group mt-3'>";
+                echo "<div class='form-group mt-2'>";
                 echo "<label for='college'>College</label>";
                 echo "<select class='form-control' name='addCollege' id='addCollege' requied>";
                 echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
@@ -278,13 +276,13 @@ if ($result1) {
               }
             ?>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="addEmail" id="addEmail" required>
               <div id="addEmailFeedback" class="invalid-feedback">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
               <label for="phone">Contact Number</label>
               <input type="text" class="form-control" name="addPhone" id="addPhone" required>
               <div id="addPhoneFeedback" class="invalid-feedback">
@@ -329,10 +327,10 @@ if ($result1) {
       { data: "faculty_id",
         render: function (data) {
           return (
-            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
             data +
             ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewAdminDetails" onclick="enableEditAdmin(' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
             data +
             ')">Edit</button>' +
             '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
@@ -350,6 +348,7 @@ if ($result1) {
     responsive: true,
     autoWidth: false,
     searching: true,
+    processing: true,
     ajax: {
       url: "get_admins.php",
       dataSrc: "",
@@ -368,10 +367,10 @@ if ($result1) {
       { data: "faculty_id",
         render: function (data) {
           return (
-            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewAdminDetails" onclick="selectedRow(' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
             data +
             ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewAdminDetails" onclick="enableEdit(' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
             data +
             ')">Edit</button>' +
             '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +

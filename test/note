@@ -1,0 +1,52 @@
+<?php
+require "connect.php"; 
+
+$sql = "SELECT * FROM announcements"; 
+
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    $announcementData = $result->fetch_all(MYSQLI_ASSOC);
+
+    echo json_encode($announcementData); 
+} else {
+    echo json_encode(['error' => 'Announcement not found']);
+}
+
+?>
+
+<?php
+$user_id = $_SESSION["user"];
+
+$campusAdminQuery = "SELECT * FROM campus_admin WHERE faculty_id = ?";
+$collegeAdminQuery = "SELECT * FROM college_admin WHERE faculty_id = ?";
+
+
+$stmt = $con->prepare($campusAdminQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $adminData = mysqli_fetch_assoc($result);
+    $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
+    $currentAdminLevel = $adminData["admin_level"];
+    $currentAdminCampus = $adminData["campus"];
+} else {
+
+    $stmt = $con->prepare($collegeAdminQuery);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $adminData = mysqli_fetch_assoc($result);
+        $currentAdminLevel = $adminData["admin_level"];
+        $currentAdminCampus = $adminData["campus"];
+        $currentCollege = $adminData["college"];
+    } else {
+    }
+}
+?>
+
+Combine this two so that the announcement will be filtered by campus and college based on the admin level of the user and the campus and college of the user

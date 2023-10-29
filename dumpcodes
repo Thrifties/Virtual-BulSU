@@ -46,8 +46,9 @@ $stmt->close();
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include "includes/cdn.php" ?>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="CSS/navbar.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Announcement Panel</title>
   <style>
     .announcement-panel {
@@ -95,7 +96,41 @@ $stmt->close();
                   </trc>
               </thead>
               <tbody>
-                
+                <?php
+
+                if ($currentAdminLevel == "super_admin") {
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements";
+                } else if ($currentAdminLevel == "admin") {
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
+                } else if ($currentAdminLevel == "college_admin") {
+                  $query2 = "SELECT announcement_id, headline, campus_assignment, college_assignment, author, faculty_id FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
+                }
+
+                $result2 = mysqli_query($con, $query2);
+
+                if (!$result2) {
+                  die("Database query failed."); // Handle the error appropriately
+                }
+
+                while ($row = mysqli_fetch_assoc($result2)) {
+                  echo "<tr id=" . $row['announcement_id'] . ">";
+                  echo "<td>" . htmlspecialchars($row['headline']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['campus_assignment']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['college_assignment']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['author']) . "</td>";
+                  echo "<td>" . htmlspecialchars($row['faculty_id']) . "</td>";
+                  echo "<td>";
+                  echo "<button type='button' class='btn btn-primary' id='editBtn' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='editAnnouncement(" . $row['announcement_id'] . ")'>Edit</button>";
+                  echo "<button type='button' class='btn btn-secondary' id='viewAnnouncement' data-toggle='modal' data-target='#viewAnnouncementModal' onclick='viewAnnouncementModal(" . $row['announcement_id'] . ")'>View</button>";
+                  echo "<button type='button' class='btn btn-danger' onclick='deleteAnnouncement(" . $row['announcement_id'] . ")' data-announcement-id='" . $row['announcement_id'] . "'>Archive</button>";
+                  echo "</td>";
+                  echo "</tr>";
+                }
+
+                // Release the result set
+                mysqli_free_result($result2);
+
+                ?>
               </tbody>
             </table>
           </div>
@@ -313,7 +348,9 @@ $stmt->close();
         </div>
       </div>
     </div>
-    <?php include "includes/js_cdn.php" ?>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/announcement_panel.js"></script>
 </body>
 

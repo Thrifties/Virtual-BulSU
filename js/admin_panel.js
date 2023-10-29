@@ -141,13 +141,13 @@ function selectedRowAdmin (facultyId){
 
   console.log("View button clicked for faculty ID:", facultyId);
   
-  document.getElementById("viewFirstName").readOnly = true;
-  document.getElementById("viewMiddleName").readOnly = true;
-  document.getElementById("viewLastName").readOnly = true;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
   document.getElementById("viewCampus").disabled = true;
   document.getElementById("viewCollege").disabled = true;
-  document.getElementById("viewEmail").readOnly = true;
-  document.getElementById("viewPhone").readOnly = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
 
   var saveBtn = document.getElementById("saveBtn");
   document.getElementById("saveBtn").disabled = true;
@@ -177,12 +177,12 @@ function selectedRowAdmin (facultyId){
 }
 function selectedRow (facultyId){
   
-  document.getElementById("viewFirstName").readOnly = true;
-  document.getElementById("viewMiddleName").readOnly = true;
-  document.getElementById("viewLastName").readOnly = true;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
   document.getElementById("viewCampus").disabled = true;
-  document.getElementById("viewEmail").readOnly = true;
-  document.getElementById("viewPhone").readOnly = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
 
   var saveBtn = document.getElementById("saveBtn");
   document.getElementById("saveBtn").disabled = true;
@@ -218,14 +218,14 @@ function enableViewEdit(){
   function enableEditAdmin(facultyId) {
   console.log("Edit button clicked for faculty ID:", facultyId);
   // Enable form fields for editing
-  document.getElementById("facultyId").readOnly = true;
-  document.getElementById("viewFirstName").readOnly = false;
-  document.getElementById("viewMiddleName").readOnly = false;
-  document.getElementById("viewLastName").readOnly = false;
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = false;
+  document.getElementById("viewMiddleName").disabled = false;
+  document.getElementById("viewLastName").disabled = false;
   document.getElementById("viewCampus").disabled = false;
   document.getElementById("viewCollege").disabled = false;
-  document.getElementById("viewEmail").readOnly = false;
-  document.getElementById("viewPhone").readOnly = false;
+  document.getElementById("viewEmail").disabled = false;
+  document.getElementById("viewPhone").disabled = false;
 
   document.getElementById("facultyId").value = facultyId;
 
@@ -259,13 +259,13 @@ function enableViewEdit(){
 
 function enableEdit(facultyId) {
   // Enable form fields for editing
-  document.getElementById("facultyId").readOnly = true;
-  document.getElementById("viewFirstName").readOnly = false;
-  document.getElementById("viewMiddleName").readOnly = false;
-  document.getElementById("viewLastName").readOnly = false;
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = false;
+  document.getElementById("viewMiddleName").disabled = false;
+  document.getElementById("viewLastName").disabled = false;
   document.getElementById("viewCampus").disabled = false;
-  document.getElementById("viewEmail").readOnly = false;
-  document.getElementById("viewPhone").readOnly = false;
+  document.getElementById("viewEmail").disabled = false;
+  document.getElementById("viewPhone").disabled = false;
 
   document.getElementById("facultyId").value = facultyId;
 
@@ -328,17 +328,17 @@ function saveChanges() {
   xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
 
   // Disable form fields after saving
-  document.getElementById("facultyId").readOnly = true;
-  document.getElementById("viewFirstName").readOnly = true;
-  document.getElementById("viewMiddleName").readOnly = true;
-  document.getElementById("viewLastName").readOnly = true;
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
   document.getElementById("viewCampus").disabled = true;
-  document.getElementById("viewEmail").readOnly = true;
-  document.getElementById("viewPhone").readOnly = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
 
   var saveBtn = document.getElementById("saveBtn");
   document.getElementById("saveBtn").disabled = true;
-  document.getElementById("facultyId").readOnly = true;
+  document.getElementById("facultyId").disabled = true;
 
 }
 
@@ -375,19 +375,19 @@ function saveChangesAdmin() {
   xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&college=" + college + "&email=" + email + "&phone=" + phone);
 
   // Disable form fields after saving
-  document.getElementById("facultyId").readOnly = true;
-  document.getElementById("viewFirstName").readOnly = true;
-  document.getElementById("viewMiddleName").readOnly = true;
-  document.getElementById("viewLastName").readOnly = true;
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
   document.getElementById("viewCampus").disabled = true;
   document.getElementById("viewCollege").disabled = true;
-  document.getElementById("viewEmail").readOnly = true;
-  document.getElementById("viewPhone").readOnly = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
 
   var saveBtn = document.getElementById("saveBtn");
 
   document.getElementById("saveBtn").disabled = true;
-  document.getElementById("facultyId").readOnly = true;
+  document.getElementById("facultyId").disabled = true;
 }
 
 function deleteAdmin(facultyId) {
