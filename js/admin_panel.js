@@ -1,5 +1,3 @@
-
-
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
 document.getElementById("addPassword").addEventListener("input", validateForm);
 document.getElementById("firstName").addEventListener("input", validateForm);
@@ -11,6 +9,96 @@ document.getElementById("viewFirstName").addEventListener("input", validateUpdat
 document.getElementById("viewLastName").addEventListener("input", validateUpdateForm);
 document.getElementById("viewEmail").addEventListener("input", validateUpdateForm);
 document.getElementById("viewPhone").addEventListener("input", validateUpdateForm);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.getElementById("addPassword").addEventListener("onkeyup", function () {
+      validatePassword();
+  });
+
+  addValidationListener("firstName");
+  addValidationListener("lastName");
+  addValidationListener("addEmail");
+  addValidationListener("addPhone");
+  addValidationListener("viewFirstName");
+  addValidationListener("viewLastName");
+  addValidationListener("viewEmail");
+  addValidationListener("viewPhone");
+  addValidationListener("addCampus");
+
+});
+
+function addValidationListener(elementId) {
+  document.getElementById(elementId).addEventListener("keyup", function () {
+      validateInput(elementId);
+  });
+}
+
+function validateInput(elementId) {
+  var inputValue = document.getElementById(elementId).value;
+  var feedbackMessage = document.getElementById(elementId + "Feedback");
+
+  if (elementId.value === "" && elementId !== "middleName") {
+      elementId.classList.add("is-invalid");
+      feedbackMessage.innerHTML = "This field is required.";
+      document.getElementById("addBtn").disabled = true;
+      return false;
+  } else {
+      var pattern;
+      switch (elementId) {
+          case "firstName":
+              pattern = /^[a-zA-Z]+$/;
+              break;
+          case "lastName":
+              pattern = /^[a-zA-Z]+$/;
+              break;
+          case "addEmail":
+              pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              break;
+          case "addPhone":
+              pattern = /^\d{11}$/;
+              break;
+          case "viewFirstName":
+              pattern = /^[a-zA-Z]+$/;
+              break;
+          case "viewLastName":
+              pattern = /^[a-zA-Z]+$/;
+              break;
+          case "viewEmail":
+              pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              break;
+          case "viewPhone":
+              pattern = /^\d{11}$/;
+              break;
+          default:
+              pattern = /.*/;
+      }
+
+      if (!pattern.test(inputValue)) {
+          document.getElementById(elementId).classList.add("is-invalid");
+          feedbackMessage.innerHTML = "Invalid format.";
+          document.getElementById("addBtn").disabled = true;
+          return false;
+      } else {
+          document.getElementById(elementId).classList.remove("is-invalid");
+          feedbackMessage.innerHTML = "";
+          // Enable or disable the button based on whether all required fields are filled
+          var isFormValid = validateForm();
+          document.getElementById("addBtn").disabled = !isFormValid;
+          return true;
+      }
+  }
+
+  /* if (inputValue.length > 0) {
+      feedbackMessage.innerText = "";
+      document.getElementById(elementId).classList.remove("is-invalid");
+      document.getElementById(elementId).classList.add("is-valid");
+  } else {
+      feedbackMessage.innerText = "This field is required.";
+      document.getElementById(elementId).classList.remove("is-valid");
+      document.getElementById(elementId).classList.add("is-invalid");
+  } */
+}
 
 function validateUpdateForm() {
     var firstName = document.getElementById("viewFirstName").value;
@@ -36,44 +124,7 @@ function validateForm() {
     document.getElementById("addBtn").disabled = !isFormValid;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
 
-  document.getElementById("addPassword").addEventListener("input", function () {
-      validatePassword();
-  });
-
-  addValidationListener("firstName");
-  addValidationListener("lastName");
-  addValidationListener("addEmail");
-  addValidationListener("addPhone");
-  addValidationListener("viewFirstName");
-  addValidationListener("viewLastName");
-  addValidationListener("viewEmail");
-  addValidationListener("viewPhone");
-  addValidationListener("addCampus");
-
-});
-
-function addValidationListener(elementId) {
-  document.getElementById(elementId).addEventListener("input", function () {
-      validateInput(elementId);
-  });
-}
-
-function validateInput(elementId) {
-  var inputValue = document.getElementById(elementId).value;
-  var feedbackMessage = document.getElementById(elementId + "Feedback");
-
-  if (inputValue.length > 0) {
-      feedbackMessage.innerText = "";
-      document.getElementById(elementId).classList.remove("is-invalid");
-      document.getElementById(elementId).classList.add("is-valid");
-  } else {
-      feedbackMessage.innerText = "This field is required.";
-      document.getElementById(elementId).classList.remove("is-valid");
-      document.getElementById(elementId).classList.add("is-invalid");
-  }
-}
 
 
 function validatePassword() {
