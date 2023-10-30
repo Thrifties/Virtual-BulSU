@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User Admin Settings</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <?php include "includes/cdn.php" ?>
         <link rel="stylesheet" href="CSS/navbar.css">
         <style>
             .card {
@@ -93,9 +93,7 @@ if ($result->num_rows > 0) {
                                 </form>
                             </div>
                     <!-- Include the necessary Bootstrap JavaScript libraries -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php include "includes/js_cdn.php" ?>
     <script src="js/user_settings_panel.js"></script>
     </body>
 </html>
