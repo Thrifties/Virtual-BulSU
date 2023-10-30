@@ -4,7 +4,6 @@ require "connect.php";
 $query = "SELECT * FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC" ;
 $result = mysqli_query($con, $query);
 
-
 ?>
 
 <!DOCTYPE html>

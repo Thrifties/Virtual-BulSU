@@ -1,52 +1,37 @@
-<?php
-require "connect.php"; 
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+      <a class="navbar-brand custom-brand" href="#">
+        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        Bulacan State University
+      </a>
 
-$sql = "SELECT * FROM announcements"; 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-$result = $con->query($sql);
-
-if ($result->num_rows > 0) {
-    $announcementData = $result->fetch_all(MYSQLI_ASSOC);
-
-    echo json_encode($announcementData); 
-} else {
-    echo json_encode(['error' => 'Announcement not found']);
-}
-
-?>
-
-<?php
-$user_id = $_SESSION["user"];
-
-$campusAdminQuery = "SELECT * FROM campus_admin WHERE faculty_id = ?";
-$collegeAdminQuery = "SELECT * FROM college_admin WHERE faculty_id = ?";
-
-
-$stmt = $con->prepare($campusAdminQuery);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $adminData = mysqli_fetch_assoc($result);
-    $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
-    $currentAdminLevel = $adminData["admin_level"];
-    $currentAdminCampus = $adminData["campus"];
-} else {
-
-    $stmt = $con->prepare($collegeAdminQuery);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $adminData = mysqli_fetch_assoc($result);
-        $currentAdminLevel = $adminData["admin_level"];
-        $currentAdminCampus = $adminData["campus"];
-        $currentCollege = $adminData["college"];
-    } else {
-    }
-}
-?>
-
-Combine this two so that the announcement will be filtered by campus and college based on the admin level of the user and the campus and college of the user
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" id="custom-item">
+            <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
+          </li>
+          <?php
+            if ($currentAdminLevel == "super_admin") {
+              echo "<li class='nav-item' id='custom-item'>";
+              echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
+              echo "</li>";
+            } else if ($currentAdminLevel == "admin") {
+              echo "<li class='nav-item' id='custom-item'>";
+              echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
+              echo "</li>";
+            }
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
+          </li>
+          <li class="nav-item" id="custom-item">
+            <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
