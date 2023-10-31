@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="CSS/VirtualBulsu_Navbar.css" />
   <link rel="icon" href="resources/virtualbulsu_logo.png" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-  <link rel="stylesheet" href="css/carousel.css">
+  <link rel="stylesheet" href="CSS/carousel.css">
 </head>
 
 <body>
