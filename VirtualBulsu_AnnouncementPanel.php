@@ -47,33 +47,17 @@ $stmt->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php include "includes/cdn.php" ?>
-  <link rel="stylesheet" href="CSS/navbar.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/navbar.CSS">
+  <link rel="stylesheet" href="CSS/announcement_panel.CSS">
   <title>Announcement Panel</title>
-  <style>
-    .announcement-panel {
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
-    #viewAnnouncementImage {
-      width: 100%;
-      height: auto;
-    }
-
-    td button {
-      margin: 0 3px;
-    }
-  </style>
 </head>
 
 <body>
   
   <?php include "includes/navbar.php" ?>
 
-  <div class="container-fluid mt-5">
+  <div class="container-lg mt-5" id="announcementPage">
     <!-- Announcement Panel -->
     <div class="announcement-panel">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -313,49 +297,7 @@ $stmt->close();
       </div>
     </div>
     <?php include "includes/js_cdn.php" ?>
-    <script src="js/announcement_panel.js"></script>
-    <script>
-      $(document).ready(function () {
-      $('#announcementTbl').DataTable({
-        responsive: true,
-        autoWidth: false,
-        search: true,
-        processing: true,
-        ajax: {
-          url: 'get_announcement_list.php',
-          dataSrc: '',
-          error: function (xhr, error, code) {
-            console.log(xhr);
-            console.log(error);
-            console.log(code);
-          },
-        },
-        columns: [
-          { data: 'headline' },
-          { data: 'campus_assignment' },
-          { data: 'college_assignment' },
-          { data: 'author' },
-          { data: 'faculty_id' },
-          { data: "announcement_id",
-            render: function (data) {
-              return (
-                '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="viewAnnouncementModal(' +
-                data +
-                ')">View</button>' +
-                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="editAnnouncement(' +
-                data +
-                ')">Edit</button>' +
-                '<button type="button" class="btn btn-danger" onclick="deleteAnnouncement(' +
-                data +
-                ')">Delete</button>'
-              );
-            },
-          },
-        ],
-      });
-    });
-
-    </script>
+    <script src="js/announcement_panel.JS"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <?php 
 require "connect.php";
 
-$query = "SELECT * FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC" ;
+$query = "SELECT college_assignment FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC" ;
 $result = mysqli_query($con, $query);
 
 ?>
@@ -30,36 +30,18 @@ $result = mysqli_query($con, $query);
         background-attachment: fixed;
         display: flex;
         flex-direction: column;
-        /*backdrop-filter: blur(2px); */
       }
-
-      #VTIntroduction {
-        color: white;
-        top: 30%;
-      }
-
-      #line-clamp {
-        display: -webkit-box;
-        -webkit-line-clamp: 6; /* Adjust the number of lines as needed */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
       .navbar-custom {
-        /*background: rgba(255, 255, 255, 0.3);*/
         z-index: 9999;
         width: 100%;
         background: none;
         background-color: #763435;
-        /*border: 1px solid#f7f7f7; */
         font-family: "Roboto";
       }
       .navbar-custom .navbar-brand {
         color: aliceblue;
         text-decoration: none;
         font-family: "Roboto";
-        /* Remove underline */
       }
       .navbar-custom {
                 background-color: #763435;
@@ -83,14 +65,13 @@ $result = mysqli_query($con, $query);
         }
 
       .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         background-color: #763435;
         color: white;
         padding: 5px;
         text-align: center;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 9999;
       }
 
       #announcementCard {
@@ -122,36 +103,42 @@ $result = mysqli_query($con, $query);
     <div class="container-lg my-3 ">
       <h1 class="text-center text-white" id="heading">San Rafael Campus News</h1>
         <div class="container mt-3">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="row g-3">
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $announcementId = $row['announcement_id'];
-                    $headline = $row['headline'];
-                    $image = $row['file_input'];
-                    $description = $row['description'];
-                    $datePosted = $row['created_at'];
+                    echo '<h2 class="text-white">'.$row['college_assignment'].'</h2>';
 
-                    // Output the announcement HTML structure here
-                    echo '<div class="col-md-6 col-lg-4">';
-                    echo '<div class="card h-100">';
-                    echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
-                    echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
-                    echo '<div class="card-body">';
-                    echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
-                    echo '</div>';
-                    echo '<div class="card-footer">';
-                    echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</a>';
-                    echo '</div>';
+                    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">';
+
+                    $query2 = "SELECT * FROM announcements WHERE college_assignment = '".$row['college_assignment']."' AND campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC";
+                    $result2 = mysqli_query($con, $query2);
+                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                      $announcementId = $row2['announcement_id'];
+                      $headline = $row2['headline'];
+                      $image = $row2['file_input'];
+                      $description = $row2['description'];
+                      $datePosted = $row2['created_at'];
+
+                      // Output the announcement HTML structure here
+                      echo '<div class="col-md-6 col-lg-4">';
+                      echo '<div class="card h-100">';
+                      echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
+                      echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
+                      echo '<div class="card-body">';
+                      echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
+                      echo '</div>';
+                      echo '<div class="card-footer">';
+                      echo "<small class='text-body-secondary'>Date Posted: $datePosted</small>";
+                      echo '</div>';
+                      echo '</div>';
+                      echo '</a>';
+                      echo '</div>';
+                      echo  '</div>';
+                  }
                 }
-              } else {
-                  echo "<p>No announcements available.</p>";
               }
             ?>
-            
         </div>
         </div>
         

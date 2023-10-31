@@ -137,8 +137,7 @@ require "connect.php"
                         <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         <span class="navbar-title text-wrap">Bulacan State University - San Rafael Campus</span>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -148,6 +147,9 @@ require "connect.php"
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav">
+                                <li class="nav-item " id="nav-item">
+                                    <a class="nav-link" aria-current="page" id="announcementTab" type="button" href="VirtualBulsu_Tour_HomePage.php">Home</a>
+                                </li>
                                 <li class="nav-item " id="nav-item">
                                     <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
                                         data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
@@ -186,7 +188,7 @@ require "connect.php"
             <div class="offcanvas-body">
                 <?php
                         // Query to fetch announcements from your database
-                        $query = "SELECT * FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY event_date DESC";
+                        $query = "SELECT * FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC";
                         $result = mysqli_query($con, $query);
         
                         if (!$result) {
@@ -200,8 +202,10 @@ require "connect.php"
                                     <img src="uploads/'.$row['file_input'].'" class="card-img-top" alt="Unable to load image">
                                     <div class="card-body">
                                         <h5 class="card-title">' . htmlspecialchars($row['headline']) . '</h5>
-                                        <p class="card-text"><small class="text-body-secondary">'.$row['event_date'].'</small></p>
                                     </div>
+                                    <div class="card-footer">
+                                       <small class="text-body-secondary">Date Posted: '.$row['created_at'].'<small>
+                                       </div>
                                 </div>
                                 </a>
                             ';

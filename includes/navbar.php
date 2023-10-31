@@ -1,37 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid">
-      <a class="navbar-brand custom-brand" href="#">
-        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-        Bulacan State University
+<?php
+
+// Assuming you have a user_id in your session
+$user_id = $_SESSION["user"];
+
+?>
+
+  <div class="sidebar d-flex flex-column flex-shrink-0 p-3">
+    <img src="resources/virtualbulsu_logo.png" id="logo" alt="Virtual BulSU Logo">
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="VirtualBulsu_AnnouncementPanel.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navAnnouncement">
+          <box-icon name='notepad' class="icons" color="#fff" id="announcementLogo"></box-icon>
+          Announcements
+        </a>
+      </li>
+      <li>
+        <a href="VirtualBulsu_SuperAdmin.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navAdmin">
+          <box-icon name='user-check' class="icons" color="#fff" id="adminLogo"></box-icon>
+          Admins
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="nav-link d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <box-icon name='user-circle' color='#fff' class="icons"></box-icon>
+        <strong><?php echo $user_id ?></strong>
       </a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" id="custom-item">
-            <a class="nav-link data-custom" href="VirtualBulsu_AnnouncementPanel.php">Announcements</a>
-          </li>
-          <?php
-            if ($currentAdminLevel == "super_admin") {
-              echo "<li class='nav-item' id='custom-item'>";
-              echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>Campus Admins</a>";
-              echo "</li>";
-            } else if ($currentAdminLevel == "admin") {
-              echo "<li class='nav-item' id='custom-item'>";
-              echo "<a class='nav-link data-custom' href='VirtualBulsu_SuperAdmin.php'>College Admins</a>";
-              echo "</li>";
-            }
-          ?>
-          <li class="nav-item">
-            <a class="nav-link" href="VirtualBulsu_AdminSettings.php">User Settings</a>
-          </li>
-          <li class="nav-item" id="custom-item">
-            <a class="nav-link data-custom" href="#" onclick="logout()">Log Out</a>
-          </li>
-        </ul>
-      </div>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item d-flex align-items-center" href="VirtualBulsu_AdminSettings.php">
+          <box-icon name='user' color="#763435" class="icons"></box-icon>User Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item d-flex align-items-center" href="#" onclick="logout()"><box-icon name='log-out' color="#763435" class="icons"></box-icon>Sign out</a></li>
+      </ul>
     </div>
-</nav>
+  </div>

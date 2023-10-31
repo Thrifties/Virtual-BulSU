@@ -210,3 +210,138 @@
       function test(announcement_id) {
         console.log("test output: ", announcement_id);
       }
+
+      document.addEventListener("DOMContentLoaded", function(){
+        document.getElementById("announcementLogo").setAttribute("color", "#ffd700");
+      })
+
+      $(document).ready(function () {
+      $('#announcementTbl').DataTable({
+        responsive: true,
+        autoWidth: false,
+        searching: true,
+        processing: true,
+        ajax: {
+          url: 'get_announcement_list.php',
+          dataSrc: '',
+          error: function (xhr, error, code) {
+            console.log(xhr);
+            console.log(error);
+            console.log(code);
+          },
+        },
+        columns: [
+          { data: 'headline',
+            render: function (data, type, row) {
+              if (type === 'display') {
+                // Set the maximum length for the headline
+                var maxLength = 30;
+                if (data.length > maxLength) {
+                  // If the headline is longer than maxLength, add an ellipsis
+                  return data.substr(0, maxLength) + '...';
+                } else {
+                  return data;
+                }
+              }
+              return data; // For sorting, filtering, etc.
+            },
+          },
+          { data: 'campus_assignment' },
+          { data: 'college_assignment' },
+          { data: 'author' },
+          { data: 'faculty_id' },
+          { data: "announcement_id",
+            render: function (data) {
+              return (
+                '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="viewAnnouncementModal(' +
+                data +
+                ')">View</button>' +
+                '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="editAnnouncement(' +
+                data +
+                ')">Edit</button>' +
+                '<button type="button" class="btn btn-danger" onclick="deleteAnnouncement(' +
+                data +
+                ')">Delete</button>'
+              );
+            },
+          },
+        ],
+      });
+    });
+    // Get references to the campus and college select elements
+    const campusSelect = document.getElementById('campusAssignment');
+    const collegeSelect = document.getElementById('collegeAssignment');
+
+    // Define the available colleges for each campus
+    const campusColleges = {
+        'Malolos Campus': [
+            'College of Industrial Technology',
+            'College of Information and Communications Technology',
+            'College of Nursing',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Law',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Sports, Exercise and Recreation',
+            'College of Arts and Letters',
+            'College of Science',
+            'College of Architecture and Fine Arts',
+            'Graduate School',
+            'College of Social Sciences and Philosophy',
+            'College of Criminal Justice Education'
+        ],
+        'Meneses Campus': [
+            'College of Education',
+            'College of Hospitality Management',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communications Technology',
+            'College of Industrial Technology'
+        ],
+        'Hagonoy Campus': [
+            'College of Industrial Technology',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Information and Communications Technology'
+        ],
+        'Bustos Campus': [
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communication Technology'
+        ],
+        'San Rafael Campus': [
+            'College of Nursing',
+            'College of Science',
+            'College of Social Science and Philosophy'
+        ],
+        'Sarmiento Campus': [
+            'College of Science',
+            'College of Industrial Technology',
+            'College of Education',
+            'College of Business Administration',
+            'College of Hotel and Tourism Management'
+        ]
+    };
+
+    // Function to update the college options based on the selected campus
+    function updateCollegeOptions() {
+        const selectedCampus = campusSelect.value;
+        collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedCampus in campusColleges) {
+            const colleges = campusColleges[selectedCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                collegeSelect.appendChild(option);
+            }
+        }
+    }
+
+    // Add an event listener to the campus select element
+    campusSelect.addEventListener('change', updateCollegeOptions);
+
+    // Initial update when the page loads
+    updateCollegeOptions();

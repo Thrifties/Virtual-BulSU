@@ -1,0 +1,21 @@
+.announcement-panel {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#viewAnnouncementImage {
+  width: 100%;
+  height: auto;
+}
+
+td button {
+  margin: 0 3px;
+}
+
+#navAnnouncement {
+  color: #ffd700;
+  text-decoration: none;
+  background-color: #4C1D14;
+}

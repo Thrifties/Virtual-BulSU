@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("adminLogo").setAttribute('color','#ffd700')
+});
+
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
 document.getElementById("addPassword").addEventListener("input", validateForm);
 document.getElementById("firstName").addEventListener("input", validateForm);
@@ -123,9 +127,6 @@ function validateForm() {
     var isFormValid = facultyId !== "" && password !== "" && firstName !== "" && lastName !== "" && email !== "" && phone !== "";
     document.getElementById("addBtn").disabled = !isFormValid;
 }
-
-
-
 
 function validatePassword() {
   var password = document.getElementById("addPassword").value;
@@ -474,3 +475,81 @@ function deleteAdmin(facultyId) {
 function logout(){
   window.location.href = "logout.php";
 }
+
+$(document).ready(function () {
+  $("#adminTable").DataTable({
+    responsive: true,
+    autoWidth: false,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "college" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>'
+          );
+        },
+      },
+    ],
+  });
+});
+
+  $(document).ready(function () {
+  $("#adminTableSuper").DataTable({
+    responsive: true,
+    autoWidth: false,
+    searching: true,
+    processing: true,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "campus" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>'
+          );
+        },
+      },
+    ],
+  });
+});
