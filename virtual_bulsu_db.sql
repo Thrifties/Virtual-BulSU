@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2023 at 04:50 PM
+-- Generation Time: Oct 31, 2023 at 10:12 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -30,22 +30,51 @@ SET time_zone = "+00:00";
 CREATE TABLE `announcements` (
   `announcement_id` int(10) NOT NULL,
   `author` varchar(255) NOT NULL,
-  `headline` varchar(60) NOT NULL,
-  `event_date` date NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `faculty_id` int(10) NOT NULL,
+  `headline` varchar(155) NOT NULL,
+  `description` text NOT NULL,
   `file_input` blob NOT NULL,
-  `campus_assignment` enum('All','Malolos Campus','Bustos Campus','Sarmiento Campus','Sarmiento Capus','San Rafael Campus','Hagonoy Campus','Meneses Campus') NOT NULL DEFAULT 'All',
+  `campus_assignment` enum('Malolos Campus','Bustos Campus','Sarmiento Campus','Sarmiento Capus','San Rafael Campus','Hagonoy Campus','Meneses Campus') NOT NULL,
+  `college_assignment` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `announcements`
+-- Table structure for table `archive_admin`
 --
 
-INSERT INTO `announcements` (`announcement_id`, `author`, `headline`, `event_date`, `description`, `file_input`, `campus_assignment`, `created_at`, `updated_at`) VALUES
-(11, '2020104259', 'Ako\'y may allergy', '2023-09-30', 'asdfasdf', 0x756c77646866756c37387061312e6a7067, 'All', '2023-09-21 12:46:58', '2023-09-21 12:46:58'),
-(12, '2020104259', 'Hala ka', '2023-09-23', 'afaddvasv', 0x353635716d77326762696438312e6a7067, 'All', '2023-09-21 12:47:31', '2023-09-21 12:47:31');
+CREATE TABLE `archive_admin` (
+  `archive_id` int(11) NOT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `campus` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `contact_num` varchar(20) DEFAULT NULL,
+  `archived_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `archive_announcement`
+--
+
+CREATE TABLE `archive_announcement` (
+  `archive_id` int(11) NOT NULL,
+  `announcement_id` int(11) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `headline` varchar(60) NOT NULL,
+  `description` text NOT NULL,
+  `file_input` blob NOT NULL,
+  `campus_assignment` enum('Malolos Campus','Bustos Campus','Sarmiento Campus','Sarmiento Capus','San Rafael Campus','Hagonoy Campus','Meneses Campus') NOT NULL,
+  `college_assignment` varchar(50) NOT NULL,
+  `archived_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -72,9 +101,28 @@ CREATE TABLE `campus_admin` (
 --
 
 INSERT INTO `campus_admin` (`faculty_id`, `admin_level`, `first_name`, `middle_name`, `last_name`, `campus`, `email`, `contact_num`, `password`, `created_at`, `update_at`) VALUES
-(2020104258, 'super_admin', 'Shin', 'Manalili', 'Sayson', 'Malolos Campus', 'kenshinsayson@gmail.com', '09107876004', 'password', '2023-09-20 14:13:39', '2023-09-20 14:13:39'),
-(2020104259, 'admin', 'Audrey', 'Santos', 'Del Rosario', 'Malolos Campus', 'audrey.jeine@gmail.com', '09107876114', 'password', '2023-09-20 15:25:30', '2023-09-20 15:25:30'),
-(2020105555, 'admin', 'Kyra', 'Santos', 'Del Rosario', 'San Rafael Campus', 'kyra@abc.com', '09107876555', 'password', '2023-09-21 12:50:30', '2023-09-21 12:50:30');
+(2020104258, 'super_admin', 'Kenshin', 'Manalili', 'Sayson', 'Malolos Campus', 'kenshinsayson@gmail.com', '09107876001', 'password', '2023-09-20 14:13:39', '2023-09-20 14:13:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `college_admin`
+--
+
+CREATE TABLE `college_admin` (
+  `faculty_id` int(10) NOT NULL,
+  `admin_level` enum('college_admin') NOT NULL DEFAULT 'college_admin',
+  `first_name` varchar(50) NOT NULL,
+  `middle_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `campus` enum('Malolos Campus','Bustos Campus','Sarmiento Campus','Sarmiento Capus','San Rafael Campus','Hagonoy Campus','Meneses Campus') NOT NULL,
+  `college` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contact_num` varchar(11) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -87,9 +135,27 @@ ALTER TABLE `announcements`
   ADD PRIMARY KEY (`announcement_id`);
 
 --
+-- Indexes for table `archive_admin`
+--
+ALTER TABLE `archive_admin`
+  ADD PRIMARY KEY (`archive_id`);
+
+--
+-- Indexes for table `archive_announcement`
+--
+ALTER TABLE `archive_announcement`
+  ADD PRIMARY KEY (`archive_id`);
+
+--
 -- Indexes for table `campus_admin`
 --
 ALTER TABLE `campus_admin`
+  ADD PRIMARY KEY (`faculty_id`);
+
+--
+-- Indexes for table `college_admin`
+--
+ALTER TABLE `college_admin`
   ADD PRIMARY KEY (`faculty_id`);
 
 --
@@ -100,7 +166,19 @@ ALTER TABLE `campus_admin`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `announcement_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `announcement_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `archive_admin`
+--
+ALTER TABLE `archive_admin`
+  MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `archive_announcement`
+--
+ALTER TABLE `archive_announcement`
+  MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

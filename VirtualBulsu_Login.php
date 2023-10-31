@@ -13,6 +13,7 @@ require "includes/sessionStart.php"
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <link rel="icon" href="resources/virtualbulsu_logo.png" />
 </head>
 <style>
     html,

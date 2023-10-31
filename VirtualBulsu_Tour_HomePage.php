@@ -7,6 +7,7 @@
   <title>Bulacan State University</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS\VirtualBulsu_Navbar.css" />
+  <link rel="icon" href="resources/virtualbulsu_logo.png" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   <style>
     html,
@@ -181,7 +182,7 @@
   <?php include "includes/tour_navbar.php"; ?>
 
   <!-- Virtual Tour Introduction -->
-  <div class="container d-block position-absolute mx-5" id="VTIntroduction">
+  <div class="container-lg my-auto" id="VTIntroduction">
     <div class="image">
 
     </div>
@@ -202,9 +203,9 @@
     </a>
   </div>
   <div class="navigate" <img src="resources\navigate.png" alt="Logo" width="80" height="auto">
-    <footer class="footer">
+  <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
-    </footer>
+  </footer>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 

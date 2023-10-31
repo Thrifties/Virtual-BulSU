@@ -11,6 +11,7 @@ require "connect.php"
     <title>Bulacan State University</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="icon" href="resources/virtualbulsu_logo.png" />
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/mobileView.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
@@ -116,7 +117,7 @@ require "connect.php"
             <div class="container-fluid">
                 <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
                     <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    <span class="navbar-title text-wrap">Bulacan State University - Hagonoy Campus</span>
+                    <span class="navbar-title text-wrap text-white">Bulacan State University - Hagonoy Campus</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -136,7 +137,7 @@ require "connect.php"
                                 <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas" data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="campuses">
                                     Campuses
                                 </a>
                                 <ul class="dropdown-menu">
@@ -153,7 +154,7 @@ require "connect.php"
                 </div>
                 <a class="navbar-brand custom-brand mx-auto d-none d-lg-block" href="VirtualBulsu_Tour_HomePage.php">
                     <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    <span class="navbar-title text-wrap">Bulacan State University - Hagonoy Campus</span>
+                    <span class="navbar-title text-wrap text-white">Bulacan State University - Hagonoy Campus</span>
                 </a>
             </div>
         </nav>
