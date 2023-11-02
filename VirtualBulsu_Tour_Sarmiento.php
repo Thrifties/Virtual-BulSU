@@ -130,8 +130,8 @@ require "connect.php"
             <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
-                        <img src="resources\SarmientoLogo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                        <span class="navbar-title text-wrap text-white">Bulacan State University - Sarmiento Campus</span>
+                        <img src="resources\BSU_Sarmiento.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <span class="navbar-title text-wrap text-white">BulSU - Sarmiento Campus</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -169,7 +169,7 @@ require "connect.php"
                         </div>
                     </div>
                     <a class="navbar-brand custom-brand mx-auto d-none d-lg-block" href="VirtualBulsu_Tour_HomePage.php">
-                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <img src="resources\BSU_Sarmiento.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         <span class="navbar-title text-wrap text-white">Bulacan State University - Sarmiento Campus</span>
                     </a>
                 </div>

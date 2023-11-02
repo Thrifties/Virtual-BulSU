@@ -33,25 +33,28 @@ body {
   color: #ffd700;
 }
 
-#tranding {
+#campusSelect {
 padding: 4rem 0;
 }
 
-@media (max-width:1440px) {
-#tranding {
+
+/* @media (max-width:1440px) {
+#campusSelect {
 padding: 7rem 0;
 }
-}
+} */
 
-#tranding .tranding-slider {
+#campusSelect .tranding-slider {
 height: 52rem;
 padding: 2rem 0;
 position: relative;
 }
 
 @media (max-width:500px) {
-#tranding .tranding-slider {
+#campusSelect .tranding-slider {
 height: 45rem;
+width: 20rem;
+overflow-y: auto;
 }
 }
 
@@ -63,30 +66,29 @@ position: relative;
 
 @media (max-width:500px) {
 .tranding-slide {
-width: 28rem !important;
-height: 36rem !important;
-}
-.tranding-slide .tranding-slide-img img {
-width: 28rem !important;
-height: 36rem !important;
+width: 20rem !important;
+height: 39rem !important;
 }
 }
 
-.tranding-slide .tranding-slide-img img  {
+/* .tranding-slide .tranding-slide-img img  {
 width: 37rem;
 height: 42rem;
 border-radius: 2rem;
 object-fit: cover;
+} */
+
+.tranding-slide a {
+  text-decoration: none;
 }
 
-
-.swiper-slide-shadow-left,
+/* .swiper-slide-shadow-left,
 .swiper-slide-shadow-right {
 display: none;
 }
 
 .tranding-slider-control {
-position: relative;
+position: absolute;
 bottom: 2rem;
 display: flex;
 align-items: center;
@@ -124,11 +126,7 @@ transform: translateX(-30%) !important;
 left: 20% !important;
 transform: translateX(-20%) !important;
 }
-}
-
-#campusSelect {
-margin: auto 0;
-}
+} */
 
 #campusSelect h1 {
 color: white;
@@ -139,7 +137,7 @@ margin-top: 25px;
 margin-bottom: 25px;
 font-family: 'Roboto';
 }
-
+/* 
 .tranding-slider-control .slider-arrow {
 width: 3.5rem;
 height: 3.5rem;
@@ -171,17 +169,12 @@ filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
 .tranding-slider-control .swiper-pagination .swiper-pagination-bullet-active {
 background: var(--primary);
 }
-
+ */
 .footer {
-  position:absolute;
-  bottom: 0;
   background-color: #763435;
   color: white;
   padding: 10px;
   text-align: center;
-  width: 100%;
-  flex-shrink: 0;
-  
 }
 
 .navbar-custom .navbar-nav #campus-link:before {

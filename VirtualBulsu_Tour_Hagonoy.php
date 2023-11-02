@@ -117,7 +117,7 @@ require "connect.php"
             <div class="container-fluid">
                 <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
                     <img src="resources\BSU_Hagonoy.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                    <span class="navbar-title text-wrap text-white">Bulacan State University - Hagonoy Campus</span>
+                    <span class="navbar-title text-wrap text-white">BulSU - Hagonoy Campus</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
