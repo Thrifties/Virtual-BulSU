@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid d-flex justify-content-start-lg">
       <a class="navbar-brand custom-brand order-0" href="VirtualBulsu_Tour_HomePage.php">
-        <img src="resources\virtualbulsu_logo.png" alt="Logo" width="80" height="auto" class="d-inline-block align-top" />
+        <img src="resources\virtualbulsu_logo.png" id="navBarLogo" alt="Logo" width="80" height="auto" class="d-inline-block align-top" />
         <!-- Virtual BulSU -->
       </a>
 

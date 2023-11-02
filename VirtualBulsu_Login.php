@@ -13,7 +13,6 @@ require "includes/sessionStart.php"
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-    <link rel="icon" href="resources/virtualbulsu_logo.png" />
 </head>
 <style>
     html,
@@ -25,7 +24,7 @@ require "includes/sessionStart.php"
     body {
         background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
 
-            url('resources/cover.png');
+            url('resources/school_cover1.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -36,6 +35,7 @@ require "includes/sessionStart.php"
 
     }
 
+    /*
     .box-flex-justify-content-center {
         display: flex;
         justify-content: center;
@@ -47,7 +47,7 @@ require "includes/sessionStart.php"
         width: 400px;
         flex-direction: column;
         padding: 0 15px 0 15px;
-        /*border: 2px solid#f7f7f7; */
+        /*border: 2px solid#f7f7f7; 
         border-radius: 10px;
         margin-top: 30px;
         margin-bottom: 15px;
@@ -72,7 +72,7 @@ require "includes/sessionStart.php"
         padding: 10px 0 10px 0;
     }
 
-    #password, #username {
+    .input-flex-justify-content-center {
         height: 45px;
         width: 70%;
         border: none;
@@ -169,32 +169,247 @@ require "includes/sessionStart.php"
         top: -30px;
         left: 60px;
         color: #fff;
+    }  */
+
+    .container {
+        width: 50vw;
+        height: 60vh;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas: "login";
+        box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+        border-radius: 20px;
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+            url('resources/school_cover2.png');
+        overflow: hidden;
+        background-size: cover;
+    }
+
+    .rotate-45 {
+        transform: rotate(-45deg);
+    }
+
+    .login {
+        grid-area: login;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .login h3.title {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-family: 'Roboto';
+        font-size: 30px;
+        font-weight: bold;
+        padding-top: 50px;
+        color: #d09b00;
+    }
+
+    .text-input {
+        background: #e6e6e6;
+        height: 40px;
+        display: flex;
+        width: 60%;
+        align-items: center;
+        border-radius: 10px;
+        padding: 0 15px;
+        margin: 5px 0;
+    }
+
+    .text-input input {
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        margin-left: 10px;
+        color: #d09b00;
+    }
+
+    .text-input i {
+        color: #686868;
+    }
+
+    ::placeholder {
+        color: #9a9a9a;
+    }
+
+    .login-btn {
+        width: 68%;
+        padding: 10px;
+        color: white;
+        background: linear-gradient(to right, #ff966d, #fa538d, #89379c);
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        background: rgba(231, 199, 17, 0.7);
+        background-color: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    a {
+        font-size: 12px;
+        color: #9a9a9a;
+        cursor: pointer;
+        user-select: none;
+        text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+        .container {
+            grid-template-columns: 50% 50%;
+            grid-template-areas: "design login";
+        }
+
+        .design {
+            display: block;
+        }
+    }
+
+    .input-field .submit {
+        color: #fff;
+        margin-top: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        height: 40px;
+        width: 200px;
+        background-color: #d09b00;
+        border: white;
+
+    }
+
+    .input-field .submit:hover {
+        color: white;
+        background-color: #8D4242;
     }
 </style>
 
 <body>
-    <div class="box-flex-justify-content-center">
+    <!--<div class="box-flex-justify-content-center">
         <div class="container-justify-content-center">
             <div class="top-header-d-flex justify-content-center">
-
-                <img id="virtualbulsuLogo" src="resources\virtualbulsu_logo.png" alt="Logo" />
-                <form method="post" action="login.php">
-                    <div class="form-group">
+                <span>Have an account? </span> -->
+    <!--<header>Login Form</header>
+                <img id="virtualbulsuLogo" src="resources\virtualbulsu_logo.png" alt="Logo" /> -->
+    <div class="container">
+        <div class="design">
+            <div class="pill-1 rotate-45"></div>
+            <div class="pill-2 rotate-45"></div>
+            <div class="pill-3 rotate-45"></div>
+            <div class="pill-4 rotate-45"></div>
+        </div>
+        <form method="post" action="login.php">
+            <div class="form-group">
+                <div class="login">
+                    <h3 class="title">Welcome</h3>
+                    <div class="text-input">
+                        <i class="ri-user-fill"></i>
+                        <input type="text" placeholder="Faculty ID" input name="username" required />
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="text-input">
+                        <i class="ri-lock-fill"></i>
+                        <input type="password" placeholder="Password" input name="password" required />
+                        <i class="bx bx-lock"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="submit" class="submit" value="LOGIN" />
+                    </div>
+                </div>
+            </div>
+            <!--
                         <div class="input-field">
-                            <input type="text" class="form-control" id="username" placeholder="Faculty ID" input name="username" required />
+                            <input type="number" placeholder="Faculty ID" input name="username" required />
                             <i class="bx bx-user"></i>
                         </div>
                         <div class="input-field">
-                            <input type="password" class="form-control" id="password" placeholder="Password" input name="password" required />
+                            <input type="password" placeholder="Password" input name="password" required />
                             <i class="bx bx-lock"></i>
                         </div>
                         <div class="input-field">
                             <input type="submit" class="submit" value="Login" />
                         </div>
+-->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!--<div class="bottom">
+                            <div class="left">
+                                <input type="checkbox" id=" check" />
+                                <label for="check"> &nbsp Remember Me </label>
+                            </div>
+                            <div class="right">
+                                <label><a href="#"> Forgot Password?</a></label>
+                            </div> 
+
+                          
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Login Interface</title>
+                                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                            </head>
+                            <style>
+                                html,
+                                body {
+                                    height: 100%;
+                                }
+
+                                body {
+                                    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+
+                                        url('resources/cover.png');
+                                    background-size: cover;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    background-attachment: fixed;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+
+                                }
+                            </style>
+
+                            
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Login</h3>
+                        <form method="post" action="login.php">
+                            <div class="form-group">
+                                <label for="username">Admin:</label>
+                                <input name="username" type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input name="password" type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            >>>>>>> cccaa5ffbe21c7005caa4528017ee2457e459ad7:VirtualBulsu_Login.php
+        </div>
+        <div class="right">
+            <label><a href="#"> Forgot Password?</a></label>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+     Include the necessary Bootstrap JavaScript libraries -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

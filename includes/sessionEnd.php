@@ -2,7 +2,7 @@
 	session_start();
 	if (!isset($_SESSION["user"]) && !isset($_SESSION["pass"]))
 	{
-	header('Location: login.php');
+	header('Location: VirtualBulsu_Login.php');
 	exit();
 	}
 ?>

@@ -130,7 +130,7 @@ require "connect.php"
             <nav id="navBar" class="navbar navbar-lg navbar-custom">
                 <div class="container-fluid">
                     <a class="navbar-brand custom-brand mx-auto d-lg-none" href="VirtualBulsu_Tour_HomePage.php">
-                        <img src="resources\BSU_Logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                        <img src="resources\SarmientoLogo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         <span class="navbar-title text-wrap text-white">Bulacan State University - Sarmiento Campus</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
