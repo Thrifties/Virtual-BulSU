@@ -106,24 +106,16 @@
             </div>
           </a>
         </div>
-
-
-
-      <!-- <div class="tranding-slider-control">
-        <div class="swiper-button-prev slider-arrow">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </div>
-        <div class="swiper-button-next slider-arrow">
-          <ion-icon name="arrow-forward-outline"></ion-icon>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div> -->
-
-
-
-
       </div>
     </div>
+  </div>
+
+  <div class="tranding-slider-control">
+        <div class="swiper-button-prev slider-arrow">
+        </div>
+        <div class="swiper-button-next slider-arrow">
+        </div>
+        <div class="swiper-pagination"></div>
   </div>
 
   <footer class="footer">
