@@ -57,7 +57,7 @@ $stmt->close();
   
   <?php include "includes/navbar.php" ?>
 
-  <div class="container-lg mt-5" id="announcementPage">
+  <div class="container-fluid mt-5" id="announcementPage">
     <!-- Announcement Panel -->
     <div class="announcement-panel">
       <div class="d-flex justify-content-between align-items-center mb-3">

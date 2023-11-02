@@ -24,10 +24,10 @@
         var pattern;
         switch (elementId) {
             case "firstName":
-                pattern = /^[a-zA-Z]+$/;
+                pattern = /^[a-zA-Z ]+$/;
                 break;
             case "lastName":
-                pattern = /^[a-zA-Z]+$/;
+                pattern = /^[a-zA-Z ]+$/;
                 break;
             case "email":
                 pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

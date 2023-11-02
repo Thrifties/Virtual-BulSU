@@ -34,10 +34,10 @@ if ($currentAdminLevel == 'super_admin') {
     $sql = "SELECT * FROM announcements";
 } elseif ($currentAdminLevel == 'admin') {
     // Admin can see announcements for their campus.
-    $sql = "SELECT * FROM announcements WHERE campus = '$currentAdminCampus'";
+    $sql = "SELECT * FROM announcements WHERE campus_assignment = '$currentAdminCampus'";
 } elseif ($currentAdminLevel == 'college_admin') {
     // College admin can see announcements for their campus and college.
-    $sql = "SELECT * FROM announcements WHERE campus = '$currentAdminCampus' AND college = '$currentCollege'";
+    $sql = "SELECT * FROM announcements WHERE campus_assignment = '$currentAdminCampus' AND college_assignment = '$currentCollege'";
 }
 
 $result1 = $con->query($sql);

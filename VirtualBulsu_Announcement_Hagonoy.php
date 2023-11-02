@@ -117,7 +117,7 @@ $result = mysqli_query($con, $query);
                       $headline = $row2['headline'];
                       $image = $row2['file_input'];
                       $description = $row2['description'];
-                      $datePosted = $row2['created_at'];
+                      $datePosted = date('F d, Y', strtotime($row2['created_at']));
 
                       // Output the announcement HTML structure here
                       echo '<div class="col-md-6 col-lg-4">';

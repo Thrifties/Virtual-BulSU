@@ -1,0 +1,13 @@
+#settingPage {
+    position: absolute;
+    left: 290px;
+    width: calc(100% - 290px);
+}
+
+@media (max-width: 1200px) {
+    #settingPage {
+        position: absolute;
+        left: 230px;
+        width: calc(100% - 230px);
+    }
+}

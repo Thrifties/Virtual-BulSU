@@ -202,6 +202,7 @@ require "connect.php"
                         }
         
                         while ($row = mysqli_fetch_assoc($result)) {
+                            $datePosted = date('F d, Y', strtotime($row['created_at']));
                             echo '
                                 <div class="card mb-3" id='.$row['announcement_id'].'>
                                 <a href="VirtualBulsu_AnnouncementPage.php?id='.$row['announcement_id'].'" class="text-decoration-none text-body">
@@ -210,7 +211,7 @@ require "connect.php"
                                         <h5 class="card-title">' . htmlspecialchars($row['headline']) . '</h5>
                                     </div>
                                     <div class="card-footer">
-                                       <small class="text-body-secondary">Date Posted: '.$row['created_at'].'<small>
+                                       <small class="text-body-secondary">Date Posted: '.$datePosted.'<small>
                                        </div>
                                 </a>
                                 </div>

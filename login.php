@@ -1,5 +1,4 @@
 
-
 <?php
 session_start();
 require "connect.php"; 
@@ -28,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
 		$_SESSION["user"] = $user;
 		$_SESSION["pass"] = $pass;
-    echo 'alert("Login Successful!");';
     header("refresh: 1; url=VirtualBulsu_AnnouncementPanel.php");
 
 		
@@ -43,12 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $_SESSION["user"] = $user;
 			$_SESSION["pass"] = $pass;
-    		echo 'alert("Login Successful!");';
+            $output = '<div class="alert alert-success" role="alert">
+                            Login successful!
+                        </div>';
     		header("refresh: 1; url=VirtualBulsu_AnnouncementPanel.php");
 
         } else {
             // User not found in either table
-            echo "Invalid username or password";
+            $output = '<div class="alert alert-danger" role="alert">
+                            Invalid username or password!
+                        </div>';
+            header("refresh: 1; url=VirtualBulsu_Login.php");
         }
     }
 
@@ -58,3 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $con->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= device-width, initial-scale=1.0">
+    <title>Virtual BulSU</title>
+    <?php include "includes/cdn.php"?>
+</head>
+<body>
+<?php $output ?>
+<?php include "includes/js_cdn.php"?>
+</body>
+</html>

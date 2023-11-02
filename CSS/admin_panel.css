@@ -13,3 +13,17 @@ td button {
     text-decoration: none;
     background-color: #4C1D14;
 }
+
+#adminPage {
+    position: absolute;
+    left: 290px;
+    width: calc(100vw - 290px);
+}
+
+@media (max-width: 1200px) {
+    #adminPage {
+        position: absolute;
+        left: 230px;
+        width: calc(100vw - 230px);
+    }
+}

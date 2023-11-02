@@ -5,7 +5,7 @@ $announcementId = $_POST['announcementId'];
 $campusAssignment = $_POST['campusAssignment'];
 $collegeAssignment = $_POST['collegeAssignment'];
 $headline = $_POST['headline'];
-$description = $_POST['description'];
+$description = nl2br($_POST['description']);
 
 // Initialize $fileInput as null
 $fileInput = null;

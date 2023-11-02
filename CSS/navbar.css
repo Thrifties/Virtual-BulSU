@@ -58,11 +58,13 @@
 
 @media (max-width: 1200px) {
   .sidebar {
-    width: 180px;
+    width: 230px;
+    height: 100vh;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
   }
+
   
 }

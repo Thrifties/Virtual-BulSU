@@ -42,6 +42,7 @@ if ($result->num_rows > 0) {
         <title>User Admin Settings</title>
         <?php include "includes/cdn.php" ?>
         <link rel="stylesheet" href="CSS/navbar.css">
+        <link rel="stylesheet" href="CSS/settings_panel.css">
         <style>
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -52,7 +53,7 @@ if ($result->num_rows > 0) {
     <body>
         <?php include "includes/navbar.php"; ?>
 
-            <div class="container p-3 mt-5 ">
+            <div class="container-fluid p-3 mt-5" id="settingPage">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">

@@ -32,44 +32,45 @@ if ($result1) {
 
   <?php include "includes/navbar.php"; ?>
 
-  <div class="container-lg mt-5" id="adminPage">
+  <div class="container-fluid mt-5" id="adminPage">
     <div class="admin-panel-container">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Admin Panel</h2>
-        <div>
+        <div class="mb-1">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminModal">Add Admin</button>
           <a href="generate_report_admin.php" class="btn btn-success">Download List</a>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
           <!-- Table to display the list of admins -->
-    <div class="table-responsive">
-      <table id="<?php if($currentAdminLevel == 'admin'){
-        echo 'adminTable';
-      } elseif ($currentAdminLevel == 'super_admin') {
-        echo 'adminTableSuper';
-      } ?>" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>Faculty ID</th>
-                <th>Name</th>
-                 <?php 
-                  if ($currentAdminLevel === 'super_admin') {
-                    echo "<th>Campus</th>";
-                  } elseif ($currentAdminLevel === 'admin') {
-                    echo "<th>College</th>";
-                  }
-                  ?>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
-      </table>
-
+          <div class="table-responsive">
+            <table id="<?php if($currentAdminLevel == 'admin'){
+              echo 'adminTable';
+            } elseif ($currentAdminLevel == 'super_admin') {
+              echo 'adminTableSuper';
+            } ?>" class="display" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>Faculty ID</th>
+                      <th>Name</th>
+                      <?php 
+                        if ($currentAdminLevel === 'super_admin') {
+                          echo "<th>Campus</th>";
+                        } elseif ($currentAdminLevel === 'admin') {
+                          echo "<th>College</th>";
+                        }
+                        ?>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+              </tbody>
+            </table>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 
@@ -201,12 +202,6 @@ if ($result1) {
               <div id="feedbackMessage" class="invalid-feedback">
               </div>
             </div>
-            <div class="form-group mt-2">
-              <label for="addFacultyId">Password:</label>
-              <input type="password" class="form-control" name="addPassword" id="addPassword" value="" required>
-              <div id="passwordFeedback" class="invalid-feedback">
-              </div>
-            </div>
             <div class="form-row mt-2">
               <div class="col">
                 <label for="firstName">First Name</label>
@@ -283,6 +278,12 @@ if ($result1) {
               <label for="phone">Contact Number</label>
               <input type="text" class="form-control" name="addPhone" id="addPhone" required>
               <div id="addPhoneFeedback" class="invalid-feedback">
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label for="addFacultyId">Password:</label>
+              <input type="password" class="form-control" name="addPassword" id="addPassword" value="" onkeyup="validatePassword()" required>
+              <div id="passwordFeedback" class="invalid-feedback">
               </div>
             </div>
             <div class="modal-footer">

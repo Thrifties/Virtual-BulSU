@@ -1,5 +1,4 @@
-    
-    let id;
+let id;
     
     document.getElementById("headline").addEventListener("input", validateForm);
     document.getElementById("description").addEventListener("input", validateForm);
@@ -83,7 +82,7 @@
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
+            document.getElementById("viewDescription").textContent = data.description;
             document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
             document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
           }
@@ -121,7 +120,7 @@
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = data.description;
+            document.getElementById("viewDescription").textContent = data.description;
             document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
           }
         };
@@ -253,6 +252,7 @@
           { data: "announcement_id",
             render: function (data) {
               return (
+                '<div class="btn-group" role="group">' +
                 '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal" onclick="viewAnnouncementModal(' +
                 data +
                 ')">View</button>' +
@@ -261,7 +261,8 @@
                 ')">Edit</button>' +
                 '<button type="button" class="btn btn-danger" onclick="deleteAnnouncement(' +
                 data +
-                ')">Delete</button>'
+                ')">Archive</button>' +
+                '</div>'
               );
             },
           },
@@ -345,3 +346,4 @@
 
     // Initial update when the page loads
     updateCollegeOptions();
+

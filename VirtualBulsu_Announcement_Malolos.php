@@ -87,6 +87,11 @@ $result = mysqli_query($con, $query);
         color: white;
         padding: 5px;
         text-align: center;
+        position:absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
       }
 
       #announcementCard {
@@ -114,7 +119,7 @@ $result = mysqli_query($con, $query);
     <?php include "includes/tour_navbar.php"; ?>
 
     <div class="container-lg my-3 ">
-      <h1 class="text-white text-center" id="heading">Malolos Campus News</h1>
+      <h1 class="text-white text-center" id="heading" >Malolos Campus News</h1>
         <div class="container-lg mt-3">
             <div class="row g-3">
             <?php
@@ -131,7 +136,7 @@ $result = mysqli_query($con, $query);
                       $headline = $row2['headline'];
                       $image = $row2['file_input'];
                       $description = $row2['description'];
-                      $datePosted = $row2['created_at'];
+                      $datePosted = date('F d, Y', strtotime($row2['created_at']));
 
                       // Output the announcement HTML structure here
                       echo '<div class="col-md-6 col-lg-4">';

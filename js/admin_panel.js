@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
-document.getElementById("addPassword").addEventListener("input", validateForm);
 document.getElementById("firstName").addEventListener("input", validateForm);
 document.getElementById("lastName").addEventListener("input", validateForm);
 document.getElementById("addEmail").addEventListener("input", validateForm);
@@ -51,10 +50,10 @@ function validateInput(elementId) {
       var pattern;
       switch (elementId) {
           case "firstName":
-              pattern = /^[a-zA-Z]+$/;
+              pattern = /^[a-zA-Z ]+$/;
               break;
           case "lastName":
-              pattern = /^[a-zA-Z]+$/;
+              pattern = /^[a-zA-Z ]+$/;
               break;
           case "addEmail":
               pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -63,10 +62,10 @@ function validateInput(elementId) {
               pattern = /^\d{11}$/;
               break;
           case "viewFirstName":
-              pattern = /^[a-zA-Z]+$/;
+              pattern = /^[a-zA-Z ]+$/;
               break;
           case "viewLastName":
-              pattern = /^[a-zA-Z]+$/;
+              pattern = /^[a-zA-Z ]+$/;
               break;
           case "viewEmail":
               pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,6 +84,7 @@ function validateInput(elementId) {
           return false;
       } else {
           document.getElementById(elementId).classList.remove("is-invalid");
+          document.getElementById(elementId).classList.add("is-valid");
           feedbackMessage.innerHTML = "";
           // Enable or disable the button based on whether all required fields are filled
           var isFormValid = validateForm();
@@ -117,14 +117,13 @@ function validateUpdateForm() {
 
 function validateForm() {
     var facultyId = document.getElementById("addFacultyId").value;
-    var password = document.getElementById("addPassword").value;
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
     var email = document.getElementById("addEmail").value;
     var phone = document.getElementById("addPhone").value;
 
 
-    var isFormValid = facultyId !== "" && password !== "" && firstName !== "" && lastName !== "" && email !== "" && phone !== "";
+    var isFormValid = facultyId !== "" && firstName !== "" && lastName !== "" && email !== "" && phone !== "";
     document.getElementById("addBtn").disabled = !isFormValid;
 }
 
@@ -136,11 +135,32 @@ function validatePassword() {
       feedbackMessage.innerText = "Looks good!";
       document.getElementById("addPassword").classList.remove("is-invalid");
       document.getElementById("addPassword").classList.add("is-valid");
+      document.getElementById("addBtn").disabled = false;
   } else {
       feedbackMessage.innerText = "Password should be between 8 and 25 characters.";
       document.getElementById("addPassword").classList.remove("is-valid");
       document.getElementById("addPassword").classList.add("is-invalid");
+      document.getElementById("addBtn").disabled = true;
   }
+}
+
+function confirmPass() {
+  var password = document.getElementById("addPassword").value;
+  var confirmPassword = document.getElementById("confirmPass").value;
+  var feedbackMessage = document.getElementById("confirmPasswordFeedback");
+
+  if (password === confirmPassword) {
+      feedbackMessage.innerText = "Passwords match!";
+      document.getElementById("confirmPass").classList.remove("is-invalid");
+      document.getElementById("confirmPass").classList.add("is-valid");
+      document.getElementById("addBtn").disabled = false;
+  } else {
+      feedbackMessage.innerText = "Passwords do not match.";
+      document.getElementById("confirmPass").classList.remove("is-valid");
+      document.getElementById("confirmPass").classList.add("is-invalid");
+      document.getElementById("addBtn").disabled = true;
+  }
+
 }
 
 function checkFacultyId() {
@@ -498,6 +518,7 @@ $(document).ready(function () {
       { data: "faculty_id",
         render: function (data) {
           return (
+            '<div class="btn-group" role="group">' +
             '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
             data +
             ')">View</button>' +
@@ -506,7 +527,8 @@ $(document).ready(function () {
             ')">Edit</button>' +
             '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
             data +
-            ')">Delete</button>'
+            ')">Delete</button>' +
+            '</div>'
           );
         },
       },
@@ -517,7 +539,7 @@ $(document).ready(function () {
   $(document).ready(function () {
   $("#adminTableSuper").DataTable({
     responsive: true,
-    autoWidth: false,
+    autoWidth: true,
     searching: true,
     processing: true,
     ajax: {
@@ -538,6 +560,7 @@ $(document).ready(function () {
       { data: "faculty_id",
         render: function (data) {
           return (
+            '<div class="btn-group" role="group">' +
             '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
             data +
             ')">View</button>' +
@@ -546,7 +569,8 @@ $(document).ready(function () {
             ')">Edit</button>' +
             '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
             data +
-            ')">Delete</button>'
+            ')">Archive</button>' +
+            '</div>'
           );
         },
       },
