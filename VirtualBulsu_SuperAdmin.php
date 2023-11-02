@@ -23,8 +23,8 @@ if ($result1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <?php include "includes/cdn.php"; ?>
-    <link rel="stylesheet" href="CSS/navbar.CSS">
-    <link rel="stylesheet" href="CSS/admin_panel.CSS">
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/admin_panel.css">
   </head>
 
   <body>
@@ -299,6 +299,6 @@ if ($result1) {
   include "includes/js_cdn.php"; 
   
   ?>
-  <script src="js/admin_panel.JS"></script>
+  <script src="js/admin_panel.js"></script>
   </body>
 </html>

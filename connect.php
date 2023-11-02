@@ -1,18 +1,14 @@
 <?php
-$host = "localhost";
-$dbname = "u673355866_vbulsu";
-$username = "u673355866_vbulsu";
-$password = "a9FU@1F92e@$Hhf";
 
-try {
-    // Create a new PDO instance
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+$servername = "localhost";
+$username = "u156823415_virtual_bulsu";
+$password = "Virtual_BulSU_2023";
+$dbname = "u156823415_virtual_bulsu";
 
-    // Set PDO to throw exceptions on error
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    echo "Connected to the database successfully";
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error); // Handle the error appropriately
 }
+
 ?>

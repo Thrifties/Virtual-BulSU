@@ -48,8 +48,8 @@ $stmt->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php include "includes/cdn.php" ?>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="CSS/navbar.CSS">
-  <link rel="stylesheet" href="CSS/announcement_panel.CSS">
+  <link rel="stylesheet" href="CSS/navbar.css">
+  <link rel="stylesheet" href="CSS/announcement_panel.css">
   <title>Announcement Panel</title>
 </head>
 
@@ -297,7 +297,7 @@ $stmt->close();
       </div>
     </div>
     <?php include "includes/js_cdn.php" ?>
-    <script src="js/announcement_panel.JS"></script>
+    <script src="js/announcement_panel.js"></script>
 </body>
 
 </html>
