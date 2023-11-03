@@ -216,6 +216,7 @@ let id;
 
       $(document).ready(function () {
       $('#announcementTbl').DataTable({
+        paging: false,
         responsive: true,
         autoWidth: false,
         searching: true,

@@ -66,5 +66,7 @@
     left: 0;
   }
 
-  
+  #announcementTbl {
+    height: 50vh;
+  }
 }

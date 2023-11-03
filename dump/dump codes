@@ -1,0 +1,153 @@
+function saveChanges() {
+  // Get a list of admin data from your HTML or data source
+  var adminDataList = getAdminDataList(); // Implement this function to retrieve the data
+
+  adminDataList.forEach(function (adminData) {
+    var facultyId = adminData.facultyId;
+    var firstName = adminData.firstName;
+    var middleName = adminData.middleName;
+    var lastName = adminData.lastName;
+    var campus = adminData.campus;
+    var email = adminData.email;
+    var phone = adminData.phone;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "update_admin.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            alert(response.success);
+          } else {
+            alert(response.error);
+          }
+        } else {
+          alert("Error updating admin details. Please try again later.");
+        }
+      }
+    };
+
+    // Send the updated admin data to the server
+    xhr.send(
+      "facultyId=" +
+        facultyId +
+        "&firstName=" +
+        firstName +
+        "&middleName=" +
+        middleName +
+        "&lastName=" +
+        lastName +
+        "&campus=" +
+        campus +
+        "&email=" +
+        email +
+        "&phone=" +
+        phone
+    );
+  });
+}
+
+// Function to get a list of admin data from your HTML or data source
+function getAdminDataList() {
+  // Implement this function to retrieve and return a list of admin data
+  // For example, you can collect data from your HTML form elements and organize it into a list
+  var adminDataList = [];
+  // Add each set of admin data to the list
+  // Example:
+  adminDataList.push({
+    facultyId: document.getElementById("facultyId").value,
+    firstName: document.getElementById("viewFirstName").value,
+    middleName: document.getElementById("viewMiddleName").value,
+    lastName: document.getElementById("viewLastName").value,
+    campus: document.getElementById("viewCampus").value,
+    email: document.getElementById("viewEmail").value,
+    phone: document.getElementById("viewPhone").value,
+  });
+
+  // Repeat the above step for each set of admin data
+  return adminDataList;
+}
+
+
+
+
+function saveChangesAdmin() {
+
+  var adminCollegeDataList = getCollegeAdminDataList(); // Implement this function to retrieve the data
+
+    adminCollegeDataList.forEach(function (adminData) {
+        var facultyId = adminData.facultyId;
+        var firstName = adminData.firstName;
+        var middleName = adminData.middleName;
+        var lastName = adminData.lastName;
+        var campus = adminData.campus;
+        var college = adminData.college;
+        var email = adminData.email;
+        var phone = adminData.phone;
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin_college.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                alert(response.success);
+                } else {
+                alert(response.error);
+                }
+            } else {
+                alert("Error updating admin details. Please try again later.");
+            }
+            }
+        };
+    
+        // Send the updated admin data to the server
+        xhr.send(
+            "facultyId=" +
+            facultyId +
+            "&firstName=" +
+            firstName +
+            "&middleName=" +
+            middleName +
+            "&lastName=" +
+            lastName +
+            "&campus=" +
+            campus +
+            "&college=" +
+            college +
+            "&email=" +
+            email +
+            "&phone=" +
+            phone
+        );
+        });
+}
+
+// Function to get a list of admin data from your HTML or data source
+function getCollegeAdminDataList() {
+    // Implement this function to retrieve and return a list of admin data
+    // For example, you can collect data from your HTML form elements and organize it into a list
+    var adminCollegeDataList = [];
+    // Add each set of admin data to the list
+    // Example:
+    adminCollegeDataList.push({
+      facultyId: document.getElementById("facultyId").value,
+      firstName: document.getElementById("viewFirstName").value,
+      middleName: document.getElementById("viewMiddleName").value,
+      lastName: document.getElementById("viewLastName").value,
+      campus: document.getElementById("viewCampus").value,
+      college: document.getElementById("viewCollege").value,
+      email: document.getElementById("viewEmail").value,
+      phone: document.getElementById("viewPhone").value,
+    });
+
+    // Repeat the above step for each set of admin data
+    return adminCollegeDataList;
+
+}
+
+

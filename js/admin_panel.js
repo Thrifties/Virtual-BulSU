@@ -1,172 +1,5 @@
-const campusSelect = document.getElementById('addCampus');
-    const collegeSelect = document.getElementById('addCollege');
-
-    // Define the available colleges for each campus
-    const campusColleges = {
-        'Malolos Campus': [
-          '-- Select College --',
-            'College of Industrial Technology',
-            'College of Information and Communications Technology',
-            'College of Nursing',
-            'College of Hospitality and Tourism Management',
-            'College of Education',
-            'College of Law',
-            'College of Engineering',
-            'College of Business Administration',
-            'College of Sports, Exercise and Recreation',
-            'College of Arts and Letters',
-            'College of Science',
-            'College of Architecture and Fine Arts',
-            'Graduate School',
-            'College of Social Sciences and Philosophy',
-            'College of Criminal Justice Education'
-        ],
-        'Meneses Campus': [
-          '-- Select College --',
-            'College of Education',
-            'College of Hospitality Management',
-            'College of Engineering',
-            'College of Business Administration',
-            'College of Information and Communications Technology',
-            'College of Industrial Technology'
-        ],
-        'Hagonoy Campus': [
-          '-- Select College --',
-            'College of Industrial Technology',
-            'College of Hospitality and Tourism Management',
-            'College of Education',
-            'College of Information and Communications Technology'
-        ],
-        'Bustos Campus': [
-          '-- Select College --',
-            'College of Engineering',
-            'College of Business Administration',
-            'College of Information and Communication Technology'
-        ],
-        'San Rafael Campus': [
-          '-- Select College --',
-            'College of Nursing',
-            'College of Science',
-            'College of Social Science and Philosophy'
-        ],
-        'Sarmiento Campus': [
-            '-- Select College --',
-            'College of Science',
-            'College of Industrial Technology',
-            'College of Education',
-            'College of Business Administration',
-            'College of Hotel and Tourism Management'
-        ]
-    };
-
-    // Function to update the college options based on the selected campus
-    function updateCollegeOptions() {
-        const selectedCampus = campusSelect.value;
-        collegeSelect.innerHTML = ''; // Clear current options
-
-        if (selectedCampus in campusColleges) {
-            const colleges = campusColleges[selectedCampus];
-            for (const college of colleges) {
-                const option = document.createElement('option');
-                option.value = college;
-                option.textContent = college;
-                collegeSelect.appendChild(option);
-            }
-        }
-    }
-
-    // Add an event listener to the campus select element
-    campusSelect.addEventListener('change', updateCollegeOptions);
-
-    // Initial update when the page loads
-    updateCollegeOptions();
-
-    $(document).ready(function () {
-  $("#adminTable").DataTable({
-    responsive: true,
-    autoWidth: true,
-    searching: true,
-    processing: true,
-    ajax: {
-      url: "get_admins.php",
-      dataSrc: "",
-      error: function (xhr, error, thrown) {
-      console.log("DataTables error:", error, thrown);
-    }
-    },
-    columns: [
-      { data: "faculty_id" },
-      { data: null,
-        render: function (data, type, row) {
-          return row.first_name + " " + row.last_name;
-        }
-      },
-      { data: "college" },
-      { data: "faculty_id",
-        render: function (data) {
-          return (
-            '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
-            data +
-            ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
-            data +
-            ')">Edit</button>' +
-            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
-            data +
-            ')">Delete</button>' +
-            '</div>'
-          );
-        },
-      },
-    ],
-  });
-});
-
-  $(document).ready(function () {
-  $("#adminTableSuper").DataTable({
-    responsive: true,
-    autoWidth: true,
-    searching: true,
-    processing: true,
-    ajax: {
-      url: "get_admins.php",
-      dataSrc: "",
-      error: function (xhr, error, thrown) {
-      console.log("DataTables error:", error, thrown);
-    }
-    },
-    columns: [
-      { data: "faculty_id" },
-      { data: null,
-        render: function (data, type, row) {
-          return row.first_name + " " + row.last_name;
-        }
-      },
-      { data: "campus" },
-      { data: "faculty_id",
-        render: function (data) {
-          return (
-            '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
-            data +
-            ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
-            data +
-            ')">Edit</button>' +
-            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
-            data +
-            ')">Archive</button>' +
-            '</div>'
-          );
-        },
-      },
-    ],
-  });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-document.getElementById("adminLogo").setAttribute('color','#ffd700')
+  document.getElementById("adminLogo").setAttribute('color','#ffd700')
 });
 
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
@@ -388,8 +221,8 @@ function selectedRowAdmin (facultyId){
   document.getElementById("viewEmail").disabled = true;
   document.getElementById("viewPhone").disabled = true;
 
-  var saveBtn = document.getElementById("saveBtn");
-  document.getElementById("saveBtn").disabled = true;
+  
+  document.getElementById("saveBtn").hidden = true;
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "get_admin_details.php", true);
@@ -423,8 +256,8 @@ function selectedRow (facultyId){
   document.getElementById("viewEmail").disabled = true;
   document.getElementById("viewPhone").disabled = true;
 
-  var saveBtn = document.getElementById("saveBtn");
-  document.getElementById("saveBtn").disabled = true;
+  document.getElementById("saveBtn").hidden = true;
+
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "get_admin_details.php", true);
@@ -448,10 +281,7 @@ function selectedRow (facultyId){
   // Send the id to the server
   xhr.send("facultyId="+ facultyId);
 
-}
 
-function enableViewEdit(){
-  enableEdit(document.getElementById("facultyId").value);
 }
 
   function enableEditAdmin(facultyId) {
@@ -467,6 +297,8 @@ function enableViewEdit(){
   document.getElementById("viewPhone").disabled = false;
 
   document.getElementById("facultyId").value = facultyId;
+
+  document.getElementById("saveBtn").hidden = false;
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "get_admin_details.php", true);
@@ -508,6 +340,8 @@ function enableEdit(facultyId) {
 
   document.getElementById("facultyId").value = facultyId;
 
+  document.getElementById("saveBtn").hidden = false;
+
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "get_admin_details.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -535,7 +369,7 @@ function enableEdit(facultyId) {
   saveBtn.onclick = saveChanges;
 }
 
-function saveChanges() {
+/* function saveChanges() {
   
   var facultyId = document.getElementById("facultyId").value;
   var firstName = document.getElementById("viewFirstName").value;
@@ -554,9 +388,19 @@ function saveChanges() {
       var response = JSON.parse(xhr.responseText);
       if (response.success) {
         alert(response.success);
+        document.getElementById("facultyId").disabled = true;
+        document.getElementById("viewFirstName").disabled = true;
+        document.getElementById("viewMiddleName").disabled = true;
+        document.getElementById("viewLastName").disabled = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").disabled = true;
+        document.getElementById("viewPhone").disabled = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").disabled = true;
       } else {
         alert(response.error);
-        console.log(response.error);
       }
     } else {
       alert("Error updating admin details. Please try again later.");
@@ -564,26 +408,103 @@ function saveChanges() {
   }
   };
 
-  // Send the updated admin data to the server
   xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
 
+} */
 
-  // Disable form fields after saving
-  document.getElementById("facultyId").disabled = true;
-  document.getElementById("viewFirstName").disabled = true;
-  document.getElementById("viewMiddleName").disabled = true;
-  document.getElementById("viewLastName").disabled = true;
-  document.getElementById("viewCampus").disabled = true;
-  document.getElementById("viewEmail").disabled = true;
-  document.getElementById("viewPhone").disabled = true;
+function saveChanges() {
+  // Get a list of admin data from your HTML or data source
+  var adminDataList = getAdminDataList(); // Implement this function to retrieve the data
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
 
-  var saveBtn = document.getElementById("saveBtn");
-  document.getElementById("saveBtn").disabled = true;
-  document.getElementById("facultyId").disabled = true;
+  adminDataList.forEach(function (adminData) {
+    var facultyId = adminData.facultyId;
+    var firstName = adminData.firstName;
+    var middleName = adminData.middleName;
+    var lastName = adminData.lastName;
+    var campus = adminData.campus;
+    var email = adminData.email;
+    var phone = adminData.phone;
 
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "update_admin.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            Toast.fire ({
+              icon: 'success',
+              title: 'Admin successfully updated!'
+            })
+          } else {
+            Toast.fire ({
+              icon: 'error',
+              title: 'Error updating admin details. Please try again later.'
+            })
+          }
+        } else {
+          Toast.fire ({
+            icon: 'error',
+            title: 'Error updating admin details. Please try again later.'
+          })
+        }
+      }
+    };
+
+    // Send the updated admin data to the server
+    xhr.send(
+      "facultyId=" +
+        facultyId +
+        "&firstName=" +
+        firstName +
+        "&middleName=" +
+        middleName +
+        "&lastName=" +
+        lastName +
+        "&campus=" +
+        campus +
+        "&email=" +
+        email +
+        "&phone=" +
+        phone
+    );
+  });
 }
 
-function saveChangesAdmin() {
+// Function to get a list of admin data from your HTML or data source
+function getAdminDataList() {
+  // Implement this function to retrieve and return a list of admin data
+  // For example, you can collect data from your HTML form elements and organize it into a list
+  var adminDataList = [];
+  // Add each set of admin data to the list
+  // Example:
+  adminDataList.push({
+    facultyId: document.getElementById("facultyId").value,
+    firstName: document.getElementById("viewFirstName").value,
+    middleName: document.getElementById("viewMiddleName").value,
+    lastName: document.getElementById("viewLastName").value,
+    campus: document.getElementById("viewCampus").value,
+    email: document.getElementById("viewEmail").value,
+    phone: document.getElementById("viewPhone").value,
+  });
+
+  // Repeat the above step for each set of admin data
+  return adminDataList;
+}
+
+
+/* function saveChangesAdmin() {
 
   var facultyId = document.getElementById("facultyId").value;
   var firstName = document.getElementById("viewFirstName").value;
@@ -629,6 +550,104 @@ function saveChangesAdmin() {
 
   document.getElementById("saveBtn").disabled = true;
   document.getElementById("facultyId").disabled = true;
+} */
+
+
+function saveChangesAdmin() {
+
+  var adminCollegeDataList = getCollegeAdminDataList(); // Implement this function to retrieve the data
+
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
+    adminCollegeDataList.forEach(function (adminData) {
+        var facultyId = adminData.facultyId;
+        var firstName = adminData.firstName;
+        var middleName = adminData.middleName;
+        var lastName = adminData.lastName;
+        var campus = adminData.campus;
+        var college = adminData.college;
+        var email = adminData.email;
+        var phone = adminData.phone;
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin_college.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                Toast.fire ({
+                    icon: 'success',
+                    title: 'Admin successfully updated!'
+                })
+                } else {
+                Toast.fire ({
+                    icon: 'error',
+                    title: 'Error updating admin details. Please try again later.'
+                })
+                }
+            } else {
+                Toast.fire ({
+                    icon: 'error',
+                    title: 'Error updating admin details. Please try again later.'
+                })
+            }
+            }
+        };
+    
+        // Send the updated admin data to the server
+        xhr.send(
+            "facultyId=" +
+            facultyId +
+            "&firstName=" +
+            firstName +
+            "&middleName=" +
+            middleName +
+            "&lastName=" +
+            lastName +
+            "&campus=" +
+            campus +
+            "&college=" +
+            college +
+            "&email=" +
+            email +
+            "&phone=" +
+            phone
+        );
+        });
+}
+
+// Function to get a list of admin data from your HTML or data source
+function getCollegeAdminDataList() {
+    // Implement this function to retrieve and return a list of admin data
+    // For example, you can collect data from your HTML form elements and organize it into a list
+    var adminCollegeDataList = [];
+    // Add each set of admin data to the list
+    // Example:
+    adminCollegeDataList.push({
+      facultyId: document.getElementById("facultyId").value,
+      firstName: document.getElementById("viewFirstName").value,
+      middleName: document.getElementById("viewMiddleName").value,
+      lastName: document.getElementById("viewLastName").value,
+      campus: document.getElementById("viewCampus").value,
+      college: document.getElementById("viewCollege").value,
+      email: document.getElementById("viewEmail").value,
+      phone: document.getElementById("viewPhone").value,
+    });
+
+    // Repeat the above step for each set of admin data
+    return adminCollegeDataList;
+
 }
 
 function deleteAdmin(facultyId) {
@@ -677,11 +696,97 @@ function logout(){
   window.location.href = "logout.php";
 }
 
+$(document).ready(function () {
+  $("#adminTable").DataTable({
+    paging: false,
+    scrollCollapse: true,
+    scrollY: "50vh",
+    responsive: true,
+    autoWidth: false,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "college" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<div class="btn-group" role="group">' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>' +
+            '</div>'
+          );
+        },
+      },
+    ],
+  });
+});
 
+  $(document).ready(function () {
+  $("#adminTableSuper").DataTable({
+    paging: false,
+    scrollCollapse: true,
+    scrollY: "50vh",
+    responsive: true,
+    autoWidth: true,
+    searching: true,
+    processing: true,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "campus" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<div class="btn-group" role="group">' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Archive</button>' +
+            '</div>'
+          );
+        },
+      },
+    ],
+  });
+});
 
 
     function submitForm(event) {
-    var adminTable = $('#adminTableSuper').DataTable();
+    var adminTableSuper = $("#adminTableSuper").DataTable();
     event.preventDefault();
     var form = document.getElementById("adminForm");
     var formData = new FormData(form);
@@ -708,7 +813,7 @@ function logout(){
             title: 'Admin successfully added!'
           })
 
-          adminTable.ajax.reload();
+          adminTableSuper.ajax.reload(null, false);
 
         } else {
           // Handle the case where there was an error
@@ -768,3 +873,86 @@ function logout(){
 
     xhr.send(formData);
   }
+
+  const campusSelect = document.getElementById('addCampus');
+    const collegeSelect = document.getElementById('addCollege');
+
+    // Define the available colleges for each campus
+    const campusColleges = {
+        'Malolos Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Information and Communications Technology',
+            'College of Nursing',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Law',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Sports, Exercise and Recreation',
+            'College of Arts and Letters',
+            'College of Science',
+            'College of Architecture and Fine Arts',
+            'Graduate School',
+            'College of Social Sciences and Philosophy',
+            'College of Criminal Justice Education'
+        ],
+        'Meneses Campus': [
+          '-- Select College --',
+            'College of Education',
+            'College of Hospitality Management',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communications Technology',
+            'College of Industrial Technology'
+        ],
+        'Hagonoy Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Information and Communications Technology'
+        ],
+        'Bustos Campus': [
+          '-- Select College --',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communication Technology'
+        ],
+        'San Rafael Campus': [
+          '-- Select College --',
+            'College of Nursing',
+            'College of Science',
+            'College of Social Science and Philosophy'
+        ],
+        'Sarmiento Campus': [
+            '-- Select College --',
+            'College of Science',
+            'College of Industrial Technology',
+            'College of Education',
+            'College of Business Administration',
+            'College of Hotel and Tourism Management'
+        ]
+    };
+
+    // Function to update the college options based on the selected campus
+    function updateCollegeOptions() {
+        const selectedCampus = campusSelect.value;
+        collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedCampus in campusColleges) {
+            const colleges = campusColleges[selectedCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                collegeSelect.appendChild(option);
+            }
+        }
+    }
+
+    // Add an event listener to the campus select element
+    campusSelect.addEventListener('change', updateCollegeOptions);
+
+    // Initial update when the page loads
+    updateCollegeOptions();
