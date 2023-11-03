@@ -11,3 +11,7 @@
         width: calc(100% - 230px);
     }
 }
+
+.custom-toast.swal2-icon-success {
+    background-color: #4caf50;
+}

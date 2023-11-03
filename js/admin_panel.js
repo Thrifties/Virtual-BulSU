@@ -1,5 +1,172 @@
+const campusSelect = document.getElementById('addCampus');
+    const collegeSelect = document.getElementById('addCollege');
+
+    // Define the available colleges for each campus
+    const campusColleges = {
+        'Malolos Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Information and Communications Technology',
+            'College of Nursing',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Law',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Sports, Exercise and Recreation',
+            'College of Arts and Letters',
+            'College of Science',
+            'College of Architecture and Fine Arts',
+            'Graduate School',
+            'College of Social Sciences and Philosophy',
+            'College of Criminal Justice Education'
+        ],
+        'Meneses Campus': [
+          '-- Select College --',
+            'College of Education',
+            'College of Hospitality Management',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communications Technology',
+            'College of Industrial Technology'
+        ],
+        'Hagonoy Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Information and Communications Technology'
+        ],
+        'Bustos Campus': [
+          '-- Select College --',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communication Technology'
+        ],
+        'San Rafael Campus': [
+          '-- Select College --',
+            'College of Nursing',
+            'College of Science',
+            'College of Social Science and Philosophy'
+        ],
+        'Sarmiento Campus': [
+            '-- Select College --',
+            'College of Science',
+            'College of Industrial Technology',
+            'College of Education',
+            'College of Business Administration',
+            'College of Hotel and Tourism Management'
+        ]
+    };
+
+    // Function to update the college options based on the selected campus
+    function updateCollegeOptions() {
+        const selectedCampus = campusSelect.value;
+        collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedCampus in campusColleges) {
+            const colleges = campusColleges[selectedCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                collegeSelect.appendChild(option);
+            }
+        }
+    }
+
+    // Add an event listener to the campus select element
+    campusSelect.addEventListener('change', updateCollegeOptions);
+
+    // Initial update when the page loads
+    updateCollegeOptions();
+
+    $(document).ready(function () {
+  $("#adminTable").DataTable({
+    responsive: true,
+    autoWidth: true,
+    searching: true,
+    processing: true,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "college" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<div class="btn-group" role="group">' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Delete</button>' +
+            '</div>'
+          );
+        },
+      },
+    ],
+  });
+});
+
+  $(document).ready(function () {
+  $("#adminTableSuper").DataTable({
+    responsive: true,
+    autoWidth: true,
+    searching: true,
+    processing: true,
+    ajax: {
+      url: "get_admins.php",
+      dataSrc: "",
+      error: function (xhr, error, thrown) {
+      console.log("DataTables error:", error, thrown);
+    }
+    },
+    columns: [
+      { data: "faculty_id" },
+      { data: null,
+        render: function (data, type, row) {
+          return row.first_name + " " + row.last_name;
+        }
+      },
+      { data: "campus" },
+      { data: "faculty_id",
+        render: function (data) {
+          return (
+            '<div class="btn-group" role="group">' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
+            data +
+            ')">View</button>' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
+            data +
+            ')">Edit</button>' +
+            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
+            data +
+            ')">Archive</button>' +
+            '</div>'
+          );
+        },
+      },
+    ],
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("adminLogo").setAttribute('color','#ffd700')
+document.getElementById("adminLogo").setAttribute('color','#ffd700')
 });
 
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
@@ -389,6 +556,7 @@ function saveChanges() {
         alert(response.success);
       } else {
         alert(response.error);
+        console.log(response.error);
       }
     } else {
       alert("Error updating admin details. Please try again later.");
@@ -398,6 +566,7 @@ function saveChanges() {
 
   // Send the updated admin data to the server
   xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
+
 
   // Disable form fields after saving
   document.getElementById("facultyId").disabled = true;
@@ -463,6 +632,18 @@ function saveChangesAdmin() {
 }
 
 function deleteAdmin(facultyId) {
+  var adminTableSuper = $('#adminTableSuper').DataTable();
+  var adminTable = $('#adminTable').DataTable();
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
     var confirmation = confirm("Are you sure you want to delete this admin?");
     if (confirmation) {
         // Create an XMLHttpRequest object
@@ -475,12 +656,12 @@ function deleteAdmin(facultyId) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                alert(response.success);
-                // Find and remove the deleted admin's row from the table
-                var rowToRemove = document.getElementById("row_" + facultyId);
-                if (rowToRemove) {
-                    rowToRemove.remove();
-                }
+                  Toast.fire ({
+                    icon: 'success',
+                    title: 'Admin successfully archived!'
+                  })
+                  adminTableSuper.ajax.reload();
+                  adminTable.ajax.reload();
               } else {
                   alert(response.error);
                 }
@@ -496,90 +677,57 @@ function logout(){
   window.location.href = "logout.php";
 }
 
-$(document).ready(function () {
-  $("#adminTable").DataTable({
-    responsive: true,
-    autoWidth: false,
-    ajax: {
-      url: "get_admins.php",
-      dataSrc: "",
-      error: function (xhr, error, thrown) {
-      console.log("DataTables error:", error, thrown);
-    }
-    },
-    columns: [
-      { data: "faculty_id" },
-      { data: null,
-        render: function (data, type, row) {
-          return row.first_name + " " + row.last_name;
+
+
+
+    function submitForm(event) {
+    var adminTable = $('#adminTableSuper').DataTable();
+    event.preventDefault();
+    var form = document.getElementById("adminForm");
+    var formData = new FormData(form);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "add_admin_details.php", true);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          
+          Toast.fire ({
+            icon: 'success',
+            title: 'Admin successfully added!'
+          })
+
+          adminTable.ajax.reload();
+
+        } else {
+          // Handle the case where there was an error
+          console.error("Error: " + xhr.responseText);
+          
+          Toast.fire ({
+            icon: 'error',
+            title: 'Error adding admin!'
+
+          })
         }
-      },
-      { data: "college" },
-      { data: "faculty_id",
-        render: function (data) {
-          return (
-            '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
-            data +
-            ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
-            data +
-            ')">Edit</button>' +
-            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
-            data +
-            ')">Delete</button>' +
-            '</div>'
-          );
-        },
-      },
-    ],
-  });
-});
+      }
+    };
 
-  $(document).ready(function () {
-  $("#adminTableSuper").DataTable({
-    responsive: true,
-    autoWidth: true,
-    searching: true,
-    processing: true,
-    ajax: {
-      url: "get_admins.php",
-      dataSrc: "",
-      error: function (xhr, error, thrown) {
-      console.log("DataTables error:", error, thrown);
-    }
-    },
-    columns: [
-      { data: "faculty_id" },
-      { data: null,
-        render: function (data, type, row) {
-          return row.first_name + " " + row.last_name;
-        }
-      },
-      { data: "campus" },
-      { data: "faculty_id",
-        render: function (data) {
-          return (
-            '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
-            data +
-            ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
-            data +
-            ')">Edit</button>' +
-            '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
-            data +
-            ')">Archive</button>' +
-            '</div>'
-          );
-        },
-      },
-    ],
-  });
-});
+    xhr.send(formData);
+  }
 
-
-    function submitForm() {
+  function adminSubmitForm(event) {
+    event.preventDefault();
     var form = document.getElementById("adminForm");
     var formData = new FormData(form);
     const Toast = Swal.mixin({

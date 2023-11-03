@@ -86,6 +86,16 @@ function validateForm() {
 
         function saveChanges() {
 
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'colored-toast'
+                },
+                timer: 1500,
+            });
+
             // Get updated admin data
             var facultyId = document.getElementById("facultyId").value;
             var firstName = document.getElementById("firstName").value;
@@ -103,7 +113,11 @@ function validateForm() {
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
                         if (response.success) {
-                        alert(response.success);
+                        Toast.fire({
+                            icon: 'success',
+                            type: 'success',
+                            title: 'Changes saved.'
+                        });
                         } else {
                         alert(response.error);
                         }

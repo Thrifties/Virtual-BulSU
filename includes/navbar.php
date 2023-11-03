@@ -1,7 +1,41 @@
 <?php
+require "connect.php";
 
 // Assuming you have a user_id in your session
 $user_id = $_SESSION["user"];
+
+$campusAdminQuery = "SELECT * FROM campus_admin WHERE faculty_id = ?";
+$collegeAdminQuery = "SELECT * FROM college_admin WHERE faculty_id = ?";
+
+// Prepare and execute the query for campus_admin
+$stmt = $con->prepare($campusAdminQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $adminData = mysqli_fetch_assoc($result);
+    $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
+    $currentAdminLevel = $adminData["admin_level"];
+    $currentAdminCampus = $adminData["campus"];
+} else {
+    // If user is not found in campus_admin, check college_admin
+    $stmt = $con->prepare($collegeAdminQuery);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $adminData = mysqli_fetch_assoc($result);
+        $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
+        $currentAdminLevel = $adminData["admin_level"];
+        $currentAdminCampus = $adminData["campus"];
+        $currentCollege = $adminData["college"];
+    } else {
+    }
+}
+
+$stmt->close();
 
 ?>
 
@@ -15,12 +49,18 @@ $user_id = $_SESSION["user"];
           Announcements
         </a>
       </li>
-      <li>
+      <?php 
+        if ($currentAdminLevel == "super_admin" OR $currentAdminLevel == "admin") {
+          echo '<li>
         <a href="VirtualBulsu_SuperAdmin.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navAdmin">
-          <box-icon name='user-check' class="icons" color="#fff" id="adminLogo"></box-icon>
+          <box-icon name="user-check" class="icons" color="#fff" id="adminLogo"></box-icon>
           Admins
         </a>
-      </li>
+      </li>';
+        }
+      
+      ?>
+      
     </ul>
     <hr>
     <div class="dropdown">
