@@ -577,3 +577,46 @@ $(document).ready(function () {
     ],
   });
 });
+
+
+    function submitForm() {
+    var form = document.getElementById("adminForm");
+    var formData = new FormData(form);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "add_admin_details.php", true);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          
+          Toast.fire ({
+            icon: 'success',
+            title: 'Admin successfully added!'
+          })
+
+        } else {
+          // Handle the case where there was an error
+          console.error("Error: " + xhr.responseText);
+          
+          Toast.fire ({
+            icon: 'error',
+            title: 'Error adding admin!'
+
+          })
+        }
+      }
+    };
+
+    xhr.send(formData);
+  }

@@ -27,3 +27,11 @@ td button {
         width: calc(100vw - 230px);
     }
 }
+
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
