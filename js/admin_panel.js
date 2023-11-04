@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+
+    document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("adminLogo").setAttribute('color','#ffd700')
 });
 
@@ -15,7 +16,7 @@ document.getElementById("viewPhone").addEventListener("input", validateUpdateFor
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  document.getElementById("addPassword").addEventListener("onkeyup", function () {
+  document.getElementById("addPassword").addEventListener("input", function () {
       validatePassword();
   });
 
@@ -815,6 +816,25 @@ $(document).ready(function () {
 
           adminTableSuper.ajax.reload(null, false);
 
+          document.getElementById("addFacultyId").value = "";
+          document.getElementById("firstName").value = "";
+          document.getElementById("middleName").value = "";
+          document.getElementById("lastName").value = "";
+          document.getElementById("addCampus").value = "";
+          document.getElementById("addEmail").value = "";
+          document.getElementById("addPhone").value = "";
+          document.getElementById("addPassword").value = "";
+
+          document.getElementById("addFacultyId").classList.remove("is-valid");
+          document.getElementById("firstName").classList.remove("is-valid");
+          document.getElementById("middleName").classList.remove("is-valid");
+          document.getElementById("lastName").classList.remove("is-valid");
+          document.getElementById("addCampus").classList.remove("is-valid");
+          document.getElementById("addEmail").classList.remove("is-valid");
+          document.getElementById("addPhone").classList.remove("is-valid");
+          document.getElementById("addPassword").classList.remove("is-valid");
+          
+
         } else {
           // Handle the case where there was an error
           console.error("Error: " + xhr.responseText);
@@ -857,6 +877,27 @@ $(document).ready(function () {
             icon: 'success',
             title: 'Admin successfully added!'
           })
+
+          document.getElementById("addFacultyId").value = "";
+          document.getElementById("firstName").value = "";
+          document.getElementById("middleName").value = "";
+          document.getElementById("lastName").value = "";
+          document.getElementById("addCollege").value = "";
+          document.getElementById("addEmail").value = "";
+          document.getElementById("addPhone").value = "";
+          document.getElementById("addPassword").value = "";
+
+          document.getElementById("addFacultyId").classList.remove("is-valid");
+          document.getElementById("firstName").classList.remove("is-valid");
+          document.getElementById("middleName").classList.remove("is-valid");
+          document.getElementById("lastName").classList.remove("is-valid");
+          document.getElementById("addCollege").classList.remove("is-valid");
+          document.getElementById("addEmail").classList.remove("is-valid");
+          document.getElementById("addPhone").classList.remove("is-valid");
+          document.getElementById("addPassword").classList.remove("is-valid");
+
+
+
 
         } else {
           // Handle the case where there was an error

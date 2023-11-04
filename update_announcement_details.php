@@ -37,9 +37,9 @@ if ($fileInput !== null) {
 }
 
 if ($stmt->execute()) {
-    echo json_encode(['success' => 'Announcement updated']);
+    echo "Announcement details updated successfully!";
 } else {
-    echo json_encode(['error' => 'Error updating announcement details: ' . $stmt->error]);
+    echo "Error: " . $stmt->error;
 }
 
 $stmt->close();

@@ -44,10 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Successful insertion
-        header("refresh: 0; url=VirtualBulsu_AnnouncementPanel.php");
-        // Redirect to the announcement panel
+        echo "Announcement added successfully!";
     } else {
-        // Error occurred
         echo "Error: " . $stmt->error;
     }
 

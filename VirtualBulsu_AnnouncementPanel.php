@@ -50,6 +50,8 @@ $stmt->close();
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="CSS/navbar.css">
   <link rel="stylesheet" href="CSS/announcement_panel.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="sweetalert2.all.min.js"></script>
   <title>Announcement Panel</title>
 </head>
 
@@ -198,7 +200,7 @@ $stmt->close();
             </button>
           </div>
           <div class="modal-body">
-            <form method="post" class="needs-validation" id="announcementForm" action="add_announcement.php" enctype="multipart/form-data">
+            <form method="post" class="needs-validation" id="announcementForm" action="add_announcement.php" onsubmit="submitAnnouncementForm(event)" enctype="multipart/form-data">
               <input type="text" class="form-control" id="announcementId" name="announcementId" value="" hidden>
               <input type="text" class="form-control " id="author" name="author" value="<?php echo $author ?>" hidden>
               <input type="text" class="form-control" id="faculty_id" name="facultyId" value="<?php echo $user_id ?>" hidden>
@@ -290,7 +292,7 @@ $stmt->close();
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="addBtn" class="btn btn-primary" form="announcementForm" disabled>Save</button>
+            <button type="submit" id="addBtn" class="btn btn-primary" form="announcementForm" onclick="submitAnnouncementForm()" disabled>Add</button>
           </div>
         </div>
       </div>
@@ -343,7 +345,7 @@ $stmt->close();
       });
 
       function addValidationListener(elementId){
-        document.getElementById(elementId).addEventListener("keyup", function(){
+        document.getElementById(elementId).addEventListener("input", function(){
           validateInput(elementId);
         })
       }
@@ -379,12 +381,11 @@ $stmt->close();
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
             var description = data.description;
-            var outputDescription = description.textContent;
             document.getElementById("announcementId").value = data.announcement_id;
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").value = outputDescription;
+            document.getElementById("viewDescription").value = description.replace("<br />", /\n/g);
             document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
             document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
           }
@@ -428,6 +429,7 @@ $stmt->close();
       }
 
       function saveChanges() {
+
         var announcementId = document.getElementById("announcementId").value;
         var campusAssignment = document.getElementById("viewCampusAssignment").value;
         var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
@@ -452,12 +454,10 @@ $stmt->close();
         xhr.open("POST", "update_announcement_details.php", true);
         xhr.onreadystatechange = function () {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var response = JSON.parse(this.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
+            console.log("Success: " + xhr.responseText);
+            $('#announcementTbl').DataTable().ajax.reload();
+          } else {
+            console.log("Error: " + xhr.status);
           }
         };
 
@@ -476,21 +476,32 @@ $stmt->close();
 
       function deleteAnnouncement(announcementId) {
         console.log(announcementId);
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          customClass: {
+            popup: 'colored-toast'
+          },
+          timer: 2000,
+        })
         if (confirm("Are you sure you want to delete this announcement?")) {
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "delete_announcement.php", true);
           xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           xhr.onreadystatechange = function() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              var response = JSON.parse(this.responseText);
-              if (response.success) {
-                // Remove the deleted row from the table
-                var row = document.getElementById(announcementId);
-                row.parentNode.removeChild(row);
-                alert(response.success);
-              } else {
-                alert(response.error);
-              }
+              Toast.fire({
+                icon: 'success',
+                title: "Announcement deleted successfully!"
+              })
+              $('#announcementTbl').DataTable().ajax.reload();
+            } else {
+              Toast.fire({
+                icon: 'error',
+                title: "Error: " + xhr.status
+              })
             }
           };
           xhr.send("announcementId=" + announcementId);
@@ -518,8 +529,6 @@ $stmt->close();
         scrollY: '50vh',
         responsive: true,
         autoWidth: false,
-        searching: true,
-        processing: true,
         ajax: {
           url: 'get_announcement_list.php',
           dataSrc: '',
@@ -576,6 +585,7 @@ $stmt->close();
     // Define the available colleges for each campus
     const campusColleges = {
         'Malolos Campus': [
+            '-- Select College --',
             'College of Industrial Technology',
             'College of Information and Communications Technology',
             'College of Nursing',
@@ -593,6 +603,7 @@ $stmt->close();
             'College of Criminal Justice Education'
         ],
         'Meneses Campus': [
+          '-- Select College --',
             'College of Education',
             'College of Hospitality Management',
             'College of Engineering',
@@ -607,16 +618,19 @@ $stmt->close();
             'College of Information and Communications Technology'
         ],
         'Bustos Campus': [
+            '-- Select College --',
             'College of Engineering',
             'College of Business Administration',
             'College of Information and Communication Technology'
         ],
         'San Rafael Campus': [
+            '-- Select College --',
             'College of Nursing',
             'College of Science',
             'College of Social Science and Philosophy'
         ],
         'Sarmiento Campus': [
+            '-- Select College --',
             'College of Science',
             'College of Industrial Technology',
             'College of Education',
@@ -646,6 +660,52 @@ $stmt->close();
 
     // Initial update when the page loads
     updateCollegeOptions();
+
+    function submitAnnouncementForm (event) {
+      event.preventDefault();
+      var formData = new FormData(document.getElementById("announcementForm"));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        customClass: {
+          popup: 'colored-toast'
+        },
+        timer: 2000,
+      })
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "add_announcement.php", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+
+            Toast.fire({
+              icon: 'success',
+              title: xhr.responseText
+            })
+            
+            $('#announcementTbl').DataTable().ajax.reload();
+
+            document.getElementById("headline").classList.remove("is-valid");
+            document.getElementById("description").classList.remove("is-valid");
+            document.getElementById("fileInput").classList.remove("is-valid");
+
+
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: "Error: " + xhr.status
+            })
+          }
+        }
+      }
+
+      xhr.send(formData);
+
+      document.getElementById("announcementForm").reset();
+      document.getElementById("addBtn").disabled = true;
+
+    }
 
 
     </script>

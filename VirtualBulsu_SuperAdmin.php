@@ -306,6 +306,7 @@ if ($result1) {
   
   ?>
   <script src="js/admin_panel.js"></script>
+  
 
   </body>
 </html>
