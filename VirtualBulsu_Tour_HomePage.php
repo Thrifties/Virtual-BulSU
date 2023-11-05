@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bulacan State University</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="CSS\VirtualBulsu_Navbar.css" />
-  <link rel="icon" href="resources/virtualbulsu_logo.png" />
+  <link rel="stylesheet" href="CSS/VirtualBulsu_Navbar.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   <style>
     html,
@@ -17,8 +16,8 @@
 
     body {
       background:
-        /*linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.932)),*/
-        url("resources/cover.png");
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
+        url("resources/school_cover8.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -63,7 +62,6 @@
     }
 
     .cta span {
-      padding-bottom: 7px;
       font-family: "Roboto";
       font-weight: bold;
       font-size: 15px;
@@ -72,16 +70,17 @@
       padding-top: 15px;
       padding-bottom: 15px;
       text-transform: uppercase;
-      color: darkslategray;
+      color: #d09b00;
       width: 100%;
       border: none;
       background-color: #ffff;
-      border-radius: 30px;
+      border-radius: 5px;
 
     }
 
     .cta span:hover {
       background-color: #d09b00;
+      color: white;
     }
 
     .cta svg {
@@ -117,35 +116,38 @@
       color: white;
       padding: 5px;
       text-align: center;
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
+      right: 0;
       width: 100%;
-      z-index: 9999;
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 2rem;
       font-family: "Roboto";
       margin-bottom: 2px;
+      letter-spacing: 3px;
     }
 
     h2 {
-      font-size: 70px;
-      font-weight: bold;
-      font-family: "Roboto";
+      font-size: 5rem;
+      font-weight: bolder;
       line-height: 60px;
-      color: aliceblue;
+      color: white;
+      letter-spacing: 5px;
+      font-family: Georgia, sans-serif;
     }
 
     p {
-      font-size: 15px;
+      font-family: "Roboto";
+      font-size: 1rem;
       letter-spacing: 2px;
-      margin-bottom: 70px;
+      margin-bottom: 40px;
     }
 
     .gold {
-      color: #d09b00;
+      color: white;
     }
 
     .navbar-custom .navbar-nav #home-link:before {
@@ -164,10 +166,14 @@
     }
 
 
-    @media (max-width: 500px) {
+    @media (max-width: 576px) {
       h1 {
-        font-size: 35px;
+        font-size: 1.5rem;
       }
+
+        h2 {
+            font-size: 2.5rem;
+        }
 
       nav {
         display: block;
@@ -178,11 +184,9 @@
 </head>
 
 <body>
-  
-  <?php include "includes/tour_navbar.php"; ?>
-
+ <?php include "includes/tour_navbar.php"; ?>
   <!-- Virtual Tour Introduction -->
-  <div class="container-lg my-auto" id="VTIntroduction">
+  <div class="container my-auto mx-lg-5" id="VTIntroduction">
     <div class="image">
 
     </div>
@@ -190,8 +194,9 @@
     <h2 class="gold">BULACAN STATE</h2>
     <h2>UNIVERSITY</h2>
     <p>
-      Embark on a Digital Journey through the <br />
-      Prestigious Campus
+      Embark on a Digital Journey through the Prestigious Campus.<br />
+      Navigate through interactive maps, engage with informative hotspots, <br />
+      and envision your academic journey like never before.
     </p>
     <a href="VirtualBulsu_Tour_Campuses.php" id="btnPrimary">
       <button class="cta">
@@ -202,10 +207,9 @@
       </button>
     </a>
   </div>
-  <div class="navigate" <img src="resources\navigate.png" alt="Logo" width="80" height="auto">
-  <footer class="footer">
+    <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
-  </footer>
+    </footer>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 

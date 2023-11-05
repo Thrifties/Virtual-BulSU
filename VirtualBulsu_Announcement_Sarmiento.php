@@ -100,6 +100,15 @@ $result = mysqli_query($con, $query);
         color: inherit; /* Inherit text color on hover */
       }
 
+      .announcementList {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 1em;
+        overflow-x: auto;
+      
+      }
+
 
 @media (max-width: 500px){
     h1{
@@ -120,16 +129,25 @@ $result = mysqli_query($con, $query);
     <div class="container-lg my-3 ">
       <h1 class="text-center text-white" id="heading">Sarmiento Campus News</h1>
         <div class="container mt-3">
-            <div class="row g-3">
+          <div class="row g-3">
             <?php
-              if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<h2 class="text-white">'.$row['college_assignment'].'</h2>';
+            if (mysqli_num_rows($result) > 0) {
+              $previousCollege = null; // Variable to track the previous college name
 
-                    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">';
+              while ($row = mysqli_fetch_assoc($result)) {
+                $college = $row['college_assignment'];
 
-                    $query2 = "SELECT * FROM announcements WHERE college_assignment = '".$row['college_assignment']."' AND campus_assignment = 'Sarmiento Campus' ORDER BY created_at DESC";
-                    $result2 = mysqli_query($con, $query2);
+                // Check if the current college name is different from the previous one
+                if ($college != $previousCollege) {
+                  echo '<h2 class="text-white mt-3">' . $college . '</h2>';
+                  $previousCollege = $college; // Update the previous college name
+
+                  $query2 = "SELECT * FROM announcements WHERE college_assignment = '" . $college . "' AND campus_assignment = 'Sarmiento Campus' ORDER BY created_at DESC";
+                  $result2 = mysqli_query($con, $query2);
+
+                  // Check if there are announcements for this college
+                  if (mysqli_num_rows($result2) > 0) {
+                    echo '<div class="announcementList">';
                     while ($row2 = mysqli_fetch_assoc($result2)) {
                       $announcementId = $row2['announcement_id'];
                       $headline = $row2['headline'];
@@ -138,10 +156,10 @@ $result = mysqli_query($con, $query);
                       $datePosted = date('F d, Y', strtotime($row2['created_at']));
 
                       // Output the announcement HTML structure here
-                      echo '<div class="col-md-6 col-lg-4">';
+                      echo '<div class="col-3"">';
                       echo '<div class="card h-100">';
-                      echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
-                      echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
+                      echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id=' . $announcementId . '">';
+                      echo '<img src="uploads/' . $image . '" class="card-img-top" alt="...">';
                       echo '<div class="card-body">';
                       echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
                       echo '</div>';
@@ -151,14 +169,18 @@ $result = mysqli_query($con, $query);
                       echo '</div>';
                       echo '</a>';
                       echo '</div>';
-                      echo  '</div>';
+                    }
+                    echo '</div>'; // Close the row for announcements
                   }
                 }
               }
+            }
             ?>
+          </div>
         </div>
-        </div>
-        
+
+
+
     </div>
 
     
