@@ -1,9 +1,5 @@
 <?php 
 require "connect.php";
-
-$query = "SELECT college_assignment FROM announcements WHERE campus_assignment = 'Malolos Campus' ORDER BY created_at DESC" ;
-$result = mysqli_query($con, $query);
-
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +120,7 @@ $result = mysqli_query($con, $query);
       <h1 class="text-white text-center" id="heading" >Malolos Campus News</h1>
       <div class="row row-cols-lg-3 justify-content-center gy-3 mt-1">
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Architecture and Fine Arts">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CAFA.png" alt="" class="position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -133,7 +129,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Arts and Letters">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CAL.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -142,7 +138,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Business Administration">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CBA.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -151,7 +147,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Criminal Justice Education">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CCJE.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -160,7 +156,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Education">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/COED.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -169,7 +165,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Engineering">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/COE.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -178,7 +174,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Hospitality and Tourism Management">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CHTM.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -187,7 +183,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Industrial Technology">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CIT.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -196,16 +192,16 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Information and Communications Technology">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CICT.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
-              <h5 class="card-title text-center mt-5">College of Communication and Information Technology</h5>
+              <h5 class="card-title text-center mt-5">College of Information and Communications Technology</h5>
             </div>
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Law">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CLaw.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -214,7 +210,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Nursing">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CICT.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -223,7 +219,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Education">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/COED.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -232,7 +228,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Science">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CS.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -241,7 +237,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Sports, Exercise and Recreation">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CSER.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -250,16 +246,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <img src="resources/cover.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <img src="resources/CSER.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
-              <h5 class="card-title text-center mt-5">College of Sports, Exercise and Recreation</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="College of Social Sciences and Philosophy">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/CSSP.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -268,7 +255,7 @@ $result = mysqli_query($con, $query);
           </div>
         </div>
         <div class="col">
-          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div type="button" class="card h-100" data-bs-toggle="modal" data-bs-target="#announcementListModal" data-bs-id="Graduate School">
             <img src="resources/cover.png" class="card-img-top" alt="...">
             <div class="card-body">
               <img src="resources/GS.png" alt="" class="rounded-circle position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -279,19 +266,81 @@ $result = mysqli_query($con, $query);
       </div>
     </div>
 
-    <?php include "announcementModal.php"; ?>
+    <div class="modal fade" id="announcementListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
 
     <footer class="footer">
       <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
     </footer>
 
-    <script>
-        document.getElementById("");
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <script>
+
+    var announcementListModal = document.getElementById('announcementListModal');
+    announcementListModal.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      var button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      var college = button.getAttribute('data-bs-id');
+
+      var modalTitle = announcementListModal.querySelector('.modal-title');
+      var modalBody = announcementListModal.querySelector('.modal-body');
+
+      modalTitle.textContent = college;
+
+      console.log(college);
+
+      // Construct and execute a SQL query to retrieve content based on announcementId
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'college_announcements.php?college=' + college + '&campus=Malolos Campus');
+      xhr.onload = function() {
+        if (xhr.status === 200 && xhr.responseText) {
+          var announcements = JSON.parse(xhr.responseText);
+
+          if (announcements.length > 0) {
+            var html = '';
+            for (var i = 0; i < announcements.length; i++) {
+              var announcement = announcements[i];
+
+              html += '<a href="VirtualBulsu_AnnouncementPage.php?id=' + announcement.announcement_id + '" class="text-decoration-none" id="announcementCard">';
+              html += '<div class="card mb-3">';
+              html += '<img src="resources/'+ announcement.file_input +'" class="card-img-top" alt="...">';
+              html += '<div class="card-body">';
+              html += '<h5 class="card-title">' + announcement.headline + '</h5>';
+              html += '</div>';
+              html += '</div>';
+              html += '</a>';
+
+              console.log(announcement);
+            } 
+
+            modalBody.innerHTML = html;
+          } else {
+            modalBody.textContent = 'No announcements found.';
+          }
+        } else if (xhr.status !== 200) {
+          modalBody.textContent = 'Request failed.  Returned status of ' + xhr.status;
+
+        } else {
+          modalBody.textContent = 'Error fetching data.';
+        }
+      };
+    });
+
+    </script>
     
   </body>
 </html>
