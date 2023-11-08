@@ -1,7 +1,7 @@
 <?php 
 require "connect.php";
 
-$query = "SELECT college_assignment FROM announcements WHERE campus_assignment = 'Malolos Campus' ORDER BY created_at DESC" ;
+$query = "SELECT DISTINCT college_assignment FROM announcements WHERE campus_assignment = 'Malolos Campus' ORDER BY created_at DESC" ;
 $result = mysqli_query($con, $query);
 
 ?>
@@ -87,10 +87,6 @@ $result = mysqli_query($con, $query);
         color: white;
         padding: 5px;
         text-align: center;
-        position:absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
         
       }
 
@@ -142,7 +138,7 @@ $result = mysqli_query($con, $query);
                       echo '<div class="col-md-6 col-lg-4">';
                       echo '<div class="card h-100">';
                       echo '<a id="announcementCard" href="VirtualBulsu_AnnouncementPage.php?id='.$announcementId.'">';
-                      echo '<img src="uploads/'.$image.'" class="card-img-top" alt="...">';
+                      echo '<img src="uploads/'.$image.'" class="card-img-top" alt="..." loading="lazy">';
                       echo '<div class="card-body">';
                       echo "<h5 id='announcementHeadline' class='card-title text-center'>$headline</h5>";
                       echo '</div>';
@@ -152,8 +148,9 @@ $result = mysqli_query($con, $query);
                       echo '</div>';
                       echo '</a>';
                       echo '</div>';
-                      echo  '</div>';
+                      
                   }
+                  echo  '</div>';
                 }
               }
             ?>
