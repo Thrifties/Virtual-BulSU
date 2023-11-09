@@ -309,23 +309,21 @@ $stmt->close();
 
           </div>
           <div class="modal-body">
-            <form class="needs-validation" id="changePassForm" action="password_change.php">
+            <form class="needs-validation" id="changePassForm" action="<?php if ($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin") {
+              echo "password_change_campus.php";
+            } else {
+              echo "password_change_college.php";
+            } ?>" onsubmit="submitChangePassForm(event)">
                 <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_id ?>" hidden>
                 <div class="form-group">
-                    <label for="defaultPass">Default Password: </label>
-                    <input type="password" class="form-control" id="defaultPass" name="defaultPass" required>
-                    <div id="defaultPassFeedback" class="invalid-feedback">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="newPass">New Password: </label>
-                    <input type="password" class="form-control" id="newPass" name="newPass" required>
+                    <input type="password" class="form-control" id="newPass" name="newPass" oninput="newPassValidation()" required>
                     <div id="newPassFeedback" class="invalid-feedback">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="confirmPass">Confirm Password: </label>
-                    <input type="password" class="form-control" id="confirmPass" required>
+                    <input type="password" class="form-control" id="confirmPass" oninput="confirmPassValidation(this)" required>
                     <div id="confirmPassFeedback" class="invalid-feedback">
                     </div>
                 </div>
@@ -333,7 +331,7 @@ $stmt->close();
             </form>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" form="changePassForm" onclick="submitChangePassForm()">Save</button>
+            <button type="submit" class="btn btn-primary" id="changePassBtn" form="changePassForm" onclick="submitChangePassForm()" disabled>Save</button>
           </div>
         </div>
       </div>
@@ -390,10 +388,144 @@ $stmt->close();
         <?php endif; ?>
       });
 
-      function submitChangePassForm () {
-        document.getElementById("changePassForm").submit();
-        changePass.hide();
+      function submitChangePassForm (event) {
+        event.preventDefault();
+        var form = new FormData(document.getElementById("changePassForm"));
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          customClass: {
+            popup: 'colored-toast'
+          },
+          timer: 2000,
+        })
+
+        console.log(formData);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 
+        <?php 
+          if ($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin") {
+            echo "password_change_campus.php";
+          } else {
+            echo "password_change_college.php";
+          }
+        ?>
+        , true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              Toast.fire({
+                icon: 'success',
+                title: 'Password changed successfully!'
+              })
+              changePass.hide();
+            } else {
+              Toast.fire({
+                icon: 'error',
+                title: 'Error: ' + xhr.status
+              })
+            }
+          }
+        }
+
+        xhr.send(form);
+
       }
+
+  function newPassValidation() {
+    var newPass = document.getElementById("newPass").value;
+    var newPassFeedback = document.getElementById("newPassFeedback");
+
+    // Validate password requirements
+    var lengthRequirement = /^(?=.{8,})/;
+    var uppercaseRequirement = /^(?=.*[A-Z])/;
+    var lowercaseRequirement = /^(?=.*[a-z])/;
+    var numberRequirement = /^(?=.*\d)/;
+
+    // Define individual error messages
+    var errorMessages = {
+        length: "Password must be at least 8 characters long.",
+        uppercase: "Password must contain at least 1 uppercase letter.",
+        lowercase: "Password must contain at least 1 lowercase letter.",
+        number: "Password must contain at least 1 number."
+    };
+
+    // Collect error messages
+    var errors = [];
+
+    if (!lengthRequirement.test(newPass)) {
+        errors.push(errorMessages.length);
+    }
+
+    if (!uppercaseRequirement.test(newPass)) {
+        errors.push(errorMessages.uppercase);
+    }
+
+    if (!lowercaseRequirement.test(newPass)) {
+        errors.push(errorMessages.lowercase);
+    }
+
+    if (!numberRequirement.test(newPass)) {
+        errors.push(errorMessages.number);
+    }
+
+    // Display errors or clear feedback
+    if (errors.length > 0) {
+        displayErrors(errors);
+        return false;
+    } else {
+        newPassFeedback.innerHTML = "";
+        document.getElementById("newPass").classList.remove("is-invalid");
+        document.getElementById("newPass").classList.add("is-valid");
+        document.getElementById("changePassBtn").disabled = false;
+        return true;
+    }
+
+    // Function to display errors
+    function displayErrors(errors) {
+        newPassFeedback.innerHTML = ""; // Clear previous feedback
+        var errorList = document.createElement("ul");
+
+        errors.forEach(function (error) {
+            var errorItem = document.createElement("li");
+            errorItem.textContent = error;
+            errorList.appendChild(errorItem);
+        });
+
+        newPassFeedback.appendChild(errorList);
+        document.getElementById("newPass").classList.remove("is-valid");
+        document.getElementById("newPass").classList.add("is-invalid");
+        document.getElementById("changePassBtn").disabled = true;
+    }
+}
+
+  function confirmPassValidation(input) {
+    var confirmPass = input.value;
+    var newPass = document.getElementById("newPass").value;
+    var confirmPassFeedback = document.getElementById("confirmPassFeedback");
+
+    console.log(confirmPass);
+
+    if (confirmPass !== newPass) {
+        confirmPassFeedback.innerText = "Passwords do not match.";
+        document.getElementById("confirmPass").classList.remove("is-valid");
+        document.getElementById("confirmPass").classList.add("is-invalid");
+        document.getElementById("changePassBtn").disabled = true;
+        return false;
+    } else {
+        confirmPassFeedback.innerText = "";
+        document.getElementById("confirmPass").classList.remove("is-invalid");
+        document.getElementById("confirmPass").classList.add("is-valid");
+        document.getElementById("changePassBtn").disabled = false;
+        return true;
+    }
+}
+
+
+
 
       function addValidationListener(elementId){
         document.getElementById(elementId).addEventListener("input", function(){

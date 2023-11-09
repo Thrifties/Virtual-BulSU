@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         // Update the password and set first_login to false
-        $updateSql = "UPDATE admins SET password = '$hashedPassword', first_login = false WHERE username = '$username'";
+        $updateSql = "UPDATE college_admin SET password = '$hashedPassword', first_login = false WHERE faculty_id = '$username'";
         
-        if ($conn->query($updateSql) === TRUE) {
+        if ($con->query($updateSql) === TRUE) {
             echo "Password updated successfully!";
         } else {
             echo "Error updating password: " . $conn->error;
@@ -26,5 +26,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$conn->close();
+$con->close();
 ?>
