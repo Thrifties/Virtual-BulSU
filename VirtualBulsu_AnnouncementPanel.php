@@ -19,6 +19,7 @@ if ($result->num_rows > 0) {
     $author = $adminData["first_name"] . ' ' . $adminData["last_name"];
     $currentAdminLevel = $adminData["admin_level"];
     $currentAdminCampus = $adminData["campus"];
+    $firstLogin = $adminData["first_login"];
 } else {
     // If user is not found in campus_admin, check college_admin
     $stmt = $con->prepare($collegeAdminQuery);
@@ -32,6 +33,7 @@ if ($result->num_rows > 0) {
         $currentAdminLevel = $adminData["admin_level"];
         $currentAdminCampus = $adminData["campus"];
         $currentCollege = $adminData["college"];
+        $firstLogin = $adminData["first_login"];
     } else {
     }
 }
@@ -297,6 +299,46 @@ $stmt->close();
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="firstLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="firstLogin" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title">Change Default Password</h5>
+
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" id="changePassForm" action="password_change.php">
+                <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_id ?>" hidden>
+                <div class="form-group">
+                    <label for="defaultPass">Default Password: </label>
+                    <input type="password" class="form-control" id="defaultPass" name="defaultPass" required>
+                    <div id="defaultPassFeedback" class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPass">New Password: </label>
+                    <input type="password" class="form-control" id="newPass" name="newPass" required>
+                    <div id="newPassFeedback" class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPass">Confirm Password: </label>
+                    <input type="password" class="form-control" id="confirmPass" required>
+                    <div id="confirmPassFeedback" class="invalid-feedback">
+                    </div>
+                </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" form="changePassForm" onclick="submitChangePassForm()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <?php include "includes/js_cdn.php" ?>
     <!-- <script src="js/announcement_panel.js"></script> -->
     <script>
@@ -342,7 +384,16 @@ $stmt->close();
         addValidationListener("description");
         addValidationListener("fileInput");
 
+        <?php if ($firstLogin == true): ?>
+          var changePass = new bootstrap.Modal(document.getElementById('firstLogin'));
+          changePass.show();
+        <?php endif; ?>
       });
+
+      function submitChangePassForm () {
+        document.getElementById("changePassForm").submit();
+        changePass.hide();
+      }
 
       function addValidationListener(elementId){
         document.getElementById(elementId).addEventListener("input", function(){
@@ -706,8 +757,6 @@ $stmt->close();
       document.getElementById("addBtn").disabled = true;
 
     }
-
-
     </script>
 </body>
 

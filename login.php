@@ -30,9 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
+
 		$_SESSION["user"] = $user;
 		$_SESSION["pass"] = $pass;
-        echo '<script>
+
+        $loginQuery = "SELECT * FROM campus_admin WHERE faculty_id = '$user' AND password = '$pass'";
+        $loginResult = mysqli_query($con, $loginQuery);
+        $loginRow = mysqli_fetch_assoc($loginResult);
+        if (!$loginRow["first_login"]) {
+            echo '<script>
             $(document).ready(function(){
                 Swal.fire({
                     icon: "success",
@@ -45,6 +51,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     })
             });
             </script>';
+        } else {
+            echo '<script>
+            $(document).ready(function(){
+                Swal.fire({
+                    icon: "success",
+                    title: "Log In Successfully!",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    })
+                    .then(function(){
+                    window.location.href = "password_change.php" 
+                    })
+            });
+            </script>';
+         }
     } else {
         // If user is not found in campus_admin, check college_admin
         $stmt = $con->prepare($collegeAdminQuery);
@@ -56,10 +77,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $_SESSION["user"] = $user;
 			$_SESSION["pass"] = $pass;
-            $output = '<div class="alert alert-success" role="alert">
-                            Login successful!
-                        </div>';
-    		header("refresh: 1; url=VirtualBulsu_AnnouncementPanel.php");
+            echo '<script>
+            $(document).ready(function(){
+                Swal.fire({
+                    icon: "success",
+                    title: "Log In Successfully!",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    })
+                    .then(function(){
+                    window.location.href = "VirtualBulsu_AnnouncementPanel.php" 
+                    })
+            });
+            </script>';
 
         } else {
             // User not found in either table
