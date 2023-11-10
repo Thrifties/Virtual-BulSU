@@ -3,7 +3,6 @@
 require "connect.php";
 
 // Assuming you have a form with POST data
-if ($_REQUEST["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $newPassword = $_POST['newPass'];
     $confirmPassword = $_POST['confirmPass'];
@@ -22,7 +21,7 @@ if ($_REQUEST["REQUEST_METHOD"] == "POST") {
     } else {
         echo 'Passwords do not match';
     }
-}
 
+    
 $con->close();
 ?>

@@ -313,7 +313,7 @@ $stmt->close();
               echo "password_change_campus.php";
             } else {
               echo "password_change_college.php";
-            } ?>" onsubmit="submitChangePassForm(event)">
+            }?>" onsubmit="submitChangePassForm(event)">
                 <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_id ?>" hidden>
                 <div class="form-group">
                     <label for="newPass">New Password: </label>
@@ -407,7 +407,7 @@ $stmt->close();
         console.log(form);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST","password_change_campus.php", true);
+        xhr.open("POST","<?php if($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin") {echo 'password_change_campus.php';} else {echo 'password_change_college.php';}?>", true);
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             Toast.fire({
