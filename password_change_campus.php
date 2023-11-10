@@ -3,26 +3,24 @@
 require "connect.php";
 
 // Assuming you have a form with POST data
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $newPassword = $_POST["new_password"];
-    $confirmPassword = $_POST["confirm_password"];
+if ($_REQUEST["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $newPassword = $_POST['newPass'];
+    $confirmPassword = $_POST['confirmPass'];
 
     // Validate passwords
     if ($newPassword == $confirmPassword) {
-        // Hash the new password (you should use a secure hashing algorithm like bcrypt)
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         // Update the password and set first_login to false
-        $updateSql = "UPDATE campus_admin SET password = '$hashedPassword', first_login = false WHERE faculty_id = '$username'";
+        $updateSql = "UPDATE campus_admin SET password = '$newPassword', first_login = false WHERE faculty_id = '$username'";
         
         if ($con->query($updateSql) === TRUE) {
-            echo "Password updated successfully!";
+            echo 'password updated successfully';
         } else {
-            echo "Error updating password: " . $conn->error;
+            echo 'Error: ' . $con->error;
         }
     } else {
-        echo "Passwords do not match";
+        echo 'Passwords do not match';
     }
 }
 

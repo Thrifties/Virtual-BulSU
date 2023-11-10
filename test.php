@@ -90,10 +90,14 @@ $result = mysqli_query($con, $query);
   object-fit: contain;
 }
 
-.card {
+.collegeCards {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: ease-in-out .3s;
+}
+
+.card {
   transition: ease-in-out .3s;
 }
 
@@ -112,6 +116,13 @@ $result = mysqli_query($con, $query);
   color: #763435;
 }
 
+#modalCollegeLogo {
+  width: 3em;
+  height: 3em;
+  object-fit: contain;
+  margin-right: 1em;
+}
+
 </style>
 </head>
 <body>
@@ -124,12 +135,21 @@ $result = mysqli_query($con, $query);
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+
+        
                   //echo '<h2 class="text-white">'.$row['college_assignment'].'</h2>';
                   $college = $row['college_assignment'];
 
+                  $query2 = "SELECT * FROM announcements WHERE college_assignment = '$college' AND campus_assignment = 'Malolos Campus' ORDER BY created_at DESC";
+                  $result2 = mysqli_query($con, $query2);
+
+
+                  //trim the spaces in the string
+                  $collegeId = str_replace(' ', '', $college);
+
                     echo '
                     <div class="col">
-                      <div type="button" class="card h-100 p-1 shadow" data-bs-toggle="modal" data-bs-target="#'.$college.'">
+                      <div type="button" class="card h-100 p-1 shadow collegeCards" data-bs-toggle="modal" data-bs-target="#'.$collegeId.'">
                         <img src="resources/college-banners/'.$college.'.png" class="card-img-top rounded" alt="...">
                         <div class="card-body">
                           <img src="resources/college-logo/'.$college.'.png" alt="" class="position-absolute top-50 start-50 translate-middle" id="collegeLogo">
@@ -139,31 +159,55 @@ $result = mysqli_query($con, $query);
                     </div>
                       ';
 
+                    echo '
+                    <div class="modal fade" id="'.$collegeId.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <img src="resources/college-logo/'.$college.'.png" alt="" id="modalCollegeLogo">
+                            <h5 class="modal-title">'.$college.'</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                          <div class = "row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
+                          ';?>
+
+                          <?php 
+                            if (mysqli_num_rows($result2) > 0) { 
+                              while ($row2 = mysqli_fetch_assoc($result2)) { 
+                                echo '
+                                <div class="col">
+                                  <a href="VirtualBulsu_AnnouncementPage.php?id='.$row2['announcement_id'].'" class="text-decoration-none">
+                                    <div class="card h-100">
+                                      <img src="uploads/'.$row2['file_input'].'" class="card-img-top" alt="...">
+                                      <div class="card-body">
+                                        <h5 class="card-title">'.$row2['headline'].'</h5>
+                                      </div>
+                                      <div class="card-footer">
+                                        <small class="text-body-secondary">Date Posted: '.date('F d, Y', strtotime($row2['created_at'])).'</small>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                                ';
+                              }
+                            }
+                          ?>
+
+                          <?php
+                          echo'
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    ';
                 }
               }
             ?>
         </div>
       </div>
     </div>
-
-    <div class="modal fade" id="" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     
 
     <!-- <footer class="footer">
@@ -174,13 +218,5 @@ $result = mysqli_query($con, $query);
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     
-    <script>
-      var collegeAnnouncementCard = document.querySelector(".card");
-      var collegeModal = document.querySelector(".modal");
-
-
-
-
-    </script>
   </body>
 </html>

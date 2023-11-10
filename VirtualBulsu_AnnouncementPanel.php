@@ -327,13 +327,12 @@ $stmt->close();
                     <div id="confirmPassFeedback" class="invalid-feedback">
                     </div>
                 </div>
-
-            </form>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="changePassBtn" form="changePassForm" onclick="submitChangePassForm()" disabled>Save</button>
+            <button type="submit" class="btn btn-primary" id="changePassBtn" onclick="submitChangePassForm()" disabled>Save</button>
           </div>
         </div>
+        </form>
       </div>
     </div>
 
@@ -341,7 +340,7 @@ $stmt->close();
     <!-- <script src="js/announcement_panel.js"></script> -->
     <script>
       let id;
-    
+
     document.getElementById("headline").addEventListener("input", validateForm);
     document.getElementById("description").addEventListener("input", validateForm);
     document.getElementById("fileInput").addEventListener("input", validateForm);
@@ -389,8 +388,11 @@ $stmt->close();
       });
 
       function submitChangePassForm (event) {
+
         event.preventDefault();
+
         var form = new FormData(document.getElementById("changePassForm"));
+
 
         const Toast = Swal.mixin({
           toast: true,
@@ -402,37 +404,26 @@ $stmt->close();
           timer: 2000,
         })
 
-        console.log(formData);
+        console.log(form);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", 
-        <?php 
-          if ($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin") {
-            echo "password_change_campus.php";
-          } else {
-            echo "password_change_college.php";
-          }
-        ?>
-        , true);
+        xhr.open("POST","password_change_campus.php", true);
         xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              Toast.fire({
-                icon: 'success',
-                title: 'Password changed successfully!'
-              })
-              changePass.hide();
-            } else {
-              Toast.fire({
-                icon: 'error',
-                title: 'Error: ' + xhr.status
-              })
-            }
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            Toast.fire({
+              icon: 'success',
+              title: 'Password changed successfully!'
+            })
+            $('#firstLogin').modal('hide');
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: 'Error: ' + xhr.status
+            })
+           
           }
         }
-
         xhr.send(form);
-
       }
 
   function newPassValidation() {
@@ -763,7 +754,9 @@ $stmt->close();
     });
     // Get references to the campus and college select elements
     const campusSelect = document.getElementById('campusAssignment');
+    const viewCampusSelect = document.getElementById('viewCampusAssignment');
     const collegeSelect = document.getElementById('collegeAssignment');
+    const viewCollegeSelect = document.getElementById('viewCollegeAssignment');
 
     // Define the available colleges for each campus
     const campusColleges = {
@@ -825,7 +818,19 @@ $stmt->close();
     // Function to update the college options based on the selected campus
     function updateCollegeOptions() {
         const selectedCampus = campusSelect.value;
+        const selectedViewCampus = viewCampusSelect.value;
+        viewCollegeSelect.innerHTML = ''; // Clear current options
         collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedViewCampus in campusColleges) {
+            const colleges = campusColleges[selectedViewCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                viewCollegeSelect.appendChild(option);
+            }
+        }
 
         if (selectedCampus in campusColleges) {
             const colleges = campusColleges[selectedCampus];
@@ -839,6 +844,7 @@ $stmt->close();
     }
 
     // Add an event listener to the campus select element
+    viewCampusSelect.addEventListener('change', updateCollegeOptions);
     campusSelect.addEventListener('change', updateCollegeOptions);
 
     // Initial update when the page loads

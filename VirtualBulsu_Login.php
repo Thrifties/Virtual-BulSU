@@ -310,12 +310,12 @@ require "includes/sessionStart.php"
                     <h3 class="title">Welcome</h3>
                     <div class="text-input">
                         <i class="ri-user-fill"></i>
-                        <input type="text" placeholder="Faculty ID" input name="username" required />
+                        <input type="text" placeholder="Faculty ID" name="username" required />
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="text-input">
                         <i class="ri-lock-fill"></i>
-                        <input type="password" placeholder="Password" input name="password" required />
+                        <input type="password" placeholder="Password" name="password" required />
                         <i class="bx bx-lock"></i>
                     </div>
                     <div class="input-field">
