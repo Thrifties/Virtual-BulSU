@@ -34,11 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$_SESSION["user"] = $user;
 		$_SESSION["pass"] = $pass;
 
-        $loginQuery = "SELECT * FROM campus_admin WHERE faculty_id = '$user' AND password = '$pass'";
-        $loginResult = mysqli_query($con, $loginQuery);
-        $loginRow = mysqli_fetch_assoc($loginResult);
-        if (!$loginRow["first_login"]) {
-            echo '<script>
+        echo '<script>
             $(document).ready(function(){
                 Swal.fire({
                     icon: "success",
@@ -51,21 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     })
             });
             </script>';
-        } else {
-            echo '<script>
-            $(document).ready(function(){
-                Swal.fire({
-                    icon: "success",
-                    title: "Log In Successfully!",
-                    showConfirmButton: false,
-                    timer: 2000,
-                    })
-                    .then(function(){
-                    window.location.href = "password_change.php" 
-                    })
-            });
-            </script>';
-         }
+
     } else {
         // If user is not found in campus_admin, check college_admin
         $stmt = $con->prepare($collegeAdminQuery);
