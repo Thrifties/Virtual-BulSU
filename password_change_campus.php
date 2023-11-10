@@ -3,6 +3,7 @@
 require "connect.php";
 
 // Assuming you have a form with POST data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $newPassword = $_POST['newPass'];
     $confirmPassword = $_POST['confirmPass'];
@@ -10,18 +11,25 @@ require "connect.php";
     // Validate passwords
     if ($newPassword == $confirmPassword) {
 
-        // Update the password and set first_login to false
-        $updateSql = "UPDATE campus_admin SET password = '$newPassword', first_login = false WHERE faculty_id = '$username'";
-        
-        if ($con->query($updateSql) === TRUE) {
-            echo 'password updated successfully';
+        // Prepare and bind the parameters
+        $updateSql = "UPDATE campus_admin SET password = ?, first_login = false WHERE faculty_id = ?";
+        $stmt = $con->prepare($updateSql);
+        $stmt->bind_param("ss", $newPassword, $username);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo 'Password updated successfully';
         } else {
-            echo 'Error: ' . $con->error;
+            echo 'Error: ' . $stmt->error;
         }
+
+        // Close the statement
+        $stmt->close();
     } else {
         echo 'Passwords do not match';
     }
 
-    
-$con->close();
+    // Close the database connection
+    $con->close();
+}
 ?>

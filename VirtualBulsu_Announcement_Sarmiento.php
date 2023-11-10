@@ -83,8 +83,7 @@ $result = mysqli_query($con, $query);
             color: #ffd700;
         }
 
-      .footer {
-        width: 100%;
+      footer {
         background-color: #763435;
         color: white;
         padding: 5px;
@@ -247,12 +246,7 @@ $result = mysqli_query($con, $query);
       </div>
     </div>
 
-    
-
-
-    <footer class="footer">
-      <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
-    </footer>
+    <?php include "includes/footer.php"; ?>
 
     <script>
         document.getElementById("");

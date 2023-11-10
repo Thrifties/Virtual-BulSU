@@ -1,5 +1,6 @@
-let id;
-    
+
+      let id;
+
     document.getElementById("headline").addEventListener("input", validateForm);
     document.getElementById("description").addEventListener("input", validateForm);
     document.getElementById("fileInput").addEventListener("input", validateForm);
@@ -40,10 +41,14 @@ let id;
         addValidationListener("description");
         addValidationListener("fileInput");
 
+        <?php if ($firstLogin == true): ?>
+          var changePass = new bootstrap.Modal(document.getElementById('firstLogin'));
+          changePass.show();
+        <?php endif; ?>
       });
 
       function addValidationListener(elementId){
-        document.getElementById(elementId).addEventListener("keyup", function(){
+        document.getElementById(elementId).addEventListener("input", function(){
           validateInput(elementId);
         })
       }
@@ -78,11 +83,12 @@ let id;
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             var data = JSON.parse(this.responseText);
             var ImageURL = data.file_input;
+            var description = data.description;
             document.getElementById("announcementId").value = data.announcement_id;
             document.getElementById("viewCampusAssignment").value = data.campus_assignment;
             document.getElementById("viewCollegeAssignment").value = data.college_assignment;
             document.getElementById("viewHeadline").value = data.headline;
-            document.getElementById("viewDescription").textContent = data.description;
+            document.getElementById("viewDescription").value = description.replace("<br />", /\n/g);
             document.getElementById("viewAnnouncementImage").src = "uploads/" + data.file_input;
             document.getElementById("viewAuthor").innerHTML = "<small class='text-body-secondary'>Author: </small>" + data.author;
           }
@@ -95,11 +101,6 @@ let id;
 
         id = announcementId;
 
-      }
-
-      function enableViewEdit() {
-        console.log(id);
-        editAnnouncement(id);
       }
 
       function editAnnouncement(announcementId) {
@@ -131,6 +132,7 @@ let id;
       }
 
       function saveChanges() {
+
         var announcementId = document.getElementById("announcementId").value;
         var campusAssignment = document.getElementById("viewCampusAssignment").value;
         var collegeAssignment = document.getElementById("viewCollegeAssignment").value;
@@ -155,12 +157,10 @@ let id;
         xhr.open("POST", "update_announcement_details.php", true);
         xhr.onreadystatechange = function () {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var response = JSON.parse(this.responseText);
-            if (response.success) {
-              alert(response.success);
-            } else {
-              alert(response.error);
-            }
+            console.log("Success: " + xhr.responseText);
+            $('#announcementTbl').DataTable().ajax.reload();
+          } else {
+            console.log("Error: " + xhr.status);
           }
         };
 
@@ -179,21 +179,32 @@ let id;
 
       function deleteAnnouncement(announcementId) {
         console.log(announcementId);
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          customClass: {
+            popup: 'colored-toast'
+          },
+          timer: 2000,
+        })
         if (confirm("Are you sure you want to delete this announcement?")) {
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "delete_announcement.php", true);
           xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           xhr.onreadystatechange = function() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-              var response = JSON.parse(this.responseText);
-              if (response.success) {
-                // Remove the deleted row from the table
-                var row = document.getElementById(announcementId);
-                row.parentNode.removeChild(row);
-                alert(response.success);
-              } else {
-                alert(response.error);
-              }
+              Toast.fire({
+                icon: 'success',
+                title: "Announcement deleted successfully!"
+              })
+              $('#announcementTbl').DataTable().ajax.reload();
+            } else {
+              Toast.fire({
+                icon: 'error',
+                title: "Error: " + xhr.status
+              })
             }
           };
           xhr.send("announcementId=" + announcementId);
@@ -217,10 +228,10 @@ let id;
       $(document).ready(function () {
       $('#announcementTbl').DataTable({
         paging: false,
+        scrollCollapse: true,
+        scrollY: '50vh',
         responsive: true,
         autoWidth: false,
-        searching: true,
-        processing: true,
         ajax: {
           url: 'get_announcement_list.php',
           dataSrc: '',
@@ -272,11 +283,14 @@ let id;
     });
     // Get references to the campus and college select elements
     const campusSelect = document.getElementById('campusAssignment');
+    const viewCampusSelect = document.getElementById('viewCampusAssignment');
     const collegeSelect = document.getElementById('collegeAssignment');
+    const viewCollegeSelect = document.getElementById('viewCollegeAssignment');
 
     // Define the available colleges for each campus
     const campusColleges = {
         'Malolos Campus': [
+            '-- Select College --',
             'College of Industrial Technology',
             'College of Information and Communications Technology',
             'College of Nursing',
@@ -294,6 +308,7 @@ let id;
             'College of Criminal Justice Education'
         ],
         'Meneses Campus': [
+          '-- Select College --',
             'College of Education',
             'College of Hospitality Management',
             'College of Engineering',
@@ -308,16 +323,19 @@ let id;
             'College of Information and Communications Technology'
         ],
         'Bustos Campus': [
+            '-- Select College --',
             'College of Engineering',
             'College of Business Administration',
             'College of Information and Communication Technology'
         ],
         'San Rafael Campus': [
+            '-- Select College --',
             'College of Nursing',
             'College of Science',
             'College of Social Science and Philosophy'
         ],
         'Sarmiento Campus': [
+            '-- Select College --',
             'College of Science',
             'College of Industrial Technology',
             'College of Education',
@@ -329,7 +347,19 @@ let id;
     // Function to update the college options based on the selected campus
     function updateCollegeOptions() {
         const selectedCampus = campusSelect.value;
+        const selectedViewCampus = viewCampusSelect.value;
+        viewCollegeSelect.innerHTML = ''; // Clear current options
         collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedViewCampus in campusColleges) {
+            const colleges = campusColleges[selectedViewCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                viewCollegeSelect.appendChild(option);
+            }
+        }
 
         if (selectedCampus in campusColleges) {
             const colleges = campusColleges[selectedCampus];
@@ -343,8 +373,54 @@ let id;
     }
 
     // Add an event listener to the campus select element
+    viewCampusSelect.addEventListener('change', updateCollegeOptions);
     campusSelect.addEventListener('change', updateCollegeOptions);
 
     // Initial update when the page loads
     updateCollegeOptions();
 
+    function submitAnnouncementForm (event) {
+      event.preventDefault();
+      var formData = new FormData(document.getElementById("announcementForm"));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        customClass: {
+          popup: 'colored-toast'
+        },
+        timer: 2000,
+      })
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "add_announcement.php", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+
+            Toast.fire({
+              icon: 'success',
+              title: xhr.responseText
+            })
+            
+            $('#announcementTbl').DataTable().ajax.reload();
+
+            document.getElementById("headline").classList.remove("is-valid");
+            document.getElementById("description").classList.remove("is-valid");
+            document.getElementById("fileInput").classList.remove("is-valid");
+
+
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: "Error: " + xhr.status
+            })
+          }
+        }
+      }
+
+      xhr.send(formData);
+
+      document.getElementById("announcementForm").reset();
+      document.getElementById("addBtn").disabled = true;
+
+    }

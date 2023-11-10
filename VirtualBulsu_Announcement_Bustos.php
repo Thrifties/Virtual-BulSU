@@ -65,10 +65,8 @@ $result = mysqli_query($con, $query);
         color: white;
         padding: 5px;
         text-align: center;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 9999;
+        position:absolute;
+        bottom:0;
       }
 
     #announcementCard {
@@ -222,9 +220,7 @@ $result = mysqli_query($con, $query);
     </div>
   </div>
 
-  <footer class="footer">
-    All rights reserved.
-  </footer>
+  <?php include "includes/footer.php"; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
