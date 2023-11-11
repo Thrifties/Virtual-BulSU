@@ -64,9 +64,6 @@ $result = mysqli_query($con, $query);
         background-color: #4B5320;
         color: white;
         padding: 5px;
-        text-align: center;
-        position:absolute;
-        bottom:0;
       }
 
     #announcementCard {

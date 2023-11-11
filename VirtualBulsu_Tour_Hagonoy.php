@@ -33,93 +33,23 @@ if (mysqli_num_rows($result) > 0) {
             background-color: #95b302;
             font-family: "Roboto";
         }
-        iframe {
-            width: 100%;
-            height: calc(100vh - 51px); /* Adjusted for the navbar height */
-            border: none;
-        }
-        #offcanvasNavbar, #announcementPanel {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 30px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            transition: width 0.5s;
-        }
-
-        .offcanvas-header h5 {
-            color: black;
-            width: 550px;
-            height: 30px;
-            margin: 0;
-        }
-
-        #announcementTab {
-            box-shadow: inset 0 0 0 0 #95b302;
-            color: #95b302;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            margin-bottom: 8px;
-        }
-
-        #announcementTab:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #95b302;
-        }
-
-        #campuses {
-            box-shadow: inset 0 0 0 0 #95b302;
-            color: #95b302;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        #campuses:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #95b302;
-        }
-
-        #offcanvasNavbarLabel {
-            color: white;
-            font-size: larger;
-            margin-left: 5px;
-        }
-
-        .dropdown-menu {
+        
+        .navbar-custom, .footer, body, .dropdown-menu {
             background-color: #95b302;
         }
 
-        .dropdown-item {
-            color: white;
+        #announcementTab, #campuses {
+            color: black;
+        }
+        #announcementTab, #campuses {
+            box-shadow: inset 0 0 0 0 #95b302;
+            color: #f9f6ee;
         }
 
-        #offcanvasScrollingLabel {
-            color: white;
-            font-family: 'Roboto';
+        #announcementTab:hover, #campuses:hover {
+            color: black;
+            box-shadow: inset 150px 0 0 0 #95b302;
         }
-
-        .btn-close {
-            color: white;
-        }
-
     </style>
 </head>
 
@@ -172,9 +102,10 @@ if (mysqli_num_rows($result) > 0) {
                 </a>
             </div>
         </nav>
-        <iframe scrolling="no" id="virtualTour" allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>
+        <iframe scrolling="no" allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true" frameborder="0" src="https://webobook.com/public/650267175030d77e98222f42,en?ap=true&si=true&sm=false&sp=true&sfr=true&sl=true&sop=true&" allowvr="yes"></iframe>
 
         <?php include "campus_announcement_modal.php"; ?>
+        <?php include "includes/footer.php"; ?>
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         <script>
             var navHeight = document.getElementById("navBar").clientHeight;

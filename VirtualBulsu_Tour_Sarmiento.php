@@ -28,111 +28,21 @@ if (mysqli_num_rows($result) > 0) {
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mobileView.css">
         <style>
-            .navbar-custom {
-        font-family: 'Roboto';
-        background-color: #800080;
-    }
+        .navbar-custom, .footer, body, .dropdown-menu {
+            background-color: #800080;
+        }
 
+        #announcementTab, #campuses {
+            color: black;
+        }
+        #announcementTab, #campuses {
+            box-shadow: inset 0 0 0 0 #800080;
+            color: #f9f6ee;
+        }
 
-    #announcementTab {
-        color: black;
-    }
-
-    #campuses {
-        color: black;
-    }
-
-    #offcanvasNavbar,
-    #announcementPanel {
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 30px 15px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        transition: width 0.5s;
-    }
-
-    .offcanvas-header h5 {
-        color: black;
-        width: 550px;
-        height: 30px;
-        margin: 0;
-    }
-
-    #announcementTab {
-        box-shadow: inset 0 0 0 0 #800080;
-        color: #800080;
-        padding: 0 .25rem;
-        margin: 0 -.25rem;
-        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-        color: white;
-        font-family: 'Roboto';
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 1.5;
-        text-decoration: none;
-        margin-bottom: 8px;
-    }
-
-    #announcementTab:hover {
-        color: #d09b00;
-        box-shadow: inset 150px 0 0 0 #800080;
-        ;
-    }
-
-    #campuses {
-        box-shadow: inset 0 0 0 0 #800080;
-        color: #800080;
-        padding: 0 .25rem;
-        margin: 0 -.25rem;
-        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-        color: white;
-        font-family: 'Roboto';
-        font-weight: 500;
-        line-height: 1.5;
-        text-decoration: none;
-        font-size: 18px;
-    }
-
-    #campuses:hover {
-        color: #d09b00;
-        box-shadow: inset 150px 0 0 0 #800080;
-        ;
-    }
-
-    #offcanvasNavbarLabel {
-        color: white;
-        font-size: larger;
-        margin-left: 5px;
-        padding-top: 3px;
-        font-family: 'Roboto';
-    }
-
-    .dropdown-menu {
-        background-color: #800080;
-    }
-
-    .dropdown-item {
-        color: white;
-    }
-
-    #offcanvasScrollingLabel {
-        color: white;
-        font-family: 'Roboto';
-    }
-
-    .btn-close {
-        color: white;
-    }
-
-     iframe {
-            width: 100%;
-            height: calc(100vh - 51px); /* Adjusted for the navbar height */
-            border: none;
+        #announcementTab:hover, #campuses:hover {
+            color: #d09b00;
+            box-shadow: inset 150px 0 0 0 #800080;
         }
         </style>
     </head>
@@ -191,6 +101,7 @@ if (mysqli_num_rows($result) > 0) {
             <iframe allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e987a96269741085b6f72,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" allowvr="yes" ></iframe>
 
             <?php include "campus_announcement_modal.php"; ?>
+            <?php include "includes/footer.php"; ?>
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     </body>  
 </html>

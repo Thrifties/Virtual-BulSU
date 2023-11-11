@@ -1,8 +1,10 @@
-/* styles.css */
-
 /* Common Styles */
 body {
     font-family: 'Roboto';
+    background-color: #763435;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navigation Bar */
@@ -36,6 +38,7 @@ body {
     box-shadow: inset 150px 0 0 0 #763435;
 }
 
+/* Dropdown Styles */
 .dropdown-menu {
     background-color: #763435;
 }
@@ -44,15 +47,9 @@ body {
     color: white;
 }
 
+/* Button Styles */
 .btn-close {
     color: white;
-}
-
-/* Iframe Styles */
-iframe {
-    width: 100%;
-    height: 98%;
-    border: none;
 }
 
 /* Offcanvas Panel Styles */
@@ -62,71 +59,26 @@ iframe {
     left: 0;
     padding: 30px 15px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     transition: width 0.5s;
 }
 
-#offcanvasNavbarLabel {
+#offcanvasNavbarLabel, #offcanvasScrollingLabel {
     color: white;
     font-size: larger;
     margin-left: 5px;
     padding-top: 3px;
 }
 
-
-/* styles.css */
-
-.navbar-custom {
-    font-family: 'Roboto';
-}
-
-#tour {
-    width: 100%;
-    height: 800px;
-    min-height: 562px;
-    margin: 0 auto;
-}
-
-#offcanvasNavbar,
-#announcementPanel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 30px 15px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    transition: width 0.5s;
-}
-
-.offcanvas-header h5 {
-    color: black;
-    width: 550px;
-    height: 30px;
-    margin: 0;
-}
-
-#offcanvasNavbarLabel,
-#offcanvasScrollingLabel,
-.btn-close {
-    color: white;
-}
-
-.dropdown-menu {
+.footer {
     background-color: #763435;
-}
-
-.dropdown-item {
     color: white;
+    padding: 8px;
 }
 
 iframe {
     width: 100%;
-    height: calc(100vh - 51px); /* Adjusted for the navbar height */
-    border: none;
+    height: calc(100vh - 110px);
 }

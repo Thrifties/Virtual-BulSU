@@ -27,113 +27,21 @@ if (mysqli_num_rows($result) > 0) {
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mobileView.css">
         <style>
-     .navbar-custom {
-            background-color: #dd4091;
-            font-family: 'Roboto';
-        }
-
-        #tour {
-            width: 100%;
-            height: 800px;
-            min-height: 562px;
-            margin: 0 auto;
-        }
-
-        #announcementTab {
-            color: black;
-        }
-
-        #campuses {
-            color: black;
-        }
-
-        #offcanvasNavbar, #announcementPanel {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 30px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            transition: width 0.5s;
-        }
-
-        .offcanvas-header h5 {
-            color: black;
-            width: 550px;
-            height: 30px;
-            margin: 0;
-        }
-
-        #announcementTab {
-            box-shadow: inset 0 0 0 0 #dd4091;
-            color: #dd4091;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            margin-bottom: 8px;
-        }
-
-        #announcementTab:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #dd4091;
-        }
-
-        #campuses {
-            box-shadow: inset 0 0 0 0 #dd4091;
-            color: #dd4091;
-            padding: 0 .25rem;
-            margin: 0 -.25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            color: white;
-            font-family: 'Roboto';
-            font-weight: 500;
-            line-height: 1.5;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        #campuses:hover {
-            color: black;
-            box-shadow: inset 150px 0 0 0 #dd4091;
-        }
-
-        #offcanvasNavbarLabel {
-            color: white;
-            font-size: larger;
-            margin-left: 5px;
-            padding-top: 3px;
-            font-family: 'Roboto';
-        }
-
-        .dropdown-menu {
+     .navbar-custom, .footer, body, .dropdown-menu {
             background-color: #dd4091;
         }
 
-        .dropdown-item {
-            color: white;
+        #announcementTab, #campuses {
+            color: black;
+        }
+        #announcementTab, #campuses {
+            box-shadow: inset 0 0 0 0 #dd4091;
+            color: #f9f6ee;
         }
 
-        #offcanvasScrollingLabel {
-            color: white;
-            font-family: 'Roboto';
-        }
-
-        .btn-close {
-            color: white;
-        }
-        iframe {
-            width: 100%;
-            height: calc(100vh - 51px); /* Adjusted for the navbar height */
-            border: none;
+        #announcementTab:hover, #campuses:hover {
+            color: #d09b00;
+            box-shadow: inset 150px 0 0 0 #dd4091;
         }
 
         </style>
@@ -195,6 +103,7 @@ if (mysqli_num_rows($result) > 0) {
 
             
             <?php include "campus_announcement_modal.php"; ?>
+            <?php include "includes/footer.php"; ?>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

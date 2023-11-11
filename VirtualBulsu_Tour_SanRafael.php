@@ -1,7 +1,7 @@
 <?php
 require "connect.php";
 
-$query = "SELECT * FROM announcements WHERE campus_assignment = 'Malolos Campus' ORDER BY created_at DESC";
+$query = "SELECT * FROM announcements WHERE campus_assignment = 'San Rafael Campus' ORDER BY created_at DESC";
 $result = mysqli_query($con, $query);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {{
@@ -28,116 +28,14 @@ if (mysqli_num_rows($result) > 0) {
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mobileView.css">
         <style>
-             .navbar-custom {
-        font-family: 'Roboto';
-    }
+        #announcementTab, #campuses {
+            box-shadow: inset 0 0 0 0 #763435;
+            color: #fff;
+        }
 
-    #tour {
-        width: 100%;
-        height: 800px;
-        min-height: 562px;
-        margin: 0 auto;
-    }
-
-    #announcementTab {
-        color: black;
-    }
-
-    #campuses {
-        color: black;
-    }
-
-    #offcanvasNavbar,
-    #announcementPanel {
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 30px 15px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        transition: width 0.5s;
-    }
-
-    .offcanvas-header h5 {
-        color: black;
-        width: 550px;
-        height: 30px;
-        margin: 0;
-    }
-
-    #announcementTab {
-        box-shadow: inset 0 0 0 0 #763435;
-        color: #763435;
-        padding: 0 .25rem;
-        margin: 0 -.25rem;
-        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-        color: white;
-        font-family: 'Roboto';
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 1.5;
-        text-decoration: none;
-        margin-bottom: 8px;
-    }
-
-    #announcementTab:hover {
-        color: #d09b00;
-        box-shadow: inset 150px 0 0 0 #763435;
-        ;
-    }
-
-    #campuses {
-        box-shadow: inset 0 0 0 0 #763435;
-        color: #763435;
-        padding: 0 .25rem;
-        margin: 0 -.25rem;
-        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-        color: white;
-        font-family: 'Roboto';
-        font-weight: 500;
-        line-height: 1.5;
-        text-decoration: none;
-        font-size: 18px;
-    }
-
-    #campuses:hover {
-        color: #d09b00;
-        box-shadow: inset 150px 0 0 0 #763435;
-        ;
-    }
-
-    #offcanvasNavbarLabel {
-        color: white;
-        font-size: larger;
-        margin-left: 5px;
-        padding-top: 3px;
-        font-family: 'Roboto';
-    }
-
-    .dropdown-menu {
-        background-color: #763435;
-    }
-
-    .dropdown-item {
-        color: white;
-    }
-
-    #offcanvasScrollingLabel {
-        color: white;
-        font-family: 'Roboto';
-    }
-
-    .btn-close {
-        color: white;
-    }
-
-    iframe {
-            width: 100%;
-            height: calc(100vh - 51px); /* Adjusted for the navbar height */
-            border: none;
+        #announcementTab:hover, #campuses:hover {
+            color: #d09b00;
+            box-shadow: inset 150px 0 0 0 #763435;
         }
         </style>
     </head>
@@ -194,6 +92,8 @@ if (mysqli_num_rows($result) > 0) {
             <iframe allowvr="yes" allow="xr-spatial-tracking;vr;gyroscope;accelerometer;fullscreen;" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/65103e271f8f1a3b9a2e9862,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" ></iframe>
         
         <?php include "campus_announcement_modal.php"; ?>
+
+        <?php include "includes/footer.php"; ?>
         
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         </body>
