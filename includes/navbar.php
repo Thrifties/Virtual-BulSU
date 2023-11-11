@@ -40,7 +40,7 @@ $stmt->close();
 ?>
 
   <div class="sidebar d-flex flex-column flex-shrink-0 p-3">
-    <img src="resources/virtualbulsu_logo.png" id="logo" alt="Virtual BulSU Logo">
+    <img src="resources/Virtual BulSU Logo.png" id="logo" alt="Virtual BulSU Logo">
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>

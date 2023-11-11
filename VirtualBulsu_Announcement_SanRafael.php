@@ -14,127 +14,13 @@ $result = mysqli_query($con, $query);
     <title>Bulacan State University</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS\VirtualBulsu_Navbar.css" />
+    <link rel="stylesheet" href="CSS\announcement_style.css" />
+    <link rel="icon" href="resources/Virtual BulSU Logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <style>
-      html,
-      body {
-        height: 100%;
-      }
-
-      body {
-        background: /*linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.932)),*/
-          url("resources/cover.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        display: flex;
-        flex-direction: column;
-      }
-      .navbar-custom {
-        z-index: 9999;
-        width: 100%;
-        background: none;
-        background-color: #763435;
-        font-family: "Roboto";
-      }
-      .navbar-custom .navbar-brand {
-        color: aliceblue;
-        text-decoration: none;
-        font-family: "Roboto";
-      }
-      .navbar-custom {
-                background-color: #763435;
-                z-index: 9999;
-                width: 100%;
-            }
-
-    .navbar-custom .navbar-nav #news-link:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: rgba(255, 215, 0, 1);
-            transition: background-color 0.3s ease;
-        }
-
-    .navbar-custom .navbar-nav #news-link {
-            color: #ffd700;
-        }
-
-      .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: #763435;
-        color: white;
-        padding: 5px;
-        text-align: center;
-      }
-
-      #announcementCard {
-        text-decoration: none; /* Remove underline */
-        color: inherit; /* Inherit text color */
-      }
-
-      #announcementCard:hover {
-        color: inherit; /* Inherit text color on hover */
-      }
-
-
-@media (max-width: 500px){
-    h1{
-        font-size: 35px;
+    .navbar-custom, .footer {
+      background-color: #763435;
     }
-
-    nav {
-        display: block;
-        width: 100% !important;
-    }
-
-}
-
-
-#collegeLogo {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
-
-.collegeCards {
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: ease-in-out .3s;
-}
-
-.card {
-  transition: ease-in-out .3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card-img-top {
-  background-color: #763435;
-  height: 150px;
-  object-fit: cover;
-  border: solid 2px #763435;
-}
-
-.card-title {
-  color: #763435;
-}
-
-#modalCollegeLogo {
-  width: 3em;
-  height: 3em;
-  object-fit: contain;
-  margin-right: 1em;
-}
 </style>
 </head>
 <body>
@@ -215,6 +101,8 @@ $result = mysqli_query($con, $query);
                     </div>
                     ';
                 }
+              } else {
+                echo '<h2 class="text-white text-center">No announcements yet</h2>';
               }
             ?>
         </div>

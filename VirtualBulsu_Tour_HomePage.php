@@ -7,6 +7,7 @@
   <title>Bulacan State University</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS/VirtualBulsu_Navbar.css" />
+  <link rel="icon" href="resources/Virtual BulSU Logo.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   <style>
     html,

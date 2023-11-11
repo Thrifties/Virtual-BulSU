@@ -13,7 +13,7 @@
             if (mysqli_num_rows($result2) > 0) {
                 while ($row2 = mysqli_fetch_assoc($result2)) { 
                 echo '
-                    <div class="col">
+                    <div class="col newsCard">
                     <a href="VirtualBulsu_AnnouncementPage.php?id='.$row2['announcement_id'].'" class="text-decoration-none">
                         <div class="card h-100">
                         <img src="uploads/'.$row2['file_input'].'" class="card-img-top" alt="...">

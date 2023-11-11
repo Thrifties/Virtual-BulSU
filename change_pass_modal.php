@@ -5,7 +5,11 @@
                 <h5 class="modal-title">Change Default Password</h5>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" id="changePassForm" action="password_change_campus.php" onsubmit="submitChangePassForm(event)">
+                <form class="needs-validation" id="changePassForm" action="<?php if($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin"){
+                    echo "password_change_campus.php";
+                } else {
+                    echo "password_change_college.php";
+                } ?>" onsubmit="submitChangePassForm(event)">
                     <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_id ?>" hidden>
                     <div class="form-group">
                         <label for="newPass">New Password: </label>
@@ -44,7 +48,7 @@
         })
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "password_change_campus.php", true);
+        xhr.open("POST", "<?php if($currentAdminLevel === "super_admin" OR $currentAdminLevel === "admin"){echo "password_change_campus.php";}else {echo "password_change_college.php";} ?>", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // Set content type here
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

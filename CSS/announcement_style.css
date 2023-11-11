@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("../resources/cover.png") center/cover no-repeat fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-custom {
+    width: 100%;
+    background: none;
+    background-color: #763435;
+    font-family: "Roboto";
+}
+
+.navbar-custom .navbar-brand {
+    color: aliceblue;
+    text-decoration: none;
+    font-family: "Roboto";
+}
+
+.navbar-custom {
+    background-color: #763435;
+    width: 100%;
+}
+
+.navbar-custom .navbar-nav #news-link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 215, 0, 1);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-custom .navbar-nav #news-link {
+    color: #ffd700;
+}
+
+.footer {
+    color: white;
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+}
+
+@media (max-width: 500px) {
+    h1 {
+        font-size: 35px;
+    }
+
+    nav {
+        display: block;
+        width: 100% !important;
+    }
+}
+
+#collegeLogo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.collegeCards {
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.card {
+    transition: ease-in-out 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    background-color: #763435;
+    height: 150px;
+    object-fit: cover;
+    border: solid 2px #763435;
+}
+
+.card-title {
+    color: #763435;
+}
+
+#modalCollegeLogo {
+    width: 3em;
+    height: 3em;
+    object-fit: contain;
+    margin-right: 1em;
+}

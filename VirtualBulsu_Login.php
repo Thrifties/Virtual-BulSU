@@ -24,7 +24,7 @@ require "includes/sessionStart.php"
     body {
         background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
 
-            url('resources/school_cover1.png');
+            url('resources/school_cover15.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -36,6 +36,8 @@ require "includes/sessionStart.php"
     }
 
     /*
+    old code for the login ui
+
     .box-flex-justify-content-center {
         display: flex;
         justify-content: center;
@@ -180,7 +182,7 @@ require "includes/sessionStart.php"
         box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
         border-radius: 20px;
         background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-            url('resources/school_cover2.png');
+            url('resources/school_cover14.png');
         overflow: hidden;
         background-size: cover;
     }
@@ -205,7 +207,7 @@ require "includes/sessionStart.php"
         font-size: 30px;
         font-weight: bold;
         padding-top: 50px;
-        color: #d09b00;
+        color: #2c1414;
     }
 
     .text-input {
@@ -226,7 +228,7 @@ require "includes/sessionStart.php"
         width: 100%;
         height: 100%;
         margin-left: 10px;
-        color: #d09b00;
+        color: #2c1414;
     }
 
     .text-input i {
@@ -279,14 +281,14 @@ require "includes/sessionStart.php"
         transition: 0.3s;
         height: 40px;
         width: 200px;
-        background-color: #d09b00;
+        background-color: #8D4242;
         border: white;
 
     }
 
     .input-field .submit:hover {
         color: white;
-        background-color: #8D4242;
+        background-color: #2c1414;
     }
 </style>
 
@@ -310,12 +312,12 @@ require "includes/sessionStart.php"
                     <h3 class="title">Welcome</h3>
                     <div class="text-input">
                         <i class="ri-user-fill"></i>
-                        <input type="text" placeholder="Faculty ID" name="username" required />
+                        <input type="text" placeholder="Faculty ID" input name="username" required />
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="text-input">
                         <i class="ri-lock-fill"></i>
-                        <input type="password" placeholder="Password" name="password" required />
+                        <input type="password" placeholder="Password" input name="password" required />
                         <i class="bx bx-lock"></i>
                     </div>
                     <div class="input-field">
