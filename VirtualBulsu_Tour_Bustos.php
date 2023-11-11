@@ -1,5 +1,18 @@
 <?php
-require "connect.php"
+require "connect.php";
+
+$query = "SELECT * FROM announcements WHERE campus_assignment = 'Bustos Campus' ORDER BY created_at DESC";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {{
+      $college = $row['college_assignment'];
+      $campus = $row['campus_assignment'];
+      $campusId = str_replace(' ', '', $campus);
+      $collegeId = str_replace(' ', '', $college);
+      $datePosted = date('F d, Y', strtotime($row['created_at']));
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -156,8 +169,8 @@ require "connect.php"
                                     <a class="nav-link" aria-current="page" id="announcementTab" type="button" href="VirtualBulsu_Tour_HomePage.php">Home</a>
                                 </li>
                                 <li class="nav-item " id="nav-item">
-                                    <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="offcanvas"
-                                        data-bs-target="#announcementPanel" aria-controls="offcanvasScrollingLabel">Announcements</a>
+                                    <a class="nav-link" aria-current="page" id="announcementTab" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#<?php echo $campusId ?>">Announcements</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="campuses" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,43 +198,8 @@ require "connect.php"
 
             <iframe allow="xr-spatial-tracking; vr; gyroscope; accelerometer; fullscreen; autoplay; xr" scrolling="no" allowfullscreen="true"  frameborder="0" src="https://webobook.com/public/650e8deea43813098500eb72,en?ap=true&si=true&sm=false&sp=true&sfr=false&sl=false&sop=false&" allowvr="yes" ></iframe>
             
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
-                id="announcementPanel" aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                    <h4 class="offcanvas-title" id="offcanvasScrollingLabel">Campus News</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <?php
-                        // Query to fetch announcements from your database
-                        $query = "SELECT * FROM announcements WHERE campus_assignment = 'Bustos Campus' ORDER BY created_at DESC";
-                        $result = mysqli_query($con, $query);
-        
-                        if (!$result) {
-                            die("Database query failed."); // Handle the error appropriately
-                        }
-        
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $datePosted = date('F d, Y', strtotime($row['created_at']));
-                            echo '
-                                <div class="card mb-3" id='.$row['announcement_id'].'>
-                                <a href="VirtualBulsu_AnnouncementPage.php?id='.$row['announcement_id'].'" class="text-decoration-none text-body">
-                                    <img src="uploads/'.$row['file_input'].'" class="card-img-top" alt="Unable to load image">
-                                    <div class="card-body">
-                                        <h5 class="card-title">' . htmlspecialchars($row['headline']) . '</h5>
-                                    </div>
-                                    <div class="card-footer">
-                                       <small class="text-body-secondary">Date Posted: '.$datePosted.'<small>
-                                       </div>
-                                </a>
-                                </div>
-                            ';
-                        }
-                        // Release the result set
-                        mysqli_free_result($result);
-                    ?>
-                </div>
-            </div>
+            <?php include "campus_announcement_modal.php"; ?> 
+            
             <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
             </body>
             
