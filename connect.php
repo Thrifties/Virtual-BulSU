@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$username = "u673355866_vbulsu";
-$password = "a9FU@1F92efadsad";
-$dbname = "u673355866_vbulsu";
+$username = "root";
+$password = "";
+$dbname = "virtual_bulsu_db";
 
 // Create connection
 $con = new mysqli($servername, $username, $password, $dbname);

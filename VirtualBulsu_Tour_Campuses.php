@@ -115,7 +115,6 @@
         </div>
         <div class="swiper-button-next slider-arrow">
         </div>
-        <div class="swiper-pagination"></div>
   </div>
 
   <footer class="footer">

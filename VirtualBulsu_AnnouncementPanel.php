@@ -65,7 +65,11 @@ $stmt->close();
     <!-- Announcement Panel -->
     <div class="announcement-panel">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Announcement Panel</h2>
+        <h2><?php if ($currentAdminLevel === "super_admin") {
+          echo 'Announcement Panel';
+        } elseif ($currentAdminLevel === "admin" OR $currentAdminLevel === "college_admin") {
+          echo $currentAdminCampus . ' - Announcement Panel ';
+        } ?></h2>
         <button class="btn btn-primary" id="addAnnouncement" data-bs-toggle="modal" data-bs-target="#announcementModal">Add
           Announcement</button>
       </div>

@@ -35,7 +35,11 @@ if ($result1) {
   <div class="container-fluid mt-5" id="adminPage">
     <div class="admin-panel-container">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Admin Panel</h2>
+        <h2><?php if ($currentAdminLevel === "super_admin") {
+          echo 'Admin Panel';
+        } elseif ($currentAdminLevel === "admin" OR $currentAdminLevel === "college_admin") {
+          echo $currentAdminCampus . ' - Admin Panel ';
+        } ?></h2>
         <div class="mb-1">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminModal">Add Admin</button>
           <a href="generate_report_admin.php" class="btn btn-success">Download List</a>
