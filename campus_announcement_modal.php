@@ -18,6 +18,7 @@
                         <div class="card h-100">
                         <img src="uploads/'.$row2['file_input'].'" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <small class="text-body-secondary">'.$row2['college_assignment'].'</small>
                             <h5 class="card-title">'.$row2['headline'].'</h5>
                         </div>
                         <div class="card-footer">

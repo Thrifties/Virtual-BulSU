@@ -958,7 +958,7 @@ $(document).ready(function () {
           '-- Select College --',
             'College of Engineering',
             'College of Business Administration',
-            'College of Information and Communication Technology'
+            'College of Information and Communications Technology'
         ],
         'San Rafael Campus': [
           '-- Select College --',

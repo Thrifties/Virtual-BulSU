@@ -17,6 +17,7 @@ if (isset($_GET['id'])) {
         $description = $row['description'];
         $datePosted = $row['created_at'];
         $campusAssignment = $row['campus_assignment'];
+        $collegeAssignment = $row['college_assignment'];
     } else {
         // Handle the case where the announcement with the provided ID is not found
         $headline = "Announcement Not Found";
@@ -131,8 +132,8 @@ if (isset($_GET['id'])) {
         <li class="breadcrumb-item active" aria-current="page"><?php echo $headline?></li> 
       </ol>
     </nav>
-
-        <small class="text-body-secondary" id="date-posted">Date posted: <?php echo date('F d, Y', strtotime($datePosted)); ?> </small>
+        <small class="text-body-secondary"><?php echo "$campusAssignment | $collegeAssignment"  ?></small></br>
+        <small class="text-body-secondary" id="date-posted">Date posted: <?php echo date('F d, Y', strtotime($datePosted)); ?></small>
         <h1 class="mb-3"><strong><?php echo $headline ?></strong></h1>
 
         <small class="text-body-secondary" id="author">Author:  <?php echo $author; ?></small>

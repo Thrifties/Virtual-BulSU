@@ -90,3 +90,42 @@ iframe {
 .newsCard:hover {
     transform: translateY(-5px);
 }
+
+#collegeLogo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.collegeCards {
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.card {
+    transition: ease-in-out 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    background-color: #763435;
+    height: 150px;
+    object-fit: cover;
+    border: solid 2px #763435;
+}
+
+.card-title {
+    color: #763435;
+}
+
+#modalCollegeLogo {
+    width: 3em;
+    height: 3em;
+    object-fit: contain;
+    margin-right: 1em;
+}
