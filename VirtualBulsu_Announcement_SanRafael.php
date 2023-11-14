@@ -29,7 +29,7 @@ $result = mysqli_query($con, $query);
     <div class="container-lg my-3 ">
       <h1 class="text-center text-white" id="heading">San Rafael Campus News</h1>
       <div class="container mt-3">
-        <div class="row gx-3">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {

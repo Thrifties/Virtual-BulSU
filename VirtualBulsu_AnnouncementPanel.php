@@ -84,6 +84,7 @@ $stmt->close();
                   <th>College</th>
                   <th>Author</th>
                   <th>Faculty ID</th>
+                  <th>Date Posted</th>
                   <th>Actions</th>
                   </trc>
               </thead>
@@ -573,6 +574,24 @@ $stmt->close();
           { data: 'college_assignment' },
           { data: 'author' },
           { data: 'faculty_id' },
+          {
+                data: 'created_at',
+                render: function (data, type, row) {
+                    if (type === 'display') {
+                        // Format the date using the Date object
+                        var date = new Date(data);
+                        var formattedDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour12: true,
+                        });
+
+                        return formattedDate;
+                    }
+                    return data; // For sorting, filtering, etc.
+                },
+            },
           { data: "announcement_id",
             render: function (data) {
               return (
@@ -652,7 +671,7 @@ $stmt->close();
             'College of Industrial Technology',
             'College of Education',
             'College of Business Administration',
-            'College of Hotel and Tourism Management'
+            'College of Hospitality and Tourism Management'
         ]
     };
 
