@@ -213,7 +213,7 @@ if (numericRegex.test(facultyId)) {
 function selectedRowAdmin (facultyId){ 
 
   console.log("View button clicked for faculty ID:", facultyId);
-  
+  document.getElementById("facultyId").value = facultyId;
   document.getElementById("viewFirstName").disabled = true;
   document.getElementById("viewMiddleName").disabled = true;
   document.getElementById("viewLastName").disabled = true;
@@ -242,8 +242,6 @@ function selectedRowAdmin (facultyId){
       document.getElementById("viewPhone").value = facultyData.contact_num;
     }
   };
-
-  document.getElementById("facultyId").value = data;
 
   // Send the id to the server
   xhr.send("facultyId="+ facultyId);
@@ -972,7 +970,7 @@ $(document).ready(function () {
             'College of Industrial Technology',
             'College of Education',
             'College of Business Administration',
-            'College of Hotel and Tourism Management'
+            'College of Hospitality and Tourism Management'
         ]
     };
 

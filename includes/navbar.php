@@ -43,12 +43,21 @@ $stmt->close();
     <img src="resources/Virtual BulSU Logo.png" id="logo" alt="Virtual BulSU Logo">
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
+
+    <li>
+        <a href="VirtualBulsu_Tour_HomePage.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navWebsite">
+          <box-icon name='street-view' class="icons" color="#fff"></box-icon>
+          Virtual BulSU - Tour Site
+        </a>
+      </li>
+      
       <li>
         <a href="VirtualBulsu_AnnouncementPanel.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navAnnouncement">
           <box-icon name='notepad' class="icons" color="#fff" id="announcementLogo"></box-icon>
           Announcements
         </a>
       </li>
+      
       <?php 
         if ($currentAdminLevel == "super_admin" OR $currentAdminLevel == "admin") {
           echo '<li>

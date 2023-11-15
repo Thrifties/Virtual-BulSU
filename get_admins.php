@@ -28,6 +28,6 @@ if ($result->num_rows > 0) {
     $data = $result->fetch_all(MYSQLI_ASSOC);
     echo json_encode($data); // Send admin data as JSON response
 } else {
-    echo json_encode(['error' => 'Admin not found']);
+    echo json_encode(['error' => 'No Admins Yet']);
 }
 ?>

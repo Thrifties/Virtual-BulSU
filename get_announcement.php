@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
 
     echo json_encode($announcementData); // Send announcement data as JSON response
 } else {
-    echo json_encode(['error' => 'Announcement not found']);
+    echo json_encode(['error' => 'No Announcements Yet']);
 }
 
 ?>
