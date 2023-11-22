@@ -35,11 +35,7 @@ if ($result1) {
   <div class="container-fluid mt-5" id="adminPage">
     <div class="admin-panel-container">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2><?php if ($currentAdminLevel === "super_admin") {
-          echo 'Admin Panel';
-        } elseif ($currentAdminLevel === "admin" OR $currentAdminLevel === "college_admin") {
-          echo $currentAdminCampus . ' - Admin Panel ';
-        } ?></h2>
+        <h2>Virtual BulSU Admins</h2>
         <div class="mb-1">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminModal">Add Admin</button>
           <a href="generate_report_admin.php" class="btn btn-success">Download List</a>
@@ -49,22 +45,12 @@ if ($result1) {
         <div class="col-md-12">
           <!-- Table to display the list of admins -->
           <div class="table-responsive">
-            <table id="<?php if($currentAdminLevel == 'admin'){
-              echo 'adminTable';
-            } elseif ($currentAdminLevel == 'super_admin') {
-              echo 'adminTableSuper';
-            } ?>" class="table table-striped table-hover" style="width:100%">
+            <table id="adminTableSuper" class="table table-striped table-hover" style="width:100%">
               <thead>
                   <tr>
                       <th>Faculty ID</th>
                       <th>Name</th>
-                      <?php 
-                        if ($currentAdminLevel === 'super_admin') {
-                          echo "<th>Campus</th>";
-                        } elseif ($currentAdminLevel === 'admin') {
-                          echo "<th>College</th>";
-                        }
-                        ?>
+                      <th>Campus Assignment</th>
                       <th>Actions</th>
                   </tr>
               </thead>
@@ -114,48 +100,17 @@ if ($result1) {
                     </div>
                   </div>
                 </div>
-                <?php 
-                  if ($currentAdminLevel === 'super_admin') {
-                    echo "<div class='form-group mt-2'>";
-                    echo "<label for='campus'>Campus:</label>";
-                    echo "<select class='form-control' id='viewCampus'>";
-                    echo "<option value='Malolos Campus'>Malolos Campus</option>";
-                    echo "<option value='Bustos Campus'>Bustos Campus</option>";
-                    echo "<option value='Sarmiento Campus'>Sarmiento Campus</option>";
-                    echo "<option value='San Rafael Campus'>San Rafael Campus</option>";
-                    echo "<option value='Hagonoy Campus'>Hagonoy Campus</option>";
-                    echo "<option value='Meneses Campus'>Meneses Campus</option>";
-                    echo "</select>";
-                    echo "</div>";
-                  } elseif ($currentAdminLevel === 'admin') {
-                    echo "<div class='form-group mt-2'>";
-                    echo "<label for='campus'>Campus:</label>";
-                    echo "<select class='form-control' id='viewCampus'>";
-                    echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
-                    echo "</select>";
-                    echo "</div>";
-                    echo "<div class='form-group mt-2'>";
-                    echo "<label for='college'>College:</label>";
-                    echo "<select class='form-control' id='viewCollege'>";
-                    echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
-                    echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
-                    echo "<option value='College of Business Administration'>College of Business Administration</option>";
-                    echo "<option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>";
-                    echo "<option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>";
-                    echo "<option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>";
-                    echo "<option value='College of Industrial Technology'>College of Industrial Technology</option>";
-                    echo "<option value='College of Law'>College of Law</option>";
-                    echo "<option value='College of Nursing'>College of Nursing</option>";
-                    echo "<option value='College of Engineering'>College of Engineering</option>";
-                    echo "<option value='College of Education'>College of Education</option>";
-                    echo "<option value='College of Science'>College of Science</option>";
-                    echo "<option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>";
-                    echo "<option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>";
-                    echo "<option value='Graduate School'>Graduate School</option>";
-                    echo "</select>";
-                    echo "</div>";
-                  }
-                ?>
+                <div class='form-group mt-2'>
+                  <label for='campus'>Campus:</label>
+                  <select class='form-control' id='viewCampus'>
+                    <option value='Malolos Campus'>Malolos Campus</option>
+                    <option value='Bustos Campus'>Bustos Campus</option>
+                    <option value='Sarmiento Campus'>Sarmiento Campus</option>
+                    <option value='San Rafael Campus'>San Rafael Campus</option>
+                    <option value='Hagonoy Campus'>Hagonoy Campus</option>
+                    <option value='Meneses Campus'>Meneses Campus</option>
+                  </select>
+                </div>
                 <div class="form-group mt-2">
                   <label for="email">Email:</label>
                   <input type="email" class="form-control" id="viewEmail">
@@ -169,13 +124,7 @@ if ($result1) {
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <?php 
-                    if ($currentAdminLevel === 'super_admin') {
-                      echo '<button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>';
-                    } elseif ($currentAdminLevel === 'admin') {
-                      echo '<button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChangesAdmin()">Save</button>';
-                    }
-                  ?>
+                  <button type="submit" class="btn btn-success" id="saveBtn" onclick="saveChanges()">Save</button>
                 </div>
               </form>
             </div>
@@ -223,54 +172,19 @@ if ($result1) {
                 </div>
               </div>
             </div>
-
-            <?php 
-              if ($currentAdminLevel === 'super_admin') {
-                echo "<div class='form-group mt-2' has-validation>";
-                echo "<label for='campus'>Campus</label>";
-                echo "<select class='form-control' name='addCampus' id='addCampus' required>";
-                echo "<option value='' selected disabled> -- Select Campus -- </option>";
-                echo "<option value='Malolos Campus'>Malolos Campus</option>";
-                echo "<option value='Bustos Campus'>Bustos Campus</option>";
-                echo "<option value='Sarmiento Campus'>Sarmiento Campus</option>";
-                echo "<option value='San Rafael Campus'>San Rafael Campus</option>";
-                echo "<option value='Hagonoy Campus'>Hagonoy Campus</option>";
-                echo "<option value='Meneses Campus'>Meneses Campus</option>";
-                echo "</select>";
-                echo '<div id="addCampusFeedback" class="invalid-feedback"></div>';
-                echo "</div>";
-              } elseif ($currentAdminLevel === 'admin') {
-                echo "<div class='form-group mt-2'>";
-                echo "<label for='campus'>Campus</label>";
-                echo "<select class='form-control' name='addCampus' id='addCampus' required>";
-                echo "<option value='$currentAdminCampus'>$currentAdminCampus</option>";
-                echo "</select>";
-                echo "</div>";
-                echo "<div class='form-group mt-2'>";
-                echo "<label for='college'>College</label>";
-                echo "<select class='form-control' name='addCollege' id='addCollege' requied>";
-                echo "<option value='College of Architecture and Fine Arts'>College of Architecture and Fine Arts</option>";
-                echo "<option value='College of Arts and Letters'>College of Arts and Letters</option>";
-                echo "<option value='College of Business Administration'>College of Business Administration</option>";
-                echo "<option value='College of Criminal Justice Education'>College of Criminal Justice Education</option>";
-                echo "<option value='College of Hospitality and Tourism Management'>College of Hospitality and Tourism Management</option>";
-                echo "<option value='College of Information and Communications Technology'>College of Information and Communications Technology</option>";
-                echo "<option value='College of Industrial Technology'>College of Industrial Technology</option>";
-                echo "<option value='College of Law'>College of Law</option>";
-                echo "<option value='College of Nursing'>College of Nursing</option>";
-                echo "<option value='College of Engineering'>College of Engineering</option>";
-                echo "<option value='College of Education'>College of Education</option>";
-                echo "<option value='College of Science'>College of Science</option>";
-                echo "<option value='College of Sports, Exercise and Recreation'>College of Sports, Exercise and Recreation</option>";
-                echo "<option value='College of Social Sciences and Philosophy'>College of Social Sciences and Philosophy</option>";
-                echo "<option value='Graduate School'>Graduate School</option>";
-                echo "</select>";
-                echo '<div id="addCollegeFeedback" class="invalid-feedback"></div>';
-                echo "</div>";
-
-              }
-            ?>
-
+            <div class='form-group mt-2' has-validation>
+              <label for='campus'>Campus</label>
+              <select class='form-control' name='addCampus' id='addCampus' required>
+                <option value='' selected disabled> -- Select Campus -- </option>
+                <option value='Malolos Campus'>Malolos Campus</option>
+                <option value='Bustos Campus'>Bustos Campus</option>
+                <option value='Sarmiento Campus'>Sarmiento Campus</option>
+                <option value='San Rafael Campus'>San Rafael Campus</option>
+                <option value='Hagonoy Campus'>Hagonoy Campus</option>
+                <option value='Meneses Campus'>Meneses Campus</option>
+              </select>
+              <div id="addCampusFeedback" class="invalid-feedback"></div>
+            </div>
             <div class="form-group mt-2">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="addEmail" id="addEmail" required>
@@ -291,13 +205,7 @@ if ($result1) {
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <?php 
-            if ($currentAdminLevel === 'super_admin') {
-              echo '<button type="submit" class="btn btn-primary" id="addBtn" onclick="submitForm()">Add</button>';
-            } elseif ($currentAdminLevel === 'admin') {
-              echo '<button type="submit" class="btn btn-primary" id="addBtn" onclick="adminSubmitForm()">Add</button>';
-            }
-            ?>
+            <button type="submit" class="btn btn-primary" id="addBtn" onclick="submitForm()">Add</button>
             </div>
           </form>
         </div>

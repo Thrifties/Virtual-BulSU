@@ -56,6 +56,11 @@
   text-decoration: none;
 }
 
+#navbarDropdown, #userNav {
+  color: #763435;
+  text-decoration: none;
+}
+
 @media (max-width: 1200px) {
   .sidebar {
     width: 230px;

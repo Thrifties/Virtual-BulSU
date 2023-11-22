@@ -16,7 +16,7 @@ if ($result1) {
 }
 
 if ($currentAdminLevel == "super_admin") {
-    $sql = "SELECT * FROM campus_admin WHERE faculty_id != '$currentAdminId'";
+    $sql = "SELECT * FROM college_admin WHERE faculty_id != '$currentAdminId'";
 
 } elseif ($currentAdminLevel == "admin") {
     $sql = "SELECT * FROM college_admin WHERE campus = '$currentAdminCampus' AND faculty_id != '$currentAdminId'";

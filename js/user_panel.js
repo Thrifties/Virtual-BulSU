@@ -1,6 +1,6 @@
 
     document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("adminLogo").setAttribute('color','#ffd700')
+  document.getElementById("usersLogo").setAttribute('color','#ffd700')
 });
 
 document.getElementById("addFacultyId").addEventListener("input", validateForm);
@@ -93,6 +93,16 @@ function validateInput(elementId) {
           return true;
       }
   }
+
+  /* if (inputValue.length > 0) {
+      feedbackMessage.innerText = "";
+      document.getElementById(elementId).classList.remove("is-invalid");
+      document.getElementById(elementId).classList.add("is-valid");
+  } else {
+      feedbackMessage.innerText = "This field is required.";
+      document.getElementById(elementId).classList.remove("is-valid");
+      document.getElementById(elementId).classList.add("is-invalid");
+  } */
 }
 
 function validateUpdateForm() {
@@ -199,6 +209,43 @@ if (numericRegex.test(facultyId)) {
 }
 }
 
+
+function selectedRowAdmin (facultyId){ 
+
+  console.log("View button clicked for faculty ID:", facultyId);
+  document.getElementById("facultyId").value = facultyId;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
+  document.getElementById("viewCampus").disabled = true;
+  document.getElementById("viewCollege").disabled = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
+
+  
+  document.getElementById("saveBtn").hidden = true;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "get_admin_details.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var facultyData = JSON.parse(xhr.responseText);
+
+      document.getElementById("facultyId").value = facultyData.faculty_id;
+      document.getElementById("viewFirstName").value = facultyData.first_name;
+      document.getElementById("viewMiddleName").value = facultyData.middle_name;
+      document.getElementById("viewLastName").value = facultyData.last_name;
+      document.getElementById("viewCampus").value = facultyData.campus;
+      document.getElementById("viewCollege").value = facultyData.college;
+      document.getElementById("viewEmail").value = facultyData.email;
+      document.getElementById("viewPhone").value = facultyData.contact_num;
+    }
+  };
+
+  // Send the id to the server
+  xhr.send("facultyId="+ facultyId);
+}
 function selectedRow (facultyId){
   
   document.getElementById("viewFirstName").disabled = true;
@@ -234,6 +281,50 @@ function selectedRow (facultyId){
   xhr.send("facultyId="+ facultyId);
 
 
+}
+
+  function enableEditAdmin(facultyId) {
+  console.log("Edit button clicked for faculty ID:", facultyId);
+  // Enable form fields for editing
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = false;
+  document.getElementById("viewMiddleName").disabled = false;
+  document.getElementById("viewLastName").disabled = false;
+  document.getElementById("viewCampus").disabled = false;
+  document.getElementById("viewCollege").disabled = false;
+  document.getElementById("viewEmail").disabled = false;
+  document.getElementById("viewPhone").disabled = false;
+
+  document.getElementById("facultyId").value = facultyId;
+
+  document.getElementById("saveBtn").hidden = false;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "get_admin_details.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var facultyData = JSON.parse(xhr.responseText);
+
+      // Populate form fields with the fetched faculty data
+      document.getElementById("facultyId").value = facultyData.faculty_id;
+      document.getElementById("viewFirstName").value = facultyData.first_name;
+      document.getElementById("viewMiddleName").value = facultyData.middle_name;
+      document.getElementById("viewLastName").value = facultyData.last_name;
+      document.getElementById("viewCampus").value = facultyData.campus;
+      document.getElementById("viewCollege").value = facultyData.college;
+      document.getElementById("viewEmail").value = facultyData.email;
+      document.getElementById("viewPhone").value = facultyData.contact_num;
+    }
+  };
+
+  // Send the id to the server
+  xhr.send("facultyId="+ facultyId);
+
+  // Change the "Edit" button to a "Save" button
+  document.getElementById("saveBtn").disabled = false;
+  var saveBtn = document.getElementById("saveBtn");
+  saveBtn.onclick = saveChangesAdmin;
 }
 
 function enableEdit(facultyId) {
@@ -276,6 +367,49 @@ function enableEdit(facultyId) {
   var saveBtn = document.getElementById("saveBtn");
   saveBtn.onclick = saveChanges;
 }
+
+/* function saveChanges() {
+  
+  var facultyId = document.getElementById("facultyId").value;
+  var firstName = document.getElementById("viewFirstName").value;
+  var middleName = document.getElementById("viewMiddleName").value;
+  var lastName = document.getElementById("viewLastName").value;
+  var campus = document.getElementById("viewCampus").value;
+  var email = document.getElementById("viewEmail").value;
+  var phone = document.getElementById("viewPhone").value;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "update_admin.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      if (response.success) {
+        alert(response.success);
+        document.getElementById("facultyId").disabled = true;
+        document.getElementById("viewFirstName").disabled = true;
+        document.getElementById("viewMiddleName").disabled = true;
+        document.getElementById("viewLastName").disabled = true;
+        document.getElementById("viewCampus").disabled = true;
+        document.getElementById("viewEmail").disabled = true;
+        document.getElementById("viewPhone").disabled = true;
+
+        var saveBtn = document.getElementById("saveBtn");
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("facultyId").disabled = true;
+      } else {
+        alert(response.error);
+      }
+    } else {
+      alert("Error updating admin details. Please try again later.");
+    }
+  }
+  };
+
+  xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&email=" + email + "&phone=" + phone);
+
+} */
 
 function saveChanges() {
   // Get a list of admin data from your HTML or data source
@@ -368,6 +502,153 @@ function getAdminDataList() {
   return adminDataList;
 }
 
+
+/* function saveChangesAdmin() {
+
+  var facultyId = document.getElementById("facultyId").value;
+  var firstName = document.getElementById("viewFirstName").value;
+  var middleName = document.getElementById("viewMiddleName").value;
+  var lastName = document.getElementById("viewLastName").value;
+  var campus = document.getElementById("viewCampus").value;
+  var college = document.getElementById("viewCollege").value;
+  var email = document.getElementById("viewEmail").value;
+  var phone = document.getElementById("viewPhone").value;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "update_admin_college.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      if (response.success) {
+        alert(response.success);
+      } else {
+        alert(response.error);
+      }
+    } else {
+      alert("Error updating admin details. Please try again later.");
+    }
+  }
+  };
+
+  // Send the updated admin data to the server
+  xhr.send("facultyId=" + facultyId + "&firstName=" + firstName + "&middleName=" + middleName + "&lastName=" + lastName + "&campus=" + campus + "&college=" + college + "&email=" + email + "&phone=" + phone);
+
+  // Disable form fields after saving
+  document.getElementById("facultyId").disabled = true;
+  document.getElementById("viewFirstName").disabled = true;
+  document.getElementById("viewMiddleName").disabled = true;
+  document.getElementById("viewLastName").disabled = true;
+  document.getElementById("viewCampus").disabled = true;
+  document.getElementById("viewCollege").disabled = true;
+  document.getElementById("viewEmail").disabled = true;
+  document.getElementById("viewPhone").disabled = true;
+
+  var saveBtn = document.getElementById("saveBtn");
+
+  document.getElementById("saveBtn").disabled = true;
+  document.getElementById("facultyId").disabled = true;
+} */
+
+
+function saveChangesAdmin() {
+
+  var adminCollegeDataList = getCollegeAdminDataList(); // Implement this function to retrieve the data
+
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
+    adminCollegeDataList.forEach(function (adminData) {
+        var facultyId = adminData.facultyId;
+        var firstName = adminData.firstName;
+        var middleName = adminData.middleName;
+        var lastName = adminData.lastName;
+        var campus = adminData.campus;
+        var college = adminData.college;
+        var email = adminData.email;
+        var phone = adminData.phone;
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_admin_college.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                Toast.fire ({
+                    icon: 'success',
+                    title: 'Admin successfully updated!'
+                })
+                } else {
+                Toast.fire ({
+                    icon: 'error',
+                    title: 'Error updating admin details. Please try again later.'
+                })
+                }
+            } else {
+                Toast.fire ({
+                    icon: 'error',
+                    title: 'Error updating admin details. Please try again later.'
+                })
+            }
+            }
+        };
+    
+        // Send the updated admin data to the server
+        xhr.send(
+            "facultyId=" +
+            facultyId +
+            "&firstName=" +
+            firstName +
+            "&middleName=" +
+            middleName +
+            "&lastName=" +
+            lastName +
+            "&campus=" +
+            campus +
+            "&college=" +
+            college +
+            "&email=" +
+            email +
+            "&phone=" +
+            phone
+        );
+        });
+}
+
+// Function to get a list of admin data from your HTML or data source
+function getCollegeAdminDataList() {
+    // Implement this function to retrieve and return a list of admin data
+    // For example, you can collect data from your HTML form elements and organize it into a list
+    var adminCollegeDataList = [];
+    // Add each set of admin data to the list
+    // Example:
+    adminCollegeDataList.push({
+      facultyId: document.getElementById("facultyId").value,
+      firstName: document.getElementById("viewFirstName").value,
+      middleName: document.getElementById("viewMiddleName").value,
+      lastName: document.getElementById("viewLastName").value,
+      campus: document.getElementById("viewCampus").value,
+      college: document.getElementById("viewCollege").value,
+      email: document.getElementById("viewEmail").value,
+      phone: document.getElementById("viewPhone").value,
+    });
+
+    // Repeat the above step for each set of admin data
+    return adminCollegeDataList;
+
+}
+
 function deleteAdmin(facultyId) {
   var adminTableSuper = $('#adminTableSuper').DataTable();
   var adminTable = $('#adminTable').DataTable();
@@ -414,16 +695,13 @@ function logout(){
   window.location.href = "logout.php";
 }
 
-
-  $(document).ready(function () {
-  $("#adminTableSuper").DataTable({
+$(document).ready(function () {
+  $("#adminTable").DataTable({
     paging: false,
     scrollCollapse: true,
     scrollY: "50vh",
     responsive: true,
-    autoWidth: true,
-    searching: true,
-    processing: true,
+    autoWidth: false,
     ajax: {
       url: "get_admins.php",
       dataSrc: "",
@@ -438,20 +716,20 @@ function logout(){
           return row.first_name + " " + row.last_name;
         }
       },
-      { data: "campus" },
+      { data: "college" },
       { data: "faculty_id",
         render: function (data) {
           return (
             '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRow(' +
+            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="selectedRowAdmin(' +
             data +
             ')">View</button>' +
-            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEdit(' +
+            '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewAdminDetails" onclick="enableEditAdmin(' +
             data +
             ')">Edit</button>' +
             '<button type="button" class="btn btn-danger" onclick="deleteAdmin(' +
             data +
-            ')">Archive</button>' +
+            ')">Delete</button>' +
             '</div>'
           );
         },
@@ -459,7 +737,6 @@ function logout(){
     ],
   });
 });
-
 
     function submitForm(event) {
     var adminTableSuper = $("#adminTableSuper").DataTable();
@@ -525,3 +802,150 @@ function logout(){
 
     xhr.send(formData);
   }
+
+  function adminSubmitForm(event) {
+    event.preventDefault();
+    var form = document.getElementById("adminForm");
+    var formData = new FormData(form);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+    })
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "add_admin_details.php", true);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          
+          Toast.fire ({
+            icon: 'success',
+            title: 'Admin successfully added!'
+          })
+
+          document.getElementById("addFacultyId").value = "";
+          document.getElementById("firstName").value = "";
+          document.getElementById("middleName").value = "";
+          document.getElementById("lastName").value = "";
+          document.getElementById("addCollege").value = "";
+          document.getElementById("addEmail").value = "";
+          document.getElementById("addPhone").value = "";
+          document.getElementById("addPassword").value = "";
+
+          document.getElementById("addFacultyId").classList.remove("is-valid");
+          document.getElementById("firstName").classList.remove("is-valid");
+          document.getElementById("middleName").classList.remove("is-valid");
+          document.getElementById("lastName").classList.remove("is-valid");
+          document.getElementById("addCollege").classList.remove("is-valid");
+          document.getElementById("addEmail").classList.remove("is-valid");
+          document.getElementById("addPhone").classList.remove("is-valid");
+          document.getElementById("addPassword").classList.remove("is-valid");
+
+
+
+
+        } else {
+          // Handle the case where there was an error
+          console.error("Error: " + xhr.responseText);
+          
+          Toast.fire ({
+            icon: 'error',
+            title: 'Error adding admin!'
+
+          })
+        }
+      }
+    };
+
+    xhr.send(formData);
+  }
+
+  const campusSelect = document.getElementById('addCampus');
+    const collegeSelect = document.getElementById('addCollege');
+
+    // Define the available colleges for each campus
+    const campusColleges = {
+        'Malolos Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Information and Communications Technology',
+            'College of Nursing',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Law',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Sports, Exercise and Recreation',
+            'College of Arts and Letters',
+            'College of Science',
+            'College of Architecture and Fine Arts',
+            'Graduate School',
+            'College of Social Sciences and Philosophy',
+            'College of Criminal Justice Education'
+        ],
+        'Meneses Campus': [
+          '-- Select College --',
+            'College of Education',
+            'College of Hospitality Management',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communications Technology',
+            'College of Industrial Technology'
+        ],
+        'Hagonoy Campus': [
+          '-- Select College --',
+            'College of Industrial Technology',
+            'College of Hospitality and Tourism Management',
+            'College of Education',
+            'College of Information and Communications Technology'
+        ],
+        'Bustos Campus': [
+          '-- Select College --',
+            'College of Engineering',
+            'College of Business Administration',
+            'College of Information and Communications Technology'
+        ],
+        'San Rafael Campus': [
+          '-- Select College --',
+            'College of Nursing',
+            'College of Science',
+            'College of Social Science and Philosophy'
+        ],
+        'Sarmiento Campus': [
+            '-- Select College --',
+            'College of Science',
+            'College of Industrial Technology',
+            'College of Education',
+            'College of Business Administration',
+            'College of Hospitality and Tourism Management'
+        ]
+    };
+
+    // Function to update the college options based on the selected campus
+    function updateCollegeOptions() {
+        const selectedCampus = campusSelect.value;
+        collegeSelect.innerHTML = ''; // Clear current options
+
+        if (selectedCampus in campusColleges) {
+            const colleges = campusColleges[selectedCampus];
+            for (const college of colleges) {
+                const option = document.createElement('option');
+                option.value = college;
+                option.textContent = college;
+                collegeSelect.appendChild(option);
+            }
+        }
+    }
+
+    // Add an event listener to the campus select element
+    campusSelect.addEventListener('change', updateCollegeOptions);
+
+    // Initial update when the page loads
+    updateCollegeOptions();
