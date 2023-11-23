@@ -1,0 +1,41 @@
+.campus-panel {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+td button {
+    margin: 0 3px;
+}
+
+.card{
+    margin: 1em;
+}
+
+#navCampus {
+    color: #ffd700;
+    text-decoration: none;
+    background-color: #4C1D14;
+}
+
+#campusManagementPage {
+    position: absolute;
+    left: 290px;
+    width: calc(100vw - 290px);
+}
+
+@media (max-width: 1200px) {
+    #campusManagementPage {
+        position: absolute;
+        left: 230px;
+        width: calc(100vw - 230px);
+    }
+}
+
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}

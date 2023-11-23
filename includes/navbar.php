@@ -70,7 +70,7 @@ $stmt->close();
           <li>
             <a href="VirtualBulsu_UsersPanel.php" class="nav-link main-items d-flex align-items-center text-decoration-none" id="navUsers">
               <box-icon name="group" class="icons" color="#fff" id="usersLogo"></box-icon>
-              Users
+              Virtual BulSU Users
             </a>
           </li>
           <li>
