@@ -33,59 +33,73 @@ if ($result1) {
 
         <div class="container-fluid mt-5" id="campusManagementPage">
             <div class="campus-panel">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="text-center">Campus Management Panel</h1>
-                    <button class="btn btn-primary" id="addCampusBtn">Add Campus</button>
-                </div>
-                <div class="container d-flex flex-column align-items-center">
-                    <div class="row">
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Malolos Campus</h5>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
+                    <h2>Campus Management Panel</h2>
+
+                <div class="container row row-cols-3 mx-auto">
+    <!-- Malolos Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="Malolos Campus">
+            <img src="resources/campus_malolos.png" class="card-img-top" alt="Malolos Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">Malolos Campus</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bustos Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="Bustos Campus">
+            <img src="resources/campus_bustos.png" class="card-img-top" alt="Bustos Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">Bustos Campus</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hagonoy Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="Hagonoy Campus">
+            <img src="resources/campus_hagonoy.png" class="card-img-top" alt="Hagonoy Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">Hagonoy Campus</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meneses Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="Meneses Campus">
+            <img src="resources/campus_meneses.png" class="card-img-top" alt="Meneses Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">Meneses Campus</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sarmiento Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="Sarmiento Campus">
+            <img src="resources/campus_sarmiento.png" class="card-img-top" alt="Sarmiento Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">Sarmiento Campus</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- San Rafael Campus -->
+    <div class="col">
+        <div class="card shadow" data-bs-toggle="modal" data-bs-target="#campusCollegeList" data-bs-campus="San Rafael Campus">
+            <img src="resources/campus_sanrafael.png" class="card-img-top" alt="San Rafael Campus">
+            <div class="card-body">
+                <h5 class="card-title text-center">San Rafael Campus</h5>
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </div>
 
-
+        <?php include "includes/campus_college_list.php"; ?>
         <?php include "includes/js_cdn.php"; ?>
         <script src="JS/campus_management_panel.js"></script>
     </body>

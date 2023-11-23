@@ -10,6 +10,12 @@ td button {
 
 .card{
     margin: 1em;
+    width: 20rem;
+    transition: ease-in-out 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 #navCampus {
