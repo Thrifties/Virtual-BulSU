@@ -86,7 +86,7 @@ $stmt->close();
                   <th>Faculty ID</th>
                   <th>Date Posted</th>
                   <th>Actions</th>
-                  </trc>
+                  </tr>
               </thead>
               <tbody>
                 

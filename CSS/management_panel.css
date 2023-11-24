@@ -45,3 +45,7 @@ td button {
 .colored-toast.swal2-icon-error {
   background-color: #f27474 !important;
 }
+
+#collegeListTbl {
+    width: 100%;
+}
