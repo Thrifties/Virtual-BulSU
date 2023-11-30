@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  /* background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
+    url("../resources/school_cover8.png"); */
+  background-color: #ffffff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#VTIntroduction {
+  color: black;
+  top: 30%;
+}
+
+.cta {
+  border: none;
+  background: none;
+  color: #ffff;
+  margin: 5rem 0;
+}
+
+.cta span {
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+  color: #d09b00;
+  width: 100%;
+  border: none;
+  background-color: #ffff;
+  border-radius: 5px;
+}
+
+.cta span:hover {
+  background-color: #d09b00;
+  color: white;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  fill: #ffff;
+  margin-left: 20px;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+  fill: #d09b00;
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: aliceblue;
+  padding-bottom: 20px;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.footer {
+  /*background: none;*/
+  background-color: #763435;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: "Roboto";
+  margin-bottom: 2px;
+  letter-spacing: 3px;
+}
+
+#section-tour h2 {
+  font-size: 5rem;
+  font-weight: bolder;
+  line-height: 60px;
+  color: white;
+  letter-spacing: 5px;
+  font-family: Georgia, sans-serif;
+}
+
+p {
+  font-family: "Roboto";
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
+
+.gold {
+  color: white;
+}
+
+.navbar-custom .navbar-nav #home-link:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 215, 0, 1);
+  transition: background-color 0.3s ease;
+}
+
+.navbar-custom .navbar-nav #home-link {
+  color: #ffd700;
+}
+
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+  nav {
+    display: block;
+    width: 100% !important;
+  }
+}
+
+.navBrand {
+background-color: #763435;
+border-bottom: solid 1px #582c2c;
+}
+
+.navBrand img {
+width: 8rem;
+height: auto;
+}
+
+/* Style the video container */
+#section-tour {
+    position: relative;
+    height: 100vh; /* Adjust the height as needed */
+    overflow: hidden;
+}
+
+/* Style the video to cover the section */
+#bg-video {
+    filter: brightness(50%);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+}
+
+/* Style the content */
+.content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 5rem; /* Adjust the left padding as needed */
+    z-index: 1; /* Ensure content is above the video */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Additional styles for content elements */
+/* ... */
+
+/* Hide default video controls */
+#bg-video::-webkit-media-controls {
+    display: none;
+}
+
+#section-tour-subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#sub-section-tour {
+  padding: 10vh 0;
+}
+
+.section-highlights {
+  margin-bottom: 5em;
+}
+
+.section-highlights h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 60px;
+  color: #763435;
+  letter-spacing: 5px;
+  font-family: Georgia, sans-serif;
+}
+
+.highlight-cards .card {
+}
+
+.highlight-cards .card img {
+  filter: brightness(50%);
+}
+
+.swiper-slide {
+  width: 20rem;
+  height: 40rem;
+}
+
+.swiper-wrapper {
+  width: 20rem;
+  height: 40rem;  
+}
