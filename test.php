@@ -87,137 +87,134 @@
             <p class="text-white" id="section-tour-subtitle">Embark on a Digital Journey through the Prestigious Campus</p>
         </div>
     </section>
-        <p class="lead text-center my-5" id="sub-section-tour"><strong>Navigate through interactive maps, engage with informative hotspots,and envision your academic journey like never before.</strong></p>
+        <p class="lead text-center my-5" id="sub-section-tour"><strong>Navigate through <span class="colored-text">interactive maps</span>, engage with <span class="colored-text">informative hotspots</span>, and envision your <span class="colored-text">academic journey</span> like never before.</strong></p>
     <section class="section-highlights">
-      <div class="container-fluid">
-        <h2>BULSU HIGHLIGHTS</h2>
-        <!-- <div class="swiper-container">
-          <div class="highlight-cards">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-              <div class="swiper-pagination"></div>
-
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-
-              <div class="swiper-scrollbar"></div>
-          </div>
-          
-        </div>
-        </div> -->
-        
+        <h1>BULSU HIGHLIGHTS</h1>
         <!-- Slider main container -->
-<div class="swiper">
-  <!-- Additional required wrapper -->
-  <div class="swiper-wrapper">
-    <!-- Slides -->
-    <div class="swiper-slide">
-      <div class="card text-bg-dark">
-        <img src="uploads/bg.png" class="card-img" alt="...">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="card text-bg-dark">
-        <img src="uploads/bg.png" class="card-img" alt="...">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide">
-      <div class="card text-bg-dark">
-        <img src="uploads/bg.png" class="card-img" alt="...">
-        <div class="card-img-overlay d-flex flex-column justify-content-end">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    ...
-  </div>
-  <!-- If we need pagination -->
-  <div class="swiper-pagination"></div>
+        <div class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card text-bg-dark">
+                <img src="uploads/bg.png" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
 
-  <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+    </section>
+    <img src="resources/arrow-down.png" alt="arrow-down" id="arrow-down" />
+    <section class="sub-section-2">
+      <div class="container">
+        <p><small><strong>WELCOME TO <span class="colored-text">BULACAN STATE UNIVERSITY</span></strong></small></p>
+        <p class="lead" id="sub-section-description">
+          <strong>Your digital gateway to a world of academic excellence, innovation, and community engagement.
+            Here, we invite you to explore the comprehensive offerings of our institution, designed to inspire,
+            educate, and empower the next generation of leaders. Explore the vibrant student life at
+            <span class="colored-text">BulSU</span>, where learning goes beyond the classroom. Learn about student
+            organizations, cultural events, sports activities, and community engagement initiatives that contribute to a
+            holistic and well-rounded educational experience. Stay up-to-date with the latest news and events at
+            <span class="colored-text">BulSU</span>.
+          </strong>
+        </p>
 
-  <!-- If we need scrollbar -->
-  <div class="swiper-scrollbar"></div>
-</div>
-        
+      </div>
+      
+    </section>
+    
+    <section class="section-gallery">
+      <h2>DELVE INTO BULACAN STATE UNIVERSITY</h2>
+      <div class="news-cards">
+        <!-- Include cards displaying recent news articles or upcoming events -->
       </div>
     </section>
 
-  <section class="section-gallery">
-    <h2>DELVE INTO BULACAN STATE UNIVERSITY</h2>
-    <div class="news-cards">
-      <!-- Include cards displaying recent news articles or upcoming events -->
-    </div>
-  </section>
+    <section class="testimonials">
+      <h3>Student Testimonials</h3>
+      <div class="testimonial-cards">
+        <!-- Include cards with quotes or stories from students or alumni -->
+      </div>
+    </section>
 
-  <section class="testimonials">
-    <h3>Student Testimonials</h3>
-    <div class="testimonial-cards">
-      <!-- Include cards with quotes or stories from students or alumni -->
-    </div>
-  </section>
-
-  <section class="academic-programs">
-    <h3>Academic Programs</h3>
-    <div class="program-cards">
-      <!-- Include cards or sections highlighting different academic programs -->
-    </div>
-  </section>
+    <section class="academic-programs">
+      <h3>Academic Programs</h3>
+      <div class="program-cards">
+        <!-- Include cards or sections highlighting different academic programs -->
+      </div>
+    </section>
     
   </div>
     <footer class="footer">
@@ -247,23 +244,22 @@
 const swiper = new Swiper('.swiper', {
   // Optional parameters
   direction: 'horizontal',
-  loop: true,
-  effect: 'coverflow',
+  loop: false,
+  spaceBetween: 30,
+  slidesPerView: 3,
+  centeredSlides: true,
+  freeMode:true,
 
   // If we need pagination
   pagination: {
     el: '.swiper-pagination',
+    dynamicBullets: true,
   },
 
   // Navigation arrows
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
   },
 });
 

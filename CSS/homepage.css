@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #763435;
+  --secondary-color: #ffd700;
+  --quinary-color: #ffffff;
+  --senary-color: #000000;
+}
+
 
 html,
 body {
@@ -202,30 +209,65 @@ height: auto;
 
 .section-highlights {
   margin-bottom: 5em;
+  height: 50vh;
+  width: 100%;
 }
 
-.section-highlights h2 {
-  font-size: 3rem;
+.section-highlights h1 {
   font-weight: bold;
-  line-height: 60px;
   color: #763435;
   letter-spacing: 5px;
-  font-family: Georgia, sans-serif;
-}
-
-.highlight-cards .card {
-}
-
-.highlight-cards .card img {
-  filter: brightness(50%);
 }
 
 .swiper-slide {
-  width: 20rem;
-  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.swiper-wrapper {
-  width: 20rem;
-  height: 40rem;  
+.swiper-slide .card img {
+  filter: brightness(50%);
+}
+
+.swiper-slide .card {
+  width: 100%; /* Ensure the card takes up the available width within the swiper slide */
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.swiper {
+  padding: 5em 0;
+  height: 50vh;
+  --swiper-navigation-size: 1.5rem;
+  --swiper-navigation-top-offset: 97%;
+  --swiper-navigation-sides-offset: 45%;
+  --swiper-navigation-color: var(--primary-color);
+  --swiper-pagination-color: #763435;
+  --swiper-pagination-left: auto;
+  --swiper-pagination-right: 8px;
+  --swiper-pagination-bottom: 10px;
+  --swiper-pagination-top: auto;
+  --swiper-pagination-fraction-color: inherit;
+  --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
+  --swiper-pagination-progressbar-size: 4px;
+  --swiper-pagination-bullet-size: 8px;
+  --swiper-pagination-bullet-width: 8px;
+  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-inactive-color: #000;
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
+}
+
+.colored-text {
+  color: #763435; /* Change this color to the desired color code */
+  /* Add any additional styling if needed */
+}
+
+.section-highlights h1 {
+  margin-left: 7rem;
+  font-weight: bold;
+  color: #763435;
+  letter-spacing: 5px;
 }
