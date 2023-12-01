@@ -89,7 +89,7 @@
     </section>
         <p class="lead text-center my-5" id="sub-section-tour"><strong>Navigate through <span class="colored-text">interactive maps</span>, engage with <span class="colored-text">informative hotspots</span>, and envision your <span class="colored-text">academic journey</span> like never before.</strong></p>
     <section class="section-highlights">
-        <h1>BULSU HIGHLIGHTS</h1>
+        <h1 class="text-center" id="header">BULSU HIGHLIGHTS</h1>
         <!-- Slider main container -->
         <div class="swiper">
           <!-- Additional required wrapper -->
@@ -97,72 +97,36 @@
             <!-- Slides -->
             <div class="swiper-slide">
               <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
+                <img src="uploads/profs.jpg" class="card-img" alt="...">
                 <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
+                  <h5 class="card-title">University News</h5>
+                  <h1>
+                    SYMBOLIC HANDOVER
+                  </h1>
                   <p class="card-text"><small>Last updated 3 mins ago</small></p>
                 </div>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
+                <img src="uploads/opening.jpg" class="card-img" alt="...">
+                 <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">University News</h5>
+                  <h1>
+                    SAN RAFAEL CAMPUS OPENS
+                  </h1>
                   <p class="card-text"><small>Last updated 3 mins ago</small></p>
                 </div>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card text-bg-dark">
-                <img src="uploads/bg.png" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                  </p>
+                <img src="uploads/intrams.jpg" class="card-img" alt="...">
+                 <div class="card-img-overlay d-flex flex-column justify-content-end">
+                  <h5 class="card-title">University News</h5>
+                  <h1>
+                    PARADE OF COLORS
+                  </h1>
                   <p class="card-text"><small>Last updated 3 mins ago</small></p>
                 </div>
               </div>
@@ -176,7 +140,7 @@
           <div class="swiper-button-next"></div>
         </div>
     </section>
-    <img src="resources/arrow-down.png" alt="arrow-down" id="arrow-down" />
+    <img src="resources/BSU_Main.jpg" id="section-divider-img-BSU" />
     <section class="sub-section-2">
       <div class="container">
         <p><small><strong>WELCOME TO <span class="colored-text">BULACAN STATE UNIVERSITY</span></strong></small></p>
@@ -196,29 +160,48 @@
     </section>
     
     <section class="section-gallery">
-      <h2>DELVE INTO BULACAN STATE UNIVERSITY</h2>
-      <div class="news-cards">
-        <!-- Include cards displaying recent news articles or upcoming events -->
-      </div>
-    </section>
-
-    <section class="testimonials">
-      <h3>Student Testimonials</h3>
-      <div class="testimonial-cards">
-        <!-- Include cards with quotes or stories from students or alumni -->
-      </div>
-    </section>
-
-    <section class="academic-programs">
-      <h3>Academic Programs</h3>
-      <div class="program-cards">
-        <!-- Include cards or sections highlighting different academic programs -->
+      <div class="container">
+        <h2 class="text-center">DELVE INTO BULACAN STATE UNIVERSITY</h2>
+        <div class="gallery">
+          <div class="row g-3 my-3">
+            <div class="col">
+              <img src="resources/gallery/bsu1.png" class="img-fluid" alt="BSU Pic 1" />
+            </div>
+            <div class="col">
+              <img src="resources/gallery/bsu2.png" class="img-fluid" alt="BSU Pic 2" />
+            </div>
+          </div>
+          <div class="row g-3 my-3">
+            <div class="col">
+              <img src="resources/gallery/bsu3.png" class="img-fluid" alt="BSU Pic 3" />
+            </div>
+            <div class="col">
+              <img src="resources/gallery/bsu4.png" class="img-fluid" alt="BSU Pic 4" />
+            </div>
+            <div class="col">
+              <img src="resources/gallery/bsu5.png" class="img-fluid" alt="BSU Pic 5" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     
   </div>
     <footer class="footer">
-      <!-- &copy; 2023 Bulacan State University.  -->All rights reserved.
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col d-flex flex-column align-items-start" id="col-1">
+            <h1 class="my-4">CONTACT US</h1>
+            <p class="lead"><small class="d-flex align-items-center"><box-icon name='map' color="#ffd700"></box-icon>Guinhawa, City of Malolos, Bulacan</small></p>
+            <p class="lead"><small class="d-flex align-items-center"><box-icon name='phone' color="#ffd700"></box-icon>(+63) 919 123 4567</small></p>
+            <p class="lead"><small class="d-flex align-items-center"><box-icon name='envelope' color="#ffd700"></box-icon>virtualbulsu@.com</small></p>
+
+          </div>
+          <div class="col" id="col-2">
+            <img src="resources/Virtual BulSU Logo.png" alt="Virtual BulSU Logo" />
+          </div>
+        </div>
+      </div>
     </footer>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -261,6 +244,14 @@ const swiper = new Swiper('.swiper', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
+});
+
+const image_BSU = document.querySelector("#section-divider-img-BSU");
+new simpleParallax(image_BSU, {
+  delay: .5,
+  scale: 1.5,
+  orientation: 'down',
+	transition: 'cubic-bezier(0,0,0,1)'
 });
 
 
